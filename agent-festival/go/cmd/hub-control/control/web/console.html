@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hub-control · #16 W04 控制与正式结果</title>
+<link rel="icon" href="data:,">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--line:#e3e6eb;--ink:#1f2328;--mute:#6b7280;--blue:#2563eb;--green:#15803d;--red:#b91c1c;--amber:#b45309;--gray:#9ca3af;--violet:#6d28d9}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.55 -apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg)}
+header{display:flex;align-items:center;gap:16px;padding:10px 20px;background:#111827;color:#f9fafb}
+header .title{font-weight:600}
+header .sub{color:#9ca3af;font-size:12px}
+header .me{margin-left:auto;display:flex;gap:10px;align-items:center;font-size:13px}
+.badge{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;border:1px solid var(--line);background:#fff;color:var(--ink);white-space:nowrap}
+.badge.demo{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+.badge.s-green{background:#dcfce7;border-color:#86efac;color:var(--green)}
+.badge.s-red{background:#fee2e2;border-color:#fca5a5;color:var(--red)}
+.badge.s-amber{background:#fef3c7;border-color:#fcd34d;color:var(--amber)}
+.badge.s-blue{background:#dbeafe;border-color:#93c5fd;color:var(--blue)}
+.badge.s-gray{background:#f3f4f6;border-color:#d1d5db;color:#4b5563}
+.badge.s-violet{background:#ede9fe;border-color:#c4b5fd;color:var(--violet)}
+button{font:inherit;padding:5px 12px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;cursor:pointer}
+button:hover{background:#f1f5f9}
+button.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+button.primary:hover{background:#1d4ed8}
+button.danger{color:var(--red);border-color:#fca5a5}
+button:disabled{opacity:.5;cursor:not-allowed}
+header button{background:transparent;color:#e5e7eb;border-color:#4b5563}
+input,textarea,select{font:inherit;padding:6px 8px;border:1px solid #cbd5e1;border-radius:6px;background:#fff}
+main{display:grid;grid-template-columns:340px 1fr;gap:16px;padding:16px 20px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.card h2{font-size:15px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.card h2 .hint{font-weight:400;color:var(--mute);font-size:12px}
+.tasks .item{padding:9px 10px;border:1px solid transparent;border-radius:6px;cursor:pointer;margin-bottom:4px}
+.tasks .item:hover{background:#f8fafc}
+.tasks .item.sel{border-color:#93c5fd;background:#eff6ff}
+.tasks .item .goal{font-size:13px;margin:2px 0 4px;color:#374151}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.mute{color:var(--mute)}
+.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:12px}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:4px 12px;font-size:13px}
+.kv .k{color:var(--mute)}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:500;background:#fafbfc}
+pre{background:#0f172a;color:#e2e8f0;padding:12px;border-radius:6px;overflow:auto;max-height:420px;font-size:12px}
+.reasons{margin:6px 0 0;padding-left:18px;color:#374151}
+.login{max-width:380px;margin:80px auto}
+.login label{display:block;margin:10px 0 4px;color:var(--mute)}
+.login input{width:100%}
+#toast{position:fixed;right:20px;bottom:20px;max-width:460px;padding:10px 14px;border-radius:8px;background:#111827;color:#fff;display:none;white-space:pre-wrap;z-index:9}
+#toast.err{background:#7f1d1d}
+.events{max-height:420px;overflow:auto}
+.ev{display:grid;grid-template-columns:52px 150px 120px 1fr;gap:8px;padding:4px 0;border-bottom:1px dashed var(--line);font-size:12px}
+.ev .detail{color:#4b5563;word-break:break-all}
+svg text{font-family:inherit}
+.empty{color:var(--mute);padding:12px 0}
+.note{font-size:12px;color:var(--mute);margin-top:6px}
+.attempt{white-space:nowrap}
+@media (max-width:900px){main{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="title">hub-control 控制台</div><div class="sub">#16 W04 · 管理/控制与正式结果 · 原型（单实例）</div></div>
+  <div class="me" id="me"></div>
+</header>
+<div id="app"></div>
+<div id="toast"></div>
+<script>
+"use strict";
+const $ = (s, r = document) => r.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids.flat()) if (k != null && k !== false) el.append(k instanceof Node ? k : document.createTextNode(String(k)));
+  return el;
+}
+function svg(tag, attrs, ...kids) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const [k, v] of Object.entries(attrs || {})) el.setAttribute(k, v);
+  for (const k of kids.flat()) if (k != null) el.append(k instanceof Node ? k : document.createTextNode(String(k)));
+  return el;
+}
+function toast(msg, err) {
+  const t = $("#toast"); t.textContent = msg; t.className = err ? "err" : ""; t.style.display = "block";
+  clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", err ? 8000 : 3000);
+}
+// command ids are generated once per click; crypto.randomUUID needs HTTPS, getRandomValues does not
+function newCommandId() {
+  const b = new Uint8Array(16); crypto.getRandomValues(b);
+  return "ui-" + Array.from(b, x => x.toString(16).padStart(2, "0")).join("");
+}
+const S = { token: sessionStorage.getItem("hubToken"), me: null, tasks: [], sel: null, view: null, unresolved: [], events: [], timer: null, page: "tasks", know: null };
+
+async function api(method, path, body) {
+  const opt = { method, headers: {} };
+  if (S.token) opt.headers.Authorization = "Bearer " + S.token;
+  if (body !== undefined) { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); }
+  const r = await fetch(path, opt);
+  const data = await r.json().catch(() => ({}));
+  if (!r.ok) {
+    if (r.status === 401 && path !== "/v1/login") { logout(); }
+    const e = data.error || { code: "http_" + r.status, message: r.statusText };
+    throw Object.assign(new Error(e.message), { code: e.code });
+  }
+  return data;
+}
+// a command is retried with the same id after a network failure, so it runs at most once
+async function command(kind, body) {
+  body.command_id = newCommandId();
+  for (let i = 0; ; i++) {
+    try { return await api("POST", "/v1/commands/" + kind, body); }
+    catch (e) { if (e.code || i >= 2) throw e; await new Promise(r => setTimeout(r, 800)); }
+  }
+}
+function fail(e) { toast((e.code ? "[" + e.code + "] " : "") + e.message, true); }
+
+const L = {
+  task: { draft: ["草稿（待批准）", "s-gray"], adopted: ["已采纳", "s-blue"], delivered: ["已交付", "s-green"] },
+  node: { completed: ["已完成", "s-green"], business_rejected: ["业务拒绝", "s-red"], running: ["执行中", "s-blue"], technical_failure: ["技术失败，可重试", "s-amber"], lost: ["尝试丢失（已被接管）", "s-amber"], claimed: ["已认领", "s-gray"], committed: ["已提交", "s-green"], "": ["未开始", "s-gray"] },
+  call: { bound: ["已绑定未发送", "s-gray"], dispatched: ["已发送待回执", "s-blue"], accepted: ["对方已受理", "s-violet"], unknown: ["结果未知（不自动重发）", "s-amber"], succeeded: ["成功", "s-green"], failed_confirmed: ["确认失败", "s-red"] },
+  gate: { not_ready: ["报告未产出", "s-gray"], not_configured: ["未配置检查规则：禁止自动交付", "s-amber"], uncovered: ["等待检查", "s-gray"], check_error: ["检查器出错，需重跑", "s-amber"], needs_human: ["待人工复核", "s-violet"], rejected: ["检查未通过", "s-red"], ready: ["可以交付", "s-green"], delivered: ["已交付", "s-green"], stale_basis: ["依据已撤回，禁止交付", "s-red"] },
+  lookup: { hit: ["命中", "s-green"], miss: ["未命中", "s-gray"], not_applicable: ["不参与复用", "s-gray"] },
+  verdict: { pass: ["通过", "s-green"], fail: ["不通过", "s-red"], human: ["转人工", "s-violet"], error: ["检查器出错", "s-amber"] },
+  action: { accept: "确认交付", review: "人工复核", wait_for_check: "等待检查器", rerun_check: "重跑检查", revise_in_new_task: "新建任务修订", open_case: "提交反馈案例", manual_handling: "人工处理" },
+  event: { graph_proposed: "提交候选图", graph_adopted: "采纳图", command: "用户命令", lease_granted: "执行租约", lease_released: "释放租约", attempt_started: "开始尝试", attempt_failed: "技术失败", result_committed: "提交正式结果", result_reused: "复用已有结果", commit_duplicate: "重复提交（已确认）", call_bound: "绑定调用", call_dispatched: "派发调用", call_observed: "回执观测", call_unknown: "调用结果未知", check_recorded: "记录检查", check_reviewed: "人工复核", report_delivered: "报告交付", case_opened: "反馈案例", task_paused: "暂停", task_resumed: "恢复", policy_published: "发布策略", material_registered: "登记材料", principal_put: "账号配置", roles_set: "角色变更", principal_disabled: "停用账号", knowledge_lookup: "知识查找", knowledge_revoked: "撤回知识" },
+};
+const badge = (map, key) => { const [t, c] = map[key] || [key || "—", "s-gray"]; return h("span", { class: "badge " + c }, t); };
+const short = d => d ? (d.replace(/^jcs-sha256-v1:/, "").slice(0, 12) + "…") : "—";
+const when = s => s ? new Date(s).toLocaleString("zh-CN", { hour12: false }) : "";
+const has = r => S.me && S.me.roles && S.me.roles.includes(r);
+
+function logout() { S.token = null; sessionStorage.removeItem("hubToken"); clearInterval(S.timer); render(); }
+
+function renderMe() {
+  const box = $("#me"); box.replaceChildren();
+  if (!S.me) return;
+  box.append(h("span", null, S.me.id), h("span", { class: "badge s-gray" }, S.me.kind),
+    ...(S.me.roles || []).map(r => h("span", { class: "badge s-gray" }, r)),
+    h("span", { class: "badge demo", title: "由本服务签发的演示账号，不代表企业身份认证" }, "演示身份"),
+    h("button", { onclick: logout }, "退出"));
+}
+
+function renderLogin() {
+  const id = h("input", { autocomplete: "username", placeholder: "例如 demo-viewer" });
+  const sec = h("input", { type: "password", autocomplete: "current-password" });
+  const go = async () => {
+    try {
+      const r = await api("POST", "/v1/login", { id: id.value.trim(), secret: sec.value });
+      S.token = r.token; sessionStorage.setItem("hubToken", r.token); await boot();
+    } catch (e) { fail(e); }
+  };
+  sec.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+  return h("div", { class: "card login" },
+    h("h2", null, "登录"),
+    h("div", { class: "note" }, "账号由部署方分发。所有账号都是演示身份；身份只认本服务签发的令牌，请求头里的 X-User-ID 等一律不认。"),
+    h("label", null, "账号"), id, h("label", null, "密钥"), sec,
+    h("div", { class: "row", style: "margin-top:14px" }, h("button", { class: "primary", onclick: go }, "登录")));
+}
+
+const srcLabel = ref => { const [id, sha] = ref.replace(/^material:/, "").split("@"); return id + "@" + (sha || "").slice(0, 10) + "…"; };
+
+async function revoke(ref, what) {
+  const reason = prompt(`撤回${what}：\n${ref}\n\n撤回后：不能再被新节点消费、不能再启动新任务；依赖它且尚未交付的报告将禁止交付；已有记录和已交付的报告保持不变。\n\n请填写撤回原因：`);
+  if (!reason) return;
+  try { await command("revoke", { ref, reason }); toast("已撤回"); await loadKnowledge(); if (S.sel) await loadView(); render(); } catch (e) { fail(e); }
+}
+
+// the task's knowledge consumption: what each node consumed, whether another task's result was reused and why (not)
+function renderKnowledge(v) {
+  const nodes = (v.nodes || []).filter(n => (n.sources && n.sources.length) || n.lookup);
+  if (!nodes.length && !(v.knowledge && v.knowledge.basis_revoked)) return null;
+  const k = v.knowledge || {};
+  const t = h("table", null, h("tr", null, h("th", null, "节点"), h("th", null, "消费的来源"), h("th", null, "知识查找"), h("th", null, "复用自"), h("th", null, "节省远端调用")));
+  for (const n of nodes) {
+    t.append(h("tr", null,
+      h("td", { class: "mono" }, n.o),
+      h("td", null, (n.sources || []).map(s => h("div", { class: "mono" }, srcLabel(s))), n.basis_revoked ? h("span", { class: "badge s-red", title: n.basis_revoked }, "依据已撤回") : null),
+      h("td", null, n.lookup ? h("div", null, badge(L.lookup, n.lookup.outcome), h("div", { class: "mute", style: "font-size:12px" }, n.lookup.reason)) : "—"),
+      h("td", null, n.result && n.result.reused_from ? h("div", null, h("span", { class: "mono" }, n.result.reused_from), n.origin && n.origin !== n.result.reused_from ? h("div", { class: "mute" }, "最初计算于 " + n.origin) : null) : "—"),
+      h("td", null, n.saved_calls ? String(n.saved_calls) : "—")));
+  }
+  return h("div", { class: "card" },
+    h("h2", null, "知识消费", h("span", { class: "hint" }, "F-02C：新任务按 输入·版本·来源·保鲜·权限·适用性 判定能否复用；复用的结果仍走本任务的检查与批准")),
+    (k.basis_revoked && k.basis_revoked.length) ? h("div", { class: "card", style: "border-color:#fca5a5;background:#fef2f2;margin-bottom:10px" },
+      h("b", { style: "color:var(--red)" }, v.status === "delivered" ? "交付之后，报告依据的知识被撤回（已交付记录保持不变）" : "报告依据的知识已撤回，禁止交付"),
+      h("ul", { class: "reasons" }, k.basis_revoked.map(r => h("li", null, r)))) : null,
+    h("div", { class: "row", style: "margin-bottom:8px" },
+      h("span", { class: "badge s-green" }, "命中 " + (k.hits || 0)), h("span", { class: "badge s-gray" }, "未命中 " + (k.misses || 0)),
+      h("span", { class: "badge s-gray" }, "不参与 " + (k.not_applicable || 0)), h("span", { class: "badge s-blue" }, "节省远端调用 " + (k.saved_calls || 0))),
+    t,
+    h("div", { class: "note" }, "来源必须在任务获批时的材料清单里、已登记且未撤回；复用要求输入摘要完全一致（含能力定义、来源版本、指令与模板），不沿用旧任务的批准。"));
+}
+
+function renderKnowledgePage() {
+  const k = S.know;
+  if (!k) return h("div", { class: "card" }, h("div", { class: "empty" }, "加载中…"));
+  const canRevoke = has("curate");
+  const mats = h("table", null, h("tr", null, h("th", null, "来源"), h("th", null, "版本（SHA-256）"), h("th", null, "说明"), h("th", null, "被消费的节点数"), h("th", null, "状态"), h("th", null, "")));
+  for (const m of k.materials) mats.append(h("tr", null, h("td", null, m.id), h("td", { class: "mono" }, m.sha256.slice(0, 16) + "…"), h("td", null, m.title || "—"), h("td", null, String(m.consumer_nodes)),
+    h("td", null, m.revoked ? h("span", null, h("span", { class: "badge s-red" }, "已撤回"), h("div", { class: "mute" }, m.revoked)) : h("span", { class: "badge s-green" }, "可用")),
+    h("td", null, !m.revoked && canRevoke ? h("button", { class: "danger", onclick: () => revoke(m.ref, "材料版本") }, "撤回") : null)));
+  const items = h("table", null, h("tr", null, h("th", null, "可复用结果 o"), h("th", null, "能力"), h("th", null, "来源"), h("th", null, "被复用次数"), h("th", null, "节省远端调用"), h("th", null, "状态"), h("th", null, "")));
+  for (const it of k.items) items.append(h("tr", null,
+    h("td", null, h("a", { href: "#", class: "mono", onclick: e => { e.preventDefault(); S.page = "tasks"; select(it.task); } }, it.o)),
+    h("td", null, it.capability), h("td", { class: "mono" }, it.sources.split(" ").filter(Boolean).map(s => h("div", null, srcLabel(s)))),
+    h("td", null, String(it.reused_by)), h("td", null, String(it.saved_calls)),
+    h("td", null, it.revoked ? h("span", null, h("span", { class: "badge s-red" }, "不可再复用"), h("div", { class: "mute" }, it.revoked)) : h("span", { class: "badge s-green" }, "可复用")),
+    h("td", null, !it.revoked && canRevoke ? h("button", { class: "danger", onclick: () => revoke("result:" + it.o, "结果") }, "撤回") : null)));
+  return h("div", null,
+    h("div", { class: "card" }, h("h2", null, "知识来源", h("span", { class: "hint" }, "已登记的材料版本，以及可被其他任务消费的已有结果")),
+      h("div", { class: "row" }, h("span", { class: "badge s-green" }, "命中 " + k.hits), h("span", { class: "badge s-gray" }, "未命中 " + k.misses), h("span", { class: "badge s-blue" }, "累计节省远端调用 " + k.saved_calls),
+        canRevoke ? null : h("span", { class: "mute", style: "font-size:12px" }, "撤回需要 curate 角色"))),
+    h("div", { class: "card" }, h("h2", null, "材料版本"), mats),
+    h("div", { class: "card" }, h("h2", null, "可复用的已有结果"), k.items.length ? items : h("div", { class: "empty" }, "还没有可复用的结果。")),
+    h("div", { class: "note" }, "撤回只影响以后：不能再被消费、不能再启动新任务、依赖它且未交付的报告禁止交付；已有记录和已交付的报告不改写。"));
+}
+
+function renderTasks() {
+  const list = h("div", { class: "tasks" });
+  if (!S.tasks.length) list.append(h("div", { class: "empty" }, "还没有任务。规划者提交候选图后会出现在这里。"));
+  for (const t of S.tasks) {
+    list.append(h("div", { class: "item" + (S.sel === t.id ? " sel" : ""), onclick: () => select(t.id) },
+      h("div", { class: "row" }, h("b", null, t.id), badge(L.task, t.status), t.report_gate ? badge(L.gate, t.report_gate) : null,
+        t.paused ? h("span", { class: "badge s-amber" }, "已暂停") : null,
+        t.unresolved_calls ? h("span", { class: "badge s-amber" }, t.unresolved_calls + " 个调用待核对") : null),
+      h("div", { class: "goal" }, t.goal),
+      h("div", { class: "mute", style: "font-size:12px" }, (t.policy_version ? "策略 " + t.policy_version + " · " : "") + "更新于 " + when(t.updated_at))));
+  }
+  return h("div", { class: "card" }, h("h2", null, "任务", h("span", { class: "hint" }, "每 10 秒刷新")), list);
+}
+
+function renderNav() {
+  const tab = (id, label) => h("button", { class: S.page === id ? "primary" : "", onclick: async () => { S.page = id; if (id === "knowledge") { try { await loadKnowledge(); } catch (e) { fail(e); } } render(); } }, label);
+  return h("div", { class: "row", style: "margin-bottom:12px" }, tab("tasks", "任务"), tab("knowledge", "知识来源"));
+}
+
+function nodeState(v, id) {
+  const xs = (v.nodes || []).filter(n => n.node === id).sort((a, b) => b.iter - a.iter);
+  return xs[0];
+}
+
+function renderGraph(v) {
+  const g = v.graph || { nodes: [] };
+  if (!g.nodes || !g.nodes.length) return h("div", { class: "empty" }, "任务尚未采纳图。");
+  const depth = {}, byId = Object.fromEntries(g.nodes.map(n => [n.id, n]));
+  const d = id => depth[id] ?? (depth[id] = 1 + Math.max(-1, ...((byId[id] || {}).depends_on || []).filter(x => byId[x]).map(d)));
+  g.nodes.forEach(n => d(n.id));
+  const cols = {}; g.nodes.forEach(n => (cols[depth[n.id]] = cols[depth[n.id]] || []).push(n));
+  const W = 190, H = 70, gx = 70, gy = 22, pos = {};
+  const ncol = Math.max(...Object.keys(cols).map(Number)) + 1, nrow = Math.max(...Object.values(cols).map(c => c.length));
+  Object.entries(cols).forEach(([c, ns]) => ns.forEach((n, i) => pos[n.id] = { x: 10 + c * (W + gx), y: 10 + i * (H + gy) + (nrow - ns.length) * (H + gy) / 2 }));
+  const width = 20 + ncol * W + (ncol - 1) * gx, height = 20 + nrow * H + (nrow - 1) * gy;
+  const s = svg("svg", { viewBox: `0 0 ${width} ${height}`, width: "100%", style: `max-height:${height + 10}px` });
+  s.append(svg("defs", {}, svg("marker", { id: "arr", viewBox: "0 0 10 10", refX: "9", refY: "5", markerWidth: "7", markerHeight: "7", orient: "auto" }, svg("path", { d: "M0,0 L10,5 L0,10 z", fill: "#94a3b8" }))));
+  for (const n of g.nodes) for (const dep of n.depends_on || []) {
+    if (!pos[dep]) continue;
+    const a = pos[dep], b = pos[n.id], x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x - 2, y2 = b.y + H / 2;
+    s.append(svg("path", { d: `M${x1},${y1} C${x1 + gx / 2},${y1} ${x2 - gx / 2},${y2} ${x2},${y2}`, fill: "none", stroke: "#94a3b8", "stroke-width": "1.5", "marker-end": "url(#arr)" }));
+  }
+  const fill = { "s-green": ["#dcfce7", "#16a34a"], "s-red": ["#fee2e2", "#dc2626"], "s-blue": ["#dbeafe", "#2563eb"], "s-amber": ["#fef3c7", "#d97706"], "s-gray": ["#f3f4f6", "#9ca3af"], "s-violet": ["#ede9fe", "#7c3aed"] };
+  for (const n of g.nodes) {
+    const p = pos[n.id], st = nodeState(v, n.id), key = st ? st.state : "", [label, cls] = L.node[key] || [key, "s-gray"], [bg, fg] = fill[cls];
+    const calls = st ? (st.calls || []) : [], unk = calls.filter(c => c.state === "unknown" || c.state === "accepted" || c.state === "dispatched").length;
+    const grp = svg("g", {});
+    grp.append(svg("rect", { x: p.x, y: p.y, width: W, height: H, rx: "8", fill: bg, stroke: fg, "stroke-width": n.id === g.report ? "3" : "1.5" }));
+    grp.append(svg("text", { x: p.x + 10, y: p.y + 20, "font-size": "13", "font-weight": "600", fill: "#111827" }, n.id + (n.id === g.report ? "（报告）" : "")));
+    grp.append(svg("text", { x: p.x + 10, y: p.y + 38, "font-size": "11", fill: "#4b5563" }, n.capability + (n.max_iterations ? ` · 至多 ${n.max_iterations} 轮` : "")));
+    grp.append(svg("text", { x: p.x + 10, y: p.y + 56, "font-size": "11", fill: fg }, label + (st && st.result && st.result.reused_from ? " · 知识命中" : "") + (st && st.reused ? ` · 复用 ${st.reused} 次` : "") + (unk ? ` · ${unk} 调用未决` : "")));
+    s.append(grp);
+  }
+  return s;
+}
+
+// a draft has no adopted graph yet: preview the newest candidate, which is what "批准此版本" confirms
+function renderDraftGraph(v) {
+  const cs = (v.candidates || []).filter(c => c.status === "candidate");
+  const c = cs[cs.length - 1];
+  if (!c) return h("div", { class: "empty" }, "没有可批准的候选图。");
+  return h("div", null, h("div", { class: "note", style: "margin-bottom:6px" }, `候选 v${c.rev} 预览（摘要 ${short(c.digest)}）：批准时绑定的就是这张图、目标和材料`), renderGraph({ graph: c.graph, nodes: [] }));
+}
+
+async function viewArtifact(d, title) {
+  try {
+    const r = await fetch("/v1/artifacts/" + encodeURIComponent(d), { headers: { Authorization: "Bearer " + S.token } });
+    const txt = await r.text(); let pretty = txt;
+    try { pretty = JSON.stringify(JSON.parse(txt), null, 2); } catch (_) {}
+    const box = $("#artifact"); box.replaceChildren(h("h2", null, title || "产物", h("span", { class: "hint mono" }, d), h("button", { onclick: () => box.replaceChildren(), style: "margin-left:auto" }, "关闭")), h("pre", null, pretty));
+    box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  } catch (e) { fail(e); }
+}
+const artLink = (d, title) => d ? h("a", { href: "#", class: "mono", onclick: e => { e.preventDefault(); viewArtifact(d, title); } }, short(d)) : "—";
+
+function renderGate(v) {
+  const g = v.report_gate;
+  if (!g) return null;
+  const actions = h("div", { class: "row", style: "margin-top:10px" });
+  for (const a of g.allowed_actions || []) {
+    if (a === "accept") actions.append(h("button", { class: "primary", disabled: !has("accept"), title: has("accept") ? "" : "需要 accept 角色", onclick: async () => {
+      if (!confirm("确认交付这份报告？\n摘要：" + g.artifact + "\n交付绑定这个精确摘要；之后对报告的任何修改都需要重新检查。")) return;
+      try { await command("accept", { task: v.id, artifact: g.artifact }); toast("已交付"); refresh(); } catch (e) { fail(e); }
+    } }, "确认交付"));
+    else actions.append(h("span", { class: "badge s-gray" }, "允许：" + (L.action[a] || a)));
+  }
+  const checks = h("table", null, h("tr", null, h("th", null, "检查器"), h("th", null, "版本 / 规则"), h("th", null, "结论"), h("th", null, "依据"), h("th", null, "复核")));
+  for (const c of g.checks || []) {
+    let review = c.review ? h("span", null, badge(L.verdict, c.review.verdict), " ", c.review.reviewer, h("div", { class: "mute" }, c.review.note)) : "—";
+    if (c.verdict === "human" && !c.review) {
+      const note = h("input", { placeholder: "核对了什么（必填）", style: "width:180px" });
+      const go = verdict => async () => {
+        try { await command("review", { check_id: c.id, verdict, note: note.value }); toast("已复核"); refresh(); } catch (e) { fail(e); }
+      };
+      review = has("review") ? h("div", { class: "row" }, note, h("button", { onclick: go("pass") }, "通过"), h("button", { class: "danger", onclick: go("fail") }, "不通过")) : h("span", { class: "mute" }, "需要 review 角色");
+    }
+    checks.append(h("tr", null, h("td", null, c.checker), h("td", { class: "mono" }, c.checker_version + " / " + c.rule_version), h("td", null, badge(L.verdict, c.verdict)),
+      h("td", { style: "max-width:320px;word-break:break-all" }, c.findings && c.findings.reason ? h("span", null, (c.findings.item ? c.findings.item + "：" : "") + c.findings.reason) : (c.findings ? h("span", { class: "mono" }, JSON.stringify(c.findings)) : "—")), h("td", null, review)));
+  }
+  return h("div", { class: "card" },
+    h("h2", null, "报告交付门禁", badge(L.gate, g.status)),
+    h("div", { class: "kv" }, h("div", { class: "k" }, "报告产物"), h("div", null, artLink(g.artifact, "报告产物"), g.o ? h("span", { class: "mute mono" }, "  来自 " + g.o) : null)),
+    (g.reasons && g.reasons.length) ? h("ul", { class: "reasons" }, g.reasons.map(r => h("li", null, r))) : null,
+    (g.checks && g.checks.length) ? h("div", { style: "margin-top:10px" }, checks) : null,
+    actions,
+    h("div", { class: "note" }, "检查只对产物的精确摘要有效；报告改动后摘要变化，旧检查和旧批准不能放行新报告。"));
+}
+
+function renderNodes(v) {
+  const t = h("table", null, h("tr", null, h("th", null, "节点执行 o"), h("th", null, "状态"), h("th", null, "尝试 a"), h("th", null, "正式结果"), h("th", null, "远端调用 b")));
+  for (const n of v.nodes || []) {
+    const atts = (n.attempts || []).map(a => h("div", { class: "attempt" }, `a${a.a} · epoch ${a.epoch} · ${a.owner} · `, badge(L.node, a.state === "committed" ? "committed" : a.state), a.detail ? h("span", { class: "mute" }, " " + a.detail) : null));
+    const res = n.result ? h("div", null, artLink(n.result.artifact, n.o), n.result.reused_from ? h("div", { class: "mute" }, "跨任务复用自 " + n.result.reused_from) : null) : "—";
+    const calls = (n.calls || []).map(c => h("div", { style: "margin-bottom:4px" }, h("span", { class: "mono" }, c.name + " → " + c.target), " ", badge(L.call, c.state),
+      h("div", { class: "mute", style: "font-size:12px" }, `发送 ${c.sends} 次` + (c.remote_ref ? ` · 远端任务 ${c.remote_ref}` : "") + (c.late_events ? ` · ${c.late_events} 条迟到/未生效回执已记录` : ""))));
+    t.append(h("tr", null, h("td", null, h("div", { class: "mono" }, n.o), n.activity ? h("div", { class: "mute" }, "当前：" + n.activity) : null),
+      h("td", null, badge(L.node, n.state), n.reused ? h("div", { class: "mute" }, "复用 " + n.reused + " 次，未重算") : null),
+      h("td", null, atts), h("td", null, res), h("td", null, calls.length ? calls : "—")));
+  }
+  return h("div", { class: "card" }, h("h2", null, "节点执行", h("span", { class: "hint" }, "o = 任务/图版本/节点#轮次；重试与恢复保留 o，每次尝试是一个 a")),
+    (v.nodes && v.nodes.length) ? t : h("div", { class: "empty" }, "还没有节点开始执行。"));
+}
+
+function renderUnresolved() {
+  if (!S.unresolved.length) return null;
+  return h("div", { class: "card" }, h("h2", null, "待核对的远端调用", h("span", { class: "hint" }, "这些调用可能已到达对方；按能力契约只允许下列动作，不会自动重发")),
+    h("table", null, h("tr", null, h("th", null, "调用 b"), h("th", null, "状态"), h("th", null, "下一步")),
+      S.unresolved.map(c => h("tr", null, h("td", { class: "mono" }, c.b), h("td", null, badge(L.call, c.state)), h("td", null, c.next)))));
+}
+
+function renderCandidates(v) {
+  const rows = (v.candidates || []).map(c => {
+    let act = null;
+    if (v.status === "draft" && c.status === "candidate") act = h("button", { class: "primary", disabled: !has("approve"), title: has("approve") ? "" : "需要 approve 角色", onclick: async () => {
+      if (!confirm(`批准第 ${c.rev} 版？\n摘要：${c.digest}\n批准后图冻结，改目标或拓扑需要新建任务。`)) return;
+      try { await command("adopt", { task: v.id, rev: c.rev, digest: c.digest }); toast("已采纳"); refresh(); } catch (e) { fail(e); }
+    } }, "批准此版本");
+    return h("tr", null, h("td", null, "v" + c.rev), h("td", null, h("span", { class: "badge " + ({ adopted: "s-green", candidate: "s-blue", rejected: "s-red", superseded: "s-gray" }[c.status] || "s-gray") }, { adopted: "已采纳", candidate: "候选", rejected: "挂载前拒绝", superseded: "已被取代" }[c.status] || c.status)),
+      h("td", { class: "mono" }, short(c.digest)), h("td", null, c.proposed_by), h("td", null, (c.problems || []).length ? h("ul", { class: "reasons" }, c.problems.map(p => h("li", null, p))) : "—"), h("td", null, act));
+  });
+  return h("div", { class: "card" }, h("h2", null, "候选图"), h("table", null, h("tr", null, h("th", null, "版本"), h("th", null, "状态"), h("th", null, "摘要"), h("th", null, "提交者"), h("th", null, "检查问题"), h("th", null, "")), rows));
+}
+
+function renderCases(v) {
+  if (v.status === "draft") return null;
+  const ref = h("select", null, [v.report_gate && v.report_gate.artifact ? h("option", { value: v.report_gate.artifact }, "报告产物 " + short(v.report_gate.artifact)) : null,
+    ...(v.nodes || []).filter(n => n.result).map(n => h("option", { value: n.o }, "节点 " + n.o))].filter(Boolean));
+  const text = h("input", { placeholder: "哪里不对、依据是什么", style: "flex:1;min-width:240px" });
+  const list = (v.cases || []).map(c => h("tr", null, h("td", null, c.id), h("td", { class: "mono" }, c.ref.startsWith("jcs-") ? short(c.ref) : c.ref), h("td", null, c.text), h("td", null, c.opened_by), h("td", null, c.policy_version), h("td", null, when(c.at))));
+  return h("div", { class: "card" }, h("h2", null, "反馈案例", h("span", { class: "hint" }, "案例关联原证据和原策略版本，不改动本任务；修正以新版本作用于新任务")),
+    list.length ? h("table", null, h("tr", null, h("th", null, "编号"), h("th", null, "关联"), h("th", null, "内容"), h("th", null, "提交人"), h("th", null, "策略"), h("th", null, "时间")), list) : null,
+    S.me && S.me.kind === "user" && ref.options.length ? h("div", { class: "row", style: "margin-top:10px" }, ref, text, h("button", { onclick: async () => {
+      try { await command("case", { task: v.id, ref: ref.value, text: text.value }); toast("已提交"); refresh(); } catch (e) { fail(e); }
+    } }, "提交案例")) : null);
+}
+
+function renderEvents() {
+  const list = h("div", { class: "events" });
+  for (const e of S.events.slice().reverse()) {
+    let d = ""; try { d = JSON.stringify(e.detail); } catch (_) {}
+    list.append(h("div", { class: "ev" }, h("span", { class: "mono mute" }, "#" + e.seq), h("span", { class: "mute" }, when(e.at)), h("span", null, L.event[e.kind] || e.kind),
+      h("span", { class: "detail" }, h("span", { class: "mono" }, e.actor + (e.o ? " · " + e.o : "") + (e.b ? " · " + e.b : "")), " ", d.length > 220 ? d.slice(0, 220) + "…" : d)));
+  }
+  return h("div", { class: "card" }, h("h2", null, "审计事件", h("span", { class: "hint" }, "状态转移与审计在同一事务提交；读操作不写事件")), S.events.length ? list : h("div", { class: "empty" }, "无"));
+}
+
+function renderDetail() {
+  const v = S.view;
+  if (!v) return h("div", { class: "card" }, h("div", { class: "empty" }, "选择左侧一个任务查看。"));
+  const ops = h("div", { class: "row", style: "margin-left:auto" });
+  if (v.status === "adopted" && has("operate")) ops.append(v.paused
+    ? h("button", { onclick: async () => { try { await command("resume", { task: v.id }); refresh(); } catch (e) { fail(e); } } }, "恢复")
+    : h("button", { onclick: async () => { try { await command("pause", { task: v.id }); toast("已暂停：不再启动新节点、不再派发新调用；在途调用照常接收回执"); refresh(); } catch (e) { fail(e); } } }, "暂停"));
+  return h("div", null,
+    h("div", { class: "card" },
+      h("h2", null, v.id, badge(L.task, v.status), v.paused ? h("span", { class: "badge s-amber" }, "已暂停") : null, ops),
+      h("div", { style: "margin-bottom:10px" }, v.goal),
+      h("div", { class: "kv" },
+        h("div", { class: "k" }, "材料快照"), h("div", null, (v.material || []).map(m => h("div", { class: "mono" }, m.id + " @ " + m.sha256.slice(0, 16) + "…"))),
+        h("div", { class: "k" }, "采纳版本"), h("div", null, v.adopted_rev ? h("span", null, "v" + v.adopted_rev + " ", h("span", { class: "mono mute" }, short(v.adopted_digest))) : "—"),
+        h("div", { class: "k" }, "策略"), h("div", null, v.policy_version || "—"),
+        h("div", { class: "k" }, "批准人"), h("div", null, v.approved_by ? h("span", null, v.approved_by + " ", h("span", { class: "badge demo" }, "演示身份")) : "—"),
+        h("div", { class: "k" }, "执行所有权"), h("div", null, "epoch " + v.lease_epoch + (v.lease_owner ? " · 当前持有者 " + v.lease_owner : " · 无人持有"))),
+      h("div", { style: "margin-top:12px" }, v.status === "draft" ? renderDraftGraph(v) : renderGraph(v))),
+    renderGate(v),
+    renderKnowledge(v),
+    h("div", { class: "card", id: "artifact", style: "padding:0;border:0;background:none" }),
+    renderUnresolved(),
+    renderNodes(v),
+    renderCandidates(v),
+    renderCases(v),
+    renderEvents());
+}
+
+function render() {
+  const app = $("#app"); app.replaceChildren(); renderMe();
+  if (!S.token || !S.me) { app.append(renderLogin()); return; }
+  app.append(h("main", null, h("div", null, renderNav(), renderTasks()), h("div", { id: "detail" }, S.page === "knowledge" ? renderKnowledgePage() : renderDetail())));
+}
+
+async function loadTasks() { S.tasks = (await api("GET", "/v1/tasks")).tasks || []; }
+async function loadKnowledge() { S.know = await api("GET", "/v1/knowledge"); }
+async function loadView() {
+  if (!S.sel) { S.view = null; return; }
+  const [v, u, e] = await Promise.all([api("GET", "/v1/tasks/" + encodeURIComponent(S.sel)), api("GET", "/v1/tasks/" + encodeURIComponent(S.sel) + "/unresolved"), api("GET", "/v1/events?limit=1000&task=" + encodeURIComponent(S.sel))]);
+  S.view = v; S.unresolved = u.calls || []; S.events = e.events || [];
+}
+async function select(id) { S.page = "tasks"; S.sel = id; location.hash = id; try { await loadView(); } catch (e) { fail(e); } render(); }
+let tick = 0;
+// re-render only when something changed, and never while the user is typing
+async function refresh() {
+  if (S.page === "knowledge") {
+    try {
+      const before = JSON.stringify(S.know); await loadKnowledge();
+      const typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && document.activeElement.value;
+      if (JSON.stringify(S.know) !== before && !typing) render();
+    } catch (e) { if (S.token) fail(e); }
+    return;
+  }
+  try {
+    const tasksBefore = JSON.stringify(S.tasks);
+    if (tick++ % 3 === 0) await loadTasks();
+    const before = S.view ? S.view.last_event_seq : -1;
+    await loadView();
+    const changed = (S.view ? S.view.last_event_seq : -1) !== before || JSON.stringify(S.tasks) !== tasksBefore;
+    const typing = document.activeElement && /^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && document.activeElement.value;
+    if (changed && !typing) { const y = window.scrollY; render(); window.scrollTo(0, y); }
+  } catch (e) { if (S.token) fail(e); }
+}
+async function boot() {
+  if (!S.token) { render(); return; }
+  try {
+    S.me = await api("GET", "/v1/me");
+    await loadTasks();
+    S.sel = decodeURIComponent(location.hash.slice(1)) || (S.tasks[0] && S.tasks[0].id) || null;
+    await loadView();
+  } catch (e) { S.me = null; if (S.token) fail(e); }
+  render();
+  clearInterval(S.timer); if (S.me) S.timer = setInterval(refresh, 3000);
+}
+boot();
+</script>
+</body>
+</html>

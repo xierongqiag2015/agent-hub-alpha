@@ -1,0 +1,34 @@
+[Unit]
+Description=agent-hub-alpha #16 W04 hub-control (demo, single instance)
+After=network-online.target
+
+[Service]
+# Localhost by default; to publish, add a drop-in setting HUB_ADDR=0.0.0.0:8740
+# (see README) and open the port in the host's security group.
+Environment=HUB_ADDR=127.0.0.1:8740
+Environment=HUB_DB=/var/lib/hub-control/hub.db
+ExecStart=/opt/hub-control/bin/hub-control -addr ${HUB_ADDR} -db ${HUB_DB} -bootstrap /opt/hub-control/etc/bootstrap.json
+EnvironmentFile=/opt/hub-control/etc/secrets.env
+DynamicUser=yes
+StateDirectory=hub-control
+StateDirectoryMode=0700
+Restart=on-failure
+RestartSec=3
+# The host is shared and short on memory: keep this service small and polite.
+MemoryHigh=96M
+MemoryMax=128M
+CPUWeight=20
+Nice=10
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=yes
+
+[Install]
+WantedBy=multi-user.target

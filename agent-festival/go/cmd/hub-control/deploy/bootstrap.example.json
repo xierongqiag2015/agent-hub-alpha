@@ -1,0 +1,31 @@
+{
+  "_comment": "hub-control 首次启动配置示例（#16 年报 demo）。账号密钥只从环境变量读取，不写进本文件。targets 必须与 W05 受控能力清单中的 AgentCard 标识一致；此处为占位。",
+  "principals": [
+    {"id": "demo-approver", "kind": "user", "roles": ["approve", "accept", "operate", "review"], "secret_env": "HUB_SECRET_DEMO_APPROVER"},
+    {"id": "demo-viewer", "kind": "user", "roles": [], "secret_env": "HUB_SECRET_DEMO_VIEWER"},
+    {"id": "demo-curator", "kind": "user", "roles": ["curate"], "secret_env": "HUB_SECRET_DEMO_CURATOR"},
+    {"id": "hub-admin", "kind": "admin", "roles": [], "secret_env": "HUB_SECRET_HUB_ADMIN"},
+    {"id": "planner", "kind": "agent", "roles": ["propose"], "secret_env": "HUB_SECRET_PLANNER"},
+    {"id": "graph-host", "kind": "executor", "roles": [], "secret_env": "HUB_SECRET_GRAPH_HOST"},
+    {"id": "checker-calc", "kind": "checker", "roles": ["check:calc"], "secret_env": "HUB_SECRET_CHECKER_CALC"},
+    {"id": "checker-citation", "kind": "checker", "roles": ["check:citation"], "secret_env": "HUB_SECRET_CHECKER_CITATION"}
+  ],
+  "materials": [
+    {"id": "cmb-2025-annual-report-a", "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da", "title": "招商银行股份有限公司 2025 年度报告（A 股），368 页"}
+  ],
+  "policy": {
+    "version": "ar-demo-1",
+    "capabilities": {
+      "material": {"targets": ["rdc:annual-report/material"], "queryable": true, "reusable": true},
+      "analysis": {"targets": ["rdc:annual-report/analysis"], "queryable": true},
+      "writer":   {"targets": ["rdc:annual-report/writer"], "queryable": true}
+    },
+    "max_nodes": 8,
+    "max_loop_iterations": 2,
+    "required_checks": [
+      {"checker": "calc", "rule_version": "w01-r1"},
+      {"checker": "citation", "rule_version": "w01-r1"}
+    ],
+    "reuse_max_age_hours": 720
+  }
+}
