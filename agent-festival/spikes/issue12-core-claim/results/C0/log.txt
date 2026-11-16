@@ -1,0 +1,27 @@
+$ worker task=TC0 owner=W1 naive=true crash=credit_request:after_api_before_observe
+22:19:45.136 [W1@pid38700] START  task=TC0 workflow=credit-flow-v1 crash=credit_request:after_api_before_observe
+22:19:45.372 [W1@pid38700] RUN    TC0/evidence/- (naive: no control plane; Core executableId=evidence)
+22:19:45.574 [W1@pid38700] RUN    TC0/kyc_check/- (naive: no control plane; Core executableId=kyc.kyc_check)
+22:19:45.576 [W1@pid38700] SUBWF  kyc_check sees session=TC0 executableId=kyc.kyc_check
+22:19:45.591 [W1@pid38700] RUN    TC0/supplement/0 (naive: no control plane; Core executableId=loop.supplement)
+22:19:45.598 [W1@pid38700] RUN    TC0/supplement/1 (naive: no control plane; Core executableId=loop.supplement)
+22:19:45.605 [W1@pid38700] RUN    TC0/supplement/2 (naive: no control plane; Core executableId=loop.supplement)
+22:19:45.614 [W1@pid38700] RUN    TC0/judge/- (naive: no control plane; Core executableId=judge)
+22:19:45.618 [W1@pid38700] RUN    TC0/credit_request/- (naive: no control plane; Core executableId=credit_request)
+22:19:45.621 [W1@pid38700] SEND   direct call, fresh key naive-e8650011... (no B, no permit)
+22:19:45.624 [W1@pid38700] CRASH  at credit_request:after_api_before_observe (Runtime.halt, equivalent to kill -9)
+  -> W1 exit code 137 (halted = simulated kill -9)
+$ worker task=TC0 owner=W2 naive=true
+22:19:46.639 [W2@pid1628] START  task=TC0 workflow=credit-flow-v1
+22:19:46.889 [W2@pid1628] RUN    TC0/evidence/- (naive: no control plane; Core executableId=evidence)
+22:19:47.095 [W2@pid1628] RUN    TC0/kyc_check/- (naive: no control plane; Core executableId=kyc.kyc_check)
+22:19:47.100 [W2@pid1628] SUBWF  kyc_check sees session=TC0 executableId=kyc.kyc_check
+22:19:47.115 [W2@pid1628] RUN    TC0/supplement/0 (naive: no control plane; Core executableId=loop.supplement)
+22:19:47.122 [W2@pid1628] RUN    TC0/supplement/1 (naive: no control plane; Core executableId=loop.supplement)
+22:19:47.129 [W2@pid1628] RUN    TC0/supplement/2 (naive: no control plane; Core executableId=loop.supplement)
+22:19:47.139 [W2@pid1628] RUN    TC0/judge/- (naive: no control plane; Core executableId=judge)
+22:19:47.146 [W2@pid1628] RUN    TC0/credit_request/- (naive: no control plane; Core executableId=credit_request)
+22:19:47.149 [W2@pid1628] SEND   direct call, fresh key naive-1c1fcfcc... (no B, no permit)
+22:19:47.151 [W2@pid1628] RUN    TC0/await_receipt/- (naive: no control plane; Core executableId=await_receipt)
+22:19:47.156 [W2@pid1628] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"see bank","verdict":"grant-50000"}
+  -> W2 exit code 0

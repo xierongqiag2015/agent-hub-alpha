@@ -1,0 +1,24 @@
+$ worker task=T5 owner=W1 bank_delay_ms=2500 bank_timeout_ms=800 recover_interval_ms=3000
+22:20:35.203 [W1@pid19832] START  task=T5 workflow=credit-flow-v1
+22:20:36.014 [W1@pid19832] OWN    T5/evidence/- gen=1 (Core executableId=evidence)
+22:20:36.036 [W1@pid19832] COMMIT T5/evidence/- gen=1 -> {"assets_musd":35,"recent_overdue":false,"long_overdue":false,"source":"S2-investigation"}
+22:20:36.049 [W1@pid19832] OWN    T5/kyc_check/- gen=1 (Core executableId=kyc.kyc_check)
+22:20:36.053 [W1@pid19832] SUBWF  kyc_check sees session=T5 executableId=kyc.kyc_check
+22:20:36.057 [W1@pid19832] COMMIT T5/kyc_check/- gen=1 -> {"kyc":"passed","applicant":"T5"}
+22:20:36.084 [W1@pid19832] OWN    T5/supplement/0 gen=1 (Core executableId=loop.supplement)
+22:20:36.089 [W1@pid19832] COMMIT T5/supplement/0 gen=1 -> {"doc":"statement-0","round":0}
+22:20:36.101 [W1@pid19832] OWN    T5/supplement/1 gen=1 (Core executableId=loop.supplement)
+22:20:36.105 [W1@pid19832] COMMIT T5/supplement/1 gen=1 -> {"doc":"statement-1","round":1}
+22:20:36.116 [W1@pid19832] OWN    T5/supplement/2 gen=1 (Core executableId=loop.supplement)
+22:20:36.123 [W1@pid19832] COMMIT T5/supplement/2 gen=1 -> {"doc":"statement-2","round":2}
+22:20:36.133 [W1@pid19832] OWN    T5/judge/- gen=1 (Core executableId=judge)
+22:20:36.140 [W1@pid19832] COMMIT T5/judge/- gen=1 -> {"verdict":"grant-50000"}
+22:20:36.144 [W1@pid19832] OWN    T5/credit_request/- gen=1 (Core executableId=credit_request)
+22:20:36.152 [W1@pid19832] SEND   B:T5/credit_request/- attempt=1 idempotency_key=B:T5/credit_request/-
+22:20:36.959 [W1@pid19832] TIMEOUT B:T5/credit_request/- after 800ms: outcome unknown, not failure
+22:20:39.982 [W1@pid19832] RECOVER B:T5/credit_request/- -> {"decision":"done","ref":"BANK-0001","state":"SUCCEEDED"}
+22:20:39.986 [W1@pid19832] COMMIT T5/credit_request/- gen=1 -> {"state":"SUCCEEDED","ref":"BANK-0001","b":"B:T5/credit_request/-"}
+22:20:39.990 [W1@pid19832] OWN    T5/await_receipt/- gen=1 (Core executableId=await_receipt)
+22:20:39.995 [W1@pid19832] COMMIT T5/await_receipt/- gen=1 -> {"receipt":"SUCCEEDED","ref":"BANK-0001"}
+22:20:39.995 [W1@pid19832] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W1 exit code 0

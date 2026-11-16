@@ -1,0 +1,32 @@
+$ worker task=T2a owner=W1 crash=judge:after_commit
+22:19:51.239 [W1@pid7344] START  task=T2a workflow=credit-flow-v1 crash=judge:after_commit
+22:19:51.655 [W1@pid7344] OWN    T2a/evidence/- gen=1 (Core executableId=evidence)
+22:19:51.670 [W1@pid7344] COMMIT T2a/evidence/- gen=1 -> {"assets_musd":35,"recent_overdue":false,"long_overdue":false,"source":"S2-investigation"}
+22:19:51.680 [W1@pid7344] OWN    T2a/kyc_check/- gen=1 (Core executableId=kyc.kyc_check)
+22:19:51.682 [W1@pid7344] SUBWF  kyc_check sees session=T2a executableId=kyc.kyc_check
+22:19:51.684 [W1@pid7344] COMMIT T2a/kyc_check/- gen=1 -> {"applicant":"T2a","kyc":"passed"}
+22:19:51.708 [W1@pid7344] OWN    T2a/supplement/0 gen=1 (Core executableId=loop.supplement)
+22:19:51.715 [W1@pid7344] COMMIT T2a/supplement/0 gen=1 -> {"round":0,"doc":"statement-0"}
+22:19:51.726 [W1@pid7344] OWN    T2a/supplement/1 gen=1 (Core executableId=loop.supplement)
+22:19:51.731 [W1@pid7344] COMMIT T2a/supplement/1 gen=1 -> {"round":1,"doc":"statement-1"}
+22:19:51.741 [W1@pid7344] OWN    T2a/supplement/2 gen=1 (Core executableId=loop.supplement)
+22:19:51.746 [W1@pid7344] COMMIT T2a/supplement/2 gen=1 -> {"round":2,"doc":"statement-2"}
+22:19:51.754 [W1@pid7344] OWN    T2a/judge/- gen=1 (Core executableId=judge)
+22:19:51.762 [W1@pid7344] COMMIT T2a/judge/- gen=1 -> {"verdict":"grant-50000"}
+22:19:51.762 [W1@pid7344] CRASH  at judge:after_commit (Runtime.halt, equivalent to kill -9)
+  -> W1 exit code 137 (halted = simulated kill -9)
+$ worker task=T2a owner=W2
+22:19:52.755 [W2@pid10324] START  task=T2a workflow=credit-flow-v1
+22:19:53.193 [W2@pid10324] REUSE  T2a/evidence/- -> {"assets_musd":35,"long_overdue":false,"recent_overdue":false,"source":"S2-investigation"} (inner not executed; Core executableId=evidence)
+22:19:53.201 [W2@pid10324] REUSE  T2a/kyc_check/- -> {"applicant":"T2a","kyc":"passed"} (inner not executed; Core executableId=kyc.kyc_check)
+22:19:53.220 [W2@pid10324] REUSE  T2a/supplement/0 -> {"doc":"statement-0","round":0} (inner not executed; Core executableId=loop.supplement)
+22:19:53.229 [W2@pid10324] REUSE  T2a/supplement/1 -> {"doc":"statement-1","round":1} (inner not executed; Core executableId=loop.supplement)
+22:19:53.235 [W2@pid10324] REUSE  T2a/supplement/2 -> {"doc":"statement-2","round":2} (inner not executed; Core executableId=loop.supplement)
+22:19:53.241 [W2@pid10324] REUSE  T2a/judge/- -> {"verdict":"grant-50000"} (inner not executed; Core executableId=judge)
+22:19:53.245 [W2@pid10324] OWN    T2a/credit_request/- gen=1 (Core executableId=credit_request)
+22:19:53.253 [W2@pid10324] SEND   B:T2a/credit_request/- attempt=1 idempotency_key=B:T2a/credit_request/-
+22:19:53.268 [W2@pid10324] COMMIT T2a/credit_request/- gen=1 -> {"state":"SUCCEEDED","ref":"BANK-0001","b":"B:T2a/credit_request/-"}
+22:19:53.273 [W2@pid10324] OWN    T2a/await_receipt/- gen=1 (Core executableId=await_receipt)
+22:19:53.280 [W2@pid10324] COMMIT T2a/await_receipt/- gen=1 -> {"ref":"BANK-0001","receipt":"SUCCEEDED"}
+22:19:53.288 [W2@pid10324] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W2 exit code 0

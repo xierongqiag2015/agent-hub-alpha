@@ -1,0 +1,27 @@
+{
+  "scenario": "E2d",
+  "title": "中断等待：检查点与 Go 记录的先后",
+  "pass": true,
+  "checks": [
+    {
+      "check": "恢复输入是过期提示，节点仍以 Go 记录为准（SUCCEEDED）",
+      "pass": true,
+      "detail": "[{'committed_at': '22:20:12.387', 'h': 'sha256:eea99904d96151b3', 'k_id': '', 'o': 'T2d/await_receipt/-', 'owner_gen': 2, 'result': '{\"receipt\":\"SUCCEEDED\",\"ref\":\"BANK-0001\"}'}]"
+    },
+    {
+      "check": "等待前节点（evidence/loop/judge/credit_request）恢复时内层 0 次重跑",
+      "pass": true,
+      "detail": "{'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 2}"
+    },
+    {
+      "check": "业务 API 效果 1 次",
+      "pass": true,
+      "detail": "calls={'B:T2d/credit_request/-': 1}"
+    },
+    {
+      "check": "await_receipt 正式结果 1 条",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

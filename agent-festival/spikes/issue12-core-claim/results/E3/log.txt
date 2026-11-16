@@ -1,0 +1,35 @@
+$ worker task=T3 owner=W1 judge_delay_ms=1500 lease_ms=5000
+$ worker task=T3 owner=W2 judge_delay_ms=1500 lease_ms=5000
+22:20:13.472 [W1@pid37756] START  task=T3 workflow=credit-flow-v1
+22:20:13.971 [W1@pid37756] OWN    T3/evidence/- gen=1 (Core executableId=evidence)
+22:20:13.986 [W1@pid37756] COMMIT T3/evidence/- gen=1 -> {"assets_musd":35,"recent_overdue":false,"long_overdue":false,"source":"S2-investigation"}
+22:20:13.999 [W1@pid37756] OWN    T3/kyc_check/- gen=1 (Core executableId=kyc.kyc_check)
+22:20:14.002 [W1@pid37756] SUBWF  kyc_check sees session=T3 executableId=kyc.kyc_check
+22:20:14.005 [W1@pid37756] COMMIT T3/kyc_check/- gen=1 -> {"applicant":"T3","kyc":"passed"}
+22:20:14.034 [W1@pid37756] OWN    T3/supplement/0 gen=1 (Core executableId=loop.supplement)
+22:20:14.042 [W1@pid37756] COMMIT T3/supplement/0 gen=1 -> {"round":0,"doc":"statement-0"}
+22:20:14.054 [W1@pid37756] OWN    T3/supplement/1 gen=1 (Core executableId=loop.supplement)
+22:20:14.060 [W1@pid37756] COMMIT T3/supplement/1 gen=1 -> {"round":1,"doc":"statement-1"}
+22:20:14.069 [W1@pid37756] OWN    T3/supplement/2 gen=1 (Core executableId=loop.supplement)
+22:20:14.075 [W1@pid37756] COMMIT T3/supplement/2 gen=1 -> {"round":2,"doc":"statement-2"}
+22:20:14.084 [W1@pid37756] OWN    T3/judge/- gen=1 (Core executableId=judge)
+22:20:15.609 [W1@pid37756] COMMIT T3/judge/- gen=1 -> {"verdict":"grant-50000"}
+22:20:15.613 [W1@pid37756] OWN    T3/credit_request/- gen=1 (Core executableId=credit_request)
+22:20:15.618 [W1@pid37756] SEND   B:T3/credit_request/- attempt=1 idempotency_key=B:T3/credit_request/-
+22:20:15.625 [W1@pid37756] COMMIT T3/credit_request/- gen=1 -> {"state":"SUCCEEDED","b":"B:T3/credit_request/-","ref":"BANK-0001"}
+22:20:15.627 [W1@pid37756] OWN    T3/await_receipt/- gen=1 (Core executableId=await_receipt)
+22:20:15.631 [W1@pid37756] COMMIT T3/await_receipt/- gen=1 -> {"ref":"BANK-0001","receipt":"SUCCEEDED"}
+22:20:15.631 [W1@pid37756] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W1 exit code 0
+22:20:13.675 [W2@pid8044] START  task=T3 workflow=credit-flow-v1
+22:20:14.160 [W2@pid8044] REUSE  T3/evidence/- -> {"assets_musd":35,"long_overdue":false,"recent_overdue":false,"source":"S2-investigation"} (inner not executed; Core executableId=evidence)
+22:20:14.170 [W2@pid8044] REUSE  T3/kyc_check/- -> {"applicant":"T3","kyc":"passed"} (inner not executed; Core executableId=kyc.kyc_check)
+22:20:14.189 [W2@pid8044] REUSE  T3/supplement/0 -> {"doc":"statement-0","round":0} (inner not executed; Core executableId=loop.supplement)
+22:20:14.196 [W2@pid8044] REUSE  T3/supplement/1 -> {"doc":"statement-1","round":1} (inner not executed; Core executableId=loop.supplement)
+22:20:14.202 [W2@pid8044] REUSE  T3/supplement/2 -> {"doc":"statement-2","round":2} (inner not executed; Core executableId=loop.supplement)
+22:20:14.208 [W2@pid8044] JOIN   T3/judge/- held by W1@pid37756 gen=1; waiting
+22:20:15.707 [W2@pid8044] REUSE  T3/judge/- -> {"verdict":"grant-50000"} (inner not executed; Core executableId=judge)
+22:20:15.711 [W2@pid8044] REUSE  T3/credit_request/- -> {"b":"B:T3/credit_request/-","ref":"BANK-0001","state":"SUCCEEDED"} (inner not executed; Core executableId=credit_request)
+22:20:15.714 [W2@pid8044] REUSE  T3/await_receipt/- -> {"receipt":"SUCCEEDED","ref":"BANK-0001"} (inner not executed; Core executableId=await_receipt)
+22:20:15.714 [W2@pid8044] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W2 exit code 0

@@ -1,0 +1,22 @@
+{
+  "scenario": "E3b2",
+  "title": "旧 worker 复活：新 owner 已提交后（重复提交被识别）",
+  "pass": true,
+  "checks": [
+    {
+      "check": "W2 接管并提交 judge（gen=2）",
+      "pass": true,
+      "detail": "[{'committed_at': '22:20:25.594', 'h': 'sha256:c3c160e03fbe8de4', 'k_id': '', 'o': 'T3b2/judge/-', 'owner_gen': 2, 'result': '{\"verdict\":\"grant-50000\"}'}]"
+    },
+    {
+      "check": "W1 复活后提交被识别为重复（commit:duplicate），采用已有正式结果，不覆盖",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "每个 o 恰好 1 条正式结果；业务 API 效果 1 次",
+      "pass": true,
+      "detail": "results=8 calls={'B:T3b2/credit_request/-': 1}"
+    }
+  ]
+}

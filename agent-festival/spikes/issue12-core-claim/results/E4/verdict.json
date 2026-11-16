@@ -1,0 +1,22 @@
+{
+  "scenario": "E4",
+  "title": "查到 K 之后、提交之前 K 失效",
+  "pass": true,
+  "checks": [
+    {
+      "check": "提交被拒（commit:k_invalid）",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "没有残留基于失效 K 的正式结果",
+      "pass": true,
+      "detail": "[{'committed_at': '22:20:33.562', 'h': 'sha256:501d546506290409', 'k_id': '', 'o': 'T4/evidence/-', 'owner_gen': 1, 'result': '{\"assets_musd\":35,\"long_overdue\":false,\"recent_overdue\":false,\"source\":\"S2-investigation\"}'}]"
+    },
+    {
+      "check": "改走 S2 调查后提交，evidence 正式结果 1 条",
+      "pass": true,
+      "detail": "{'inner:evidence': 2, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "scenario": "E3b",
+  "title": "旧 worker 复活：新 owner 仍在执行时（提交处按代次隔离）",
+  "pass": true,
+  "checks": [
+    {
+      "check": "W2 在 W1 租约过期后接管 judge（claim:takeover，gen 1 -> 2）",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "W1 复活后以 gen=1 提交被拒（commit:fenced）",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "W1 随后加入等待（claim:busy），最终复用 W2 的结果",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "judge 正式结果 1 条，由 gen=2 提交",
+      "pass": true,
+      "detail": "[{'committed_at': '22:20:21.845', 'h': 'sha256:c3c160e03fbe8de4', 'k_id': '', 'o': 'T3b/judge/-', 'owner_gen': 2, 'result': '{\"verdict\":\"grant-50000\"}'}]"
+    },
+    {
+      "check": "每个 o 恰好 1 条正式结果；业务 API 效果 1 次",
+      "pass": true,
+      "detail": "results=8 calls={'B:T3b/credit_request/-': 1}"
+    }
+  ]
+}

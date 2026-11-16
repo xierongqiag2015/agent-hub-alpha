@@ -1,0 +1,234 @@
+{
+  "attempts": null,
+  "bank": {
+    "calls": {
+      "naive-1c1fcfcc-7d3a-47fe-bb4f-58377e8d5524": 1,
+      "naive-e8650011-69cb-42eb-acf2-cab83d38be5f": 1
+    },
+    "effects": {
+      "naive-1c1fcfcc-7d3a-47fe-bb4f-58377e8d5524": {
+        "amount": "5000000",
+        "at": "22:19:47.150",
+        "ref": "BANK-0002",
+        "status": "accepted"
+      },
+      "naive-e8650011-69cb-42eb-acf2-cab83d38be5f": {
+        "amount": "5000000",
+        "at": "22:19:45.623",
+        "ref": "BANK-0001",
+        "status": "accepted"
+      }
+    }
+  },
+  "business_requests": null,
+  "counters": [
+    {
+      "n": 2,
+      "name": "inner:evidence"
+    },
+    {
+      "n": 2,
+      "name": "model:s2"
+    },
+    {
+      "n": 2,
+      "name": "inner:kyc_check"
+    },
+    {
+      "n": 6,
+      "name": "inner:supplement"
+    },
+    {
+      "n": 2,
+      "name": "inner:judge"
+    },
+    {
+      "n": 2,
+      "name": "model:s1"
+    },
+    {
+      "n": 2,
+      "name": "inner:credit_request"
+    },
+    {
+      "n": 1,
+      "name": "inner:await_receipt"
+    }
+  ],
+  "events": [
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.535",
+      "detail": "inner:evidence",
+      "kind": "count",
+      "o": "TC0/evidence/-",
+      "seq": 1,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.567",
+      "detail": "model:s2",
+      "kind": "count",
+      "o": "TC0/evidence/-",
+      "seq": 2,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.575",
+      "detail": "inner:kyc_check",
+      "kind": "count",
+      "o": "TC0/kyc_check/-",
+      "seq": 3,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.594",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "TC0/supplement/0",
+      "seq": 4,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.602",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "TC0/supplement/1",
+      "seq": 5,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.609",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "TC0/supplement/2",
+      "seq": 6,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.615",
+      "detail": "inner:judge",
+      "kind": "count",
+      "o": "TC0/judge/-",
+      "seq": 7,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.617",
+      "detail": "model:s1",
+      "kind": "count",
+      "o": "TC0/judge/-",
+      "seq": 8,
+      "task": "TC0"
+    },
+    {
+      "actor": "W1@pid38700",
+      "at": "22:19:45.620",
+      "detail": "inner:credit_request",
+      "kind": "count",
+      "o": "TC0/credit_request/-",
+      "seq": 9,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.054",
+      "detail": "inner:evidence",
+      "kind": "count",
+      "o": "TC0/evidence/-",
+      "seq": 10,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.089",
+      "detail": "model:s2",
+      "kind": "count",
+      "o": "TC0/evidence/-",
+      "seq": 11,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.099",
+      "detail": "inner:kyc_check",
+      "kind": "count",
+      "o": "TC0/kyc_check/-",
+      "seq": 12,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.118",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "TC0/supplement/0",
+      "seq": 13,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.122",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "TC0/supplement/1",
+      "seq": 14,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.136",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "TC0/supplement/2",
+      "seq": 15,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.143",
+      "detail": "inner:judge",
+      "kind": "count",
+      "o": "TC0/judge/-",
+      "seq": 16,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.145",
+      "detail": "model:s1",
+      "kind": "count",
+      "o": "TC0/judge/-",
+      "seq": 17,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.146",
+      "detail": "inner:credit_request",
+      "kind": "count",
+      "o": "TC0/credit_request/-",
+      "seq": 18,
+      "task": "TC0"
+    },
+    {
+      "actor": "W2@pid1628",
+      "at": "22:19:47.153",
+      "detail": "inner:await_receipt",
+      "kind": "count",
+      "o": "TC0/await_receipt/-",
+      "seq": 19,
+      "task": "TC0"
+    }
+  ],
+  "knowledge": null,
+  "node_exec": null,
+  "results": null
+}

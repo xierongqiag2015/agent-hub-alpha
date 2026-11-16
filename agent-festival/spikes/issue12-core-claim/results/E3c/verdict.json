@@ -1,0 +1,27 @@
+{
+  "scenario": "E3c",
+  "title": "旧 worker 复活：卡在派发前（派发许可处隔离）",
+  "pass": true,
+  "checks": [
+    {
+      "check": "W2 接管 credit_request 并派发（gen=2）",
+      "pass": true,
+      "detail": "[(1, 2)]"
+    },
+    {
+      "check": "W1 复活后派发许可被拒（dispatch:fenced），没有发出请求",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "业务 API 调用 1 次、效果 1 次",
+      "pass": true,
+      "detail": "calls={'B:T3c/credit_request/-': 1}"
+    },
+    {
+      "check": "每个 o 恰好 1 条正式结果",
+      "pass": true,
+      "detail": "8"
+    }
+  ]
+}

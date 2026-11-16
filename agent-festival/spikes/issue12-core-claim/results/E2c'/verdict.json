@@ -1,0 +1,22 @@
+{
+  "scenario": "E2c'",
+  "title": "已提交派发、请求未发出时进程被杀（提供方查无此单）",
+  "pass": true,
+  "checks": [
+    {
+      "check": "恢复先查询；查无此单，按能力契约用同一幂等键重发",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "尝试记录 a=1（崩溃）、a=2（重发），B 不变",
+      "pass": true,
+      "detail": "[(1, 'PERMITTED'), (2, 'succeeded')]"
+    },
+    {
+      "check": "业务 API 效果 1 次",
+      "pass": true,
+      "detail": "calls={'B:T2c2/credit_request/-': 1}"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "scenario": "E2b",
+  "title": "内层已执行、提交之前进程被杀（租约过期后接管）",
+  "pass": true,
+  "checks": [
+    {
+      "check": "同一 o 被 W2 接管，owner_gen 1 -> 2",
+      "pass": true,
+      "detail": "{'iter': '-', 'lease_until': 1794320399620, 'node': 'judge', 'o': 'T2b/judge/-', 'owner': 'W2@pid1640', 'owner_gen': 2, 'task': 'T2b'}"
+    },
+    {
+      "check": "judge 正式结果仍只有 1 条，且由 gen=2 提交",
+      "pass": true,
+      "detail": "[{'committed_at': '22:19:58.132', 'h': 'sha256:c3c160e03fbe8de4', 'k_id': '', 'o': 'T2b/judge/-', 'owner_gen': 2, 'result': '{\"verdict\":\"grant-50000\"}'}]"
+    },
+    {
+      "check": "未提交的计算允许重算（S1 调用 2 次，如实计数）",
+      "pass": true,
+      "detail": "{'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 2, 'model:s1': 2, 'inner:credit_request': 1, 'inner:await_receipt': 1}"
+    },
+    {
+      "check": "业务 API 效果 1 次",
+      "pass": true,
+      "detail": "calls={'B:T2b/credit_request/-': 1}"
+    }
+  ]
+}

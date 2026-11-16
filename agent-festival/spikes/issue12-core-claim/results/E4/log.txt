@@ -1,0 +1,24 @@
+$ worker task=T4 owner=W1 invalidate_k_after_find=true
+22:20:32.777 [W1@pid16976] START  task=T4 workflow=credit-flow-v1
+22:20:33.469 [W1@pid16976] OWN    T4/evidence/- gen=1 (Core executableId=evidence)
+22:20:33.496 [W1@pid16976] INJECT knowledge k-evidence-v1 invalidated after lookup, before commit
+22:20:33.527 [W1@pid16976] KSTALE T4/evidence/- knowledge k-evidence-v1 invalid at commit; re-running without it
+22:20:33.568 [W1@pid16976] COMMIT T4/evidence/- gen=1 -> {"assets_musd":35,"recent_overdue":false,"long_overdue":false,"source":"S2-investigation"}
+22:20:33.624 [W1@pid16976] OWN    T4/kyc_check/- gen=1 (Core executableId=kyc.kyc_check)
+22:20:33.633 [W1@pid16976] SUBWF  kyc_check sees session=T4 executableId=kyc.kyc_check
+22:20:33.639 [W1@pid16976] COMMIT T4/kyc_check/- gen=1 -> {"kyc":"passed","applicant":"T4"}
+22:20:33.676 [W1@pid16976] OWN    T4/supplement/0 gen=1 (Core executableId=loop.supplement)
+22:20:33.685 [W1@pid16976] COMMIT T4/supplement/0 gen=1 -> {"doc":"statement-0","round":0}
+22:20:33.699 [W1@pid16976] OWN    T4/supplement/1 gen=1 (Core executableId=loop.supplement)
+22:20:33.708 [W1@pid16976] COMMIT T4/supplement/1 gen=1 -> {"doc":"statement-1","round":1}
+22:20:33.719 [W1@pid16976] OWN    T4/supplement/2 gen=1 (Core executableId=loop.supplement)
+22:20:33.723 [W1@pid16976] COMMIT T4/supplement/2 gen=1 -> {"doc":"statement-2","round":2}
+22:20:33.732 [W1@pid16976] OWN    T4/judge/- gen=1 (Core executableId=judge)
+22:20:33.737 [W1@pid16976] COMMIT T4/judge/- gen=1 -> {"verdict":"grant-50000"}
+22:20:33.741 [W1@pid16976] OWN    T4/credit_request/- gen=1 (Core executableId=credit_request)
+22:20:33.749 [W1@pid16976] SEND   B:T4/credit_request/- attempt=1 idempotency_key=B:T4/credit_request/-
+22:20:33.763 [W1@pid16976] COMMIT T4/credit_request/- gen=1 -> {"b":"B:T4/credit_request/-","ref":"BANK-0001","state":"SUCCEEDED"}
+22:20:33.767 [W1@pid16976] OWN    T4/await_receipt/- gen=1 (Core executableId=await_receipt)
+22:20:33.772 [W1@pid16976] COMMIT T4/await_receipt/- gen=1 -> {"receipt":"SUCCEEDED","ref":"BANK-0001"}
+22:20:33.781 [W1@pid16976] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W1 exit code 0

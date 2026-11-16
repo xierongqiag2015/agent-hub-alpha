@@ -1,0 +1,37 @@
+{
+  "scenario": "E1",
+  "title": "稳定 o：重跑取回同一 o，循环轮次得到不同 o",
+  "pass": true,
+  "checks": [
+    {
+      "check": "循环 3 轮得到 3 个不同 o（Core executableId 三轮相同）",
+      "pass": true,
+      "detail": "['T1/supplement/0', 'T1/supplement/1', 'T1/supplement/2']"
+    },
+    {
+      "check": "重跑后正式结果数不变（每个 o 恰好 1 条）",
+      "pass": true,
+      "detail": "8 -> 8"
+    },
+    {
+      "check": "重跑时所有业务节点内层调用 0 次",
+      "pass": true,
+      "detail": "inner counters first={'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1} rerun={'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}"
+    },
+    {
+      "check": "业务 API 效果 1 次、调用 1 次",
+      "pass": true,
+      "detail": "calls={'B:T1/credit_request/-': 1}"
+    },
+    {
+      "check": "子工作流内节点拿到同一 T（o 以 T1/ 开头）",
+      "pass": true,
+      "detail": "['T1/kyc_check/-']"
+    },
+    {
+      "check": "重跑全部走 REUSE",
+      "pass": true,
+      "detail": "claim:reuse events=8"
+    }
+  ]
+}

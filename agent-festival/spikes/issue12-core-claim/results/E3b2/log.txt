@@ -1,0 +1,35 @@
+$ worker task=T3b2 owner=W1 judge_delay_ms=3000 lease_ms=1000
+$ worker task=T3b2 owner=W2 lease_ms=1000
+22:20:25.076 [W2@pid38228] START  task=T3b2 workflow=credit-flow-v1
+22:20:25.509 [W2@pid38228] REUSE  T3b2/evidence/- -> {"assets_musd":35,"long_overdue":false,"recent_overdue":false,"source":"S2-investigation"} (inner not executed; Core executableId=evidence)
+22:20:25.534 [W2@pid38228] REUSE  T3b2/kyc_check/- -> {"applicant":"T3b2","kyc":"passed"} (inner not executed; Core executableId=kyc.kyc_check)
+22:20:25.558 [W2@pid38228] REUSE  T3b2/supplement/0 -> {"doc":"statement-0","round":0} (inner not executed; Core executableId=loop.supplement)
+22:20:25.567 [W2@pid38228] REUSE  T3b2/supplement/1 -> {"doc":"statement-1","round":1} (inner not executed; Core executableId=loop.supplement)
+22:20:25.576 [W2@pid38228] REUSE  T3b2/supplement/2 -> {"doc":"statement-2","round":2} (inner not executed; Core executableId=loop.supplement)
+22:20:25.584 [W2@pid38228] OWN    T3b2/judge/- gen=2 (Core executableId=judge)
+22:20:25.597 [W2@pid38228] COMMIT T3b2/judge/- gen=2 -> {"verdict":"grant-50000"}
+22:20:25.602 [W2@pid38228] OWN    T3b2/credit_request/- gen=1 (Core executableId=credit_request)
+22:20:25.611 [W2@pid38228] SEND   B:T3b2/credit_request/- attempt=1 idempotency_key=B:T3b2/credit_request/-
+22:20:25.624 [W2@pid38228] COMMIT T3b2/credit_request/- gen=1 -> {"b":"B:T3b2/credit_request/-","ref":"BANK-0001","state":"SUCCEEDED"}
+22:20:25.629 [W2@pid38228] OWN    T3b2/await_receipt/- gen=1 (Core executableId=await_receipt)
+22:20:25.636 [W2@pid38228] COMMIT T3b2/await_receipt/- gen=1 -> {"receipt":"SUCCEEDED","ref":"BANK-0001"}
+22:20:25.643 [W2@pid38228] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W2 exit code 0
+22:20:23.075 [W1@pid35324] START  task=T3b2 workflow=credit-flow-v1
+22:20:23.507 [W1@pid35324] OWN    T3b2/evidence/- gen=1 (Core executableId=evidence)
+22:20:23.520 [W1@pid35324] COMMIT T3b2/evidence/- gen=1 -> {"assets_musd":35,"recent_overdue":false,"long_overdue":false,"source":"S2-investigation"}
+22:20:23.530 [W1@pid35324] OWN    T3b2/kyc_check/- gen=1 (Core executableId=kyc.kyc_check)
+22:20:23.533 [W1@pid35324] SUBWF  kyc_check sees session=T3b2 executableId=kyc.kyc_check
+22:20:23.535 [W1@pid35324] COMMIT T3b2/kyc_check/- gen=1 -> {"kyc":"passed","applicant":"T3b2"}
+22:20:23.559 [W1@pid35324] OWN    T3b2/supplement/0 gen=1 (Core executableId=loop.supplement)
+22:20:23.565 [W1@pid35324] COMMIT T3b2/supplement/0 gen=1 -> {"doc":"statement-0","round":0}
+22:20:23.574 [W1@pid35324] OWN    T3b2/supplement/1 gen=1 (Core executableId=loop.supplement)
+22:20:23.580 [W1@pid35324] COMMIT T3b2/supplement/1 gen=1 -> {"doc":"statement-1","round":1}
+22:20:23.589 [W1@pid35324] OWN    T3b2/supplement/2 gen=1 (Core executableId=loop.supplement)
+22:20:23.595 [W1@pid35324] COMMIT T3b2/supplement/2 gen=1 -> {"doc":"statement-2","round":2}
+22:20:23.602 [W1@pid35324] OWN    T3b2/judge/- gen=1 (Core executableId=judge)
+22:20:26.612 [W1@pid35324] DUP    T3b2/judge/- already committed; adopting existing result
+22:20:26.618 [W1@pid35324] REUSE  T3b2/credit_request/- -> {"b":"B:T3b2/credit_request/-","ref":"BANK-0001","state":"SUCCEEDED"} (inner not executed; Core executableId=credit_request)
+22:20:26.623 [W1@pid35324] REUSE  T3b2/await_receipt/- -> {"receipt":"SUCCEEDED","ref":"BANK-0001"} (inner not executed; Core executableId=await_receipt)
+22:20:26.635 [W1@pid35324] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W1-zombie exit code 0

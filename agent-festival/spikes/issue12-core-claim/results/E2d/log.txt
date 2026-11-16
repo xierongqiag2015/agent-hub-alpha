@@ -1,0 +1,31 @@
+$ worker task=T2d owner=W1 bank_mode=pending after_interrupt=halt
+22:20:10.072 [W1@pid15256] START  task=T2d workflow=credit-flow-v1
+22:20:10.531 [W1@pid15256] OWN    T2d/evidence/- gen=1 (Core executableId=evidence)
+22:20:10.544 [W1@pid15256] COMMIT T2d/evidence/- gen=1 -> {"assets_musd":35,"recent_overdue":false,"long_overdue":false,"source":"S2-investigation"}
+22:20:10.553 [W1@pid15256] OWN    T2d/kyc_check/- gen=1 (Core executableId=kyc.kyc_check)
+22:20:10.556 [W1@pid15256] SUBWF  kyc_check sees session=T2d executableId=kyc.kyc_check
+22:20:10.559 [W1@pid15256] COMMIT T2d/kyc_check/- gen=1 -> {"kyc":"passed","applicant":"T2d"}
+22:20:10.582 [W1@pid15256] OWN    T2d/supplement/0 gen=1 (Core executableId=loop.supplement)
+22:20:10.588 [W1@pid15256] COMMIT T2d/supplement/0 gen=1 -> {"doc":"statement-0","round":0}
+22:20:10.598 [W1@pid15256] OWN    T2d/supplement/1 gen=1 (Core executableId=loop.supplement)
+22:20:10.602 [W1@pid15256] COMMIT T2d/supplement/1 gen=1 -> {"doc":"statement-1","round":1}
+22:20:10.614 [W1@pid15256] OWN    T2d/supplement/2 gen=1 (Core executableId=loop.supplement)
+22:20:10.618 [W1@pid15256] COMMIT T2d/supplement/2 gen=1 -> {"doc":"statement-2","round":2}
+22:20:10.627 [W1@pid15256] OWN    T2d/judge/- gen=1 (Core executableId=judge)
+22:20:10.633 [W1@pid15256] COMMIT T2d/judge/- gen=1 -> {"verdict":"grant-50000"}
+22:20:10.638 [W1@pid15256] OWN    T2d/credit_request/- gen=1 (Core executableId=credit_request)
+22:20:10.645 [W1@pid15256] SEND   B:T2d/credit_request/- attempt=1 idempotency_key=B:T2d/credit_request/-
+22:20:10.655 [W1@pid15256] COMMIT T2d/credit_request/- gen=1 -> {"state":"PENDING","ref":"BANK-0001","b":"B:T2d/credit_request/-"}
+22:20:10.660 [W1@pid15256] OWN    T2d/await_receipt/- gen=1 (Core executableId=await_receipt)
+22:20:10.663 [W1@pid15256] AWAIT  B:T2d/credit_request/- state=PENDING; interrupting workflow (checkpoint)
+22:20:10.721 [W1@pid15256] END    state=INPUT_REQUIRED result=[{"type":"__interaction__","payload":{"id":"await_receipt","value":"awaiting provider receipt for B:T2d/credit_request/-","metadata":{}},"index":0}]
+22:20:10.721 [W1@pid15256] CRASH  after interrupt (Runtime.halt)
+  -> W1 exit code 137 (halted = simulated kill -9)
+$ provider callback: B:T2d/credit_request/- succeeded (Go records it; resume input not yet delivered)
+$ worker task=T2d owner=W2 resume=stale-hint:still-pending
+22:20:11.728 [W2@pid34984] START  task=T2d workflow=credit-flow-v1 resume=stale-hint:still-pending
+22:20:12.171 [W2@pid34984] JOIN   T2d/await_receipt/- held by W1@pid15256 gen=1; waiting
+22:20:12.378 [W2@pid34984] OWN    T2d/await_receipt/- gen=2 (Core executableId=await_receipt)
+22:20:12.388 [W2@pid34984] COMMIT T2d/await_receipt/- gen=2 -> {"receipt":"SUCCEEDED","ref":"BANK-0001"}
+22:20:12.413 [W2@pid34984] END    state=COMPLETED result={"receipt":"SUCCEEDED","ref":"BANK-0001","verdict":"grant-50000"}
+  -> W2-resume exit code 0

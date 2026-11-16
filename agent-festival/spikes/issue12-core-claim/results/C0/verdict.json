@@ -1,0 +1,18 @@
+{
+  "scenario": "C0",
+  "title": "对照组：同一崩溃点，不经控制面（Core 原生用法）",
+  "pass": true,
+  "checks": [
+    {
+      "check": "[缺口复现] 崩溃时无检查点，整张图从头重跑：S1 模型调用 2 次",
+      "pass": true,
+      "detail": "{'inner:evidence': 2, 'model:s2': 2, 'inner:kyc_check': 2, 'inner:supplement': 6, 'inner:judge': 2, 'model:s1': 2, 'inner:credit_request': 2, 'inner:await_receipt': 1}"
+    },
+    {
+      "check": "[缺口复现] 业务 API 效果 2 次（同一笔授信放了两次）",
+      "pass": true,
+      "detail": "effects=['naive-1c1fcfcc-7d3a-47fe-bb4f-58377e8d5524', 'naive-e8650011-69cb-42eb-acf2-cab83d38be5f']"
+    }
+  ],
+  "control": true
+}

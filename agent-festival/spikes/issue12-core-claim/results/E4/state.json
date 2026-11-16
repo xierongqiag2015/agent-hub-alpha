@@ -1,0 +1,507 @@
+{
+  "attempts": [
+    {
+      "a": 1,
+      "at": "22:20:33.748",
+      "b": "B:T4/credit_request/-",
+      "detail": "BANK-0001",
+      "owner_gen": 1,
+      "state": "succeeded"
+    }
+  ],
+  "bank": {
+    "calls": {
+      "B:T4/credit_request/-": 1
+    },
+    "effects": {
+      "B:T4/credit_request/-": {
+        "amount": "5000000",
+        "at": "22:20:33.752",
+        "ref": "BANK-0001",
+        "status": "accepted"
+      }
+    }
+  },
+  "business_requests": [
+    {
+      "b": "B:T4/credit_request/-",
+      "h": "sha256:c835fd298df514de",
+      "o": "T4/credit_request/-",
+      "payload": "{\"amount_minor\":\"5000000\",\"applicant\":\"T4\",\"currency\":\"USD\"}",
+      "provider_ref": "BANK-0001",
+      "state": "SUCCEEDED"
+    }
+  ],
+  "counters": [
+    {
+      "n": 2,
+      "name": "inner:evidence"
+    },
+    {
+      "n": 1,
+      "name": "model:s2"
+    },
+    {
+      "n": 1,
+      "name": "inner:kyc_check"
+    },
+    {
+      "n": 3,
+      "name": "inner:supplement"
+    },
+    {
+      "n": 1,
+      "name": "inner:judge"
+    },
+    {
+      "n": 1,
+      "name": "model:s1"
+    },
+    {
+      "n": 1,
+      "name": "inner:credit_request"
+    },
+    {
+      "n": 1,
+      "name": "inner:await_receipt"
+    }
+  ],
+  "events": [
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.365",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/evidence/-",
+      "seq": 1,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.474",
+      "detail": "inner:evidence",
+      "kind": "count",
+      "o": "T4/evidence/-",
+      "seq": 2,
+      "task": "T4"
+    },
+    {
+      "actor": "injector",
+      "at": "22:20:33.500",
+      "detail": "k-evidence-v1",
+      "kind": "k:invalidate",
+      "o": "",
+      "seq": 3,
+      "task": ""
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.517",
+      "detail": "k-evidence-v1 is no longer valid at commit time",
+      "kind": "commit:k_invalid",
+      "o": "T4/evidence/-",
+      "seq": 4,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.529",
+      "detail": "inner:evidence",
+      "kind": "count",
+      "o": "T4/evidence/-",
+      "seq": 5,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.551",
+      "detail": "model:s2",
+      "kind": "count",
+      "o": "T4/evidence/-",
+      "seq": 6,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.562",
+      "detail": "gen=1 h=sha256:501d546506290409 k=",
+      "kind": "commit:ok",
+      "o": "T4/evidence/-",
+      "seq": 7,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.618",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/kyc_check/-",
+      "seq": 8,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.628",
+      "detail": "inner:kyc_check",
+      "kind": "count",
+      "o": "T4/kyc_check/-",
+      "seq": 9,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.636",
+      "detail": "gen=1 h=sha256:3f11b6305a384ec1 k=",
+      "kind": "commit:ok",
+      "o": "T4/kyc_check/-",
+      "seq": 10,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.673",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/supplement/0",
+      "seq": 11,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.678",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "T4/supplement/0",
+      "seq": 12,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.683",
+      "detail": "gen=1 h=sha256:62fde551002787c2 k=",
+      "kind": "commit:ok",
+      "o": "T4/supplement/0",
+      "seq": 13,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.697",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/supplement/1",
+      "seq": 14,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.701",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "T4/supplement/1",
+      "seq": 15,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.705",
+      "detail": "gen=1 h=sha256:082c61fe087227a3 k=",
+      "kind": "commit:ok",
+      "o": "T4/supplement/1",
+      "seq": 16,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.718",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/supplement/2",
+      "seq": 17,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.720",
+      "detail": "inner:supplement",
+      "kind": "count",
+      "o": "T4/supplement/2",
+      "seq": 18,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.722",
+      "detail": "gen=1 h=sha256:f4560f20a23a6e8e k=",
+      "kind": "commit:ok",
+      "o": "T4/supplement/2",
+      "seq": 19,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.730",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/judge/-",
+      "seq": 20,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.733",
+      "detail": "inner:judge",
+      "kind": "count",
+      "o": "T4/judge/-",
+      "seq": 21,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.735",
+      "detail": "model:s1",
+      "kind": "count",
+      "o": "T4/judge/-",
+      "seq": 22,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.736",
+      "detail": "gen=1 h=sha256:c3c160e03fbe8de4 k=",
+      "kind": "commit:ok",
+      "o": "T4/judge/-",
+      "seq": 23,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.739",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/credit_request/-",
+      "seq": 24,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.742",
+      "detail": "inner:credit_request",
+      "kind": "count",
+      "o": "T4/credit_request/-",
+      "seq": 25,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.745",
+      "detail": "B:T4/credit_request/- sha256:c835fd298df514de",
+      "kind": "b:bind",
+      "o": "T4/credit_request/-",
+      "seq": 26,
+      "task": ""
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.748",
+      "detail": "B:T4/credit_request/- attempt=1",
+      "kind": "dispatch:permit",
+      "o": "T4/credit_request/-",
+      "seq": 27,
+      "task": ""
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.754",
+      "detail": "B:T4/credit_request/- -> SUCCEEDED BANK-0001",
+      "kind": "observe:succeeded",
+      "o": "T4/credit_request/-",
+      "seq": 28,
+      "task": ""
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.761",
+      "detail": "gen=1 h=sha256:6269ddd575d70bbd k=",
+      "kind": "commit:ok",
+      "o": "T4/credit_request/-",
+      "seq": 29,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.766",
+      "detail": "gen=1",
+      "kind": "claim:owned",
+      "o": "T4/await_receipt/-",
+      "seq": 30,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.768",
+      "detail": "inner:await_receipt",
+      "kind": "count",
+      "o": "T4/await_receipt/-",
+      "seq": 31,
+      "task": "T4"
+    },
+    {
+      "actor": "W1@pid16976",
+      "at": "22:20:33.771",
+      "detail": "gen=1 h=sha256:eea99904d96151b3 k=",
+      "kind": "commit:ok",
+      "o": "T4/await_receipt/-",
+      "seq": 32,
+      "task": "T4"
+    }
+  ],
+  "knowledge": [
+    {
+      "id": "k-evidence-v1",
+      "node": "evidence",
+      "valid": 0,
+      "version": "1"
+    }
+  ],
+  "node_exec": [
+    {
+      "iter": "-",
+      "lease_until": 1794320434865,
+      "node": "evidence",
+      "o": "T4/evidence/-",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "-",
+      "lease_until": 1794320435118,
+      "node": "kyc_check",
+      "o": "T4/kyc_check/-",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "0",
+      "lease_until": 1794320435173,
+      "node": "supplement",
+      "o": "T4/supplement/0",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "1",
+      "lease_until": 1794320435197,
+      "node": "supplement",
+      "o": "T4/supplement/1",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "2",
+      "lease_until": 1794320435217,
+      "node": "supplement",
+      "o": "T4/supplement/2",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "-",
+      "lease_until": 1794320435230,
+      "node": "judge",
+      "o": "T4/judge/-",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "-",
+      "lease_until": 1794320435239,
+      "node": "credit_request",
+      "o": "T4/credit_request/-",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    },
+    {
+      "iter": "-",
+      "lease_until": 1794320435266,
+      "node": "await_receipt",
+      "o": "T4/await_receipt/-",
+      "owner": "W1@pid16976",
+      "owner_gen": 1,
+      "task": "T4"
+    }
+  ],
+  "results": [
+    {
+      "committed_at": "22:20:33.562",
+      "h": "sha256:501d546506290409",
+      "k_id": "",
+      "o": "T4/evidence/-",
+      "owner_gen": 1,
+      "result": "{\"assets_musd\":35,\"long_overdue\":false,\"recent_overdue\":false,\"source\":\"S2-investigation\"}"
+    },
+    {
+      "committed_at": "22:20:33.636",
+      "h": "sha256:3f11b6305a384ec1",
+      "k_id": "",
+      "o": "T4/kyc_check/-",
+      "owner_gen": 1,
+      "result": "{\"applicant\":\"T4\",\"kyc\":\"passed\"}"
+    },
+    {
+      "committed_at": "22:20:33.683",
+      "h": "sha256:62fde551002787c2",
+      "k_id": "",
+      "o": "T4/supplement/0",
+      "owner_gen": 1,
+      "result": "{\"doc\":\"statement-0\",\"round\":0}"
+    },
+    {
+      "committed_at": "22:20:33.705",
+      "h": "sha256:082c61fe087227a3",
+      "k_id": "",
+      "o": "T4/supplement/1",
+      "owner_gen": 1,
+      "result": "{\"doc\":\"statement-1\",\"round\":1}"
+    },
+    {
+      "committed_at": "22:20:33.722",
+      "h": "sha256:f4560f20a23a6e8e",
+      "k_id": "",
+      "o": "T4/supplement/2",
+      "owner_gen": 1,
+      "result": "{\"doc\":\"statement-2\",\"round\":2}"
+    },
+    {
+      "committed_at": "22:20:33.736",
+      "h": "sha256:c3c160e03fbe8de4",
+      "k_id": "",
+      "o": "T4/judge/-",
+      "owner_gen": 1,
+      "result": "{\"verdict\":\"grant-50000\"}"
+    },
+    {
+      "committed_at": "22:20:33.761",
+      "h": "sha256:6269ddd575d70bbd",
+      "k_id": "",
+      "o": "T4/credit_request/-",
+      "owner_gen": 1,
+      "result": "{\"b\":\"B:T4/credit_request/-\",\"ref\":\"BANK-0001\",\"state\":\"SUCCEEDED\"}"
+    },
+    {
+      "committed_at": "22:20:33.771",
+      "h": "sha256:eea99904d96151b3",
+      "k_id": "",
+      "o": "T4/await_receipt/-",
+      "owner_gen": 1,
+      "result": "{\"receipt\":\"SUCCEEDED\",\"ref\":\"BANK-0001\"}"
+    }
+  ]
+}

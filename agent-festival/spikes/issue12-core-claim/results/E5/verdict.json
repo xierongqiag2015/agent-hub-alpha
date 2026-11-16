@@ -1,0 +1,27 @@
+{
+  "scenario": "E5",
+  "title": "业务 API 超时后又成功返回",
+  "pass": true,
+  "checks": [
+    {
+      "check": "超时记为 UNRESOLVED（未知），不是失败",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "恢复查询到迟到的成功，不重发",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "业务 API 调用 1 次、效果 1 次",
+      "pass": true,
+      "detail": "calls={'B:T5/credit_request/-': 1}"
+    },
+    {
+      "check": "B 最终 SUCCEEDED",
+      "pass": true,
+      "detail": "SUCCEEDED"
+    }
+  ]
+}

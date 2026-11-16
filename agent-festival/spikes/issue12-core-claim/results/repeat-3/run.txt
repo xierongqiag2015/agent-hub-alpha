@@ -1,0 +1,63 @@
+[PASS] C0: 对照组：同一崩溃点，不经控制面（Core 原生用法）
+    ok  [缺口复现] 崩溃时无检查点，整张图从头重跑：S1 模型调用 2 次  {'inner:evidence': 2, 'model:s2': 2, 'inner:kyc_check': 2, 'inner:supplement': 6, 'inner:judge': 2, 'model:s1': 2, 'inner:credit_request': 2, 'inner:await_receipt': 1}
+    ok  [缺口复现] 业务 API 效果 2 次（同一笔授信放了两次）  effects=['naive-21b2c2d1-4179-4939-ba50-453a043800b6', 'naive-a2fceed4-47b1-4fac-9645-50f58677edc5']
+[PASS] E1: 稳定 o：重跑取回同一 o，循环轮次得到不同 o
+    ok  循环 3 轮得到 3 个不同 o（Core executableId 三轮相同）  ['T1/supplement/0', 'T1/supplement/1', 'T1/supplement/2']
+    ok  重跑后正式结果数不变（每个 o 恰好 1 条）  8 -> 8
+    ok  重跑时所有业务节点内层调用 0 次  inner counters first={'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1} rerun={'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}
+    ok  业务 API 效果 1 次、调用 1 次  calls={'B:T1/credit_request/-': 1}
+    ok  子工作流内节点拿到同一 T（o 以 T1/ 开头）  ['T1/kyc_check/-']
+    ok  重跑全部走 REUSE  claim:reuse events=8
+[PASS] E2a: 提交之后、下一节点之前进程被杀
+    ok  judge 内层（S1 模型）只执行 1 次  {'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}
+    ok  重跑取回原 judge 结果  
+    ok  每个 o 恰好 1 条正式结果  8
+    ok  业务 API 效果 1 次  calls={'B:T2a/credit_request/-': 1}
+[PASS] E2b: 内层已执行、提交之前进程被杀（租约过期后接管）
+    ok  同一 o 被 W2 接管，owner_gen 1 -> 2  {'iter': '-', 'lease_until': 1794320344787, 'node': 'judge', 'o': 'T2b/judge/-', 'owner': 'W2@pid34984', 'owner_gen': 2, 'task': 'T2b'}
+    ok  judge 正式结果仍只有 1 条，且由 gen=2 提交  [{'committed_at': '22:19:03.301', 'h': 'sha256:c3c160e03fbe8de4', 'k_id': '', 'o': 'T2b/judge/-', 'owner_gen': 2, 'result': '{"verdict":"grant-50000"}'}]
+    ok  未提交的计算允许重算（S1 调用 2 次，如实计数）  {'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 2, 'model:s1': 2, 'inner:credit_request': 1, 'inner:await_receipt': 1}
+    ok  业务 API 效果 1 次  calls={'B:T2b/credit_request/-': 1}
+[PASS] E2c: 业务 API 已受理、回执未入账时进程被杀
+    ok  崩溃时本地状态为 DISPATCH_COMMITTED（本地无回执）  DISPATCH_COMMITTED
+    ok  恢复走 dispatch:recover → 查询提供方，而不是盲目重发  
+    ok  业务 API 调用 1 次、效果 1 次（没有重发）  calls={'B:T2c/credit_request/-': 1}
+    ok  回执取自提供方查询，B 收敛为 SUCCEEDED  {'b': 'B:T2c/credit_request/-', 'h': 'sha256:62b961e355d434df', 'o': 'T2c/credit_request/-', 'payload': '{"amount_minor":"5000000","applicant":"T2c","currency":"USD"}', 'provider_ref': 'BANK-0001', 'state': 'SUCCEEDED'}
+[PASS] E2c2: 已提交派发、请求未发出时进程被杀（提供方查无此单）
+    ok  恢复先查询；查无此单，按能力契约用同一幂等键重发  
+    ok  尝试记录 a=1（崩溃）、a=2（重发），B 不变  [(1, 'PERMITTED'), (2, 'succeeded')]
+    ok  业务 API 效果 1 次  calls={'B:T2c2/credit_request/-': 1}
+[PASS] E2d: 中断等待：检查点与 Go 记录的先后
+    ok  恢复输入是过期提示，节点仍以 Go 记录为准（SUCCEEDED）  [{'committed_at': '22:19:17.538', 'h': 'sha256:eea99904d96151b3', 'k_id': '', 'o': 'T2d/await_receipt/-', 'owner_gen': 2, 'result': '{"receipt":"SUCCEEDED","ref":"BANK-0001"}'}]
+    ok  等待前节点（evidence/loop/judge/credit_request）恢复时内层 0 次重跑  {'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 2}
+    ok  业务 API 效果 1 次  calls={'B:T2d/credit_request/-': 1}
+    ok  await_receipt 正式结果 1 条  
+[PASS] E3: 两个进程同时跑同一任务
+    ok  出现 claim:busy（后到者加入等待而不是并行执行）  7
+    ok  每个业务节点内层只执行 1 次  {'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}
+    ok  每个 o 恰好 1 条正式结果  8
+    ok  业务 API 效果 1 次  calls={'B:T3/credit_request/-': 1}
+[PASS] E3b: 旧 worker 复活：新 owner 仍在执行时（提交处按代次隔离）
+    ok  W2 在 W1 租约过期后接管 judge（claim:takeover，gen 1 -> 2）  
+    ok  W1 复活后以 gen=1 提交被拒（commit:fenced）  
+    ok  W1 随后加入等待（claim:busy），最终复用 W2 的结果  
+    ok  judge 正式结果 1 条，由 gen=2 提交  [{'committed_at': '22:19:27.137', 'h': 'sha256:c3c160e03fbe8de4', 'k_id': '', 'o': 'T3b/judge/-', 'owner_gen': 2, 'result': '{"verdict":"grant-50000"}'}]
+    ok  每个 o 恰好 1 条正式结果；业务 API 效果 1 次  results=8 calls={'B:T3b/credit_request/-': 1}
+[PASS] E3b2: 旧 worker 复活：新 owner 已提交后（重复提交被识别）
+    ok  W2 接管并提交 judge（gen=2）  [{'committed_at': '22:19:30.908', 'h': 'sha256:c3c160e03fbe8de4', 'k_id': '', 'o': 'T3b2/judge/-', 'owner_gen': 2, 'result': '{"verdict":"grant-50000"}'}]
+    ok  W1 复活后提交被识别为重复（commit:duplicate），采用已有正式结果，不覆盖  
+    ok  每个 o 恰好 1 条正式结果；业务 API 效果 1 次  results=8 calls={'B:T3b2/credit_request/-': 1}
+[PASS] E3c: 旧 worker 复活：卡在派发前（派发许可处隔离）
+    ok  W2 接管 credit_request 并派发（gen=2）  [(1, 2)]
+    ok  W1 复活后派发许可被拒（dispatch:fenced），没有发出请求  
+    ok  业务 API 调用 1 次、效果 1 次  calls={'B:T3c/credit_request/-': 1}
+    ok  每个 o 恰好 1 条正式结果  8
+[PASS] E4: 查到 K 之后、提交之前 K 失效
+    ok  提交被拒（commit:k_invalid）  
+    ok  没有残留基于失效 K 的正式结果  [{'committed_at': '22:19:38.226', 'h': 'sha256:501d546506290409', 'k_id': '', 'o': 'T4/evidence/-', 'owner_gen': 1, 'result': '{"assets_musd":35,"long_overdue":false,"recent_overdue":false,"source":"S2-investigation"}'}]
+    ok  改走 S2 调查后提交，evidence 正式结果 1 条  {'inner:evidence': 2, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}
+[PASS] E5: 业务 API 超时后又成功返回
+    ok  超时记为 UNRESOLVED（未知），不是失败  
+    ok  恢复查询到迟到的成功，不重发  
+    ok  业务 API 调用 1 次、效果 1 次  calls={'B:T5/credit_request/-': 1}
+    ok  B 最终 SUCCEEDED  SUCCEEDED

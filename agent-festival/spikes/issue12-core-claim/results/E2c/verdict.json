@@ -1,0 +1,27 @@
+{
+  "scenario": "E2c",
+  "title": "业务 API 已受理、回执未入账时进程被杀",
+  "pass": true,
+  "checks": [
+    {
+      "check": "崩溃时本地状态为 DISPATCH_COMMITTED（本地无回执）",
+      "pass": true,
+      "detail": "DISPATCH_COMMITTED"
+    },
+    {
+      "check": "恢复走 dispatch:recover → 查询提供方，而不是盲目重发",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "check": "业务 API 调用 1 次、效果 1 次（没有重发）",
+      "pass": true,
+      "detail": "calls={'B:T2c/credit_request/-': 1}"
+    },
+    {
+      "check": "回执取自提供方查询，B 收敛为 SUCCEEDED",
+      "pass": true,
+      "detail": "{'b': 'B:T2c/credit_request/-', 'h': 'sha256:62b961e355d434df', 'o': 'T2c/credit_request/-', 'payload': '{\"amount_minor\":\"5000000\",\"applicant\":\"T2c\",\"currency\":\"USD\"}', 'provider_ref': 'BANK-0001', 'state': 'SUCCEEDED'}"
+    }
+  ]
+}

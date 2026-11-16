@@ -1,0 +1,27 @@
+{
+  "scenario": "E3",
+  "title": "两个进程同时跑同一任务",
+  "pass": true,
+  "checks": [
+    {
+      "check": "出现 claim:busy（后到者加入等待而不是并行执行）",
+      "pass": true,
+      "detail": "7"
+    },
+    {
+      "check": "每个业务节点内层只执行 1 次",
+      "pass": true,
+      "detail": "{'inner:evidence': 1, 'model:s2': 1, 'inner:kyc_check': 1, 'inner:supplement': 3, 'inner:judge': 1, 'model:s1': 1, 'inner:credit_request': 1, 'inner:await_receipt': 1}"
+    },
+    {
+      "check": "每个 o 恰好 1 条正式结果",
+      "pass": true,
+      "detail": "8"
+    },
+    {
+      "check": "业务 API 效果 1 次",
+      "pass": true,
+      "detail": "calls={'B:T3/credit_request/-': 1}"
+    }
+  ]
+}
