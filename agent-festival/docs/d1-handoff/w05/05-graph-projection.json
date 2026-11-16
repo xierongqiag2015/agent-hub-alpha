@@ -1,0 +1,45 @@
+{
+  "plan": "P1",
+  "version": 1,
+  "case": "",
+  "goal": "",
+  "layers": [
+    [
+      "report"
+    ]
+  ],
+  "nodes": [
+    {
+      "id": "report",
+      "name": "报告撰写人",
+      "kind": "write",
+      "task": "",
+      "reads": [
+        "data:credit/evidence/*"
+      ],
+      "contract": "writer-contr…",
+      "execution": {
+        "kind": "agent_bus",
+        "path_mode": "DIRECT",
+        "binding": {
+          "agent_id": "credit-writer",
+          "version": "1.0.0",
+          "card_digest": "sha256:fbf1ebf8b630801c4273e5cc9836682a4bfb0c929e67309574442e3c2aab4809",
+          "contract_digest": "writer-contract"
+        }
+      }
+    }
+  ],
+  "ok": false,
+  "hash": "",
+  "rev": 6,
+  "bus": {
+    "planned_nodes": 1,
+    "services": 1,
+    "linked_tasks": 0,
+    "completed": 0,
+    "unresolved": 0,
+    "failed": 0,
+    "reused": 0
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "_status": "契约样例（尚未实现）。展示规划侧对同一个场景包、两种任务重点得出的两份选择记录（ALK-05 要求的有依据的不同选择）。实现后由代码生成同结构记录，并写入采纳摘要与用户投影。",
+  "package": {"id": "annual-report-cmb-2025", "version": "0.1.0", "digest": "<导入时计算>"},
+  "score_source": "配置权重：职责与任务重点匹配 0.6 + 输入输出可直接衔接 0.3 + 版本为当前获准版本 0.1。这是排序依据，不是成功概率。",
+  "records": [
+    {
+      "task": {
+        "id": "<任务 T>",
+        "query": {"entity": "招商银行股份有限公司", "basis": "本集团", "period": "2025", "compare_period": "2024",
+                  "focus": ["经营", "资产质量"], "deliverable": "demo/annual-report/report.schema.json"},
+        "materials": ["cmb-2025-annual-report-a@52c49dcd…"]
+      },
+      "recall": {
+        "method": "按任务重点与交付模板在获准包内召回（有限配置）",
+        "candidates": ["ar.material-extractor", "ar.operating-analyst", "ar.asset-quality-analyst", "ar.report-writer", "ar.parent-only-analyst", "ar.generic-finance-qa"]
+      },
+      "eligibility": [
+        {"capability": "ar.material-extractor", "result": "pass", "checks": {"basis": "本集团 ∈ [本集团]", "material": "快照在适用范围内", "period": "2025/2024 均覆盖"}},
+        {"capability": "ar.operating-analyst", "result": "pass", "checks": {"basis": "本集团 ∈ [本集团]", "period": "覆盖"}},
+        {"capability": "ar.asset-quality-analyst", "result": "pass", "checks": {"basis": "本集团 ∈ [本集团]", "period": "覆盖"}},
+        {"capability": "ar.report-writer", "result": "pass", "checks": {"template": "与交付模板一致"}},
+        {"capability": "ar.parent-only-analyst", "result": "excluded", "reason": "硬约束不满足：任务口径为本集团，能力只支持母公司口径；排序分数再高也不能进入执行图"},
+        {"capability": "ar.generic-finance-qa", "result": "unknown", "reason": "口径、期间、输入输出均未声明，信息不足；未知不算通过，不进入候选图"}
+      ],
+      "ranking": [
+        {"capability": "ar.material-extractor", "score": 0.94, "basis": "资料角色唯一合格项"},
+        {"capability": "ar.operating-analyst", "score": 0.91, "basis": "覆盖重点'经营'"},
+        {"capability": "ar.asset-quality-analyst", "score": 0.91, "basis": "覆盖重点'资产质量'"},
+        {"capability": "ar.report-writer", "score": 0.90, "basis": "唯一与交付模板一致的写作能力"}
+      ],
+      "selection": ["ar.material-extractor", "ar.operating-analyst", "ar.asset-quality-analyst", "ar.report-writer"],
+      "composition": {
+        "bindings": [
+          {"from": "extract.output.indicators[operating_income, net_profit_attributable, net_interest_margin, cost_income_ratio]", "to": "operating.input", "check": "字段齐全；单位与期间一致"},
+          {"from": "extract.output.indicators[npl_balance, npl_ratio, provision_coverage, cet1_advanced]", "to": "asset_quality.input", "check": "字段齐全；单位与期间一致"},
+          {"from": "operating.output, asset_quality.output", "to": "write.input", "check": "两个分析节点并行，write 在两者之后 join"}
+        ],
+        "result": "compatible"
+      },
+      "graph_mapping": [
+        {"node": "extract", "capability": "ar.material-extractor@1.0.0"},
+        {"node": "operating", "capability": "ar.operating-analyst@1.0.0", "depends_on": ["extract"]},
+        {"node": "asset_quality", "capability": "ar.asset-quality-analyst@1.0.0", "depends_on": ["extract"]},
+        {"node": "write", "capability": "ar.report-writer@1.0.0", "depends_on": ["operating", "asset_quality"], "report": true}
+      ],
+      "candidate_graph_digest": "<进入采纳摘要；与本选择记录的摘要一并绑定>"
+    },
+    {
+      "task": {
+        "id": "<任务 T'>",
+        "query": {"entity": "招商银行股份有限公司", "basis": "本集团", "period": "2025", "compare_period": "2024",
+                  "focus": ["资产质量"], "deliverable": "demo/annual-report/report.schema.json"},
+        "materials": ["cmb-2025-annual-report-a@52c49dcd…"]
+      },
+      "recall": {
+        "method": "同上",
+        "candidates": ["ar.material-extractor", "ar.operating-analyst", "ar.asset-quality-analyst", "ar.report-writer", "ar.parent-only-analyst", "ar.generic-finance-qa"]
+      },
+      "eligibility": [
+        {"capability": "ar.material-extractor", "result": "pass"},
+        {"capability": "ar.operating-analyst", "result": "pass"},
+        {"capability": "ar.asset-quality-analyst", "result": "pass"},
+        {"capability": "ar.report-writer", "result": "pass"},
+        {"capability": "ar.parent-only-analyst", "result": "excluded", "reason": "同上：口径不满足"},
+        {"capability": "ar.generic-finance-qa", "result": "unknown", "reason": "同上：信息不足"}
+      ],
+      "ranking": [
+        {"capability": "ar.material-extractor", "score": 0.94, "basis": "资料角色唯一合格项"},
+        {"capability": "ar.asset-quality-analyst", "score": 0.93, "basis": "覆盖重点'资产质量'"},
+        {"capability": "ar.report-writer", "score": 0.90, "basis": "唯一与交付模板一致的写作能力"},
+        {"capability": "ar.operating-analyst", "score": 0.31, "basis": "合格，但不覆盖本任务重点"}
+      ],
+      "selection": ["ar.material-extractor", "ar.asset-quality-analyst", "ar.report-writer"],
+      "not_selected": [{"capability": "ar.operating-analyst", "reason": "合格但不覆盖本任务重点；写作能力只要求至少一个分析段落"}],
+      "composition": {
+        "bindings": [
+          {"from": "extract.output.indicators[npl_balance, npl_ratio, provision_coverage, cet1_advanced]", "to": "asset_quality.input", "check": "字段齐全；单位与期间一致"},
+          {"from": "asset_quality.output", "to": "write.input", "check": "requires_sections_any 满足"}
+        ],
+        "result": "compatible"
+      },
+      "graph_mapping": [
+        {"node": "extract", "capability": "ar.material-extractor@1.0.0"},
+        {"node": "asset_quality", "capability": "ar.asset-quality-analyst@1.0.0", "depends_on": ["extract"]},
+        {"node": "write", "capability": "ar.report-writer@1.0.0", "depends_on": ["asset_quality"], "report": true}
+      ],
+      "candidate_graph_digest": "<同上>"
+    }
+  ],
+  "negative_cases_for_acceptance": [
+    {"case": "高分但不适用", "expect": "ar.parent-only-analyst 即使分数最高也被排除，派发次数为零"},
+    {"case": "全部未知", "expect": "只有 unknown 候选时不生成候选图，转澄清或待核验"},
+    {"case": "组合不兼容", "expect": "例如 extract 输出缺 cet1_advanced 而 asset_quality 要求它：采纳前拒绝，派发次数为零"},
+    {"case": "新增获准能力", "expect": "只改场景包即可被召回与选择，不改控制状态机和执行器"}
+  ]
+}

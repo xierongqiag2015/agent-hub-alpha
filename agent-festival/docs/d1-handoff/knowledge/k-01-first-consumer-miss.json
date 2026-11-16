@@ -1,0 +1,76 @@
+[
+  {
+    "as": "graph-host",
+    "request": {
+      "body": {
+        "material": {
+          "instructions": "extract the 8 W01 indicators",
+          "snapshot": {
+            "id": "cmb-2025-annual-report-a",
+            "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da"
+          },
+          "template": "w01-report-v1"
+        },
+        "node": "extract",
+        "sources": [
+          {
+            "id": "cmb-2025-annual-report-a",
+            "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da"
+          }
+        ],
+        "task": "T1",
+        "token": "<session token of lease-a>"
+      },
+      "method": "POST",
+      "path": "/v1/exec/claim"
+    },
+    "response": {
+      "body": {
+        "a": 1,
+        "action": "run",
+        "epoch": 1,
+        "kappa_in": "jcs-sha256-v1:967c7f194629a8d0289ca8bceec830ddfa7a9670d5b678aee4471c2c2ecccae6",
+        "lookup": {
+          "at": "2026-11-16T11:15:08.5480679Z",
+          "outcome": "miss",
+          "reason": "没有其他任务消费过这些来源"
+        },
+        "o": "T1/g1/extract#0"
+      },
+      "status": 200
+    },
+    "step": "step: claim the extract node (first consumer of v1)"
+  },
+  {
+    "as": "graph-host",
+    "request": {
+      "body": {
+        "a": 1,
+        "body": {
+          "indicators": 8
+        },
+        "o": "T1/g1/extract#0",
+        "outcome": "completed",
+        "task": "T1",
+        "token": "<session token of lease-a>"
+      },
+      "method": "POST",
+      "path": "/v1/exec/commit"
+    },
+    "response": {
+      "body": {
+        "result": {
+          "a": 1,
+          "artifact": "jcs-sha256-v1:55f4106d1f08cc484604ea8869d48487975e86639ca9910d9a900441db36be5a",
+          "committed_at": "2026-11-16T11:15:08.5536435Z",
+          "epoch": 1,
+          "kappa_in": "jcs-sha256-v1:967c7f194629a8d0289ca8bceec830ddfa7a9670d5b678aee4471c2c2ecccae6",
+          "o": "T1/g1/extract#0",
+          "outcome": "completed"
+        }
+      },
+      "status": 200
+    },
+    "step": "step: commit the computed result"
+  }
+]

@@ -1,0 +1,108 @@
+{
+  "call": {
+    "node_execution_id": "sha256:6b99b37688758fe4f122da3f0d3399e88bb018f9a4172cdb1972c424533ec74c",
+    "graph_revision": "P1-v1",
+    "node_path": "report",
+    "loop_iteration": 0,
+    "attempt": 1,
+    "binding": {
+      "agent_id": "credit-writer",
+      "version": "1.0.0",
+      "card_digest": "sha256:fbf1ebf8b630801c4273e5cc9836682a4bfb0c929e67309574442e3c2aab4809",
+      "contract_digest": "writer-contract"
+    },
+    "input_digest": "sha256:e64a2aefbfb43b43e190605dc8d5560e63cbb0bfed6c234d83fe99126ad39d22",
+    "input": "case C006",
+    "goal": "write a grounded report",
+    "request_id": "4b1c593499c8d9215d37eb06",
+    "message_id": "b479f99f42c575eb74c414b4",
+    "context_id": "ctx-858d7533875dc4f313684ae2",
+    "remote_task_id": "remote-task-1",
+    "status": "unknown",
+    "sequence": 2,
+    "created_at": "2026-11-16T11:19:48Z",
+    "updated_at": "2026-11-16T11:19:48Z",
+    "model_events": {},
+    "discovery": {
+      "checked_at": "2026-11-16T11:19:48Z",
+      "candidates": [
+        {
+          "instance_id": "fixture-1",
+          "health": "ONLINE",
+          "contract_version": "1.0",
+          "capability_version": "1.0.0",
+          "eligible": true
+        }
+      ]
+    },
+    "gateway_exchanges": {
+      "4b1c593499c8d9215d37eb06": {
+        "rpc_id": "4b1c593499c8d9215d37eb06",
+        "method": "SendMessage",
+        "started_at": "2026-11-11T01:00:00Z",
+        "finished_at": "2026-11-11T01:00:01Z",
+        "http_status": 200,
+        "outcome": "task_received",
+        "sequence": 1
+      },
+      "query-1": {
+        "rpc_id": "query-1",
+        "method": "GetTask",
+        "started_at": "2026-11-11T01:00:02Z",
+        "finished_at": "2026-11-11T01:00:03Z",
+        "http_status": 200,
+        "outcome": "protocol_error",
+        "error_code": "TASK_NOT_FOUND",
+        "sequence": 2
+      }
+    },
+    "capability_token": "<redacted: node-scoped credential, never projected>"
+  },
+  "gateway_view": {
+    "source": "java_host",
+    "protocol": "A2A 1.0 JSON-RPC",
+    "path_mode": "DIRECT",
+    "send_count": 1,
+    "query_count": 1,
+    "first_send": {
+      "rpc_id": "4b1c593499c8d9215d37eb06",
+      "method": "SendMessage",
+      "started_at": "2026-11-11T01:00:00Z",
+      "finished_at": "2026-11-11T01:00:01Z",
+      "http_status": 200,
+      "outcome": "task_received",
+      "sequence": 1
+    },
+    "first_receipt": {
+      "rpc_id": "4b1c593499c8d9215d37eb06",
+      "method": "SendMessage",
+      "started_at": "2026-11-11T01:00:00Z",
+      "finished_at": "2026-11-11T01:00:01Z",
+      "http_status": 200,
+      "outcome": "task_received",
+      "sequence": 1
+    },
+    "last_exchange": {
+      "rpc_id": "query-1",
+      "method": "GetTask",
+      "started_at": "2026-11-11T01:00:02Z",
+      "finished_at": "2026-11-11T01:00:03Z",
+      "http_status": 200,
+      "outcome": "protocol_error",
+      "error_code": "TASK_NOT_FOUND",
+      "sequence": 2
+    },
+    "last_error": {
+      "rpc_id": "query-1",
+      "method": "GetTask",
+      "started_at": "2026-11-11T01:00:02Z",
+      "finished_at": "2026-11-11T01:00:03Z",
+      "http_status": 200,
+      "outcome": "protocol_error",
+      "error_code": "TASK_NOT_FOUND",
+      "sequence": 2
+    }
+  },
+  "note": "a retry of the same node returns the original call with action=query; no second SendMessage is issued",
+  "retry_begin_call_action": "query"
+}

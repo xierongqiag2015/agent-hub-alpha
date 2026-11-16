@@ -1,0 +1,157 @@
+[
+  {
+    "as": "graph-host",
+    "request": {
+      "body": {
+        "material": {
+          "instructions": "extract the 8 W01 indicators",
+          "snapshot": {
+            "id": "cmb-2025-annual-report-a",
+            "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da"
+          },
+          "template": "w01-report-v1"
+        },
+        "node": "extract",
+        "sources": [
+          {
+            "id": "cmb-2025-annual-report-a",
+            "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da"
+          }
+        ],
+        "task": "T4",
+        "token": "<session token of lease-d>"
+      },
+      "method": "POST",
+      "path": "/v1/exec/claim"
+    },
+    "response": {
+      "body": {
+        "a": 1,
+        "action": "run",
+        "epoch": 1,
+        "kappa_in": "jcs-sha256-v1:967c7f194629a8d0289ca8bceec830ddfa7a9670d5b678aee4471c2c2ecccae6",
+        "lookup": {
+          "at": "2026-11-16T11:15:08.5743992Z",
+          "outcome": "hit",
+          "reason": "输入、来源版本与能力定义完全一致，可复用",
+          "source_o": "T1/g1/extract#0"
+        },
+        "o": "T4/g1/extract#0",
+        "reuse_candidate": {
+          "a": 1,
+          "artifact": "jcs-sha256-v1:55f4106d1f08cc484604ea8869d48487975e86639ca9910d9a900441db36be5a",
+          "body": {
+            "indicators": 8
+          },
+          "committed_at": "2026-11-16T11:15:08.5536435Z",
+          "epoch": 1,
+          "kappa_in": "jcs-sha256-v1:967c7f194629a8d0289ca8bceec830ddfa7a9670d5b678aee4471c2c2ecccae6",
+          "o": "T1/g1/extract#0",
+          "outcome": "completed"
+        }
+      },
+      "status": 200
+    },
+    "step": "step: claim (a candidate is offered)"
+  },
+  {
+    "as": "curator",
+    "request": {
+      "body": {
+        "command_id": "rv-1",
+        "reason": "extraction used the wrong basis (sample)",
+        "ref": "result:T1/g1/extract#0"
+      },
+      "method": "POST",
+      "path": "/v1/commands/revoke"
+    },
+    "response": {
+      "body": {
+        "at": "2026-11-16T11:15:08.5743992Z",
+        "reason": "extraction used the wrong basis (sample)",
+        "ref": "result:T1/g1/extract#0",
+        "revoked_by": "curator"
+      },
+      "status": 200
+    },
+    "step": "step: curator revokes the original result"
+  },
+  {
+    "as": "graph-host",
+    "request": {
+      "body": {
+        "a": 1,
+        "body": {
+          "indicators": 8
+        },
+        "o": "T4/g1/extract#0",
+        "outcome": "completed",
+        "reused_from": "T1/g1/extract#0",
+        "task": "T4",
+        "token": "<session token of lease-d>"
+      },
+      "method": "POST",
+      "path": "/v1/exec/commit"
+    },
+    "response": {
+      "body": {
+        "error": {
+          "code": "conflict",
+          "message": "T1/g1/extract#0 can no longer be reused: 结果 T1/g1/extract#0 已撤回：extraction used the wrong basis (sample)"
+        }
+      },
+      "status": 409
+    },
+    "step": "step: commit the candidate after revocation (refused)"
+  },
+  {
+    "as": "graph-host",
+    "request": {
+      "body": {
+        "material": {
+          "instructions": "extract the 8 W01 indicators",
+          "snapshot": {
+            "id": "cmb-2025-annual-report-a",
+            "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da"
+          },
+          "template": "w01-report-v1"
+        },
+        "node": "extract",
+        "sources": [
+          {
+            "id": "cmb-2025-annual-report-a",
+            "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da"
+          }
+        ],
+        "task": "T5",
+        "token": "<session token of lease-e>"
+      },
+      "method": "POST",
+      "path": "/v1/exec/claim"
+    },
+    "response": {
+      "body": {
+        "a": 1,
+        "action": "run",
+        "epoch": 1,
+        "kappa_in": "jcs-sha256-v1:967c7f194629a8d0289ca8bceec830ddfa7a9670d5b678aee4471c2c2ecccae6",
+        "lookup": {
+          "at": "2026-11-16T11:15:08.5820276Z",
+          "outcome": "miss",
+          "reason": "已有结果不可用：结果 T1/g1/extract#0 已撤回：extraction used the wrong basis (sample)"
+        },
+        "o": "T5/g1/extract#0"
+      },
+      "status": 200
+    },
+    "step": "step: a later claim (miss, reason names the revocation)"
+  },
+  {
+    "lookup": {
+      "at": "2026-11-16T11:15:08.5820276Z",
+      "outcome": "miss",
+      "reason": "已有结果不可用：结果 T1/g1/extract#0 已撤回：extraction used the wrong basis (sample)"
+    },
+    "step": "projection: lookup reason"
+  }
+]

@@ -1,0 +1,97 @@
+{
+  "_status": "契约样例（尚未实现）。D2 前在 PR #30 中实现受治理导入与规划消费，届时由代码生成同结构的包与记录；字段可在实现中收窄，但不得删除约束与治理字段。",
+  "package": "annual-report-cmb-2025",
+  "version": "0.1.0",
+  "scenario": "公开年报经营与资产质量简报（#16 / W01）",
+  "materials": [
+    {"id": "cmb-2025-annual-report-a", "sha256": "52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da", "source": "PR #21 source.json"}
+  ],
+  "report_template": {"ref": "demo/annual-report/report.schema.json", "from": "PR #21"},
+  "governance": {
+    "state": "approved",
+    "approved_by": "<受治理导入的批准人，演示身份>",
+    "approved_at": "<导入时间>",
+    "digest": "<包内容的 RFC 8785 + SHA-256 摘要，由导入时计算>",
+    "rule": "只有 state=approved 且未撤回的包对规划可见；向 RDC 注册 Agent 不等于进入本包"
+  },
+  "capabilities": [
+    {
+      "id": "ar.material-extractor",
+      "version": "1.0.0",
+      "role": "资料：从固定快照抽取指标及原文引用",
+      "rdc": {"agent_id": "<W05/W06 部署后填写>", "card_version": "<注册后填写>", "card_digest": "<注册后填写>"},
+      "applicability": {
+        "entities": ["招商银行股份有限公司"],
+        "basis": ["本集团"],
+        "periods": ["2025", "2024"],
+        "units": ["人民币百万元", "%"],
+        "materials": ["cmb-2025-annual-report-a"]
+      },
+      "input": {"schema": "material-ref", "requires": ["snapshot.id", "snapshot.sha256"]},
+      "output": {"schema": "indicator-set", "fields": ["id", "values", "unit", "citation.pdf_page", "citation.printed_page", "citation.quote"]},
+      "limits": ["只读快照，不联网", "页码按 PR #21 的规则：正文印刷页 = PDF 页 - 1"],
+      "reusable": true,
+      "governance_state": "approved"
+    },
+    {
+      "id": "ar.operating-analyst",
+      "version": "1.0.0",
+      "role": "经营分析：营收、利润、净息差、成本收入比",
+      "rdc": {"agent_id": "<W05/W06 部署后填写>", "card_version": "<注册后填写>", "card_digest": "<注册后填写>"},
+      "applicability": {"basis": ["本集团"], "periods": ["2025", "2024"], "indicators": ["operating_income", "net_profit_attributable", "net_interest_margin", "cost_income_ratio"]},
+      "input": {"schema": "indicator-set", "requires": ["operating_income", "net_profit_attributable", "net_interest_margin", "cost_income_ratio"]},
+      "output": {"schema": "findings", "section": "operating"},
+      "limits": ["比率变化用百分点表述"],
+      "reusable": false,
+      "governance_state": "approved"
+    },
+    {
+      "id": "ar.asset-quality-analyst",
+      "version": "1.0.0",
+      "role": "资产质量分析：不良余额与比率、拨备覆盖率、资本充足率",
+      "rdc": {"agent_id": "<W05/W06 部署后填写>", "card_version": "<注册后填写>", "card_digest": "<注册后填写>"},
+      "applicability": {"basis": ["本集团"], "periods": ["2025", "2024"], "indicators": ["npl_balance", "npl_ratio", "provision_coverage", "cet1_advanced"]},
+      "input": {"schema": "indicator-set", "requires": ["npl_balance", "npl_ratio", "provision_coverage", "cet1_advanced"]},
+      "output": {"schema": "findings", "section": "asset_quality"},
+      "limits": ["核心一级资本充足率取高级法，与权重法区分"],
+      "reusable": false,
+      "governance_state": "approved"
+    },
+    {
+      "id": "ar.report-writer",
+      "version": "1.0.0",
+      "role": "写作：按 W01 模板生成结构化报告",
+      "rdc": {"agent_id": "<W05/W06 部署后填写>", "card_version": "<注册后填写>", "card_digest": "<注册后填写>"},
+      "applicability": {"templates": ["demo/annual-report/report.schema.json"]},
+      "input": {"schema": "findings", "requires_sections_any": ["operating", "asset_quality"]},
+      "output": {"schema": "report", "ref": "demo/annual-report/report.schema.json"},
+      "limits": ["每个数字和结论都要回到快照的页与原文行"],
+      "reusable": false,
+      "governance_state": "approved"
+    },
+    {
+      "id": "ar.parent-only-analyst",
+      "version": "2.3.0",
+      "role": "母公司口径财务分析（用作应被排除的候选）",
+      "rdc": {"agent_id": "<示例>", "card_version": "<示例>", "card_digest": "<示例>"},
+      "applicability": {"basis": ["母公司"], "periods": ["2025", "2024"]},
+      "input": {"schema": "indicator-set"},
+      "output": {"schema": "findings", "section": "operating"},
+      "limits": ["只支持母公司口径"],
+      "reusable": false,
+      "governance_state": "approved"
+    },
+    {
+      "id": "ar.generic-finance-qa",
+      "version": "0.9.0",
+      "role": "通用财报问答（用作信息不足、标为未知的候选）",
+      "rdc": {"agent_id": "<示例>", "card_version": "<示例>", "card_digest": "<示例>"},
+      "applicability": {"basis": "<未声明>", "periods": "<未声明>"},
+      "input": {"schema": "<未声明>"},
+      "output": {"schema": "<未声明>"},
+      "limits": [],
+      "reusable": false,
+      "governance_state": "approved"
+    }
+  ]
+}

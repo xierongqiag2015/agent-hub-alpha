@@ -1,0 +1,12 @@
+{
+  "binding": {
+    "agent_id": "credit-writer",
+    "version": "1.0.0",
+    "card_digest": "sha256:fbf1ebf8b630801c4273e5cc9836682a4bfb0c929e67309574442e3c2aab4809",
+    "contract_digest": "writer-contract"
+  },
+  "expert": "report-writer",
+  "node": "report",
+  "note": "card_digest/contract_digest are fixed when the plan is proposed and re-checked against RDC before every send",
+  "rdc_agent_id": "credit-writer"
+}

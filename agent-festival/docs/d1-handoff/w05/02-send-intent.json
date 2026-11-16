@@ -1,0 +1,47 @@
+{
+  "begin_call": {
+    "run_id": "R1",
+    "token": "lease-old",
+    "step": "report",
+    "input": "case C006",
+    "goal": "write a grounded report"
+  },
+  "call": {
+    "node_execution_id": "sha256:6b99b37688758fe4f122da3f0d3399e88bb018f9a4172cdb1972c424533ec74c",
+    "graph_revision": "P1-v1",
+    "node_path": "report",
+    "loop_iteration": 0,
+    "attempt": 1,
+    "binding": {
+      "agent_id": "credit-writer",
+      "version": "1.0.0",
+      "card_digest": "sha256:fbf1ebf8b630801c4273e5cc9836682a4bfb0c929e67309574442e3c2aab4809",
+      "contract_digest": "writer-contract"
+    },
+    "input_digest": "sha256:e64a2aefbfb43b43e190605dc8d5560e63cbb0bfed6c234d83fe99126ad39d22",
+    "input": "case C006",
+    "goal": "write a grounded report",
+    "request_id": "39e6f069c4a154d61c44ee0e",
+    "message_id": "b13157b62a6362920304f675",
+    "context_id": "ctx-96120f9683f9ece7a3b948d0",
+    "status": "dispatching",
+    "sequence": 0,
+    "created_at": "2026-11-16T11:19:48Z",
+    "updated_at": "2026-11-16T11:19:48Z",
+    "model_events": {},
+    "discovery": {
+      "checked_at": "2026-11-16T11:19:48Z",
+      "candidates": [
+        {
+          "instance_id": "fixture-1",
+          "health": "ONLINE",
+          "contract_version": "1.0",
+          "capability_version": "1.0.0",
+          "eligible": true
+        }
+      ]
+    },
+    "capability_token": "<redacted: node-scoped credential, never projected>"
+  },
+  "note": "the intent (request/message/context ids, input digest, discovery snapshot) is persisted before anything is sent"
+}

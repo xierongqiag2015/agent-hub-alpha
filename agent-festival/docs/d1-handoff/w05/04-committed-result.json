@@ -1,0 +1,104 @@
+{
+  "call": {
+    "node_execution_id": "sha256:6b99b37688758fe4f122da3f0d3399e88bb018f9a4172cdb1972c424533ec74c",
+    "graph_revision": "P1-v1",
+    "node_path": "report",
+    "loop_iteration": 0,
+    "attempt": 1,
+    "binding": {
+      "agent_id": "credit-writer",
+      "version": "1.0.0",
+      "card_digest": "sha256:fbf1ebf8b630801c4273e5cc9836682a4bfb0c929e67309574442e3c2aab4809",
+      "contract_digest": "writer-contract"
+    },
+    "input_digest": "sha256:e64a2aefbfb43b43e190605dc8d5560e63cbb0bfed6c234d83fe99126ad39d22",
+    "input": "case C006",
+    "goal": "write a grounded report",
+    "request_id": "39e6f069c4a154d61c44ee0e",
+    "message_id": "b13157b62a6362920304f675",
+    "context_id": "ctx-96120f9683f9ece7a3b948d0",
+    "remote_task_id": "remote-task-1",
+    "status": "completed",
+    "sequence": 1,
+    "created_at": "2026-11-16T11:19:48Z",
+    "updated_at": "2026-11-16T11:19:48Z",
+    "agent_started_at": "2026-11-16T11:19:48Z",
+    "artifact_id": "artifact-6b99b37688758fe4f122da3f0d3399e88bb018f9a4172cdb1972c424533ec74c",
+    "artifact_digest": "sha256:5b8bcde27e971090695d3b375be1f204ff81a71bbd634be712c95dcdfa3b4f22",
+    "model_events": {
+      "model-1": "2026-11-16T11:19:48Z"
+    },
+    "discovery": {
+      "checked_at": "2026-11-16T11:19:48Z",
+      "candidates": [
+        {
+          "instance_id": "fixture-1",
+          "health": "ONLINE",
+          "contract_version": "1.0",
+          "capability_version": "1.0.0",
+          "eligible": true
+        }
+      ]
+    },
+    "gateway_exchanges": {
+      "39e6f069c4a154d61c44ee0e": {
+        "rpc_id": "39e6f069c4a154d61c44ee0e",
+        "method": "SendMessage",
+        "started_at": "2026-11-11T01:00:00Z",
+        "finished_at": "2026-11-11T01:00:01Z",
+        "http_status": 200,
+        "outcome": "task_received",
+        "sequence": 1
+      }
+    },
+    "capability_token": "<redacted: node-scoped credential, never projected>"
+  },
+  "commit_call": {
+    "run_id": "R1",
+    "token": "<executor lease token>",
+    "step": "report",
+    "input": "case C006",
+    "goal": "write a grounded report",
+    "node_execution_id": "sha256:6b99b37688758fe4f122da3f0d3399e88bb018f9a4172cdb1972c424533ec74c",
+    "input_digest": "sha256:e64a2aefbfb43b43e190605dc8d5560e63cbb0bfed6c234d83fe99126ad39d22",
+    "attempt": 1,
+    "remote_task_id": "remote-task-1",
+    "context_id": "ctx-96120f9683f9ece7a3b948d0",
+    "output": "structured report artifact (fixture)"
+  },
+  "gateway_view": {
+    "source": "java_host",
+    "protocol": "A2A 1.0 JSON-RPC",
+    "path_mode": "DIRECT",
+    "send_count": 1,
+    "query_count": 0,
+    "first_send": {
+      "rpc_id": "39e6f069c4a154d61c44ee0e",
+      "method": "SendMessage",
+      "started_at": "2026-11-11T01:00:00Z",
+      "finished_at": "2026-11-11T01:00:01Z",
+      "http_status": 200,
+      "outcome": "task_received",
+      "sequence": 1
+    },
+    "first_receipt": {
+      "rpc_id": "39e6f069c4a154d61c44ee0e",
+      "method": "SendMessage",
+      "started_at": "2026-11-11T01:00:00Z",
+      "finished_at": "2026-11-11T01:00:01Z",
+      "http_status": 200,
+      "outcome": "task_received",
+      "sequence": 1
+    },
+    "last_exchange": {
+      "rpc_id": "39e6f069c4a154d61c44ee0e",
+      "method": "SendMessage",
+      "started_at": "2026-11-11T01:00:00Z",
+      "finished_at": "2026-11-11T01:00:01Z",
+      "http_status": 200,
+      "outcome": "task_received",
+      "sequence": 1
+    }
+  },
+  "step_status": "done"
+}
