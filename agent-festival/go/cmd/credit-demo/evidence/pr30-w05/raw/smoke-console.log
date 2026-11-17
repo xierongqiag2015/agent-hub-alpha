@@ -1,0 +1,170 @@
+== 2026-11-17T11:27:09+08:00 smoke_bus normal
+R1 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R1 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/normal-1794886030.json
+== 2026-11-17T11:29:23+08:00 smoke_bus normal exit 0
+== 2026-11-17T11:31:17+08:00 fault overlay up
+ Container agent-hub-issue16-fault-proxy-1 Creating 
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-fault-proxy-1 Created 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-fault-proxy-1 Starting 
+ Container agent-hub-issue16-fault-proxy-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+== 2026-11-17T11:31:30+08:00 fault overlay exit 0
+== 2026-11-17T11:31:30+08:00 smoke_bus host-kill
+R2 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'done'), ('financial', 'running'), ('industry', 'running'), ('bureau', 'running'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'reused'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'waiting'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'reused'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R2 running [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R2 running [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R2 done [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/host-kill-1794886291.json
+== 2026-11-17T11:33:34+08:00 smoke_bus host-kill exit 0
+== 2026-11-17T11:33:34+08:00 smoke_bus disconnect
+R3 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R3 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R3 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R3 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R3 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/disconnect-1794886414.json
+== 2026-11-17T11:35:37+08:00 smoke_bus disconnect exit 0
+== 2026-11-17T11:35:37+08:00 smoke_bus late
+R4 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'running')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R4 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/late-1794886538.json
+== 2026-11-17T11:37:31+08:00 smoke_bus late exit 0
+== 2026-11-17T11:37:31+08:00 smoke_bus storage-failure
+R5 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R5 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R5 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R5 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R5 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R5 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R5 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R5 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/storage-failure-1794886651.json
+== 2026-11-17T11:39:09+08:00 smoke_bus storage-failure exit 0
+== 2026-11-17T11:39:09+08:00 smoke_bus gateway-restart
+R6 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R6 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R6 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R6 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/gateway-restart-1794886750.json
+== 2026-11-17T11:39:17+08:00 smoke_bus gateway-restart exit 0
+== 2026-11-17T11:39:17+08:00 smoke_bus runtime-restart
+R7 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R7 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R7 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R7 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R7 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/runtime-restart-1794886758.json
+== 2026-11-17T11:39:31+08:00 smoke_bus runtime-restart exit 0
+== 2026-11-17T11:39:31+08:00 probe_bus --rdc-outage
+ Container agent-hub-issue16-rdc-1 Stopping 
+ Container agent-hub-issue16-rdc-1 Stopped 
+time="2026-11-17T11:40:07+08:00" level=warning msg="Found orphan containers ([agent-hub-issue16-fault-proxy-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container agent-hub-issue16-bus-db-1 Running 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Starting 
+ Container agent-hub-issue16-rdc-1 Started 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Healthy 
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/protocol-admission-1794886771.json
+== 2026-11-17T11:40:18+08:00 probe_bus --rdc-outage exit 0
+== 2026-11-17T11:40:18+08:00 restore direct gateway
+time="2026-11-17T11:40:19+08:00" level=warning msg="Found orphan containers ([agent-hub-issue16-fault-proxy-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container agent-hub-issue16-bus-db-1 Running 
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-writer-agent-1 Running 
+ Container agent-hub-issue16-material-agent-1 Running 
+ Container agent-hub-issue16-analysis-agent-1 Running 
+ Container agent-hub-issue16-rdc-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-gateway-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-swarm-1 Running 
+ Container agent-hub-issue16-front-1 Running 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-analysis-agent-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-gateway-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-front-1 Waiting 
+ Container agent-hub-issue16-writer-agent-1 Waiting 
+ Container agent-hub-issue16-material-agent-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Healthy 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-gateway-1 Healthy 
+ Container agent-hub-issue16-writer-agent-1 Healthy 
+ Container agent-hub-issue16-front-1 Healthy 
+ Container agent-hub-issue16-analysis-agent-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-17T11:40:28+08:00 restore exit 0
+agent-hub-issue16-fault-proxy-1
+== 2026-11-17T11:40:29+08:00 faults done

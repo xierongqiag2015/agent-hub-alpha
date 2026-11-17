@@ -1,0 +1,575 @@
+{
+  "scenario": "protocol-admission",
+  "started_at": 1794886771.432033,
+  "cases": {
+    "credit-material": {
+      "card": {
+        "http": 200,
+        "body": {
+          "name": "credit-material",
+          "rawJson": "{\"url\": \"http://material-agent:8090/a2a\", \"name\": \"credit-material\", \"skills\": [{\"id\": \"credit-material\", \"name\": \"资料整理与证据提取\", \"tags\": [\"issue16\", \"controlled\"], \"examples\": [], \"inputModes\": [\"text/plain\"], \"description\": \"Execute a control-service-authorized node with isolated input and read-only tools\", \"outputModes\": [\"text/plain\"], \"securityRequirements\": []}], \"iconUrl\": null, \"version\": \"1.0.1\", \"provider\": {\"url\": \"\", \"organization\": \"Agent Hub Alpha\"}, \"signatures\": [], \"description\": \"Issue 16 controlled professional agent; node-scoped evidence and tools\", \"capabilities\": {\"streaming\": false, \"extensions\": [], \"extendedAgentCard\": false, \"pushNotifications\": false}, \"securitySchemes\": {}, \"documentationUrl\": null, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"preferredTransport\": \"JSONRPC\", \"supportedInterfaces\": [{\"url\": \"http://material-agent:8090/a2a\", \"tenant\": null, \"protocolBinding\": \"JSONRPC\", \"protocolVersion\": \"1.0\"}], \"additionalInterfaces\": [], \"securityRequirements\": []}"
+        }
+      },
+      "instances": {
+        "http": 200,
+        "body": {
+          "agentId": "credit-material",
+          "instances": [
+            {
+              "instanceId": "material-1",
+              "serviceId": "material-1",
+              "health": "ONLINE",
+              "weight": 100,
+              "maxConcurrency": 10,
+              "region": null,
+              "frameworkType": "JIUWEN",
+              "contractVersion": "1.0",
+              "capabilityVersion": "1.0.1",
+              "agentName": "credit-material",
+              "card": {
+                "name": "credit-material",
+                "rawJson": "{\"url\": \"http://material-agent:8090/a2a\", \"name\": \"credit-material\", \"skills\": [{\"id\": \"credit-material\", \"name\": \"资料整理与证据提取\", \"tags\": [\"issue16\", \"controlled\"], \"examples\": [], \"inputModes\": [\"text/plain\"], \"description\": \"Execute a control-service-authorized node with isolated input and read-only tools\", \"outputModes\": [\"text/plain\"], \"securityRequirements\": []}], \"iconUrl\": null, \"version\": \"1.0.1\", \"provider\": {\"url\": \"\", \"organization\": \"Agent Hub Alpha\"}, \"signatures\": [], \"description\": \"Issue 16 controlled professional agent; node-scoped evidence and tools\", \"capabilities\": {\"streaming\": false, \"extensions\": [], \"extendedAgentCard\": false, \"pushNotifications\": false}, \"securitySchemes\": {}, \"documentationUrl\": null, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"preferredTransport\": \"JSONRPC\", \"supportedInterfaces\": [{\"url\": \"http://material-agent:8090/a2a\", \"tenant\": null, \"protocolBinding\": \"JSONRPC\", \"protocolVersion\": \"1.0\"}], \"additionalInterfaces\": [], \"securityRequirements\": []}"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "credit-analysis": {
+      "card": {
+        "http": 200,
+        "body": {
+          "name": "credit-analysis",
+          "rawJson": "{\"url\": \"http://analysis-agent:8090/a2a\", \"name\": \"credit-analysis\", \"skills\": [{\"id\": \"credit-analysis\", \"name\": \"独立分析与依据说明\", \"tags\": [\"issue16\", \"controlled\"], \"examples\": [], \"inputModes\": [\"text/plain\"], \"description\": \"Execute a control-service-authorized node with isolated input and read-only tools\", \"outputModes\": [\"text/plain\"], \"securityRequirements\": []}], \"iconUrl\": null, \"version\": \"1.0.1\", \"provider\": {\"url\": \"\", \"organization\": \"Agent Hub Alpha\"}, \"signatures\": [], \"description\": \"Issue 16 controlled professional agent; node-scoped evidence and tools\", \"capabilities\": {\"streaming\": false, \"extensions\": [], \"extendedAgentCard\": false, \"pushNotifications\": false}, \"securitySchemes\": {}, \"documentationUrl\": null, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"preferredTransport\": \"JSONRPC\", \"supportedInterfaces\": [{\"url\": \"http://analysis-agent:8090/a2a\", \"tenant\": null, \"protocolBinding\": \"JSONRPC\", \"protocolVersion\": \"1.0\"}], \"additionalInterfaces\": [], \"securityRequirements\": []}"
+        }
+      },
+      "instances": {
+        "http": 200,
+        "body": {
+          "agentId": "credit-analysis",
+          "instances": [
+            {
+              "instanceId": "analysis-1",
+              "serviceId": "analysis-1",
+              "health": "ONLINE",
+              "weight": 100,
+              "maxConcurrency": 10,
+              "region": null,
+              "frameworkType": "JIUWEN",
+              "contractVersion": "1.0",
+              "capabilityVersion": "1.0.1",
+              "agentName": "credit-analysis",
+              "card": {
+                "name": "credit-analysis",
+                "rawJson": "{\"url\": \"http://analysis-agent:8090/a2a\", \"name\": \"credit-analysis\", \"skills\": [{\"id\": \"credit-analysis\", \"name\": \"独立分析与依据说明\", \"tags\": [\"issue16\", \"controlled\"], \"examples\": [], \"inputModes\": [\"text/plain\"], \"description\": \"Execute a control-service-authorized node with isolated input and read-only tools\", \"outputModes\": [\"text/plain\"], \"securityRequirements\": []}], \"iconUrl\": null, \"version\": \"1.0.1\", \"provider\": {\"url\": \"\", \"organization\": \"Agent Hub Alpha\"}, \"signatures\": [], \"description\": \"Issue 16 controlled professional agent; node-scoped evidence and tools\", \"capabilities\": {\"streaming\": false, \"extensions\": [], \"extendedAgentCard\": false, \"pushNotifications\": false}, \"securitySchemes\": {}, \"documentationUrl\": null, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"preferredTransport\": \"JSONRPC\", \"supportedInterfaces\": [{\"url\": \"http://analysis-agent:8090/a2a\", \"tenant\": null, \"protocolBinding\": \"JSONRPC\", \"protocolVersion\": \"1.0\"}], \"additionalInterfaces\": [], \"securityRequirements\": []}"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "credit-writer": {
+      "card": {
+        "http": 200,
+        "body": {
+          "name": "credit-writer",
+          "rawJson": "{\"url\": \"http://writer-agent:8090/a2a\", \"name\": \"credit-writer\", \"skills\": [{\"id\": \"credit-writer\", \"name\": \"根据上游证据撰写报告\", \"tags\": [\"issue16\", \"controlled\"], \"examples\": [], \"inputModes\": [\"text/plain\"], \"description\": \"Execute a control-service-authorized node with isolated input and read-only tools\", \"outputModes\": [\"text/plain\"], \"securityRequirements\": []}], \"iconUrl\": null, \"version\": \"1.0.1\", \"provider\": {\"url\": \"\", \"organization\": \"Agent Hub Alpha\"}, \"signatures\": [], \"description\": \"Issue 16 controlled professional agent; node-scoped evidence and tools\", \"capabilities\": {\"streaming\": false, \"extensions\": [], \"extendedAgentCard\": false, \"pushNotifications\": false}, \"securitySchemes\": {}, \"documentationUrl\": null, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"preferredTransport\": \"JSONRPC\", \"supportedInterfaces\": [{\"url\": \"http://writer-agent:8090/a2a\", \"tenant\": null, \"protocolBinding\": \"JSONRPC\", \"protocolVersion\": \"1.0\"}], \"additionalInterfaces\": [], \"securityRequirements\": []}"
+        }
+      },
+      "instances": {
+        "http": 200,
+        "body": {
+          "agentId": "credit-writer",
+          "instances": [
+            {
+              "instanceId": "writer-1",
+              "serviceId": "writer-1",
+              "health": "ONLINE",
+              "weight": 100,
+              "maxConcurrency": 10,
+              "region": null,
+              "frameworkType": "JIUWEN",
+              "contractVersion": "1.0",
+              "capabilityVersion": "1.0.1",
+              "agentName": "credit-writer",
+              "card": {
+                "name": "credit-writer",
+                "rawJson": "{\"url\": \"http://writer-agent:8090/a2a\", \"name\": \"credit-writer\", \"skills\": [{\"id\": \"credit-writer\", \"name\": \"根据上游证据撰写报告\", \"tags\": [\"issue16\", \"controlled\"], \"examples\": [], \"inputModes\": [\"text/plain\"], \"description\": \"Execute a control-service-authorized node with isolated input and read-only tools\", \"outputModes\": [\"text/plain\"], \"securityRequirements\": []}], \"iconUrl\": null, \"version\": \"1.0.1\", \"provider\": {\"url\": \"\", \"organization\": \"Agent Hub Alpha\"}, \"signatures\": [], \"description\": \"Issue 16 controlled professional agent; node-scoped evidence and tools\", \"capabilities\": {\"streaming\": false, \"extensions\": [], \"extendedAgentCard\": false, \"pushNotifications\": false}, \"securitySchemes\": {}, \"documentationUrl\": null, \"defaultInputModes\": [\"text/plain\"], \"defaultOutputModes\": [\"text/plain\"], \"preferredTransport\": \"JSONRPC\", \"supportedInterfaces\": [{\"url\": \"http://writer-agent:8090/a2a\", \"tenant\": null, \"protocolBinding\": \"JSONRPC\", \"protocolVersion\": \"1.0\"}], \"additionalInterfaces\": [], \"securityRequirements\": []}"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "unauthorized": {
+      "http": 401,
+      "body": {
+        "code": "AUTH_MISSING",
+        "message": "Missing Authorization",
+        "traceId": "c8219b1f-c8fa-4459-a860-fd5f7ad2c695"
+      }
+    },
+    "unknown_task": {
+      "http": 200,
+      "body": {
+        "jsonrpc": "2.0",
+        "id": "acceptance-probe",
+        "error": {
+          "code": -32055,
+          "message": "cannot establish the owner of task not-a-task",
+          "data": {
+            "code": "ROUTE_OWNERSHIP_UNKNOWN",
+            "retryable": false
+          }
+        }
+      }
+    },
+    "invalid_request": {
+      "http": 400,
+      "body": {
+        "code": "VALIDATION_MESSAGE",
+        "message": "params.message is required and must be an object",
+        "traceId": "d12ad14f-b75a-4a12-ba17-37bb87551efa"
+      }
+    },
+    "unknown_capability": {
+      "http": 503,
+      "body": {
+        "code": "ROUTE_NO_CANDIDATES",
+        "message": "No routable instance for agent unregistered-agent",
+        "traceId": "3fc78388-e7bb-4e18-beff-85922f185265"
+      }
+    },
+    "runtime_rejected_scope": {
+      "id": "04ec74f8-456d-4bf7-9d4a-62671e5ca831",
+      "contextId": "unapproved-context",
+      "status": {
+        "state": "TASK_STATE_FAILED",
+        "message": {
+          "role": "ROLE_AGENT",
+          "parts": [
+            {
+              "text": "Professional node failed"
+            }
+          ],
+          "messageId": "5af15997-5a5c-4a82-a08f-85289577a967",
+          "metadata": {
+            "openjiuwen.error": {
+              "schemaVersion": "1",
+              "code": "AGENT_EXECUTION_FAILED",
+              "retryable": false
+            }
+          }
+        },
+        "timestamp": "2026-11-17T03:39:34.096335742Z"
+      },
+      "artifacts": [],
+      "history": []
+    },
+    "unregistered-agent": {
+      "rejected": true,
+      "reason": "{'jsonrpc': '2.0', 'id': 2, 'result': {'content': [{'type': 'text', 'text': '{\"error\": \"agent intake: \\\\\"unregistered-agent\\\\\" is not a registered capability (use list_capabilities)\"}'}], 'isError': True}}"
+    },
+    "http://attacker.invalid/a2a": {
+      "rejected": true,
+      "reason": "{'jsonrpc': '2.0', 'id': 3, 'result': {'content': [{'type': 'text', 'text': '{\"error\": \"agent intake: \\\\\"http://attacker.invalid/a2a\\\\\" is not a registered capability (use list_capabilities)\"}'}], 'isError': True}}"
+    },
+    "missing_tool_permission": {
+      "errors": [
+        "not held by caller: data:data:credit/bureau/full/* action=read"
+      ],
+      "not_held": [
+        "bureau（征信全量查询员）需要 data:credit/bureau/full/* read，客户经理没有这项权限"
+      ],
+      "ok": false,
+      "rules": null
+    },
+    "rdc_unavailable": {
+      "catalog": {
+        "cases": [
+          "C006",
+          "C007"
+        ],
+        "experts": [
+          {
+            "available": false,
+            "bounds": {
+              "max_cost": {
+                "amount": 20,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 1,
+              "max_seconds": 120
+            },
+            "contract_hash": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e",
+            "effects": {
+              "level": "none"
+            },
+            "id": "intake",
+            "kind": "investigate",
+            "name": "材料受理",
+            "remote": true,
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "application materials",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/applications/*"
+                }
+              }
+            ],
+            "summary": "读取申请材料，整理成结构化字段",
+            "tools": [
+              "get_application"
+            ],
+            "unavailable_reason": "RDC discovery unavailable: Get \"http://rdc:8092/v2/agents/credit-material/card\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+          },
+          {
+            "available": false,
+            "bounds": {
+              "max_cost": {
+                "amount": 40,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 2,
+              "max_seconds": 180
+            },
+            "contract_hash": "sha256:b433290ae68a411e090e9b54bf8607a1d08aeb9bdf8efe4461735137505b1a1f",
+            "effects": {
+              "level": "none"
+            },
+            "id": "financial-analyst",
+            "kind": "investigate",
+            "name": "财务分析师",
+            "remote": true,
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "asset valuation and financials",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/financials/*"
+                }
+              }
+            ],
+            "summary": "读取资产与经营数据，计算资产规模和偿债指标",
+            "tools": [
+              "get_financials"
+            ],
+            "unavailable_reason": "RDC discovery unavailable: Get \"http://rdc:8092/v2/agents/credit-analysis/card\": dial tcp: lookup rdc on 127.0.0.11:53: no such host"
+          },
+          {
+            "available": false,
+            "bounds": {
+              "max_cost": {
+                "amount": 30,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 1,
+              "max_seconds": 120
+            },
+            "contract_hash": "sha256:e1622a9ca8e50c2281568d16e46c5518f157c5d6d6991097220aa3c7726d52b8",
+            "effects": {
+              "level": "none"
+            },
+            "id": "industry-researcher",
+            "kind": "investigate",
+            "name": "行业研究员",
+            "remote": true,
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "industry report",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:industry/*"
+                }
+              }
+            ],
+            "summary": "查询行业景气度与同业风险",
+            "tools": [
+              "get_industry_report"
+            ],
+            "unavailable_reason": "RDC discovery unavailable: Get \"http://rdc:8092/v2/agents/credit-analysis/card\": dial tcp: lookup rdc on 127.0.0.11:53: no such host"
+          },
+          {
+            "available": false,
+            "bounds": {
+              "max_cost": {
+                "amount": 50,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 1,
+              "max_seconds": 120
+            },
+            "contract_hash": "sha256:16ff0fe14bd50e8bbbbff003d805213cea57272f36c8b60615193293c0ee32aa",
+            "effects": {
+              "level": "none"
+            },
+            "id": "bureau-full",
+            "kind": "investigate",
+            "name": "征信全量查询员",
+            "remote": true,
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "full credit bureau report",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/bureau/full/*"
+                }
+              }
+            ],
+            "summary": "调取完整征信报告（逐笔还款记录）",
+            "tools": [
+              "query_bureau_full"
+            ],
+            "unavailable_reason": "RDC discovery unavailable: Get \"http://rdc:8092/v2/agents/credit-analysis/card\": dial tcp: lookup rdc on 127.0.0.11:53: no such host"
+          },
+          {
+            "available": false,
+            "bounds": {
+              "max_cost": {
+                "amount": 20,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 1,
+              "max_seconds": 120
+            },
+            "contract_hash": "sha256:255383d9e0e3e5d5b0a5952afc6e5e8a3c26ccb07a4bc671a6b85c115427cee1",
+            "effects": {
+              "level": "none"
+            },
+            "id": "bureau-summary",
+            "kind": "investigate",
+            "name": "征信摘要查询员",
+            "remote": true,
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "credit bureau summary",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/bureau/summary/*"
+                }
+              }
+            ],
+            "summary": "调取征信摘要（近六个月逾期、历史最长逾期）",
+            "tools": [
+              "query_bureau_summary"
+            ],
+            "unavailable_reason": "RDC discovery unavailable: Get \"http://rdc:8092/v2/agents/credit-analysis/card\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"
+          },
+          {
+            "bounds": {
+              "max_cost": {
+                "amount": 80,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 5,
+              "max_seconds": 300
+            },
+            "contract_hash": "sha256:58bf67d11161cc14f1d3b3cc5ae66d16a74aeea929f299435f1edf606fbc34fe",
+            "effects": {
+              "level": "none"
+            },
+            "id": "related-party",
+            "kind": "blackbox",
+            "name": "关联方排查",
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "related-party list",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/related/*"
+                }
+              },
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "credit summary of related companies",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/related-bureau/*"
+                }
+              }
+            ],
+            "summary": "黑盒节点（Loop Forest）：自主拆分，先查关联方名单，再逐个分叉排查征信，运行时才展开",
+            "tools": [
+              "get_related_parties",
+              "query_company_bureau"
+            ]
+          },
+          {
+            "bounds": {
+              "max_cost": {
+                "amount": 30,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 0,
+              "max_seconds": 120
+            },
+            "contract_hash": "sha256:bc9a7cfd42ef2cf682cd5b254a302fa9be84a51ab2bae28c0e85419ae9bbc213",
+            "effects": {
+              "level": "none"
+            },
+            "id": "risk-judge",
+            "kind": "judge",
+            "name": "风险判断",
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "upstream evidence of this case",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/evidence/*"
+                }
+              }
+            ],
+            "summary": "按已发布的授信判断规约，对上游证据给出结构化判断",
+            "tools": null
+          },
+          {
+            "available": false,
+            "bounds": {
+              "max_cost": {
+                "amount": 30,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 0,
+              "max_seconds": 180
+            },
+            "contract_hash": "sha256:28ec6a969fcbb53626da96e7cc6f26cf1d5ffef0e12c021757121a096eef253f",
+            "effects": {
+              "level": "none"
+            },
+            "id": "report-writer",
+            "kind": "write",
+            "name": "报告撰写人",
+            "remote": true,
+            "requires": [
+              {
+                "actions": [
+                  "read"
+                ],
+                "effect": "none",
+                "purpose": "upstream evidence of this case",
+                "resource": {
+                  "kind": "data",
+                  "selector": "data:credit/evidence/*"
+                }
+              }
+            ],
+            "summary": "汇总各步结论，写出尽调报告",
+            "tools": null,
+            "unavailable_reason": "RDC discovery unavailable: Get \"http://rdc:8092/v2/agents/credit-writer/card\": dial tcp: lookup rdc on 127.0.0.11:53: no such host"
+          },
+          {
+            "bounds": {
+              "max_cost": {
+                "amount": 0,
+                "unit": "USD-cents"
+              },
+              "max_downstream_calls": 1,
+              "max_seconds": 60
+            },
+            "contract_hash": "sha256:49c5a553d57134a2c60132b1908ee6cbc4437c788c7c4d0da91008faf150b7ce",
+            "effects": {
+              "compensation": "manual",
+              "level": "irreversible"
+            },
+            "id": "credit-submitter",
+            "kind": "effect",
+            "name": "授信申请提交",
+            "requires": [
+              {
+                "actions": [
+                  "execute"
+                ],
+                "effect": "irreversible",
+                "purpose": "submit the credit application",
+                "resource": {
+                  "kind": "tool",
+                  "selector": "credit.apply"
+                }
+              }
+            ],
+            "summary": "按已采纳的判断，经网关向银行提交授信申请（不可逆）",
+            "tools": [
+              "credit.apply"
+            ]
+          }
+        ],
+        "plan_rules": [
+          "要有成员读取申请材料证据（data:credit/applications/*）",
+          "要有成员读取财务证据（data:credit/financials/*）",
+          "要有成员读取行业证据（data:industry/*）",
+          "要有成员读取征信证据（data:credit/bureau/full/* 或 data:credit/bureau/summary/*）",
+          "要有成员读取关联方证据（data:credit/related/*）",
+          "风险判断（kind=judge）直接或间接依赖全部调查步骤和黑盒步骤",
+          "有不可逆效果的步骤依赖风险判断，并设 run_if 含 DECISION=GRANT"
+        ]
+      },
+      "gateway": {
+        "http": 503,
+        "body": {
+          "code": "RDC_UNAVAILABLE",
+          "message": "RDC search unavailable for agent unregistered-during-outage",
+          "traceId": "de9c4008-9f76-4db6-ba7d-c359c121b3f3"
+        }
+      }
+    }
+  },
+  "environment": {
+    "project": "agent-hub-issue16",
+    "base": "http://127.0.0.1:5191",
+    "source_commit": "41a36755563ebeb442f2d93050c1d3430d510e80",
+    "images": {
+      "/agent-hub-issue16-orchestrator-1": "sha256:7c454e5240fba26731e7434a44267afbb5b8f55d2bfc46ce8805022c707b3406",
+      "/agent-hub-issue16-fault-proxy-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535",
+      "/agent-hub-issue16-front-1": "sha256:fed7e14be83cbd2661a75cdc5b872d936cf155d46c327084d30b8df19ae88d72",
+      "/agent-hub-issue16-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-issue16-swarm-1": "sha256:8fa8ec4239e1ae0cf019943d97419d414e3965645a6bda331c71094a199556df",
+      "/agent-hub-issue16-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-issue16-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-issue16-material-agent-1": "sha256:6b19773e21e6a2372a98b2351e600def530e2935d1a635bbc7aa5099e8c0cae3",
+      "/agent-hub-issue16-writer-agent-1": "sha256:6b19773e21e6a2372a98b2351e600def530e2935d1a635bbc7aa5099e8c0cae3",
+      "/agent-hub-issue16-credit-1": "sha256:5e5c5229ff7b2c187c3eae645c683bfa9d16bc915cd50a8dfaa369e9b7172c62",
+      "/agent-hub-issue16-analysis-agent-1": "sha256:6b19773e21e6a2372a98b2351e600def530e2935d1a635bbc7aa5099e8c0cae3"
+    },
+    "config_sha256": {
+      "compose.yaml": "3766502dc524aed036cb3c8956930814dd3beaa530e79c768ed8851ff729ff34",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  },
+  "passed": true,
+  "finished_at": 1794886818.7290347
+}
