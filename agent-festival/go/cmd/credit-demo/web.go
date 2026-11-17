@@ -8,7 +8,6 @@ import (
 	"embed"
 	"encoding/hex"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -250,14 +249,8 @@ func (s *Service) routes(mux *http.ServeMux) {
 		_ = json.NewEncoder(w).Encode(v)
 	}
 	errOut := func(w http.ResponseWriter, err error) {
-		code := http.StatusBadRequest
-		if errors.Is(err, errFenced) {
-			code = http.StatusConflict
-		}
-		if errors.Is(err, errStorage) {
-			code = http.StatusServiceUnavailable
-		}
-		jsonOut(w, code, map[string]string{"error": err.Error()})
+		status, code := errorCode(err)
+		jsonOut(w, status, map[string]string{"error": err.Error(), "code": code})
 	}
 	type call struct {
 		RunID   string   `json:"run_id"`

@@ -510,15 +510,9 @@ func (s *Service) busRoutes(mux *http.ServeMux) {
 			}
 			w.Header().Set("Content-Type", "application/json")
 			if err != nil {
-				status := http.StatusBadRequest
-				if errors.Is(err, errFenced) || errors.Is(err, errCallConflict) || errors.Is(err, errModelBinding) {
-					status = http.StatusConflict
-				}
-				if errors.Is(err, errStorage) {
-					status = http.StatusServiceUnavailable
-				}
+				status, code := errorCode(err)
 				w.WriteHeader(status)
-				_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+				_ = json.NewEncoder(w).Encode(map[string]string{"error": err.Error(), "code": code})
 				return
 			}
 			_ = json.NewEncoder(w).Encode(out)

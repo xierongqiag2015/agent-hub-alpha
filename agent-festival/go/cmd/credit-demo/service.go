@@ -782,11 +782,11 @@ func (s *Service) Judgment(runID, token, step, raw string) (string, error) {
 	}
 	j, err := extractJSON(raw)
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf("%w: %v", errJudgmentRejected, err)
 	}
 	level := fmt.Sprint(j["level"])
 	if !contains(bs.levels, level) {
-		return "", fmt.Errorf("level %q is not one of %v", level, bs.levels)
+		return "", fmt.Errorf("%w: level %q is not one of %v", errJudgmentRejected, level, bs.levels)
 	}
 	var evidence []string
 	if ev, ok := j["evidence_steps"].([]any); ok {
@@ -795,13 +795,13 @@ func (s *Service) Judgment(runID, token, step, raw string) (string, error) {
 			id = strings.TrimPrefix(id, "step:")
 			st, ok := r.Steps[id]
 			if !ok || st.Status != "done" {
-				return "", fmt.Errorf("evidence step %q did not run in this case", id)
+				return "", fmt.Errorf("%w: evidence step %q did not run in this case", errJudgmentRejected, id)
 			}
 			evidence = append(evidence, id+"="+st.Output)
 		}
 	}
 	if len(evidence) == 0 {
-		return "", fmt.Errorf("evidence_steps is empty")
+		return "", fmt.Errorf("%w: evidence_steps is empty", errJudgmentRejected)
 	}
 	m, err := s.machine(runID)
 	if err != nil {
@@ -834,7 +834,7 @@ func (s *Service) Judgment(runID, token, step, raw string) (string, error) {
 		if err := s.save(); err != nil {
 			return "", err
 		}
-		return "", fmt.Errorf("adoption %s: %s", out.Status, out.Detail)
+		return "", fmt.Errorf("%w: adoption %s: %s", errJudgmentRejected, out.Status, out.Detail)
 	}
 	r.Decision, r.DecisionOp = decision, op
 	r.BusinessReq = req.Identity.BusinessRequestID

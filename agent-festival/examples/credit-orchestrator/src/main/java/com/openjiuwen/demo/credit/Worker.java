@@ -200,9 +200,9 @@ final class Worker implements Runnable {
                     String raw = judge.execute(userInput, subGoal);
                     try {
                         return go.judgment(run, token, step, raw);
-                    } catch (GoClient.FencedException ex) {
-                        throw ex;
-                    } catch (RuntimeException first) {
+                    } catch (GoClient.PolicyRejectedException first) {
+                        // only a content rejection earns a revision; a lost lease, a storage
+                        // failure or a transport error is never answered by calling the model again
                         String retry = judge.execute(userInput, subGoal + "\n\n上一次输出被规约校验拒绝：" + first.getMessage()
                                 + "\n请严格按要求只输出一个 JSON 对象。");
                         return go.judgment(run, token, step, retry);

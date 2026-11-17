@@ -14,9 +14,37 @@ import java.util.Map;
 
 /** The executor's only line to the authoritative record (credit-demo, Go). */
 final class GoClient {
-    /** Thrown when the run's lease was taken over: this executor must stop writing. */
+    /** Thrown when the run's lease was taken over or the run stopped: this executor must stop writing. */
     static final class FencedException extends RuntimeException {
         FencedException(String message) {
+            super(message);
+        }
+    }
+
+    /** Same call identity with different input or binding: never resend, never treat as a lost lease. */
+    static final class InputConflictException extends RuntimeException {
+        InputConflictException(String message) {
+            super(message);
+        }
+    }
+
+    /** The control service could not make the write durable; nothing was recorded. Not a content problem. */
+    static final class StorageUnavailableException extends RuntimeException {
+        StorageUnavailableException(String message) {
+            super(message);
+        }
+    }
+
+    /** The submitted content (e.g. a judgment) was rejected by the published rules; a revision may be submitted. */
+    static final class PolicyRejectedException extends RuntimeException {
+        PolicyRejectedException(String message) {
+            super(message);
+        }
+    }
+
+    /** The executor's model differs from the run's bound model; the run is blocked before the model call. */
+    static final class BindingRejectedException extends RuntimeException {
+        BindingRejectedException(String message) {
             super(message);
         }
     }
@@ -41,11 +69,23 @@ final class GoClient {
                 return null;
             }
             JsonNode node = resp.body().isBlank() ? JSON.createObjectNode() : JSON.readTree(resp.body());
-            if (resp.statusCode() == 409) {
-                throw new FencedException(node.path("error").asText("fenced"));
-            }
             if (resp.statusCode() >= 300) {
-                throw new IllegalStateException(path + " -> " + resp.statusCode() + " " + node.path("error").asText(resp.body()));
+                // The typed code, not the HTTP status, says what happened (AR-07): several share 409.
+                String code = node.path("code").asText("");
+                String message = node.path("error").asText(resp.body());
+                switch (code) {
+                    case "FENCED" -> throw new FencedException(message);
+                    case "INPUT_CONFLICT" -> throw new InputConflictException(message);
+                    case "STORAGE_UNAVAILABLE" -> throw new StorageUnavailableException(message);
+                    case "POLICY_REJECTED" -> throw new PolicyRejectedException(message);
+                    case "MODEL_BINDING_MISMATCH" -> throw new BindingRejectedException(message);
+                    default -> {
+                        if (code.isEmpty() && resp.statusCode() == 409) {
+                            throw new FencedException(message); // a control service without typed codes
+                        }
+                        throw new IllegalStateException(path + " -> " + resp.statusCode() + " " + (code.isEmpty() ? "" : code + " ") + message);
+                    }
+                }
             }
             return node;
         } catch (IOException ex) {
