@@ -1,0 +1,7 @@
+java.net.ConnectException
+	at java.net.http/jdk.internal.net.http.common.Utils.toConnectException(Utils.java:1065) ~[java.net.http:na]
+Caused by: java.nio.channels.ClosedChannelException
+2026-11-17T11:00:26.175Z ERROR 1 --- [credit-analysis] [   a2a-agent-16] tool                                     : Streamable-http connection failed to http://credit:8091/member-mcp/financial-analyst: Client failed to initialize by explicit API call
+2026-11-17T11:00:26.291Z ERROR 1 --- [credit-analysis] [   a2a-agent-16] c.o.s.a.controller.a2a.A2AAgentExecutor  : Agent execution failed for contextId=ctx-a91dadb30136cf1acbf26b71
+java.lang.IllegalStateException: Professional node failed
+Caused by: java.lang.IllegalStateException: Node tools unavailable

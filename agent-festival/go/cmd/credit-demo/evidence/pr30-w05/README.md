@@ -68,6 +68,39 @@
 
 **边界**：Gateway 与 Runtime 重启后，上游任务的归属不在其内存中保留，原任务只能停在 unknown，需要人工核对。这次验证的是不重发、下游不启动，**不是**自动无损续跑。
 
+## R-D 补充：执行中停 Go 与两个客户端并发恢复（2026-11-17 19:00）
+
+脚本：`scripts/w05_rd_extra.py`（基于 smoke_bus.py 的辅助函数，只记录与判定，不在中途断言退出）、`scripts/resume_once.py`。两个场景都在故障代理后运行，每次 SendMessage 按请求号在传输层计数。
+
+| 场景 | 任务 | 注入 | 结果 |
+|---|---|---|---|
+| two-clients | R9 | 先丢一次 GetTask 应答让任务 waiting，再从插件 API（`/api/resume`）和已登录确认页会话两处同时恢复 | 只有一个被接受（插件 API 200），另一个 409；只新增 1 次领取；intake 沿用原请求与原 task；5 个远端请求各 1 次 SendMessage；任务完成 |
+| go-kill | R8 | intake 完成、financial/industry/bureau 刚派发时 SIGKILL Go 控制服务，5 秒后启动，14.6 秒后健康 | 见下 |
+
+**go-kill 结果**（时间线见 `raw/go-kill-transport-timeline.txt`）：
+
+**符合预期的部分：**
+- 新租约接管（第 2 次领取），旧执行者失权；
+- 已完成的 intake 产物与模型事件不变，调用增量为 0；
+- 三个在途节点各 1 次 SendMessage，恢复后用原 task 查询（+16.3s），没有重发。
+
+**发现：Go 停机会导致在途远端任务失败。**
+- financial 的专业 Runtime 在执行时要从 Go 的成员工具接口 `credit:8091/member-mcp/financial-analyst` 取数据工具。
+- Go 停机期间连接失败（`Node tools unavailable` → `Professional node failed`），远端任务以 `TASK_STATE_FAILED` 结束，见 `raw/go-kill-analysis-agent-errors.log`。
+- industry/bureau 在停机前已拿到工具，继续执行。
+
+**系统如实停下：**
+- 任务停在 waiting，给出"等待远端结果；未确认的调用不会自动重发"；
+- 人工恢复一次后，industry/bureau 取回原 task 结果（请求号、task、模型事件均不变，无新增远端调用）；
+- financial 仍为 failed，任务以 failed 结束，原因 `step id=financial failed: Remote task ended: TASK_STATE_FAILED`；
+- 下游 judge/report 未执行，不伪成功。
+
+**另两处观察：**
+- 任务进入 waiting/failed 后，本地黑盒节点 related 的投影仍显示 running（Done 进入等待或失败时未重置正在执行的本地节点），用户面可能误读，需与 W02 对齐。
+- 故障代理 overlay 与事后恢复都会重建编排器容器，本次编排器日志随旧容器丢失；以后复跑先导出日志再恢复。
+
+**结论**：Go 停机期间不重发、不伪成功、旧执行者失权都成立。但"恢复复用原结果"只对停机前已完成、或已拿到工具的节点成立。依赖 Go 成员工具的在途远端节点会在远端失败，远端节点 attempt 固定为 1，系统不会自动重试，只能人工处置或新版本计划。这是专业 Runtime 对控制服务的可用性耦合，需要在共同验收中明确为边界。
+
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
 | 编号 | 本记录覆盖到的程度 | 仍需补的部分 |
@@ -75,7 +108,7 @@
 | R-A | host-kill：已有完成节点、后续节点在途时，杀执行器后恢复，完成节点调用增量为 0，在途节点沿用原请求 | 从 WorkSwarm 插件触发恢复（W02 操作）；后续节点为 unknown（而非在途）的组合 |
 | R-B | 未覆盖 | 恢复已落盘、回复被丢弃 / 浏览器断链（双方） |
 | R-C | storage-failure：Go 侧真实写失败，不伪成功、下游不启动、恢复后对账 | 经插件路径恢复时注入保存失败，并把日志关联到该命令 |
-| R-D | host-kill（执行器）、gateway-restart、runtime-restart | 执行中停 Go；两个客户端同时恢复 |
+| R-D | host-kill（执行器）、gateway-restart、runtime-restart、go-kill（执行中停 Go）、two-clients（两个客户端同时恢复，只有一个生效） | go-kill 发现在途远端节点因依赖 Go 成员工具而在远端失败，需确定处置边界；两个客户端的插件路径操作由 W02 补 |
 | M-A | 未执行 | 任务绑定 A、执行端改为 B：需要先按 PR #31 补执行端绑定，另行回填 |
 | U-B | 不适用 | 依赖 #31 进入组合候选 |
 

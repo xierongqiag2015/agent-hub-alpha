@@ -1,0 +1,25 @@
+kill at +0.0s, Go healthy again at +14.6s
+    -13.8s intake     SendMessage  http=200 fault=pass
+    -12.8s intake     GetTask      http=200 fault=pass
+    -10.6s intake     GetTask      http=200 fault=pass
+     -9.6s intake     GetTask      http=200 fault=pass
+     -7.9s intake     GetTask      http=200 fault=pass
+     -6.9s intake     GetTask      http=200 fault=pass
+     -5.8s intake     GetTask      http=200 fault=pass
+     -4.8s intake     GetTask      http=200 fault=pass
+     -3.7s intake     GetTask      http=200 fault=pass
+     -2.7s intake     GetTask      http=200 fault=pass
+     -1.7s intake     GetTask      http=200 fault=pass
+     -0.6s intake     GetTask      http=200 fault=pass
+     -0.3s industry   SendMessage  http=200 fault=pass
+     -0.2s financial  SendMessage  http=200 fault=pass
+     -0.2s bureau     SendMessage  http=200 fault=pass
+     +0.8s industry   GetTask      http=200 fault=pass
+     +0.8s bureau     GetTask      http=200 fault=pass
+     +0.8s financial  GetTask      http=200 fault=pass
+    +16.3s industry   GetTask      http=200 fault=pass
+    +16.3s bureau     GetTask      http=200 fault=pass
+    +16.3s financial  GetTask      http=200 fault=pass
+    +17.4s industry   GetTask      http=200 fault=pass
+    +17.4s bureau     GetTask      http=200 fault=pass
+counts: {'bureau/GetTask': 3, 'bureau/SendMessage': 1, 'financial/GetTask': 2, 'financial/SendMessage': 1, 'industry/GetTask': 3, 'industry/SendMessage': 1, 'intake/GetTask': 11, 'intake/SendMessage': 1}

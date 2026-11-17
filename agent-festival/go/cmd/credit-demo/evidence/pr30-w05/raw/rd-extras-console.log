@@ -1,0 +1,99 @@
+== 2026-11-17T18:59:53+08:00 fault overlay up (R-D extras)
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-fault-proxy-1 Starting 
+ Container agent-hub-issue16-fault-proxy-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+== 2026-11-17T19:00:06+08:00 fault overlay exit 0
+== 2026-11-17T19:00:06+08:00 w05_rd_extra go-kill
+R8 running [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R8 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R8 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R8 running [('intake', 'done'), ('financial', 'running'), ('industry', 'running'), ('bureau', 'running'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R8 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R8 waiting [('intake', 'reused'), ('financial', 'failed'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/go-kill-1794913207.json
+checks: {"fault_injected": true, "final_status": "waiting", "completed": false, "taken_over_by_new_lease": true, "completed_nodes_unchanged": true, "inflight_kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"1ec8542f45b7965fdcc90733": 1, "9565e7ed5c902578f514ea7d": 1, "cc8463142702e5a1f524cbac": 1, "df2829a94a2d46cebd67761d": 1}, "completed_before_kill": ["intake"]}
+== 2026-11-17T19:00:42+08:00 w05_rd_extra go-kill exit 0
+== 2026-11-17T19:00:42+08:00 w05_rd_extra two-clients
+R9 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R9 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R9 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R9 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R9 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'running')]
+R9 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R9 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/two-clients-1794913243.json
+checks: {"was_waiting": true, "exactly_one_accepted": true, "accepted": ["plugin_api"], "rejected": ["confirm_page"], "one_new_lease": true, "kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"330700234a7fbcb798aee2b1": 1, "971333a019a4d16101eaf77a": 1, "a51f13db3159b710bb421d78": 1, "1874a9a0205248ecf5123f21": 1, "970528b0b70e43c4c6666d53": 1}, "final_status": "done", "completed": true}
+== 2026-11-17T19:02:09+08:00 w05_rd_extra two-clients exit 0
+== 2026-11-17T19:02:09+08:00 restore direct gateway
+time="2026-11-17T19:02:13+08:00" level=warning msg="Found orphan containers ([agent-hub-issue16-fault-proxy-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-bus-db-1 Running 
+ Container agent-hub-issue16-analysis-agent-1 Running 
+ Container agent-hub-issue16-material-agent-1 Running 
+ Container agent-hub-issue16-writer-agent-1 Running 
+ Container agent-hub-issue16-rdc-1 Running 
+ Container agent-hub-issue16-gateway-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-swarm-1 Running 
+ Container agent-hub-issue16-front-1 Running 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-front-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-gateway-1 Waiting 
+ Container agent-hub-issue16-writer-agent-1 Waiting 
+ Container agent-hub-issue16-analysis-agent-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-gateway-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-writer-agent-1 Healthy 
+ Container agent-hub-issue16-analysis-agent-1 Healthy 
+ Container agent-hub-issue16-front-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-17T19:02:23+08:00 restore exit 0
+agent-hub-issue16-fault-proxy-1
+== 2026-11-17T19:02:24+08:00 R-D extras done
