@@ -1,0 +1,1264 @@
+{
+  "scenario": "rb-send-reply-lost",
+  "started_at": 1794923268.1094058,
+  "script": "evidence/pr30-w05/scripts/w05_rd_extra.py",
+  "scope": "W05 single-side R-D extras on synthetic credit data",
+  "snapshots": [
+    {
+      "at": 1794923268.7238836,
+      "graph": {
+        "plan": "P14",
+        "version": 1,
+        "case": "C006",
+        "goal": "Agent Bus rb-send 验证 1794923268，仅生成模拟授信报告，不提交银行操作",
+        "layers": [
+          [
+            "intake"
+          ],
+          [
+            "financial",
+            "industry",
+            "bureau",
+            "related"
+          ],
+          [
+            "judge"
+          ],
+          [
+            "report"
+          ]
+        ],
+        "nodes": [
+          {
+            "id": "intake",
+            "name": "材料受理",
+            "kind": "investigate",
+            "role": "资料",
+            "task": "使用 get_application 核对本案件申请材料",
+            "reads": [
+              "data:credit/applications/*"
+            ],
+            "contract": "a9da2fc2917a…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-material",
+                "version": "1.0.1",
+                "card_digest": "sha256:52ec0ae2aaa119ea36347f160f988460d053d3c1dcea0798aa47ea53ad81c20a",
+                "contract_digest": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e"
+              }
+            }
+          },
+          {
+            "id": "financial",
+            "name": "财务分析师",
+            "kind": "investigate",
+            "role": "财务",
+            "task": "使用 get_financials 分析本案件财务数据，明确资产单位",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/financials/*"
+            ],
+            "contract": "b433290ae68a…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:b433290ae68a411e090e9b54bf8607a1d08aeb9bdf8efe4461735137505b1a1f"
+              }
+            }
+          },
+          {
+            "id": "industry",
+            "name": "行业研究员",
+            "kind": "investigate",
+            "role": "行业",
+            "task": "使用 get_industry_report 分析本案件行业依据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:industry/*"
+            ],
+            "contract": "e1622a9ca8e5…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:e1622a9ca8e50c2281568d16e46c5518f157c5d6d6991097220aa3c7726d52b8"
+              }
+            }
+          },
+          {
+            "id": "bureau",
+            "name": "征信摘要查询员",
+            "kind": "investigate",
+            "role": "征信",
+            "task": "使用 query_bureau_summary 核对本案件征信摘要",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/bureau/summary/*"
+            ],
+            "contract": "255383d9e0e3…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:255383d9e0e3e5d5b0a5952afc6e5e8a3c26ccb07a4bc671a6b85c115427cee1"
+              }
+            }
+          },
+          {
+            "id": "related",
+            "name": "关联方排查",
+            "kind": "blackbox",
+            "role": "关联方",
+            "task": "逐家核对本案件关联方证据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/related/*",
+              "data:credit/related-bureau/*"
+            ],
+            "contract": "58bf67d11161…",
+            "status": "pending",
+            "execution": {
+              "kind": "loop_forest"
+            }
+          },
+          {
+            "id": "judge",
+            "name": "风险判断",
+            "kind": "judge",
+            "role": "原型规则判断",
+            "task": "按原型规约判断并引用上游步骤",
+            "deps": [
+              "financial",
+              "industry",
+              "bureau",
+              "related"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "bc9a7cfd42ef…",
+            "status": "pending",
+            "execution": {
+              "kind": "host"
+            }
+          },
+          {
+            "id": "report",
+            "name": "报告撰写人",
+            "kind": "write",
+            "role": "报告",
+            "task": "汇总已提供的结论和证据，缺失内容明确说明",
+            "deps": [
+              "judge"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "28ec6a969fcb…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-writer",
+                "version": "1.0.1",
+                "card_digest": "sha256:a8ee3492409dfd4b3f226cab9b7fd9133cc7020757c68ab1e2d6abff13f3ae0e",
+                "contract_digest": "sha256:28ec6a969fcbb53626da96e7cc6f26cf1d5ffef0e12c021757121a096eef253f"
+              }
+            }
+          }
+        ],
+        "ok": true,
+        "hash": "sha256:654a67388ce6309a4aaa030f7d97bfb74d04e00a446660d413e37baa37508d05",
+        "run": {
+          "id": "R13",
+          "status": "queued",
+          "leases": 0,
+          "url": "/ui/run/R13"
+        },
+        "live": "/api/graph?plan=P14&v=1",
+        "rev": 1060,
+        "bus": {
+          "planned_nodes": 5,
+          "services": 3,
+          "linked_tasks": 0,
+          "completed": 0,
+          "unresolved": 0,
+          "failed": 0,
+          "reused": 0
+        }
+      }
+    },
+    {
+      "at": 1794923269.225485,
+      "graph": {
+        "plan": "P14",
+        "version": 1,
+        "case": "C006",
+        "goal": "Agent Bus rb-send 验证 1794923268，仅生成模拟授信报告，不提交银行操作",
+        "layers": [
+          [
+            "intake"
+          ],
+          [
+            "financial",
+            "industry",
+            "bureau",
+            "related"
+          ],
+          [
+            "judge"
+          ],
+          [
+            "report"
+          ]
+        ],
+        "nodes": [
+          {
+            "id": "intake",
+            "name": "材料受理",
+            "kind": "investigate",
+            "role": "资料",
+            "task": "使用 get_application 核对本案件申请材料",
+            "reads": [
+              "data:credit/applications/*"
+            ],
+            "contract": "a9da2fc2917a…",
+            "status": "unknown",
+            "activity": "远端结果待核对：Gateway HTTP 502 TEST_SEND_REPLY_LOST；未重发",
+            "remote": {
+              "agent_id": "credit-material",
+              "agent_started_at": "2026-11-17T13:47:48Z",
+              "artifact_digest": "",
+              "artifact_id": "",
+              "attempt": 1,
+              "committed_at": "",
+              "context_id": "ctx-e7a04a21e0a971dd815c7455",
+              "discovery": {
+                "checked_at": "2026-11-17T13:47:48Z",
+                "candidates": [
+                  {
+                    "instance_id": "material-1",
+                    "health": "ONLINE",
+                    "contract_version": "1.0",
+                    "capability_version": "1.0.1",
+                    "eligible": true
+                  }
+                ]
+              },
+              "gateway": {
+                "source": "java_host",
+                "protocol": "A2A 1.0 JSON-RPC",
+                "path_mode": "DIRECT",
+                "send_count": 1,
+                "query_count": 0,
+                "first_send": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                },
+                "last_exchange": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                },
+                "last_error": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                }
+              },
+              "input_digest": "sha256:db48436e9a4597759528b8879114e68d40cbf18a8311173d2feb57a414a0f0a1",
+              "intent_saved_at": "2026-11-17T13:47:48Z",
+              "model_calls": 1,
+              "node_execution_id": "sha256:378cbd1050f6939b2e2a8e7988548a0589f127d53051c12f29a1e2e91c7a3f1e",
+              "reason": "远端结果待核对：Gateway HTTP 502 TEST_SEND_REPLY_LOST；未重发",
+              "request_id": "2c414c642e50c06a01c7c184",
+              "reused_count": 0,
+              "status": "unknown",
+              "task_id": "",
+              "updated_at": "2026-11-17T13:47:48Z"
+            },
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-material",
+                "version": "1.0.1",
+                "card_digest": "sha256:52ec0ae2aaa119ea36347f160f988460d053d3c1dcea0798aa47ea53ad81c20a",
+                "contract_digest": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e"
+              }
+            }
+          },
+          {
+            "id": "financial",
+            "name": "财务分析师",
+            "kind": "investigate",
+            "role": "财务",
+            "task": "使用 get_financials 分析本案件财务数据，明确资产单位",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/financials/*"
+            ],
+            "contract": "b433290ae68a…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:b433290ae68a411e090e9b54bf8607a1d08aeb9bdf8efe4461735137505b1a1f"
+              }
+            }
+          },
+          {
+            "id": "industry",
+            "name": "行业研究员",
+            "kind": "investigate",
+            "role": "行业",
+            "task": "使用 get_industry_report 分析本案件行业依据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:industry/*"
+            ],
+            "contract": "e1622a9ca8e5…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:e1622a9ca8e50c2281568d16e46c5518f157c5d6d6991097220aa3c7726d52b8"
+              }
+            }
+          },
+          {
+            "id": "bureau",
+            "name": "征信摘要查询员",
+            "kind": "investigate",
+            "role": "征信",
+            "task": "使用 query_bureau_summary 核对本案件征信摘要",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/bureau/summary/*"
+            ],
+            "contract": "255383d9e0e3…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:255383d9e0e3e5d5b0a5952afc6e5e8a3c26ccb07a4bc671a6b85c115427cee1"
+              }
+            }
+          },
+          {
+            "id": "related",
+            "name": "关联方排查",
+            "kind": "blackbox",
+            "role": "关联方",
+            "task": "逐家核对本案件关联方证据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/related/*",
+              "data:credit/related-bureau/*"
+            ],
+            "contract": "58bf67d11161…",
+            "status": "pending",
+            "execution": {
+              "kind": "loop_forest"
+            }
+          },
+          {
+            "id": "judge",
+            "name": "风险判断",
+            "kind": "judge",
+            "role": "原型规则判断",
+            "task": "按原型规约判断并引用上游步骤",
+            "deps": [
+              "financial",
+              "industry",
+              "bureau",
+              "related"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "bc9a7cfd42ef…",
+            "status": "pending",
+            "execution": {
+              "kind": "host"
+            }
+          },
+          {
+            "id": "report",
+            "name": "报告撰写人",
+            "kind": "write",
+            "role": "报告",
+            "task": "汇总已提供的结论和证据，缺失内容明确说明",
+            "deps": [
+              "judge"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "28ec6a969fcb…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-writer",
+                "version": "1.0.1",
+                "card_digest": "sha256:a8ee3492409dfd4b3f226cab9b7fd9133cc7020757c68ab1e2d6abff13f3ae0e",
+                "contract_digest": "sha256:28ec6a969fcbb53626da96e7cc6f26cf1d5ffef0e12c021757121a096eef253f"
+              }
+            }
+          }
+        ],
+        "ok": true,
+        "hash": "sha256:654a67388ce6309a4aaa030f7d97bfb74d04e00a446660d413e37baa37508d05",
+        "run": {
+          "id": "R13",
+          "status": "waiting",
+          "leases": 1,
+          "url": "/ui/run/R13"
+        },
+        "live": "/api/graph?plan=P14&v=1",
+        "rev": 1066,
+        "bus": {
+          "planned_nodes": 5,
+          "services": 3,
+          "linked_tasks": 0,
+          "completed": 0,
+          "unresolved": 1,
+          "failed": 0,
+          "reused": 0
+        }
+      }
+    },
+    {
+      "at": 1794923269.3776512,
+      "graph": {
+        "plan": "P14",
+        "version": 1,
+        "case": "C006",
+        "goal": "Agent Bus rb-send 验证 1794923268，仅生成模拟授信报告，不提交银行操作",
+        "layers": [
+          [
+            "intake"
+          ],
+          [
+            "financial",
+            "industry",
+            "bureau",
+            "related"
+          ],
+          [
+            "judge"
+          ],
+          [
+            "report"
+          ]
+        ],
+        "nodes": [
+          {
+            "id": "intake",
+            "name": "材料受理",
+            "kind": "investigate",
+            "role": "资料",
+            "task": "使用 get_application 核对本案件申请材料",
+            "reads": [
+              "data:credit/applications/*"
+            ],
+            "contract": "a9da2fc2917a…",
+            "status": "unknown",
+            "activity": "远端结果待核对：Gateway HTTP 502 TEST_SEND_REPLY_LOST；未重发",
+            "remote": {
+              "agent_id": "credit-material",
+              "agent_started_at": "2026-11-17T13:47:48Z",
+              "artifact_digest": "",
+              "artifact_id": "",
+              "attempt": 1,
+              "committed_at": "",
+              "context_id": "ctx-e7a04a21e0a971dd815c7455",
+              "discovery": {
+                "checked_at": "2026-11-17T13:47:48Z",
+                "candidates": [
+                  {
+                    "instance_id": "material-1",
+                    "health": "ONLINE",
+                    "contract_version": "1.0",
+                    "capability_version": "1.0.1",
+                    "eligible": true
+                  }
+                ]
+              },
+              "gateway": {
+                "source": "java_host",
+                "protocol": "A2A 1.0 JSON-RPC",
+                "path_mode": "DIRECT",
+                "send_count": 1,
+                "query_count": 0,
+                "first_send": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                },
+                "last_exchange": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                },
+                "last_error": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                }
+              },
+              "input_digest": "sha256:db48436e9a4597759528b8879114e68d40cbf18a8311173d2feb57a414a0f0a1",
+              "intent_saved_at": "2026-11-17T13:47:48Z",
+              "model_calls": 1,
+              "node_execution_id": "sha256:378cbd1050f6939b2e2a8e7988548a0589f127d53051c12f29a1e2e91c7a3f1e",
+              "reason": "远端结果待核对：Gateway HTTP 502 TEST_SEND_REPLY_LOST；未重发",
+              "request_id": "2c414c642e50c06a01c7c184",
+              "reused_count": 0,
+              "status": "unknown",
+              "task_id": "",
+              "updated_at": "2026-11-17T13:47:48Z"
+            },
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-material",
+                "version": "1.0.1",
+                "card_digest": "sha256:52ec0ae2aaa119ea36347f160f988460d053d3c1dcea0798aa47ea53ad81c20a",
+                "contract_digest": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e"
+              }
+            }
+          },
+          {
+            "id": "financial",
+            "name": "财务分析师",
+            "kind": "investigate",
+            "role": "财务",
+            "task": "使用 get_financials 分析本案件财务数据，明确资产单位",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/financials/*"
+            ],
+            "contract": "b433290ae68a…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:b433290ae68a411e090e9b54bf8607a1d08aeb9bdf8efe4461735137505b1a1f"
+              }
+            }
+          },
+          {
+            "id": "industry",
+            "name": "行业研究员",
+            "kind": "investigate",
+            "role": "行业",
+            "task": "使用 get_industry_report 分析本案件行业依据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:industry/*"
+            ],
+            "contract": "e1622a9ca8e5…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:e1622a9ca8e50c2281568d16e46c5518f157c5d6d6991097220aa3c7726d52b8"
+              }
+            }
+          },
+          {
+            "id": "bureau",
+            "name": "征信摘要查询员",
+            "kind": "investigate",
+            "role": "征信",
+            "task": "使用 query_bureau_summary 核对本案件征信摘要",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/bureau/summary/*"
+            ],
+            "contract": "255383d9e0e3…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:255383d9e0e3e5d5b0a5952afc6e5e8a3c26ccb07a4bc671a6b85c115427cee1"
+              }
+            }
+          },
+          {
+            "id": "related",
+            "name": "关联方排查",
+            "kind": "blackbox",
+            "role": "关联方",
+            "task": "逐家核对本案件关联方证据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/related/*",
+              "data:credit/related-bureau/*"
+            ],
+            "contract": "58bf67d11161…",
+            "status": "pending",
+            "execution": {
+              "kind": "loop_forest"
+            }
+          },
+          {
+            "id": "judge",
+            "name": "风险判断",
+            "kind": "judge",
+            "role": "原型规则判断",
+            "task": "按原型规约判断并引用上游步骤",
+            "deps": [
+              "financial",
+              "industry",
+              "bureau",
+              "related"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "bc9a7cfd42ef…",
+            "status": "pending",
+            "execution": {
+              "kind": "host"
+            }
+          },
+          {
+            "id": "report",
+            "name": "报告撰写人",
+            "kind": "write",
+            "role": "报告",
+            "task": "汇总已提供的结论和证据，缺失内容明确说明",
+            "deps": [
+              "judge"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "28ec6a969fcb…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-writer",
+                "version": "1.0.1",
+                "card_digest": "sha256:a8ee3492409dfd4b3f226cab9b7fd9133cc7020757c68ab1e2d6abff13f3ae0e",
+                "contract_digest": "sha256:28ec6a969fcbb53626da96e7cc6f26cf1d5ffef0e12c021757121a096eef253f"
+              }
+            }
+          }
+        ],
+        "ok": true,
+        "hash": "sha256:654a67388ce6309a4aaa030f7d97bfb74d04e00a446660d413e37baa37508d05",
+        "run": {
+          "id": "R13",
+          "status": "queued",
+          "leases": 1,
+          "url": "/ui/run/R13"
+        },
+        "live": "/api/graph?plan=P14&v=1",
+        "rev": 1067,
+        "bus": {
+          "planned_nodes": 5,
+          "services": 3,
+          "linked_tasks": 0,
+          "completed": 0,
+          "unresolved": 1,
+          "failed": 0,
+          "reused": 0
+        }
+      }
+    },
+    {
+      "at": 1794923269.8794231,
+      "graph": {
+        "plan": "P14",
+        "version": 1,
+        "case": "C006",
+        "goal": "Agent Bus rb-send 验证 1794923268，仅生成模拟授信报告，不提交银行操作",
+        "layers": [
+          [
+            "intake"
+          ],
+          [
+            "financial",
+            "industry",
+            "bureau",
+            "related"
+          ],
+          [
+            "judge"
+          ],
+          [
+            "report"
+          ]
+        ],
+        "nodes": [
+          {
+            "id": "intake",
+            "name": "材料受理",
+            "kind": "investigate",
+            "role": "资料",
+            "task": "使用 get_application 核对本案件申请材料",
+            "reads": [
+              "data:credit/applications/*"
+            ],
+            "contract": "a9da2fc2917a…",
+            "status": "unknown",
+            "activity": "派发结果未知，需核对原调用；未重发",
+            "remote": {
+              "agent_id": "credit-material",
+              "agent_started_at": "2026-11-17T13:47:48Z",
+              "artifact_digest": "",
+              "artifact_id": "",
+              "attempt": 1,
+              "committed_at": "",
+              "context_id": "ctx-e7a04a21e0a971dd815c7455",
+              "discovery": {
+                "checked_at": "2026-11-17T13:47:48Z",
+                "candidates": [
+                  {
+                    "instance_id": "material-1",
+                    "health": "ONLINE",
+                    "contract_version": "1.0",
+                    "capability_version": "1.0.1",
+                    "eligible": true
+                  }
+                ]
+              },
+              "gateway": {
+                "source": "java_host",
+                "protocol": "A2A 1.0 JSON-RPC",
+                "path_mode": "DIRECT",
+                "send_count": 1,
+                "query_count": 0,
+                "first_send": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                },
+                "last_exchange": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                },
+                "last_error": {
+                  "rpc_id": "2c414c642e50c06a01c7c184",
+                  "method": "SendMessage",
+                  "started_at": "2026-11-17T13:47:48.818601623Z",
+                  "finished_at": "2026-11-17T13:47:48.835570117Z",
+                  "http_status": 502,
+                  "outcome": "http_error",
+                  "error_code": "TEST_SEND_REPLY_LOST",
+                  "sequence": 1
+                }
+              },
+              "input_digest": "sha256:db48436e9a4597759528b8879114e68d40cbf18a8311173d2feb57a414a0f0a1",
+              "intent_saved_at": "2026-11-17T13:47:48Z",
+              "model_calls": 1,
+              "node_execution_id": "sha256:378cbd1050f6939b2e2a8e7988548a0589f127d53051c12f29a1e2e91c7a3f1e",
+              "reason": "派发结果未知，需核对原调用；未重发",
+              "request_id": "2c414c642e50c06a01c7c184",
+              "reused_count": 0,
+              "status": "unknown",
+              "task_id": "",
+              "updated_at": "2026-11-17T13:47:49Z"
+            },
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-material",
+                "version": "1.0.1",
+                "card_digest": "sha256:52ec0ae2aaa119ea36347f160f988460d053d3c1dcea0798aa47ea53ad81c20a",
+                "contract_digest": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e"
+              }
+            }
+          },
+          {
+            "id": "financial",
+            "name": "财务分析师",
+            "kind": "investigate",
+            "role": "财务",
+            "task": "使用 get_financials 分析本案件财务数据，明确资产单位",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/financials/*"
+            ],
+            "contract": "b433290ae68a…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:b433290ae68a411e090e9b54bf8607a1d08aeb9bdf8efe4461735137505b1a1f"
+              }
+            }
+          },
+          {
+            "id": "industry",
+            "name": "行业研究员",
+            "kind": "investigate",
+            "role": "行业",
+            "task": "使用 get_industry_report 分析本案件行业依据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:industry/*"
+            ],
+            "contract": "e1622a9ca8e5…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:e1622a9ca8e50c2281568d16e46c5518f157c5d6d6991097220aa3c7726d52b8"
+              }
+            }
+          },
+          {
+            "id": "bureau",
+            "name": "征信摘要查询员",
+            "kind": "investigate",
+            "role": "征信",
+            "task": "使用 query_bureau_summary 核对本案件征信摘要",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/bureau/summary/*"
+            ],
+            "contract": "255383d9e0e3…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-analysis",
+                "version": "1.0.1",
+                "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+                "contract_digest": "sha256:255383d9e0e3e5d5b0a5952afc6e5e8a3c26ccb07a4bc671a6b85c115427cee1"
+              }
+            }
+          },
+          {
+            "id": "related",
+            "name": "关联方排查",
+            "kind": "blackbox",
+            "role": "关联方",
+            "task": "逐家核对本案件关联方证据",
+            "deps": [
+              "intake"
+            ],
+            "reads": [
+              "data:credit/related/*",
+              "data:credit/related-bureau/*"
+            ],
+            "contract": "58bf67d11161…",
+            "status": "pending",
+            "execution": {
+              "kind": "loop_forest"
+            }
+          },
+          {
+            "id": "judge",
+            "name": "风险判断",
+            "kind": "judge",
+            "role": "原型规则判断",
+            "task": "按原型规约判断并引用上游步骤",
+            "deps": [
+              "financial",
+              "industry",
+              "bureau",
+              "related"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "bc9a7cfd42ef…",
+            "status": "pending",
+            "execution": {
+              "kind": "host"
+            }
+          },
+          {
+            "id": "report",
+            "name": "报告撰写人",
+            "kind": "write",
+            "role": "报告",
+            "task": "汇总已提供的结论和证据，缺失内容明确说明",
+            "deps": [
+              "judge"
+            ],
+            "reads": [
+              "data:credit/evidence/*"
+            ],
+            "contract": "28ec6a969fcb…",
+            "status": "pending",
+            "execution": {
+              "kind": "agent_bus",
+              "path_mode": "DIRECT",
+              "binding": {
+                "agent_id": "credit-writer",
+                "version": "1.0.1",
+                "card_digest": "sha256:a8ee3492409dfd4b3f226cab9b7fd9133cc7020757c68ab1e2d6abff13f3ae0e",
+                "contract_digest": "sha256:28ec6a969fcbb53626da96e7cc6f26cf1d5ffef0e12c021757121a096eef253f"
+              }
+            }
+          }
+        ],
+        "ok": true,
+        "hash": "sha256:654a67388ce6309a4aaa030f7d97bfb74d04e00a446660d413e37baa37508d05",
+        "run": {
+          "id": "R13",
+          "status": "waiting",
+          "leases": 2,
+          "url": "/ui/run/R13"
+        },
+        "live": "/api/graph?plan=P14&v=1",
+        "rev": 1070,
+        "bus": {
+          "planned_nodes": 5,
+          "services": 3,
+          "linked_tasks": 0,
+          "completed": 0,
+          "unresolved": 1,
+          "failed": 0,
+          "reused": 0
+        }
+      }
+    }
+  ],
+  "environment": {
+    "project": "agent-hub-issue16",
+    "base": "http://127.0.0.1:5191",
+    "source_commit": "41a36755563ebeb442f2d93050c1d3430d510e80",
+    "images": {
+      "/agent-hub-issue16-orchestrator-1": "sha256:7c454e5240fba26731e7434a44267afbb5b8f55d2bfc46ce8805022c707b3406",
+      "/agent-hub-issue16-fault-proxy-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535",
+      "/agent-hub-issue16-front-1": "sha256:fed7e14be83cbd2661a75cdc5b872d936cf155d46c327084d30b8df19ae88d72",
+      "/agent-hub-issue16-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-issue16-swarm-1": "sha256:8fa8ec4239e1ae0cf019943d97419d414e3965645a6bda331c71094a199556df",
+      "/agent-hub-issue16-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-issue16-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-issue16-material-agent-1": "sha256:6b19773e21e6a2372a98b2351e600def530e2935d1a635bbc7aa5099e8c0cae3",
+      "/agent-hub-issue16-writer-agent-1": "sha256:6b19773e21e6a2372a98b2351e600def530e2935d1a635bbc7aa5099e8c0cae3",
+      "/agent-hub-issue16-credit-1": "sha256:5e5c5229ff7b2c187c3eae645c683bfa9d16bc915cd50a8dfaa369e9b7172c62",
+      "/agent-hub-issue16-analysis-agent-1": "sha256:6b19773e21e6a2372a98b2351e600def530e2935d1a635bbc7aa5099e8c0cae3"
+    },
+    "config_sha256": {
+      "compose.yaml": "3766502dc524aed036cb3c8956930814dd3beaa530e79c768ed8851ff729ff34",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  },
+  "run_id": "R13",
+  "plan_id": "P14",
+  "status_before_resume": "waiting",
+  "before_resume": {
+    "intake": {
+      "request_id": "2c414c642e50c06a01c7c184",
+      "remote_task_id": null,
+      "artifact_id": null,
+      "artifact_digest": null,
+      "model_events": {
+        "35c3c3a9-1478-4391-86bf-af4d88a6bac0": "2026-11-17T13:47:48Z"
+      },
+      "context_id": "ctx-e7a04a21e0a971dd815c7455",
+      "status": "unknown"
+    }
+  },
+  "forwarded_send": [
+    {
+      "at": 1794923268.8341124,
+      "method": "SendMessage",
+      "id": "2c414c642e50c06a01c7c184",
+      "task_id": null,
+      "status": 502,
+      "fault": "drop-send-reply-once",
+      "forwarded": {
+        "upstream_status": 200,
+        "remote_task_id": "e35d7ced-4b8f-4b1c-9019-a80c230493dd"
+      }
+    }
+  ],
+  "resumes": [
+    {
+      "label": "resume",
+      "at": 1794923269.376508,
+      "http": 200,
+      "body": "{\"run\": \"R13\", \"status\": \"queued\"}"
+    }
+  ],
+  "run": {
+    "id": "R13",
+    "plan_id": "P14",
+    "plan_version": 1,
+    "plan_hash": "sha256:654a67388ce6309a4aaa030f7d97bfb74d04e00a446660d413e37baa37508d05",
+    "case_id": "C006",
+    "status": "waiting",
+    "approved_by": "alice",
+    "approved_via": {
+      "channel": "mcp-app"
+    },
+    "created_at": "2026-11-17T13:47:48Z",
+    "lease_until": "2026-11-17T13:48:09.385601765Z",
+    "epoch": 2,
+    "leases": [
+      "2026-11-17T13:47:48Z 第 1 次领取（orchestrator-1）",
+      "2026-11-17T13:47:49Z 第 2 次领取（orchestrator-1）"
+    ],
+    "steps": {
+      "bureau": {
+        "id": "bureau",
+        "expert": "bureau-summary",
+        "status": "pending"
+      },
+      "financial": {
+        "id": "financial",
+        "expert": "financial-analyst",
+        "status": "pending"
+      },
+      "industry": {
+        "id": "industry",
+        "expert": "industry-researcher",
+        "status": "pending"
+      },
+      "intake": {
+        "id": "intake",
+        "expert": "intake",
+        "status": "unknown",
+        "started_at": "2026-11-17T13:47:48Z",
+        "epoch": 1,
+        "activity": "派发结果未知，需核对原调用；未重发",
+        "remote_call": {
+          "node_execution_id": "sha256:378cbd1050f6939b2e2a8e7988548a0589f127d53051c12f29a1e2e91c7a3f1e",
+          "graph_revision": "P14-v1",
+          "node_path": "intake",
+          "loop_iteration": 0,
+          "attempt": 1,
+          "binding": {
+            "agent_id": "credit-material",
+            "version": "1.0.1",
+            "card_digest": "sha256:52ec0ae2aaa119ea36347f160f988460d053d3c1dcea0798aa47ea53ad81c20a",
+            "contract_digest": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e"
+          },
+          "input_digest": "sha256:db48436e9a4597759528b8879114e68d40cbf18a8311173d2feb57a414a0f0a1",
+          "input": "案件号：C006。任务：Agent Bus rb-send 验证 1794923268，仅生成模拟授信报告，不提交银行操作",
+          "goal": "[角色] 资料\n[角色设定]\n你是授信材料受理员。必须调用 get_application 读取申请材料，再把申请人、申请额度、用途、资产申报等字段整理成清单。只依据工具返回的内容，不要编造。\n使用 get_application 核对本案件申请材料",
+          "request_id": "2c414c642e50c06a01c7c184",
+          "message_id": "c989c3be8080d187aec12a2b",
+          "context_id": "ctx-e7a04a21e0a971dd815c7455",
+          "status": "unknown",
+          "reason": "派发结果未知，需核对原调用；未重发",
+          "sequence": 2,
+          "created_at": "2026-11-17T13:47:48Z",
+          "updated_at": "2026-11-17T13:47:49Z",
+          "agent_started_at": "2026-11-17T13:47:48Z",
+          "model_events": {
+            "35c3c3a9-1478-4391-86bf-af4d88a6bac0": "2026-11-17T13:47:48Z"
+          },
+          "discovery": {
+            "checked_at": "2026-11-17T13:47:48Z",
+            "candidates": [
+              {
+                "instance_id": "material-1",
+                "health": "ONLINE",
+                "contract_version": "1.0",
+                "capability_version": "1.0.1",
+                "eligible": true
+              }
+            ]
+          },
+          "gateway_exchanges": {
+            "2c414c642e50c06a01c7c184": {
+              "rpc_id": "2c414c642e50c06a01c7c184",
+              "method": "SendMessage",
+              "started_at": "2026-11-17T13:47:48.818601623Z",
+              "finished_at": "2026-11-17T13:47:48.835570117Z",
+              "http_status": 502,
+              "outcome": "http_error",
+              "error_code": "TEST_SEND_REPLY_LOST",
+              "sequence": 1
+            }
+          }
+        }
+      },
+      "judge": {
+        "id": "judge",
+        "expert": "risk-judge",
+        "status": "pending"
+      },
+      "related": {
+        "id": "related",
+        "expert": "related-party",
+        "status": "pending"
+      },
+      "report": {
+        "id": "report",
+        "expert": "report-writer",
+        "status": "pending"
+      }
+    },
+    "order": [
+      "intake",
+      "financial",
+      "industry",
+      "bureau",
+      "related",
+      "judge",
+      "report"
+    ],
+    "final_output": "等待远端结果；未确认的调用不会自动重发"
+  },
+  "transport_events": [
+    {
+      "at": 1794923268.8341124,
+      "method": "SendMessage",
+      "id": "2c414c642e50c06a01c7c184",
+      "task_id": null,
+      "status": 502,
+      "fault": "drop-send-reply-once",
+      "forwarded": {
+        "upstream_status": 200,
+        "remote_task_id": "e35d7ced-4b8f-4b1c-9019-a80c230493dd"
+      }
+    }
+  ],
+  "checks": {
+    "was_waiting": true,
+    "receipt_lost_node": [
+      "intake"
+    ],
+    "remote_task_created_upstream": true,
+    "no_resend_after_resume": true,
+    "send_counts": {
+      "2c414c642e50c06a01c7c184": 1
+    },
+    "still_unresolved_after_resume": true,
+    "final_status": "waiting",
+    "note": "without a remote task id the call stays UNKNOWN and is never resent; the upstream task is an orphan that needs manual reconciliation"
+  },
+  "finished_at": 1794923270.0519705
+}

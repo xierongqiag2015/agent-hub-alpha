@@ -136,6 +136,30 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
 
 **结论**：Go 停机期间不重发、不伪成功、旧执行者失权都成立。但"恢复复用原结果"只对停机前已完成、或已拿到工具的节点成立。依赖 Go 成员工具的在途远端节点会在远端失败，远端节点 attempt 固定为 1，系统不会自动重试，只能人工处置或新版本计划。这是专业 Runtime 对控制服务的可用性耦合，需要在共同验收中明确为边界。
 
+## D2 场景自测（2026-11-17 21:45，`raw/d2-selftest/`）
+
+明天组合 D2 中 W05 负责的场景，先在 W05 环境用脚本自测。恢复都经 `/api/resume`（插件调用的同一接口）发起。D2 当天可加 `--resume external`，改由人在插件里操作。
+
+两个新增工具都只用于测试：
+- `scripts/w05_fault_proxy.py`：仓库故障代理的副本，只加一个模式 `drop-send-reply-once`——照常转发 SendMessage，但给调用方返回 502。原有模式行为不变。
+- `scripts/compose.w05-send-test.yaml`：把上面这份代理挂在原路径上。
+
+产品代码未改。
+
+| 场景 | 任务 | 结果 |
+|---|---|---|
+| R-A：2 个远端节点完成后，下一个查询应答丢失（`ra-completed-then-unknown`） | R11 | Bus 部分全部符合预期：intake、bureau 未重算；financial 进入 unknown，恢复后按原 task 查询完成；4 个远端请求各 1 次 SendMessage。**但任务以 failed 结束**，见下方发现 |
+| R-A 变体：四个远端节点和本地黑盒都完成后，report 的查询应答丢失（`ra-unknown-at-report`） | R12 | intake、financial、industry、bureau 未重算；report 恢复后按原 task 查询完成；5 个请求各 1 次；任务完成 |
+| R-C：等待中注入保存失败后恢复（`rc-resume-storage-failure`） | R13 | 恢复返回 503 未被接受，healthz 503；修复存储重启后任务仍为 waiting；第二次恢复被接受，任务完成；request/task 不变，各 1 次 SendMessage |
+| R-B：首条 SendMessage 回执丢失（`rb-send-reply-lost`） | R14 | 远端任务已创建（代理记录了上游返回的 task id），调用方只拿到 502，intake 为 UNKNOWN 且无 task id；恢复后仍为 UNKNOWN、未重发（SendMessage 1 次），任务停在 waiting。上游任务成为孤儿，需要人工对账，这是现有设计边界 |
+| R-B：恢复已落盘、回复丢失（`rb-resume-reply-lost`） | R15 | 发出恢复后不读回复直接断开；1.5 秒后任务已为 queued/running（恢复已落盘）；再提交返回 409，无第二次效果；只新增 1 次领取；任务完成 |
+
+**发现：同一编排器进程内恢复时，Loop Forest 节点重跑失败**（R11）。
+- 经过：related（本地黑盒，Loop Forest）在第 1 次领取中已开始执行。financial 进入 unknown 使任务中止，related 注册的进程级全局工具 `fork_subtask` 没有卸载。恢复后同一进程再次执行 related，报 `loop-forest process-global tool registration failed: fork_subtask`，任务失败。
+- 出处：agent-solution `common/agent-core-ext-java/agent-core-ext-react-rails/.../LoopForestSuite.java` 的 `registerTool`（`Runner.resourceMgr()` 是进程级注册表），以及 credit-orchestrator 对它的使用，不在 W05 Bus 链路。
+- 之前没碰到的原因：host-kill 是编排器进程重启后接管；disconnect、late 在第一个节点就进入等待，related 尚未开始。
+- 对 D2 的影响：W02 在插件上做 R-A 时，如果 related 已经开始，也会遇到。R-A 可改用 report 变体验证恢复语义，这个问题单独交给编排器/Loop Forest 的负责方。
+
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
 | 编号 | 本记录覆盖到的程度 | 仍需补的部分 |

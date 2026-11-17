@@ -1,0 +1,7 @@
+# W05 test-only overlay, applied after compose.bus-test.yaml: replaces the
+# fault proxy script with the W05 copy that adds drop-send-reply-once.
+# W05_FAULT_PROXY must be the absolute path of scripts/w05_fault_proxy.py.
+services:
+  fault-proxy:
+    volumes:
+      - ${W05_FAULT_PROXY:?set W05_FAULT_PROXY}:/test/fault_proxy.py:ro

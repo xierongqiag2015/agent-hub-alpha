@@ -1,0 +1,221 @@
+== 2026-11-17T21:45:31+08:00 overlay up (bus-test + w05 send test)
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-fault-proxy-1 Recreate 
+ Container agent-hub-issue16-fault-proxy-1 Recreated 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-fault-proxy-1 Starting 
+ Container agent-hub-issue16-fault-proxy-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+== 2026-11-17T21:45:47+08:00 overlay exit 0
+"""Test-only transport faults in front of the real Gateway; never mocks Agents.
+
+== 2026-11-17T21:45:48+08:00 ra-completed-then-unknown
+R11 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'done'), ('financial', 'running'), ('industry', 'running'), ('bureau', 'running'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R11 waiting [('intake', 'done'), ('financial', 'unknown'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R11 queued [('intake', 'done'), ('financial', 'unknown'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'reused'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'reused'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R11 running [('intake', 'reused'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R11 failed [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/ra-completed-then-unknown-1794923148.json
+checks: {"armed_after_two_completed": true, "was_waiting_with_unknown": true, "completed_before": ["bureau", "intake"], "completed_nodes_unchanged": true, "others_kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"e9fc2575b77e1aaf46ab6218": 1, "6d7b3701b811beffaeb54524": 1, "04dd1cb63e6f68ba8d44cab7": 1, "5f40c8d309cf881d45c66750": 1}, "final_status": "failed"}
+== 2026-11-17T21:46:14+08:00 ra-completed-then-unknown exit 0
+== 2026-11-17T21:46:14+08:00 rc-resume-storage-failure
+R12 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R12 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R12 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R12 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R12 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R12 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R12 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R12 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R12 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'pending')]
+R12 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R12 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rc-resume-storage-failure-1794923174.json
+checks: {"was_waiting": true, "resume_refused_during_fault": true, "health_503_during_fault": true, "restored": true, "still_waiting_after_restore": true, "second_resume_accepted": true, "kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"8dcababa8c7bb3db301c0697": 1, "7a89b7d1e7e76790cb12dc63": 1, "dbe7212ef29e17cc40b04e22": 1, "e9b947b3475aae12675feaa5": 1, "2a3a1c91fd3c57b028bfe3a1": 1}, "final_status": "done"}
+== 2026-11-17T21:47:48+08:00 rc-resume-storage-failure exit 0
+== 2026-11-17T21:47:48+08:00 rb-send-reply-lost
+R13 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R13 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R13 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rb-send-reply-lost-1794923268.json
+checks: {"was_waiting": true, "receipt_lost_node": ["intake"], "remote_task_created_upstream": true, "no_resend_after_resume": true, "send_counts": {"2c414c642e50c06a01c7c184": 1}, "still_unresolved_after_resume": true, "final_status": "waiting", "note": "without a remote task id the call stays UNKNOWN and is never resent; the upstream task is an orphan that needs manual reconciliation"}
+== 2026-11-17T21:47:50+08:00 rb-send-reply-lost exit 0
+== 2026-11-17T21:47:50+08:00 rb-resume-reply-lost
+R14 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R14 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'pending'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R14 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R14 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rb-resume-reply-lost-1794923270.json
+checks: {"was_waiting": true, "resume_persisted_without_reply": true, "retry_has_no_second_effect": true, "one_new_lease": true, "kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"5907a65e8e8aac1193e21120": 1, "e677e6fffd6c40cf91bbb5b1": 1, "5de84c3a23d2e7981c440700": 1, "0d1094478161a1c628eec63b": 1, "7355d0dd93c442f37b1e56c6": 1}, "final_status": "done"}
+== 2026-11-17T21:49:04+08:00 rb-resume-reply-lost exit 0
+== 2026-11-17T21:49:04+08:00 logs exported
+time="2026-11-17T21:49:05+08:00" level=warning msg="Found orphan containers ([agent-hub-issue16-fault-proxy-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container agent-hub-issue16-writer-agent-1 Running 
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-bus-db-1 Running 
+ Container agent-hub-issue16-analysis-agent-1 Running 
+ Container agent-hub-issue16-material-agent-1 Running 
+ Container agent-hub-issue16-rdc-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-gateway-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-swarm-1 Running 
+ Container agent-hub-issue16-front-1 Running 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-front-1 Waiting 
+ Container agent-hub-issue16-analysis-agent-1 Waiting 
+ Container agent-hub-issue16-writer-agent-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-material-agent-1 Waiting 
+ Container agent-hub-issue16-gateway-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-analysis-agent-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Healthy 
+ Container agent-hub-issue16-writer-agent-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-front-1 Healthy 
+ Container agent-hub-issue16-gateway-1 Healthy 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-17T21:49:14+08:00 restore exit 0
+agent-hub-issue16-fault-proxy-1
+== 2026-11-17T21:49:15+08:00 D2 self-test done
+== 2026-11-17T21:54:18+08:00 overlay up (bus-test + w05 send test)
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-fault-proxy-1 Recreate 
+ Container agent-hub-issue16-fault-proxy-1 Recreated 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-fault-proxy-1 Starting 
+ Container agent-hub-issue16-fault-proxy-1 Started 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+== 2026-11-17T21:54:34+08:00 overlay exit 0
+"""Test-only transport faults in front of the real Gateway; never mocks Agents.
+
+== 2026-11-17T21:54:34+08:00 ra-unknown-at-report
+R15 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R15 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R15 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R15 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R15 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R15 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R15 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R15 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R15 waiting [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'unknown')]
+R15 queued [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'unknown')]
+R15 running [('intake', 'reused'), ('financial', 'reused'), ('industry', 'reused'), ('bureau', 'reused'), ('related', 'reused'), ('judge', 'reused'), ('report', 'waiting')]
+R15 done [('intake', 'reused'), ('financial', 'reused'), ('industry', 'reused'), ('bureau', 'reused'), ('related', 'reused'), ('judge', 'reused'), ('report', 'done')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/ra-unknown-at-report-1794923674.json
+checks: {"armed_after_two_completed": true, "was_waiting_with_unknown": true, "completed_before": ["bureau", "financial", "industry", "intake"], "completed_nodes_unchanged": true, "others_kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"6f8b5ca8f9dc26514e5d8b9d": 1, "dc4316212ee5b5554dcb6a13": 1, "54de5697700442b686d919e3": 1, "3dd0c6e0751739f948010685": 1, "f346fb16d288dd622c211106": 1}, "final_status": "done"}
+== 2026-11-17T21:55:49+08:00 ra-unknown-at-report exit 0
+== 2026-11-17T21:55:49+08:00 logs exported
+time="2026-11-17T21:55:50+08:00" level=warning msg="Found orphan containers ([agent-hub-issue16-fault-proxy-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container agent-hub-issue16-material-agent-1 Running 
+ Container agent-hub-issue16-writer-agent-1 Running 
+ Container agent-hub-issue16-bus-db-1 Running 
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-rdc-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-gateway-1 Running 
+ Container agent-hub-issue16-analysis-agent-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-swarm-1 Running 
+ Container agent-hub-issue16-front-1 Running 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-front-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-material-agent-1 Waiting 
+ Container agent-hub-issue16-analysis-agent-1 Waiting 
+ Container agent-hub-issue16-writer-agent-1 Waiting 
+ Container agent-hub-issue16-gateway-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-gateway-1 Healthy 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-analysis-agent-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Healthy 
+ Container agent-hub-issue16-front-1 Healthy 
+ Container agent-hub-issue16-writer-agent-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-17T21:56:02+08:00 restore exit 0
+agent-hub-issue16-fault-proxy-1
+== 2026-11-17T21:56:03+08:00 D2 self-test done
