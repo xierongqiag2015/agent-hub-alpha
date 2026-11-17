@@ -1,0 +1,459 @@
+{
+  "scenario": "ar04-m14",
+  "project": "agent-hub-m14b",
+  "started_at": 1794930725.4315565,
+  "phases": [
+    "m3",
+    "m1-local",
+    "m1-remote",
+    "m2"
+  ],
+  "models": {
+    "A": "glm-5-2-260617",
+    "B": "glm-4-flash"
+  },
+  "images": {
+    "M14_NEW_ORCH_IMAGE": "w05-m14/orchestrator:dev",
+    "M14_OLD_ORCH_IMAGE": "agent-hub-issue16/orchestrator:bus-v1",
+    "M14_NEW_AGENT_IMAGE": "w05-m14/professional:dev",
+    "M14_NEW_CREDIT_IMAGE": "w05-m14/credit:dev",
+    "M14_OLD_AGENT_IMAGE": "agent-hub-issue16/professional:bus-v1",
+    "M14_OLD_CREDIT_IMAGE": "agent-hub-issue16/credit:bus-v1"
+  },
+  "m3": {
+    "run": "R1",
+    "before_upgrade": {
+      "status": "running",
+      "final": null,
+      "leases": [
+        "2026-11-17T15:52:37Z 第 1 次领取（orchestrator-1）"
+      ],
+      "binding": null,
+      "calls": {
+        "intake": {
+          "request_id": "94c6f784921fadd0ae1c74d3",
+          "remote_task_id": "2bed58c7-158c-4a40-9368-f53a51d1a0a9",
+          "status": "waiting",
+          "reason": "专业 Agent 执行中，查询原任务",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "after_upgrade": {
+      "status": "blocked",
+      "final": "规约版本不可解析，任务已停止：任务在版本绑定上线前采纳，没有可解析的规约绑定。不会改用当前规约继续，需人工处理。",
+      "leases": [
+        "2026-11-17T15:52:37Z 第 1 次领取（orchestrator-1）"
+      ],
+      "binding": null,
+      "calls": {
+        "intake": {
+          "request_id": "94c6f784921fadd0ae1c74d3",
+          "remote_task_id": "2bed58c7-158c-4a40-9368-f53a51d1a0a9",
+          "status": "waiting",
+          "reason": "专业 Agent 执行中，查询原任务",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress_after_upgrade": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_unresolvable_spec": true,
+      "no_new_lease_after_upgrade": true,
+      "no_model_request_after_upgrade": true,
+      "no_new_remote_call": true
+    }
+  },
+  "m1_local": {
+    "run": "R2",
+    "record": {
+      "status": "blocked",
+      "final": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，执行器 orchestrator-1 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+      "leases": [],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {},
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "pending",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_both_models": true,
+      "never_leased": true,
+      "no_remote_call": true,
+      "no_model_request": true
+    }
+  },
+  "m1_remote": {
+    "run": "R3",
+    "record": {
+      "status": "blocked",
+      "final": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，远端 credit-material 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+      "leases": [
+        "2026-11-17T15:53:38Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "intake": {
+          "request_id": "ad36f95c53e1b7c099f5cc44",
+          "remote_task_id": "05c8d9d6-f704-41e1-aa6e-b42e37822bf5",
+          "status": "waiting",
+          "reason": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，远端 credit-material 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_both_models": true,
+      "no_model_event_recorded": true,
+      "no_runtime_model_request": true,
+      "no_request_for_model_b": true
+    }
+  },
+  "m2": {
+    "run": "R4",
+    "record": {
+      "status": "done",
+      "final": "[step:report]\n**授信尽调报告**\n\n**案件号**：C006\n\n**一、申请概况**\n本案件号为C006，任务为Agent Bus m14-m2 验证 1794930836。根据要求，本次仅生成模拟授信报告，不提交银行操作。\n\n**二、财务**\n申请人资产为35.2百万美元。（证据来源：financial bureau）\n\n**三、行业**\n上游产物未提供行业相关信息，此部分内容缺失。\n\n**四、征信**\n申请人近六个月逾期事件为0，历史最长逾期仅1个月。（证据来源：financial bureau）\n\n**五、判断结论与依据**\n**结论**：授予50,000额度（GRANT-50000）。\n**依据**：申请人资产35.2百万美元超过30门槛，近六个月逾期事件为0，历史最长逾期仅1个月未超三个月否决线，符合precedence 1授予50,000额度条件。",
+      "leases": [
+        "2026-11-17T15:53:56Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "bureau": {
+          "request_id": "c6b7d1d4dd9996c08148da15",
+          "remote_task_id": "9be3bf2c-d4a3-44d2-bbaa-c43dce8f24f5",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "404f09e5-54aa-4906-b585-1addb982b1c7": "2026-11-17T15:54:09Z",
+            "4bd673f5-0a4c-4a97-bd63-e81b8490cc37": "2026-11-17T15:54:11Z"
+          },
+          "actual_models": {
+            "404f09e5-54aa-4906-b585-1addb982b1c7": "glm-5-2-260617",
+            "4bd673f5-0a4c-4a97-bd63-e81b8490cc37": "glm-5-2-260617"
+          }
+        },
+        "financial": {
+          "request_id": "1a773070553724193424be72",
+          "remote_task_id": "77866c33-b7d2-40f7-9245-ee3d4ec24d1e",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "05536fe9-8ecd-4393-a680-976d13ee86a8": "2026-11-17T15:54:15Z",
+            "b244eb7e-4ce0-4470-b259-b87806b8fcb1": "2026-11-17T15:54:09Z"
+          },
+          "actual_models": {
+            "05536fe9-8ecd-4393-a680-976d13ee86a8": "glm-5-2-260617",
+            "b244eb7e-4ce0-4470-b259-b87806b8fcb1": "glm-5-2-260617"
+          }
+        },
+        "industry": {
+          "request_id": "35019314ad8c6106070e16c9",
+          "remote_task_id": "2c035849-aca9-45a5-9406-0ba481112a39",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "748d6ccc-996d-46b6-a5ce-952ae95cc295": "2026-11-17T15:54:09Z",
+            "8468c0e3-f67b-4b47-809a-73fe53346afb": "2026-11-17T15:54:12Z"
+          },
+          "actual_models": {
+            "748d6ccc-996d-46b6-a5ce-952ae95cc295": "glm-5-2-260617",
+            "8468c0e3-f67b-4b47-809a-73fe53346afb": "glm-5-2-260617"
+          }
+        },
+        "intake": {
+          "request_id": "4612253c14813e193ed57525",
+          "remote_task_id": "94199cd2-6e65-4814-a32c-ed62b31e6fb1",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "2257f1c4-4489-4b01-90fe-dcad5d93e795": "2026-11-17T15:54:00Z",
+            "4bd98b9f-f6fe-40d6-9f83-d17aad0c984f": "2026-11-17T15:53:57Z"
+          },
+          "actual_models": {
+            "2257f1c4-4489-4b01-90fe-dcad5d93e795": "glm-5-2-260617",
+            "4bd98b9f-f6fe-40d6-9f83-d17aad0c984f": "glm-5-2-260617"
+          }
+        },
+        "report": {
+          "request_id": "2b856848941306519ea516e0",
+          "remote_task_id": "6fac1f7b-0172-441b-b449-682bb8b610c8",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "d42ed067-55fc-4453-a30c-ac115add7ff7": "2026-11-17T15:55:14Z"
+          },
+          "actual_models": {
+            "d42ed067-55fc-4453-a30c-ac115add7ff7": "glm-5-2-260617"
+          }
+        }
+      },
+      "steps": {
+        "bureau": "done",
+        "financial": "done",
+        "industry": "done",
+        "intake": "done",
+        "judge": "done",
+        "related": "done",
+        "report": "done"
+      }
+    },
+    "egress": [
+      {
+        "at": 1794930840.0117338,
+        "caller": "172.20.0.2",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "material-agent"
+      },
+      {
+        "at": 1794930849.0283072,
+        "caller": "172.20.0.2",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "material-agent"
+      },
+      {
+        "at": 1794930851.5874,
+        "caller": "172.20.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930852.875235,
+        "caller": "172.20.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930855.0606081,
+        "caller": "172.20.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930856.540637,
+        "caller": "172.20.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930859.4957106,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930867.0049949,
+        "caller": "172.20.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930872.277808,
+        "caller": "172.20.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930872.3505104,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930873.8690097,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930874.034931,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930874.225824,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930883.8280184,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930885.2243993,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930886.795647,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930903.4948273,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930914.1270182,
+        "caller": "172.20.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930922.464148,
+        "caller": "172.20.0.4",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "writer-agent"
+      }
+    ],
+    "checks": {
+      "completed": true,
+      "egress_requests": 19,
+      "all_egress_on_model_a": true,
+      "remote_events_record_model_a": true,
+      "binding_model_a": true
+    }
+  },
+  "finished_at": 1794930923.9714255,
+  "environment": {
+    "project": "agent-hub-m14b",
+    "base": "http://127.0.0.1:5291",
+    "source_commit": "41a36755563ebeb442f2d93050c1d3430d510e80",
+    "images": {
+      "/agent-hub-m14b-material-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14b-analysis-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14b-writer-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14b-orchestrator-1": "sha256:ac312605b005b83fb9313bbaa3ba53d97a23bcf43fdad72e80cd8953618ff1ee",
+      "/agent-hub-m14b-credit-1": "sha256:33e1d461ff021d0bad870bf386ae2a88cce3808e2efd0dda49837ad0baf1ac9f",
+      "/agent-hub-m14b-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-m14b-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-m14b-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-m14b-model-egress-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535"
+    },
+    "config_sha256": {
+      "compose.yaml": "3766502dc524aed036cb3c8956930814dd3beaa530e79c768ed8851ff729ff34",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  }
+}

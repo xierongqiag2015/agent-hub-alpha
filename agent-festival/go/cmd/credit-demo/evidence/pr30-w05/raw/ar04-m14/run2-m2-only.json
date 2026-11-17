@@ -1,0 +1,317 @@
+{
+  "scenario": "ar04-m14",
+  "started_at": 1794930536.7064164,
+  "phases": [
+    "m2"
+  ],
+  "models": {
+    "A": "glm-5-2-260617",
+    "B": "glm-4-flash"
+  },
+  "images": {
+    "M14_NEW_ORCH_IMAGE": "w05-m14/orchestrator:dev",
+    "M14_OLD_ORCH_IMAGE": "agent-hub-issue16/orchestrator:bus-v1",
+    "M14_NEW_AGENT_IMAGE": "w05-m14/professional:dev",
+    "M14_NEW_CREDIT_IMAGE": "w05-m14/credit:dev",
+    "M14_OLD_AGENT_IMAGE": "agent-hub-issue16/professional:bus-v1",
+    "M14_OLD_CREDIT_IMAGE": "agent-hub-issue16/credit:bus-v1"
+  },
+  "m2": {
+    "run": "R5",
+    "record": {
+      "status": "done",
+      "final": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：** C006  \n**验证标识：** 1794930555  \n**任务来源：** Agent Bus m14-m2  \n**报告性质：** 模拟授信报告，不提交银行操作\n\n---\n\n## 一、申请概况\n\n| 项目 | 内容 |\n|------|------|\n| 案件号 | C006 |\n| 验证标识 | 1794930555 |\n| 申请额度 | 50,000（上档规则授予） |\n\n> **缺失说明：** 申请人姓名、年龄、职业、申请产品类型、申请期限等基本信息未在上游产物中提供。\n\n---\n\n## 二、财务状况\n\n| 指标 | 数值 |\n|------|------|\n| 申请人本人资产 | 35.2 百万美元 |\n| 资产门槛要求 | 30 百万美元 |\n| 是否达标 | 是（超出门槛 5.2 百万美元） |\n\n> **缺失说明：** 负债情况、收入流水、资产负债比、现金流等详细财务数据未在上游产物中提供。\n\n---\n\n## 三、行业分析\n\n> **缺失说明：** 上游产物未提供任何行业相关信息，包括申请人所属行业、行业风险评级、行业前景分析等，本节无法填写。\n\n---\n\n## 四、征信状况\n\n| 指标 | 数值 |\n|------|------|\n| 近六个月逾期事件数 | 0 |\n| 历史最长逾期 | 1 个月 |\n| 三个月否决线 | 未超过 |\n\n征信关键指标均表现良好，近半年无逾期记录，历史最长逾期仅 1 个月，远低于三个月否决线。\n\n> **缺失说明：** 征信查询次数、信用账户总数、当前未结清贷款笔数、担保情况等详细征信字段未在上游产物中提供。\n\n---\n\n## 五、判断结论与依据\n\n### 结论\n\n**GRANT — 授予额度 50,000**\n\n### 依据\n\n1. **资产达标：** 申请人本人资产 35.2 百万美元，超过 30 百万门槛要求。\n2. **征信良好：** 近六个月逾期事件数为 0；历史最长逾期仅 1 个月，未超过三个月否决线。\n3. **规则匹配：** 符合 precedence 1 上档规则，据此授予 50,000 额度。\n\n### 证据来源\n\n| 证据步骤 | 提供内容 |\n|----------|----------|\n| financial bureau | 资产数据、逾期记录数据 |\n\n---\n\n## 六、缺失内容汇总\n\n以下内容在上游产物中未提供，建议补充后完善报告：\n\n- 申请人基本身份信息\n- 详细财务数据（负债、收入、现金流等）\n- 行业分析与风险评估\n- 征信明细字段（查询次数、账户数、担保等）\n- 反洗钱 / 合规筛查结果\n- 担保方式与抵质押物信息\n\n---\n\n*本报告仅为模拟授信报告，不构成实际银行操作指令。*",
+      "leases": [
+        "2026-11-17T15:49:15Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "bureau": {
+          "request_id": "82deb380f53137be39fafdcb",
+          "remote_task_id": "3f346cfb-0953-46c7-bfb8-bc66c3a1fdbf",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "30a70cbe-3e30-4024-b160-33dbb7b3dc93": "2026-11-17T15:49:31Z",
+            "daef7632-c562-4c5e-86cf-357631c13f68": "2026-11-17T15:49:28Z"
+          },
+          "actual_models": {
+            "30a70cbe-3e30-4024-b160-33dbb7b3dc93": "glm-5-2-260617",
+            "daef7632-c562-4c5e-86cf-357631c13f68": "glm-5-2-260617"
+          }
+        },
+        "financial": {
+          "request_id": "d825e3b83e3fc777cd57ba51",
+          "remote_task_id": "19d01dbc-3492-4325-a4a2-3a518713643e",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "e381ebb9-d9a4-4344-89a7-a45754d40015": "2026-11-17T15:49:28Z",
+            "e7d87814-5b46-465f-b203-5f70522408fd": "2026-11-17T15:49:30Z"
+          },
+          "actual_models": {
+            "e381ebb9-d9a4-4344-89a7-a45754d40015": "glm-5-2-260617",
+            "e7d87814-5b46-465f-b203-5f70522408fd": "glm-5-2-260617"
+          }
+        },
+        "industry": {
+          "request_id": "0b86f662eafd3f4e4ffe5f7f",
+          "remote_task_id": "b69c35e1-a8db-4fc7-9d52-2a78b4a562f6",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "f0cb6dd2-d07a-4c20-9d4e-300b0295c408": "2026-11-17T15:49:28Z",
+            "f8dfc112-9dd0-4fa5-9e35-a738175369fd": "2026-11-17T15:49:30Z"
+          },
+          "actual_models": {
+            "f0cb6dd2-d07a-4c20-9d4e-300b0295c408": "glm-5-2-260617",
+            "f8dfc112-9dd0-4fa5-9e35-a738175369fd": "glm-5-2-260617"
+          }
+        },
+        "intake": {
+          "request_id": "18393950937b550dedd9448b",
+          "remote_task_id": "528c1dc6-b17f-4e09-8f1a-d41f2315102b",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "d26066f2-b141-4d61-810f-5e375ae7ab4e": "2026-11-17T15:49:18Z",
+            "db61067c-c9ba-48fe-8f94-7b9c62748d9c": "2026-11-17T15:49:16Z"
+          },
+          "actual_models": {
+            "d26066f2-b141-4d61-810f-5e375ae7ab4e": "glm-5-2-260617",
+            "db61067c-c9ba-48fe-8f94-7b9c62748d9c": "glm-5-2-260617"
+          }
+        },
+        "report": {
+          "request_id": "3b0af92b96fb0ac9b8a9ea74",
+          "remote_task_id": "4b4e73a2-8a54-4f86-aa30-de319b4d5e24",
+          "status": "completed",
+          "reason": null,
+          "model_events": {
+            "401b8f91-f74f-4705-81cb-c6ed6de1baa2": "2026-11-17T15:50:29Z"
+          },
+          "actual_models": {
+            "401b8f91-f74f-4705-81cb-c6ed6de1baa2": "glm-5-2-260617"
+          }
+        }
+      },
+      "steps": {
+        "bureau": "done",
+        "financial": "done",
+        "industry": "done",
+        "intake": "done",
+        "judge": "done",
+        "related": "done",
+        "report": "done"
+      }
+    },
+    "egress": [
+      {
+        "at": 1794930558.917946,
+        "caller": "172.19.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "material-agent"
+      },
+      {
+        "at": 1794930567.14131,
+        "caller": "172.19.0.5",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "material-agent"
+      },
+      {
+        "at": 1794930570.8900661,
+        "caller": "172.19.0.3",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930570.9599748,
+        "caller": "172.19.0.3",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930571.80572,
+        "caller": "172.19.0.3",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930576.4201584,
+        "caller": "172.19.0.3",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930579.7208803,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930580.0715282,
+        "caller": "172.19.0.3",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930589.249923,
+        "caller": "172.19.0.3",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "analysis-agent"
+      },
+      {
+        "at": 1794930593.7084277,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930595.7695656,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930595.9390197,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930595.9649775,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930604.8987505,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930605.0465496,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930605.539071,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930622.8875391,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930628.8121543,
+        "caller": "172.19.0.9",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "orchestrator"
+      },
+      {
+        "at": 1794930639.4702215,
+        "caller": "172.19.0.2",
+        "method": "POST",
+        "path": "/chat/completions",
+        "model": "glm-5-2-260617",
+        "status": 200,
+        "service": "writer-agent"
+      }
+    ],
+    "checks": {
+      "completed": true,
+      "egress_requests": 19,
+      "all_egress_on_model_a": true,
+      "remote_events_record_model_a": true,
+      "binding_model_a": true
+    }
+  },
+  "finished_at": 1794930641.3135011,
+  "environment": {
+    "project": "agent-hub-m14",
+    "base": "http://127.0.0.1:5291",
+    "source_commit": "41a36755563ebeb442f2d93050c1d3430d510e80",
+    "images": {
+      "/agent-hub-m14-material-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14-analysis-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14-writer-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14-orchestrator-1": "sha256:ac312605b005b83fb9313bbaa3ba53d97a23bcf43fdad72e80cd8953618ff1ee",
+      "/agent-hub-m14-credit-1": "sha256:33e1d461ff021d0bad870bf386ae2a88cce3808e2efd0dda49837ad0baf1ac9f",
+      "/agent-hub-m14-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-m14-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-m14-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-m14-model-egress-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535"
+    },
+    "config_sha256": {
+      "compose.yaml": "3766502dc524aed036cb3c8956930814dd3beaa530e79c768ed8851ff729ff34",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  }
+}

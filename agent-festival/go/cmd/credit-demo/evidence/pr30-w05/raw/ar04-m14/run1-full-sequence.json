@@ -1,0 +1,228 @@
+{
+  "scenario": "ar04-m14",
+  "started_at": 1794930257.755136,
+  "phases": [
+    "m3",
+    "m1-local",
+    "m1-remote",
+    "m2"
+  ],
+  "models": {
+    "A": "glm-5-2-260617",
+    "B": "glm-4-flash"
+  },
+  "images": {
+    "M14_NEW_ORCH_IMAGE": "w05-m14/orchestrator:dev",
+    "M14_OLD_ORCH_IMAGE": "agent-hub-issue16/orchestrator:bus-v1",
+    "M14_NEW_AGENT_IMAGE": "w05-m14/professional:dev",
+    "M14_NEW_CREDIT_IMAGE": "w05-m14/credit:dev",
+    "M14_OLD_AGENT_IMAGE": "agent-hub-issue16/professional:bus-v1",
+    "M14_OLD_CREDIT_IMAGE": "agent-hub-issue16/credit:bus-v1"
+  },
+  "m3": {
+    "run": "R1",
+    "before_upgrade": {
+      "status": "running",
+      "final": null,
+      "leases": [
+        "2026-11-17T15:44:48Z 第 1 次领取（orchestrator-1）"
+      ],
+      "binding": null,
+      "calls": {
+        "intake": {
+          "request_id": "cc65f89a30432dcab358c343",
+          "remote_task_id": "aa762cbd-4a5e-4102-b570-814642003bff",
+          "status": "waiting",
+          "reason": "专业 Agent 执行中，查询原任务",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "after_upgrade": {
+      "status": "blocked",
+      "final": "规约版本不可解析，任务已停止：任务在版本绑定上线前采纳，没有可解析的规约绑定。不会改用当前规约继续，需人工处理。",
+      "leases": [
+        "2026-11-17T15:44:48Z 第 1 次领取（orchestrator-1）"
+      ],
+      "binding": null,
+      "calls": {
+        "intake": {
+          "request_id": "cc65f89a30432dcab358c343",
+          "remote_task_id": "aa762cbd-4a5e-4102-b570-814642003bff",
+          "status": "waiting",
+          "reason": "专业 Agent 执行中，查询原任务",
+          "model_events": {
+            "cac65faf-e11d-4f7e-b42b-bf57e4b08a18": "2026-11-17T15:44:49Z"
+          },
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress_after_upgrade": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_unresolvable_spec": true,
+      "no_new_lease_after_upgrade": true,
+      "no_model_request_after_upgrade": true,
+      "no_new_remote_call": true
+    }
+  },
+  "m1_local": {
+    "run": "R2",
+    "record": {
+      "status": "blocked",
+      "final": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，执行器 orchestrator-1 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+      "leases": [],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {},
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "pending",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_both_models": true,
+      "never_leased": true,
+      "no_remote_call": true,
+      "no_model_request": true
+    }
+  },
+  "m1_remote": {
+    "run": "R3",
+    "record": {
+      "status": "blocked",
+      "final": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，远端 credit-material 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+      "leases": [
+        "2026-11-17T15:45:42Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "intake": {
+          "request_id": "c149e1787e09cf69a90d0926",
+          "remote_task_id": "19ad42c2-4faf-4fd7-9ae0-c088b33f1201",
+          "status": "waiting",
+          "reason": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，远端 credit-material 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_both_models": true,
+      "no_model_event_recorded": true,
+      "no_runtime_model_request": true,
+      "no_request_for_model_b": true
+    }
+  },
+  "m2": {
+    "run": "R4",
+    "record": {
+      "status": "failed",
+      "final": "blueprint id=team-graph step id=intake failed: Remote task ended: TASK_STATE_FAILED",
+      "leases": [
+        "2026-11-17T15:45:59Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "intake": {
+          "request_id": "f713f17a3943bc4d234f63dd",
+          "remote_task_id": "96a9eab5-7502-49da-b0b6-c4f69de5fa57",
+          "status": "failed",
+          "reason": "Remote task ended: TASK_STATE_FAILED",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "failed",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "completed": false,
+      "egress_requests": 0,
+      "all_egress_on_model_a": false,
+      "remote_events_record_model_a": false,
+      "binding_model_a": true
+    }
+  },
+  "finished_at": 1794930362.0132957,
+  "environment": {
+    "project": "agent-hub-m14",
+    "base": "http://127.0.0.1:5291",
+    "source_commit": "41a36755563ebeb442f2d93050c1d3430d510e80",
+    "images": {
+      "/agent-hub-m14-material-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14-analysis-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14-writer-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14-orchestrator-1": "sha256:ac312605b005b83fb9313bbaa3ba53d97a23bcf43fdad72e80cd8953618ff1ee",
+      "/agent-hub-m14-credit-1": "sha256:33e1d461ff021d0bad870bf386ae2a88cce3808e2efd0dda49837ad0baf1ac9f",
+      "/agent-hub-m14-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-m14-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-m14-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-m14-model-egress-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535"
+    },
+    "config_sha256": {
+      "compose.yaml": "3766502dc524aed036cb3c8956930814dd3beaa530e79c768ed8851ff729ff34",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  }
+}

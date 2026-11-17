@@ -1,0 +1,45 @@
+# AR-04 M1-M3 experiment overlay (test only), applied after compose.yaml and
+# compose.bus.yaml under a separate project (COMPOSE_PROJECT_NAME=agent-hub-m14,
+# CREDIT_PORT=5291) so the D2 environment is untouched. Images and models are
+# chosen per phase through M14_* variables; executors reach the real model
+# endpoint only through the model-egress recorder.
+x-m14-agent: &m14-agent
+  image: ${M14_AGENT_IMAGE:?}
+services:
+  credit:
+    image: ${M14_CREDIT_IMAGE:?}
+    environment:
+      CREDIT_MODEL: ${M14_MODEL_CREDIT:?}
+  orchestrator:
+    image: ${M14_ORCH_IMAGE:?}
+    environment:
+      SWARM_MODEL_NAME: ${M14_MODEL_ORCHESTRATOR:?}
+      SWARM_API_BASE: http://model-egress:8098
+  material-agent:
+    <<: *m14-agent
+    environment:
+      SWARM_MODEL_NAME: ${M14_MODEL_RUNTIME:?}
+      SWARM_API_BASE: http://model-egress:8098
+  analysis-agent:
+    <<: *m14-agent
+    environment:
+      SWARM_MODEL_NAME: ${M14_MODEL_RUNTIME:?}
+      SWARM_API_BASE: http://model-egress:8098
+  writer-agent:
+    <<: *m14-agent
+    environment:
+      SWARM_MODEL_NAME: ${M14_MODEL_RUNTIME:?}
+      SWARM_API_BASE: http://model-egress:8098
+  model-egress:
+    image: python:3.11-slim
+    command: [python, /egress/model_egress.py]
+    volumes:
+      - ${W05_MODEL_EGRESS:?}:/egress/model_egress.py:ro
+    environment:
+      UPSTREAM: ${SWARM_API_BASE:?}
+    mem_limit: 96m
+    healthcheck:
+      test: [CMD, python, -c, "import socket; socket.create_connection(('127.0.0.1',8098),3).close()"]
+      interval: 5s
+      timeout: 4s
+      retries: 12

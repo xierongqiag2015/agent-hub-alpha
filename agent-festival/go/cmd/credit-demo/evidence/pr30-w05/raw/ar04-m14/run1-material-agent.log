@@ -1,0 +1,13 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.7)
+
+2026-11-17T15:45:51.806Z  INFO 1 --- [credit-material] [           main] c.o.d.p.ProfessionalAgentApplication     : Starting ProfessionalAgentApplication v0.1.0 using Java 21.0.13 with PID 1 (/app/agent.jar started by root in /app)
+2026-11-17T15:45:51.812Z  INFO 1 --- [credit-material] [           main] c.o.d.p.ProfessionalAgentApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-11-17T15:45:54.906Z  INFO 1 --- [credit-material] [           main] c.o.d.p.ProfessionalAgentApplication     : Started ProfessionalAgentApplication in 3.894 seconds (process running for 4.891)
