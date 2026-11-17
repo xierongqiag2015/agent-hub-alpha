@@ -1,0 +1,83 @@
+== 2026-11-17T20:22:43+08:00 fault overlay up (storage-failure-traced)
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-fault-proxy-1 Starting 
+ Container agent-hub-issue16-fault-proxy-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-fault-proxy-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-fault-proxy-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+== 2026-11-17T20:22:57+08:00 w05_rd_extra storage-failure-traced
+R10 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R10 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R10 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R10 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R10 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R10 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R10 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R10 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/storage-failure-traced-1794918178.json
+checks: {"real_atomic_rename_failure": true, "no_success_before_durable_commit": true, "dependents_blocked": true, "original_task_reconciled": true}
+== 2026-11-17T20:24:54+08:00 w05_rd_extra storage-failure-traced exit 0
+== 2026-11-17T20:24:54+08:00 logs exported:   25 total
+time="2026-11-17T20:24:54+08:00" level=warning msg="Found orphan containers ([agent-hub-issue16-fault-proxy-1]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up."
+ Container agent-hub-issue16-material-agent-1 Running 
+ Container agent-hub-issue16-credit-1 Running 
+ Container agent-hub-issue16-writer-agent-1 Running 
+ Container agent-hub-issue16-analysis-agent-1 Running 
+ Container agent-hub-issue16-bus-db-1 Running 
+ Container agent-hub-issue16-rdc-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreate 
+ Container agent-hub-issue16-gateway-1 Running 
+ Container agent-hub-issue16-orchestrator-1 Recreated 
+ Container agent-hub-issue16-swarm-1 Running 
+ Container agent-hub-issue16-front-1 Running 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Starting 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Started 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Waiting 
+ Container agent-hub-issue16-analysis-agent-1 Waiting 
+ Container agent-hub-issue16-credit-1 Waiting 
+ Container agent-hub-issue16-front-1 Waiting 
+ Container agent-hub-issue16-orchestrator-1 Waiting 
+ Container agent-hub-issue16-writer-agent-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Waiting 
+ Container agent-hub-issue16-bus-db-1 Waiting 
+ Container agent-hub-issue16-rdc-1 Waiting 
+ Container agent-hub-issue16-gateway-1 Waiting 
+ Container agent-hub-issue16-swarm-1 Healthy 
+ Container agent-hub-issue16-rdc-1 Healthy 
+ Container agent-hub-issue16-analysis-agent-1 Healthy 
+ Container agent-hub-issue16-front-1 Healthy 
+ Container agent-hub-issue16-bus-db-1 Healthy 
+ Container agent-hub-issue16-material-agent-1 Healthy 
+ Container agent-hub-issue16-gateway-1 Healthy 
+ Container agent-hub-issue16-orchestrator-1 Healthy 
+ Container agent-hub-issue16-writer-agent-1 Healthy 
+ Container agent-hub-issue16-credit-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-17T20:25:05+08:00 restore exit 0
+agent-hub-issue16-fault-proxy-1
+== 2026-11-17T20:25:06+08:00 storage-failure-traced done

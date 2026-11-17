@@ -1,0 +1,38 @@
+  -17.43s  healthz -> 200 'ok'
+  -17.43s  docker exec    fault-proxy  ok=True (0.16s)
+  -16.87s  docker exec    fault-proxy  ok=True (0.18s)
+  -16.19s  docker exec    fault-proxy  ok=True (0.34s)
+  -15.35s  docker exec    fault-proxy  ok=True (0.24s)
+  -14.62s  docker exec    fault-proxy  ok=True (0.25s)
+  -13.87s  docker exec    fault-proxy  ok=True (0.18s)
+  -13.19s  docker exec    fault-proxy  ok=True (0.28s)
+  -12.41s  docker exec    fault-proxy  ok=True (0.17s)
+  -11.74s  docker exec    fault-proxy  ok=True (0.17s)
+  -11.07s  docker exec    fault-proxy  ok=True (0.24s)
+  -10.32s  docker exec    fault-proxy  ok=True (0.18s)
+   -9.64s  docker exec    fault-proxy  ok=True (0.17s)
+   -8.97s  docker exec    fault-proxy  ok=True (0.18s)
+   -8.29s  docker exec    fault-proxy  ok=True (0.16s)
+   -7.63s  docker exec    fault-proxy  ok=True (0.20s)
+   -6.93s  docker exec    fault-proxy  ok=True (0.27s)
+   -6.16s  docker exec    fault-proxy  ok=True (0.22s)
+   -5.45s  docker exec    fault-proxy  ok=True (0.31s)
+   -4.64s  docker exec    fault-proxy  ok=True (0.31s)
+   -3.83s  docker exec    fault-proxy  ok=True (0.28s)
+   -3.05s  docker exec    fault-proxy  ok=True (0.24s)
+   -2.31s  docker exec    fault-proxy  ok=True (0.23s)
+   -1.58s  docker exec    fault-proxy  ok=True (0.18s)
+   -0.90s  docker exec    fault-proxy  ok=True (0.20s)
+   -0.20s  docker exec    fault-proxy  ok=True (0.19s)
+   +0.00s  docker exec    credit       ok=True (0.21s)
+   +0.21s  docker exec    fault-proxy  ok=True (0.20s)
+   +0.51s  healthz -> 503 'durable state unavailable; restore storage and restart\n'
+   +0.92s  docker exec    credit       ok=True (0.23s)
+   +1.15s  docker restart credit       ok=True (0.74s)
+   +1.27s  healthz -> None 'ConnectionResetError'
+   +1.90s  docker restart orchestrator ok=True (0.84s)
+   +2.73s  docker exec    fault-proxy  ok=True (0.25s)
+   +2.81s  healthz -> 200 'ok'
+healthz sample counts: {'200': 0, '503': 0, 'None': 0}
+checks: {'real_atomic_rename_failure': True, 'no_success_before_durable_commit': True, 'dependents_blocked': True, 'original_task_reconciled': True}
+run R10 done

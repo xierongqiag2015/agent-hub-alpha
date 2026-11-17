@@ -41,8 +41,19 @@
 | gateway | agent-hub-issue16/gateway:bf702bc | `cac5d07658ae` |
 | bus-db | postgres:15-alpine（lock 中的 digest） | `09e4f20b14dd` |
 | 基础镜像 | python:3.11-slim | `sha256:07d4824036af…`（构建当日拉取；compose 未固定该 digest，两边可能不同） |
+| 基础镜像 | node:22-slim | `sha256:e9f565d32859f0cbfb52125eafe8be39390f24dac302dc3cdf566e8ba3ab21ee`（构建日志中 BuildKit 解析的 digest；只在构建阶段使用，未留在本地镜像库） |
+| front | nginx:alpine（compose 浮动标签） | `sha256:fed7e14be83cbd2661a75cdc5b872d936cf155d46c327084d30b8df19ae88d72` |
 
 - 镜像都在本地构建，没有仓库 digest；构建清单见 `raw/build-all.json`。
+- 挂载进 WorkSwarm 的插件文件（sha256 前 16 位）：
+  - `frontend/dist/app.js` `df366b46d0c5a512`
+  - `extension.py` `d3b9a19256be3e00`
+  - `extension.yaml` `4e2543f79d48343d`
+  - `web/graph-flow.js` `d93821a712a1b3f2`
+
+  前三项与 W02 回填一致。
+- 执行人：xierongqiag2015（W05），脚本执行；脚本见 `scripts/` 与 `deploy/smoke_bus.py`。
+- 日志中的本机用户路径已替换为 `<home>`。
 - 配置文件摘要（sha256 前 16 位）：
   - compose.yaml `3766502dc524aed0`
   - compose.bus.yaml `9be9ee4c3ddf6ed4`
@@ -65,6 +76,30 @@
 | probe_bus --rdc-outage | — | 协议准入与 RDC 不可用 | 12 项通过：三张卡与实例、未授权 401、未知 task、非法请求 400、未知能力 503、Runtime 拒绝越权范围、未注册 Agent 与伪造地址被拒、缺权限预检不过、RDC 不可用时目录标为不可用 |
 
 原始记录：`raw/<场景>-<时间戳>.json`（含逐 0.5 秒的图快照与运行记录，已按脚本规则脱敏），控制台输出见 `raw/smoke-console.log`。
+
+**关于 `checks`**：
+- 各文件的 `checks` 是脚本在断言通过后写入的结论，核对时请以快照、`gateway_exchanges`、`transport_events` 等原始记录为准。
+- disconnect、late 中 `no_completed_node_model_increment=false` 不是失败：这两个场景在恢复前没有已完成节点（intake 是第一个节点、处于 unknown），这一项不适用。已完成节点的调用增量见 host-kill 与 go-kill。
+
+**storage-failure 的原始时间线**（2026-11-17 20:23 补跑，R10，`raw/storage-failure-traced-*`）：
+- 原 storage-failure 记录里"健康检查 503"和注入、恢复时刻只体现在脚本断言中。
+- 补跑时用 `scripts/w05_rd_extra.py storage-failure-traced` 原样调用 smoke_bus.py 的 storage-failure，同时记录：
+  - 每条注入/恢复命令的时间戳；
+  - 每 0.25 秒一次的 `/healthz` 状态码与响应。
+
+| 相对注入 | 事件 |
+|---|---|
+| +0.00s | 注入：credit 容器内把 `state.json` 改名为备份并以目录占位（原子 rename 真实失败的前提） |
+| +0.21s | 放行已完成的远端结果（故障代理） |
+| +0.51s | `/healthz` → 503 `durable state unavailable; restore storage and restart` |
+| +0.92s | 恢复存储（删除占位目录、改回原文件） |
+| +1.15s | 重启 credit（期间 healthz 连接被重置） |
+| +1.90s | 重启编排器 |
+| +2.81s | `/healthz` → 200 |
+
+R10 最终完成，intake 未重算（四项检查同原场景）。完整序列见 `raw/storage-failure-traced-timeline.txt`，编排器与 credit 日志在恢复前导出。
+
+注意：该文件的 `healthz_summary` 字段因脚本比较类型错误全为 0，已在脚本中修正；逐条的 `healthz_samples` 是正确的原始记录。
 
 **边界**：Gateway 与 Runtime 重启后，上游任务的归属不在其内存中保留，原任务只能停在 unknown，需要人工核对。这次验证的是不重发、下游不启动，**不是**自动无损续跑。
 
@@ -107,7 +142,7 @@
 |---|---|---|
 | R-A | host-kill：已有完成节点、后续节点在途时，杀执行器后恢复，完成节点调用增量为 0，在途节点沿用原请求 | 从 WorkSwarm 插件触发恢复（W02 操作）；后续节点为 unknown（而非在途）的组合 |
 | R-B | 未覆盖 | 恢复已落盘、回复被丢弃 / 浏览器断链（双方） |
-| R-C | storage-failure：Go 侧真实写失败，不伪成功、下游不启动、恢复后对账 | 经插件路径恢复时注入保存失败，并把日志关联到该命令 |
+| R-C | storage-failure：Go 侧真实写失败，不伪成功、下游不启动、恢复后对账；storage-failure-traced 补了 healthz 503 与注入/恢复时间戳 | 经插件路径恢复时注入保存失败，并把日志关联到该命令 |
 | R-D | host-kill（执行器）、gateway-restart、runtime-restart、go-kill（执行中停 Go）、two-clients（两个客户端同时恢复，只有一个生效） | go-kill 发现在途远端节点因依赖 Go 成员工具而在远端失败，需确定处置边界；两个客户端的插件路径操作由 W02 补 |
 | M-A | 未执行 | 任务绑定 A、执行端改为 B：需要先按 PR #31 补执行端绑定，另行回填 |
 | U-B | 不适用 | 依赖 #31 进入组合候选 |

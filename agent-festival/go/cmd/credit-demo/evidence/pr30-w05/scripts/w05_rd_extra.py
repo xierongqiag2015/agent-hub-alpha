@@ -9,6 +9,9 @@ at the transport by its JSON-RPC id (= request_id).
   two-clients  Put a run into waiting (one lost GetTask reply), then resume
                it from two clients at the same instant: the plugin API
                (/api/resume) and a signed-in confirm-page session.
+  storage-failure-traced
+               smoke_bus.py storage-failure unchanged, with timestamps of every
+               injection/restore command and /healthz sampled every 0.25 s.
 
 The script records what happened and evaluates checks; it does not stop at
 the first unexpected result, so a deviation is kept as evidence. Evidence
@@ -185,9 +188,63 @@ def two_clients(evidence):
     }
 
 
+def storage_failure_traced(evidence):
+    """smoke_bus.py storage-failure unchanged, plus a raw timeline: every docker
+    command it issues (injection, release, restore, restarts) with timestamps,
+    and /healthz polled every 0.25 s with status and body."""
+    timeline, health = [], []
+    original = sb.docker
+
+    def traced(service, *args):
+        started = time.time()
+        try:
+            out = original(service, *args)
+            timeline.append({"at": started, "done": time.time(), "service": service, "command": list(args)[:2], "ok": True})
+            return out
+        except Exception as exc:
+            timeline.append({"at": started, "done": time.time(), "service": service, "command": list(args)[:2], "ok": False, "error": str(exc)[:200]})
+            raise
+
+    stop = threading.Event()
+
+    def poll():
+        while not stop.is_set():
+            at = time.time()
+            try:
+                with urllib.request.urlopen(sb.BASE + "/healthz", timeout=2) as resp:
+                    health.append({"at": at, "http": resp.status, "body": resp.read().decode()[:120]})
+            except urllib.error.HTTPError as exc:
+                health.append({"at": at, "http": exc.code, "body": exc.read().decode()[:120]})
+            except Exception as exc:
+                health.append({"at": at, "http": None, "error": type(exc).__name__})
+            stop.wait(0.25)
+
+    sb.docker = traced
+    poller = threading.Thread(target=poll, daemon=True)
+    poller.start()
+    try:
+        sb.storage_failure(evidence)
+    finally:
+        stop.set()
+        poller.join(5)
+        sb.docker = original
+        evidence["docker_timeline"] = timeline
+        # keep every status change plus one sample per second to bound the size
+        kept, last, last_kept = [], None, 0.0
+        for h in health:
+            if h.get("http") != last or h["at"] - last_kept >= 1.0:
+                kept.append(h)
+                last, last_kept = h.get("http"), h["at"]
+        evidence["healthz_samples"] = kept
+        counts = {}
+        for h in health:
+            counts[str(h.get("http"))] = counts.get(str(h.get("http")), 0) + 1
+        evidence["healthz_summary"] = counts
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("scenario", choices=["go-kill", "two-clients"])
+    parser.add_argument("scenario", choices=["go-kill", "two-clients", "storage-failure-traced"])
     args = parser.parse_args()
     evidence = {"scenario": args.scenario, "started_at": time.time(), "script": "evidence/pr30-w05/scripts/w05_rd_extra.py",
                 "scope": "W05 single-side R-D extras on synthetic credit data", "snapshots": [], "environment": sb.environment_record()}
@@ -195,7 +252,7 @@ def main():
     directory.mkdir(parents=True, exist_ok=True)
     target = directory / f"{args.scenario}-{int(time.time())}.json"
     try:
-        {"go-kill": go_kill, "two-clients": two_clients}[args.scenario](evidence)
+        {"go-kill": go_kill, "two-clients": two_clients, "storage-failure-traced": storage_failure_traced}[args.scenario](evidence)
     finally:
         evidence["finished_at"] = time.time()
         target.write_text(json.dumps(sb.redact(evidence), ensure_ascii=False, indent=2) + "\n")
