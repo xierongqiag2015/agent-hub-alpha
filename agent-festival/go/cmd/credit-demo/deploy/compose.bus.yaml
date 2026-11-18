@@ -120,6 +120,7 @@ services:
     environment:
       <<: *agent-env
       AGENT_SERVICE_ID: credit-material
+      AGENT_INSTANCE_ID: material-1
       AGENT_ROLE: 资料整理与证据提取
       AGENT_PUBLIC_URL: http://material-agent:8090
   analysis-agent:
@@ -127,6 +128,7 @@ services:
     environment:
       <<: *agent-env
       AGENT_SERVICE_ID: credit-analysis
+      AGENT_INSTANCE_ID: analysis-1
       AGENT_ROLE: 独立分析与依据说明
       AGENT_PUBLIC_URL: http://analysis-agent:8090
   writer-agent:
@@ -134,6 +136,7 @@ services:
     environment:
       <<: *agent-env
       AGENT_SERVICE_ID: credit-writer
+      AGENT_INSTANCE_ID: writer-1
       AGENT_ROLE: 根据上游证据撰写报告
       AGENT_PUBLIC_URL: http://writer-agent:8090
 volumes:

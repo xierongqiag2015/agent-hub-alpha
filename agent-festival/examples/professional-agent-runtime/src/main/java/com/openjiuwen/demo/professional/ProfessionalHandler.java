@@ -27,7 +27,7 @@ final class ProfessionalHandler implements AgentHandler {
     private final HttpClient http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build();
     ProfessionalHandler(Map<String,String> env) {
         this.env = env;
-        for (String k : List.of("AGENT_SERVICE_ID","CREDIT_URL","SWARM_API_KEY","SWARM_API_BASE","SWARM_MODEL_NAME")) {
+        for (String k : List.of("AGENT_SERVICE_ID","AGENT_INSTANCE_ID","CREDIT_URL","SWARM_API_KEY","SWARM_API_BASE","SWARM_MODEL_NAME")) {
             if (env.getOrDefault(k, "").isBlank()) throw new IllegalStateException("Required configuration missing: " + k);
         }
     }
@@ -53,6 +53,7 @@ final class ProfessionalHandler implements AgentHandler {
                 auth.put(k,envelope.path(k).asText());
             }
             auth.put("service_id",env.get("AGENT_SERVICE_ID"));
+            auth.put("instance_id",env.get("AGENT_INSTANCE_ID")); // as registered in RDC; checked against discovery
             auth.put("context_id",conversation);
             auth.put("service_version",env.getOrDefault("OPENJIUWEN_SERVICE_VERSION","1.0.0"));
             JsonNode approved = post("/agent/context",auth);

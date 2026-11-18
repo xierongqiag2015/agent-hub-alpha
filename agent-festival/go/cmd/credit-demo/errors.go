@@ -23,6 +23,8 @@ func errorCode(err error) (int, string) {
 		return http.StatusConflict, "INPUT_CONFLICT" // same identity, different input or binding: never resend
 	case errors.Is(err, errModelBinding):
 		return http.StatusConflict, "MODEL_BINDING_MISMATCH" // run blocked before the model call
+	case errors.Is(err, errInstance):
+		return http.StatusConflict, "INSTANCE_NOT_ELIGIBLE" // the serving runtime is not a discovered eligible instance
 	case errors.Is(err, errJudgmentRejected):
 		return http.StatusUnprocessableEntity, "POLICY_REJECTED" // content rejected: a revised judgment may be submitted
 	default:

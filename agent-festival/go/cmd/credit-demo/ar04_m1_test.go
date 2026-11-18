@@ -79,7 +79,7 @@ func m1RemoteCall(t *testing.T, s *Service, e *ar04Env) (*Run, *Job, *RemoteCall
 
 func agentCmd(r *Run, c *RemoteCall) CallCommand {
 	return CallCommand{RunID: r.ID, Step: "intake", Token: c.CapabilityToken, ServiceID: c.Binding.AgentID,
-		ContextID: c.ContextID, ServiceVersion: c.Binding.Version}
+		ContextID: c.ContextID, ServiceVersion: c.Binding.Version, InstanceID: "fixture-1"}
 }
 
 func TestAR04M1_RemoteRuntimeOnOtherModelIsStoppedBeforeTheCall(t *testing.T) {

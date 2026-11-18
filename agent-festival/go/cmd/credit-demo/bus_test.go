@@ -162,7 +162,7 @@ func TestBusPersistenceReloadReusesArtifactWithoutModelIncrement(t *testing.T) {
 	s, in, _ := busFixture(t)
 	c := beginFixture(t, s, in)
 	// the runtime reports the model it is about to call (AR-04 M1); the fixture runs on its bound model
-	auth := CallCommand{RunID: in.RunID, Step: in.Step, Token: c.CapabilityToken, ServiceID: c.Binding.AgentID, ServiceVersion: c.Binding.Version, ContextID: c.ContextID, EventID: "model-1", Model: "fixture-model"}
+	auth := CallCommand{RunID: in.RunID, Step: in.Step, Token: c.CapabilityToken, ServiceID: c.Binding.AgentID, ServiceVersion: c.Binding.Version, ContextID: c.ContextID, EventID: "model-1", Model: "fixture-model", InstanceID: "fixture-1"}
 	if _, err := s.AgentContext(auth); err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +241,7 @@ func TestBusEventsDoNotRegressOrReplaceTaskOwner(t *testing.T) {
 func TestBusScopedCredentialCannotCrossNodeOrAcquireControl(t *testing.T) {
 	s, in, _ := busFixture(t)
 	c := beginFixture(t, s, in)
-	auth := CallCommand{RunID: in.RunID, Step: "other", Token: c.CapabilityToken, ServiceID: c.Binding.AgentID}
+	auth := CallCommand{RunID: in.RunID, Step: "other", Token: c.CapabilityToken, ServiceID: c.Binding.AgentID, InstanceID: "fixture-1"}
 	if _, err := s.AgentContext(auth); !errors.Is(err, errFenced) {
 		t.Fatal("credential crossed node boundary")
 	}

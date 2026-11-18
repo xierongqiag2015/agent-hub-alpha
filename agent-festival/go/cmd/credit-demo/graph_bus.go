@@ -61,6 +61,9 @@ func remoteView(step *StepRec) map[string]any {
 	if c.Discovery != nil {
 		view["discovery"] = c.Discovery
 	}
+	if c.ExecutedBy != nil {
+		view["executed_by"] = c.ExecutedBy
+	}
 	if gateway := gatewayView(c); gateway != nil {
 		view["gateway"] = gateway
 	}

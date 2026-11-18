@@ -55,6 +55,7 @@ type RemoteCall struct {
 	ArtifactDigest   string                     `json:"artifact_digest,omitempty"`
 	ModelEvents      map[string]string          `json:"model_events"`
 	ActualModels     map[string]string          `json:"actual_models,omitempty"` // model event id -> model the runtime reported
+	ExecutedBy       *ExecutedBy                `json:"executed_by,omitempty"`   // the instance that actually executes the call
 	Discovery        *DiscoverySnapshot         `json:"discovery,omitempty"`
 	GatewayExchanges map[string]GatewayExchange `json:"gateway_exchanges,omitempty"`
 	// This scoped credential is persisted privately and never projected to UI.
@@ -80,7 +81,37 @@ type CallCommand struct {
 	ServiceVersion  string           `json:"service_version,omitempty"`
 	EventID         string           `json:"event_id,omitempty"`
 	Gateway         *GatewayExchange `json:"gateway,omitempty"`
-	Model           string           `json:"model,omitempty"` // the model the remote runtime is about to call
+	Model           string           `json:"model,omitempty"`       // the model the remote runtime is about to call
+	InstanceID      string           `json:"instance_id,omitempty"` // the runtime instance serving the call, as registered in RDC
+}
+
+// ExecutedBy is the runtime instance that actually took the call: reported by
+// the runtime and accepted only if discovery listed it as an eligible instance.
+type ExecutedBy struct {
+	InstanceID     string `json:"instance_id"`
+	ServiceVersion string `json:"service_version"`
+	At             string `json:"at"`
+}
+
+// errInstance: the runtime serving a call is not an eligible instance of the
+// call's discovery snapshot, or did not say which instance it is.
+var errInstance = errors.New("INSTANCE_NOT_ELIGIBLE")
+
+// eligibleInstance checks a reported instance against the call's discovery
+// snapshot. Must hold s.mu.
+func eligibleInstance(c *RemoteCall, id string) error {
+	if id == "" {
+		return fmt.Errorf("%w: the runtime did not report its instance", errInstance)
+	}
+	if c.Discovery == nil {
+		return fmt.Errorf("%w: no discovery snapshot for this call", errInstance)
+	}
+	for _, cand := range c.Discovery.Candidates {
+		if cand.InstanceID == id && cand.Eligible {
+			return nil
+		}
+	}
+	return fmt.Errorf("%w: instance %q is not an eligible instance discovered for this call", errInstance, id)
 }
 
 var errCallConflict = errors.New("node input, contract or result conflict")
@@ -425,7 +456,11 @@ func (s *Service) AgentContext(in CallCommand) (map[string]any, error) {
 	if c.AgentStartedAt != "" {
 		return nil, fmt.Errorf("remote execution already started; query original task")
 	}
+	if err := eligibleInstance(c, in.InstanceID); err != nil {
+		return nil, err // refused before the call starts; an eligible instance can still take it
+	}
 	c.AgentStartedAt = now()
+	c.ExecutedBy = &ExecutedBy{InstanceID: in.InstanceID, ServiceVersion: in.ServiceVersion, At: c.AgentStartedAt}
 	if err := s.save(); err != nil {
 		return nil, err
 	}
@@ -445,6 +480,9 @@ func (s *Service) ModelCall(in CallCommand) error {
 	}
 	if in.EventID == "" || len(in.EventID) > 150 {
 		return fmt.Errorf("model event id required")
+	}
+	if eb := st.Call.ExecutedBy; eb != nil && in.InstanceID != eb.InstanceID {
+		return fmt.Errorf("%w: model call reported by instance %q, the call is executed by %q", errInstance, in.InstanceID, eb.InstanceID)
 	}
 	if bound := s.runModel(r); in.Model != bound {
 		reason := modelMismatch(bound, "远端 "+in.ServiceID, in.Model)
