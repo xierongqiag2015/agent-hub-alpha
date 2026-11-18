@@ -69,13 +69,24 @@ def callers():
 
 
 def egress_since(t0):
+    """request_started events (recorded before forwarding) since t0, with the
+    calling service; finished/error events are joined by request_id."""
     names = callers()
-    return [{**e, "service": names.get(e["caller"], e["caller"])} for e in egress_lines() if e["at"] >= t0]
+    lines = egress_lines()
+    done = {e["request_id"]: e for e in lines if e.get("event") in ("response_finished", "error")}
+    out = []
+    for e in lines:
+        if e.get("event") == "request_started" and e["at"] >= t0:
+            end = done.get(e["request_id"], {})
+            out.append({**e, "service": names.get(e["caller"], e["caller"]), "status": end.get("status"),
+                        "finished": end.get("event"), "duration": end.get("duration")})
+    return out
 
 
 def run_record(run_id):
     run = sb.read_run(run_id)
     return {"status": run["status"], "final": run.get("final_output"), "leases": run.get("leases", []),
+            "lease_refusals": run.get("lease_refusals", []),
             "binding": run.get("exec_binding"),
             "calls": {k: {f: c.get(f) for f in ("request_id", "remote_task_id", "status", "reason", "model_events", "actual_models")}
                       for k, s in run["steps"].items() if (c := s.get("remote_call"))},
@@ -90,6 +101,28 @@ def wait_status(run_id, wanted, timeout):
             return status
         time.sleep(1)
     return sb.read_run(run_id)["status"]
+
+
+def capture_failure(run_id, t0, rec):
+    """Logs and the remote task's own status, taken before any container changes."""
+    since = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(t0 - 5))
+    logs = {}
+    for svc in ("material-agent", "analysis-agent", "writer-agent", "gateway", "orchestrator"):
+        out = subprocess.run(["docker", "logs", "--since", since, f"{PROJECT}-{svc}-1"], capture_output=True, text=True)
+        logs[svc] = (out.stdout + out.stderr).splitlines()[-200:]
+    tasks = {}
+    for step, c in rec["calls"].items():
+        if c.get("remote_task_id"):
+            script = ("import json,os,urllib.request;"
+                      "b=json.dumps({'jsonrpc':'2.0','id':'diag','method':'GetTask','params':{'id':os.environ['T']}}).encode();"
+                      "r=urllib.request.Request(os.environ['CREDIT_BUS_GATEWAY'].rstrip('/')+'/a2a',data=b,"
+                      "headers={'Content-Type':'application/json','Authorization':'Bearer '+os.environ['CREDIT_BUS_TOKEN']});"
+                      "t=json.load(urllib.request.urlopen(r,timeout=10));t=t.get('result',t);t=t.get('task',t);"
+                      "print(json.dumps({'state':t.get('status',{}).get('state'),'message':json.dumps(t.get('status',{}).get('message'))[:800]}))")
+            out = subprocess.run(["docker", "exec", "-e", f"T={c['remote_task_id']}", f"{PROJECT}-orchestrator-1", "python", "-c", script],
+                                 capture_output=True, text=True)
+            tasks[step] = (out.stdout or out.stderr).strip()[:1200]
+    return {"logs": logs, "remote_tasks": tasks}
 
 
 def phase_m3(ev):
@@ -125,17 +158,23 @@ def phase_m1_local(ev):
     up("orchestrator")
     t0 = time.time()
     run_id, _ = sb.new_run("m14-m1-local")
-    status = wait_status(run_id, {"blocked", "done", "failed"}, 120)
+    deadline = time.monotonic() + 90  # the model-B orchestrator polls; each poll is refused
+    while time.monotonic() < deadline and not run_record(run_id)["lease_refusals"]:
+        time.sleep(1)
+    time.sleep(10)
     rec = run_record(run_id)
     egress = egress_since(t0)
+    refusal = (rec["lease_refusals"] or [{}])[0]
     ev["m1_local"] = {"run": run_id, "record": rec, "egress": egress,
-                      "checks": {"blocked": status == "blocked", "reason_names_both_models": A in (rec["final"] or "") and B in (rec["final"] or ""),
-                                 "never_leased": not rec["leases"], "no_remote_call": not rec["calls"], "no_model_request": not egress}}
+                      "checks": {"still_queued_for_a_matching_executor": rec["status"] == "queued",
+                                 "refusal_names_both_models": refusal.get("model") == B and refusal.get("bound") == A,
+                                 "refused_polls": refusal.get("count"),
+                                 "never_leased": not rec["leases"], "no_remote_call": not rec["calls"], "no_model_request_started": not egress}}
 
 
 def phase_m1_remote(ev):
     configure("new", A, A, B)
-    up("orchestrator", "material-agent", "analysis-agent", "writer-agent")
+    up(*CORE, "orchestrator")  # unchanged services stay as they are; a fresh project needs them all
     demo.wait_bus()
     t0 = time.time()
     run_id, _ = sb.new_run("m14-m1-remote")
@@ -144,6 +183,7 @@ def phase_m1_remote(ev):
     rec = run_record(run_id)
     egress = egress_since(t0)
     runtime_requests = [e for e in egress if e["service"] in ("material-agent", "analysis-agent", "writer-agent")]
+    ev.setdefault("m1_remote_after_block", {})["note"] = "a blocked run refuses every node credential (P1); see the Go review tests"
     intake = rec["calls"].get("intake", {})
     ev["m1_remote"] = {"run": run_id, "record": rec, "egress": egress,
                        "checks": {"blocked": status == "blocked", "reason_names_both_models": A in (rec["final"] or "") and B in (rec["final"] or ""),
@@ -152,14 +192,32 @@ def phase_m1_remote(ev):
                                   "no_request_for_model_b": not [e for e in egress if e["model"] == B]}}
 
 
+RUNTIMES = ("material-agent", "analysis-agent", "writer-agent")
+
+
+def runtime_ips():
+    """Each runtime container's address on the project network ("" if not running)."""
+    return {s: subprocess.run(["docker", "inspect", "--format", "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}", f"{PROJECT}-{s}-1"],
+                              capture_output=True, text=True).stdout.strip() for s in RUNTIMES}
+
+
 def phase_m2(ev):
+    ips_before = runtime_ips()
     configure("new", A, A, A)
     up(*CORE, "orchestrator")
     demo.wait_bus()
+    settle = int(os.environ.get("M14_SETTLE", "0"))
+    time.sleep(settle)
     t0 = time.time()
+    ev["m2_ready"] = {"at": time.time(), "settle_seconds": settle, "ips_before_recreate": ips_before, "ips_after_recreate": runtime_ips(),
+                      "runtimes": {s: subprocess.run(["docker", "inspect", "--format", "{{.State.Health.Status}} {{.State.StartedAt}}", f"{PROJECT}-{s}-1"],
+                                                                  capture_output=True, text=True).stdout.strip()
+                                                   for s in ("material-agent", "analysis-agent", "writer-agent")}}
     run_id, _ = sb.new_run("m14-m2")
     status = wait_status(run_id, {"blocked", "done", "failed", "waiting"}, 600)
     rec = run_record(run_id)
+    if status != "done":
+        ev["m2_failure"] = capture_failure(run_id, t0, rec)
     egress = egress_since(t0)
     actual = [m for c in rec["calls"].values() for m in (c.get("actual_models") or {}).values()]
     ev["m2"] = {"run": run_id, "record": rec, "egress": egress,

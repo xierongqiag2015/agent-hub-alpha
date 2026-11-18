@@ -1,0 +1,25 @@
+05:05:44.313 INFO  c.o.demo.credit.Main - credit orchestrator on :8195, record at http://credit:8091
+05:05:45.049 INFO  c.o.d.credit.Worker - run R2 leased (epoch 1)
+05:05:45.455 ERROR c.o.d.credit.Worker - run R2 failed
+com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=intake failed: Remote outcome unresolved; original task retained
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)
+	at com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:70)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+05:05:50.498 INFO  c.o.d.credit.Worker - run R3 leased (epoch 1)
+05:05:51.656 WARN  c.o.d.credit.Worker - run R3: fenced, stopping
+05:06:09.708 INFO  c.o.d.credit.Worker - run R4 leased (epoch 1)
+05:06:11.062 ERROR c.o.d.credit.Worker - run R4 failed
+com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=intake failed: Remote task ended: TASK_STATE_FAILED
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)
+	at com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:70)
+	at java.base/java.lang.Thread.run(Thread.java:1583)

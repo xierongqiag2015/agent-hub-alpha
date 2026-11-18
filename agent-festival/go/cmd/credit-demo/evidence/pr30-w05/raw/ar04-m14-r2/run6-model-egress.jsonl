@@ -1,0 +1,38 @@
+{"event": "request_started", "request_id": "e0051b18a970426d99747ab06503cfad", "at": 1794979571.7651267, "caller": "172.25.0.2", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 1}
+{"event": "response_finished", "request_id": "e0051b18a970426d99747ab06503cfad", "at": 1794979573.4720542, "status": 200, "error": null, "duration": 1.707}
+{"event": "request_started", "request_id": "938228c48ca64b78a2a23a3bb547a250", "at": 1794979573.5586863, "caller": "172.25.0.2", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 1}
+{"event": "response_finished", "request_id": "938228c48ca64b78a2a23a3bb547a250", "at": 1794979583.7283838, "status": 200, "error": null, "duration": 10.17}
+{"event": "request_started", "request_id": "b50e93274c064ac88cf8d90050cbe4ae", "at": 1794979585.1226625, "caller": "172.25.0.5", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 1}
+{"event": "request_started", "request_id": "afa33f907c5c4ef0990ed4743d976238", "at": 1794979585.123469, "caller": "172.25.0.5", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 2}
+{"event": "request_started", "request_id": "63245801c50d451fb3b1d9088e92579c", "at": 1794979585.1240907, "caller": "172.25.0.5", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "response_finished", "request_id": "63245801c50d451fb3b1d9088e92579c", "at": 1794979586.840295, "status": 200, "error": null, "duration": 1.716}
+{"event": "request_started", "request_id": "e1a1948fa40a4bd0b9b1f94caa492a65", "at": 1794979586.97372, "caller": "172.25.0.5", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "response_finished", "request_id": "afa33f907c5c4ef0990ed4743d976238", "at": 1794979587.1747127, "status": 200, "error": null, "duration": 2.051}
+{"event": "request_started", "request_id": "dd14a66ef5d940ee9871c4043505fd2c", "at": 1794979587.2057605, "caller": "172.25.0.5", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "response_finished", "request_id": "b50e93274c064ac88cf8d90050cbe4ae", "at": 1794979592.6383498, "status": 200, "error": null, "duration": 7.516}
+{"event": "request_started", "request_id": "c59d80bdc84f49459732e8db7644941e", "at": 1794979592.6702855, "caller": "172.25.0.5", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "response_finished", "request_id": "e1a1948fa40a4bd0b9b1f94caa492a65", "at": 1794979592.6882854, "status": 200, "error": null, "duration": 5.715}
+{"event": "request_started", "request_id": "2ae16bae512947b2b9ada39984c385cb", "at": 1794979593.9867005, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "response_finished", "request_id": "2ae16bae512947b2b9ada39984c385cb", "at": 1794979596.200043, "status": 200, "error": null, "duration": 2.213}
+{"event": "request_started", "request_id": "87470d5334094fc19420782807e283b6", "at": 1794979596.2730205, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "response_finished", "request_id": "dd14a66ef5d940ee9871c4043505fd2c", "at": 1794979596.7217, "status": 200, "error": null, "duration": 9.516}
+{"event": "response_finished", "request_id": "87470d5334094fc19420782807e283b6", "at": 1794979604.705364, "status": 200, "error": null, "duration": 8.432}
+{"event": "request_started", "request_id": "92086f02e10743bcb50d272d068756b8", "at": 1794979604.7562406, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 2}
+{"event": "request_started", "request_id": "5dfeaa359b6d4afe89052239f4d80203", "at": 1794979604.7694728, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 3}
+{"event": "request_started", "request_id": "cbb7a08d5d0b4df2a4c09d721e55f685", "at": 1794979604.7840986, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 4}
+{"event": "response_finished", "request_id": "5dfeaa359b6d4afe89052239f4d80203", "at": 1794979606.4956312, "status": 200, "error": null, "duration": 1.726}
+{"event": "request_started", "request_id": "26d0e404b5594f9084a51a79be6da16f", "at": 1794979606.513983, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 4}
+{"event": "response_finished", "request_id": "92086f02e10743bcb50d272d068756b8", "at": 1794979606.9582164, "status": 200, "error": null, "duration": 2.202}
+{"event": "request_started", "request_id": "bf1872c12cfe4033aa55ac8bfb9a312f", "at": 1794979606.972983, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 4}
+{"event": "response_finished", "request_id": "cbb7a08d5d0b4df2a4c09d721e55f685", "at": 1794979606.9914896, "status": 200, "error": null, "duration": 2.207}
+{"event": "request_started", "request_id": "37cd5ac95494486eb8ccee5e31c0f4bf", "at": 1794979607.0133862, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 4}
+{"event": "response_finished", "request_id": "c59d80bdc84f49459732e8db7644941e", "at": 1794979608.3114915, "status": 200, "error": null, "duration": 15.641}
+{"event": "response_finished", "request_id": "26d0e404b5594f9084a51a79be6da16f", "at": 1794979614.7641566, "status": 200, "error": null, "duration": 8.25}
+{"event": "response_finished", "request_id": "37cd5ac95494486eb8ccee5e31c0f4bf", "at": 1794979616.2196248, "status": 200, "error": null, "duration": 9.206}
+{"event": "response_finished", "request_id": "bf1872c12cfe4033aa55ac8bfb9a312f", "at": 1794979620.9812582, "status": 200, "error": null, "duration": 14.008}
+{"event": "request_started", "request_id": "7ddfac2f91fe4743b2651295d71ca801", "at": 1794979621.0013385, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 1}
+{"event": "response_finished", "request_id": "7ddfac2f91fe4743b2651295d71ca801", "at": 1794979635.3616948, "status": 200, "error": null, "duration": 14.36}
+{"event": "request_started", "request_id": "98b7d4c8b23e41caaef8eaadebc1b967", "at": 1794979635.399085, "caller": "172.25.0.9", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 1}
+{"event": "response_finished", "request_id": "98b7d4c8b23e41caaef8eaadebc1b967", "at": 1794979646.1607351, "status": 200, "error": null, "duration": 10.762}
+{"event": "request_started", "request_id": "8dc4c9447e3040fcbb7d2dcd5c8fd375", "at": 1794979647.149519, "caller": "172.25.0.6", "method": "POST", "path": "/chat/completions", "model": "glm-5-2-260617", "inflight": 1}
+{"event": "response_finished", "request_id": "8dc4c9447e3040fcbb7d2dcd5c8fd375", "at": 1794979655.4937582, "status": 200, "error": null, "duration": 8.344}

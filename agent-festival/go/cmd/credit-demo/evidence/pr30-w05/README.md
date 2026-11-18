@@ -183,9 +183,37 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
 **关于 run1**：第一次完整顺序运行中，M3、M1 本地、M1 远端的结果与上表相同，M2 失败。
 - 现象：intake 的远端任务在派发后 1 秒内结束为 `TASK_STATE_FAILED`，Runtime 没有错误日志，出口 0 请求（任何模型都没被调用）。
 - 复现情况：单独重跑 M2（run2）通过，完整顺序重跑（run3）也全部通过，未复现。
-- 结论：原因未查明，可能与 M2 开始前 12 秒刚重建 Runtime 容器有关。这一失败没有发生任何模型调用，不影响绑定结论。原始记录保留在 `run1-*`。
+- 结论（当时）：原因未查明，可能与 M2 开始前 12 秒刚重建 Runtime 容器有关。这一失败没有发生任何模型调用，不影响绑定结论。原始记录保留在 `run1-*`。
+- 2026-11-18 复跑已查明，见下一节。当时说“Runtime 没有错误日志”，是因为只看了 intake 绑定的 material-agent；错误其实记在另一个 Runtime 的日志里。
 
 **边界**：保证的是"执行端配置并实际请求的模型名"等于任务绑定（出口记录的是请求中的 `model` 字段）。如果服务商在同一模型名下换了实际模型，这里检测不到。旧版本执行端（不上报模型）一律拒绝。
+
+## AR-04 复跑：7b58ed1（2026-11-18 13:05–13:28，`raw/ar04-m14-r2/`）
+
+**被测对象**：
+- PR #31 当前头 `7b58ed1`：复核 P1（blocked 任务不再给任何节点发新许可）和 P2（只拒绝不匹配的执行器，任务继续排队）的修复；
+- `7b58ed1` 只改 Go，只重建了 `w05-m14/credit:dev`（`4c47390ddd2c`）；编排器与 Runtime 镜像沿用上节（Java 自 `6e42596` 起未改）。
+
+**记录器修正**（复核指出旧记录器在上游返回后才写记录）：
+- `scripts/model_egress.py` 现在每个请求写两行，共用 `request_id`：转发前写 `request_started`（含调用方、`model` 字段、在途数），并 fsync；上游返回或失败后写 `response_finished` / `error`；
+- `scripts/recorder_timing_check.py` 按复核的反例离线检查：假上游收到请求后阻塞，此时记录里必须已有 `request_started`。新记录器通过；旧记录器在响应前没有记录文件，检查失败；
+- 驱动脚本按 `request_started` 计数，所以“出口 0 请求”包括发出后没有返回的请求。
+
+| 阶段 | 结果 |
+|---|---|
+| M3 升级 | run4：与上节相同，接管时停为 blocked，原因指向规约不可解析；升级后无新领取、无新远端调用、出口 0 请求 |
+| M1 本地（按 P2 改了预期） | run4：任务保持 `queued`，等待模型 A 的执行器；拒绝记录写明 `orchestrator-1` 上报 B、任务绑定 A，22 次轮询都被拒（同一条记录累加计数）；从未领取，无远端调用，出口无 `request_started` |
+| M1 远端 | run4、run5、run6 三次一致：blocked，原因同时写出两个模型；无模型事件，Runtime 出口 0 请求，没有发往 B 的请求 |
+| M2 正例 | run4、run5 失败，run6 通过（见下） |
+
+**M2 失败的原因**：
+- run4（完整顺序）：intake 绑定 `credit-material`，但收到这个远端任务的是 writer-agent（material-agent 日志里没有请求）。writer 调 `/agent/context` 得到 409，节点失败。0 次模型请求。
+- 为验证，驱动补记了 Runtime 重建前后的容器 IP，再成对运行：
+  - run5（`m14f`，就绪后立即发起）：material `.6→.4`、analysis `.3→.6`、writer `.4→.3`。intake 被 analysis-agent 收到，它的新 IP 正是 material 的旧 IP；同样是 `/agent/context` 409，0 次模型请求；
+  - run6（`m14g`，就绪后等 35 秒）：IP 同样轮换，M2 完成。出口 19 次 `request_started`（编排器 10、Runtime 9）全部为 A，均有对应的 `response_finished`（200）；Runtime 侧模型事件逐次记录 A。
+- 已证实：失败时，Gateway 把任务送到了占用“绑定 Runtime 旧 IP”的另一个容器。Go 在 `/agent/context` 比对服务身份，不一致就拒绝，所以错投的任务没有执行，也没有调用模型。
+- 推断（未直接观测）：Gateway（JVM）缓存了重建前的 DNS 解析。JVM 默认正向缓存 30 秒，与“等 35 秒后通过”一致。
+- 结论：这不是 AR-04 绑定的缺陷。问题出在原地重建 Runtime（同一主机名、新 IP）后的路由可用性，归 Gateway / 部署处理。实验的就绪条件改为：compose 健康检查通过，再等 35 秒（`M14_SETTLE`）。
 
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
@@ -195,7 +223,7 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
 | R-B | 未覆盖 | 恢复已落盘、回复被丢弃 / 浏览器断链（双方） |
 | R-C | storage-failure：Go 侧真实写失败，不伪成功、下游不启动、恢复后对账；storage-failure-traced 补了 healthz 503 与注入/恢复时间戳 | 经插件路径恢复时注入保存失败，并把日志关联到该命令 |
 | R-D | host-kill（执行器）、gateway-restart、runtime-restart、go-kill（执行中停 Go）、two-clients（两个客户端同时恢复，只有一个生效） | go-kill 发现在途远端节点因依赖 Go 成员工具而在远端失败，需确定处置边界；两个客户端的插件路径操作由 W02 补 |
-| M-A | 未执行 | 任务绑定 A、执行端改为 B：需要先按 PR #31 补执行端绑定，另行回填 |
+| M-A | 由上面 AR-04 M1（本地 / 远端）在 #31 `7b58ed1` 上覆盖 | 与 #30 组合后的共同部署上复跑 |
 | U-B | 不适用 | 依赖 #31 进入组合候选 |
 
 ## 复跑

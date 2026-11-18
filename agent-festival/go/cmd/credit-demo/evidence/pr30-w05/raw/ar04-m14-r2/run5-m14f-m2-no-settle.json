@@ -1,0 +1,210 @@
+{
+  "scenario": "ar04-m14",
+  "project": "agent-hub-m14f",
+  "started_at": 1794979422.262003,
+  "phases": [
+    "m1-remote",
+    "m2"
+  ],
+  "models": {
+    "A": "glm-5-2-260617",
+    "B": "glm-4-flash"
+  },
+  "images": {
+    "M14_NEW_ORCH_IMAGE": "w05-m14/orchestrator:dev",
+    "M14_OLD_ORCH_IMAGE": "agent-hub-issue16/orchestrator:bus-v1",
+    "M14_NEW_AGENT_IMAGE": "w05-m14/professional:dev",
+    "M14_NEW_CREDIT_IMAGE": "w05-m14/credit:dev",
+    "M14_OLD_AGENT_IMAGE": "agent-hub-issue16/professional:bus-v1",
+    "M14_OLD_CREDIT_IMAGE": "agent-hub-issue16/credit:bus-v1"
+  },
+  "m1_remote_after_block": {
+    "note": "a blocked run refuses every node credential (P1); see the Go review tests"
+  },
+  "m1_remote": {
+    "run": "R1",
+    "record": {
+      "status": "blocked",
+      "final": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，远端 credit-material 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+      "leases": [
+        "2026-11-18T05:24:16Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "lease_refusals": [],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "intake": {
+          "request_id": "74ec4196327e65659fb9f3d1",
+          "remote_task_id": "8f0f0958-11b3-4a13-bdb1-64b997450358",
+          "status": "waiting",
+          "reason": "执行端模型与任务绑定不一致，已在调用模型前停止：任务绑定 glm-5-2-260617，远端 credit-material 上报 glm-4-flash。不会改用其他模型继续，需人工处理。",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "waiting",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "blocked": true,
+      "reason_names_both_models": true,
+      "no_model_event_recorded": true,
+      "no_runtime_model_request": true,
+      "no_request_for_model_b": true
+    }
+  },
+  "m2_ready": {
+    "at": 1794979477.163225,
+    "settle_seconds": 0,
+    "ips_before_recreate": {
+      "material-agent": "172.24.0.6",
+      "analysis-agent": "172.24.0.3",
+      "writer-agent": "172.24.0.4"
+    },
+    "ips_after_recreate": {
+      "material-agent": "172.24.0.4",
+      "analysis-agent": "172.24.0.6",
+      "writer-agent": "172.24.0.3"
+    },
+    "runtimes": {
+      "material-agent": "healthy 2026-11-18T05:24:24.785789458Z",
+      "analysis-agent": "healthy 2026-11-18T05:24:24.80904806Z",
+      "writer-agent": "healthy 2026-11-18T05:24:24.763749303Z"
+    }
+  },
+  "m2_failure": {
+    "logs": {
+      "material-agent": [
+        "2026-11-18T05:24:33.128Z  INFO 1 --- [credit-material] [           main] c.o.d.p.ProfessionalAgentApplication     : Started ProfessionalAgentApplication in 6.188 seconds (process running for 7.912)"
+      ],
+      "analysis-agent": [
+        "2026-11-18T05:24:33.149Z  INFO 1 --- [credit-analysis] [           main] c.o.d.p.ProfessionalAgentApplication     : Started ProfessionalAgentApplication in 6.208 seconds (process running for 7.971)",
+        "2026-11-18T05:24:38.212Z ERROR 1 --- [credit-analysis] [    a2a-agent-1] c.o.s.a.controller.a2a.A2AAgentExecutor  : Agent execution failed for contextId=ctx-717707cf46880609b7854dfb",
+        "",
+        "java.lang.IllegalStateException: Professional node failed",
+        "\tat com.openjiuwen.demo.professional.ProfessionalHandler.query(ProfessionalHandler.java:110) ~[!/:0.1.0]",
+        "\tat com.openjiuwen.service.app.orchestrator.A2AEnabledServeOrchestrator.query(A2AEnabledServeOrchestrator.java:200) ~[agent-service-app-0.1.4.jar!/:0.1.4]",
+        "\tat com.openjiuwen.service.app.controller.a2a.A2AAgentExecutor.executeQuery(A2AAgentExecutor.java:498) ~[agent-service-app-0.1.4.jar!/:0.1.4]",
+        "\tat com.openjiuwen.service.app.controller.a2a.A2AAgentExecutor.lambda$executeAdmitted$0(A2AAgentExecutor.java:312) ~[agent-service-app-0.1.4.jar!/:0.1.4]",
+        "\tat java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]",
+        "\tat com.openjiuwen.service.app.controller.a2a.A2AAgentExecutor.executeAdmitted(A2AAgentExecutor.java:316) ~[agent-service-app-0.1.4.jar!/:0.1.4]",
+        "\tat com.openjiuwen.service.app.controller.a2a.A2AAgentExecutor.executeRequest(A2AAgentExecutor.java:261) ~[agent-service-app-0.1.4.jar!/:0.1.4]",
+        "\tat com.openjiuwen.service.app.controller.a2a.A2AAgentExecutor.execute(A2AAgentExecutor.java:223) ~[agent-service-app-0.1.4.jar!/:0.1.4]",
+        "\tat org.a2aproject.sdk.server.requesthandlers.DefaultRequestHandler$2.run(DefaultRequestHandler.java:935) ~[a2a-java-sdk-server-common-1.0.0.Final.jar!/:na]",
+        "\tat java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1804) ~[na:na]",
+        "\tat java.base/java.util.concurrent.ThreadPerTaskExecutor$TaskRunner.run(ThreadPerTaskExecutor.java:314) ~[na:na]",
+        "\tat java.base/java.lang.VirtualThread.run(VirtualThread.java:329) ~[na:na]",
+        "Caused by: java.lang.IllegalStateException: Control record unavailable",
+        "\tat com.openjiuwen.demo.professional.ProfessionalHandler.post(ProfessionalHandler.java:43) ~[!/:0.1.0]",
+        "\tat com.openjiuwen.demo.professional.ProfessionalHandler.query(ProfessionalHandler.java:58) ~[!/:0.1.0]",
+        "\t... 11 common frames omitted",
+        "Caused by: java.lang.IllegalStateException: Control service rejected /agent/context HTTP 409",
+        "\tat com.openjiuwen.demo.professional.ProfessionalHandler.post(ProfessionalHandler.java:41) ~[!/:0.1.0]",
+        "\t... 12 common frames omitted",
+        ""
+      ],
+      "writer-agent": [
+        "2026-11-18T05:24:32.983Z  INFO 1 --- [credit-writer] [           main] c.o.d.p.ProfessionalAgentApplication     : Started ProfessionalAgentApplication in 6.038 seconds (process running for 7.845)"
+      ],
+      "gateway": [
+        "2026-11-18T05:24:36.913Z  INFO 1 --- [nio-8080-exec-5] c.o.gateway.obs.LoggingAuditSink         : governance audit traceId=e3fa7b4e-f768-4233-8815-3b3bbf04bb10 principalId=issue16-runtime tenantId=issue16 method=GetTask outcome=PASSED rejectStage=null code=null notificationId=null pathAgentId=null callbackStage=null",
+        "2026-11-18T05:24:37.958Z  INFO 1 --- [nio-8080-exec-6] c.o.gateway.obs.LoggingAuditSink         : governance audit traceId=18f2d632-02c9-457c-92a2-66ba30f19cad principalId=issue16-runtime tenantId=issue16 method=SendMessage outcome=PASSED rejectStage=null code=null notificationId=null pathAgentId=null callbackStage=null",
+        "2026-11-18T05:24:39.180Z  INFO 1 --- [nio-8080-exec-7] c.o.gateway.obs.LoggingAuditSink         : governance audit traceId=0050e96d-050a-4264-a1d1-bce2e80a29fc principalId=issue16-runtime tenantId=issue16 method=GetTask outcome=PASSED rejectStage=null code=null notificationId=null pathAgentId=null callbackStage=null"
+      ],
+      "orchestrator": [
+        "05:24:37.911 INFO  c.o.d.credit.Worker - run R2 leased (epoch 1)",
+        "05:24:39.279 ERROR c.o.d.credit.Worker - run R2 failed",
+        "com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=intake failed: Remote task ended: TASK_STATE_FAILED",
+        "\tat com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)",
+        "\tat com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)",
+        "\tat com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)",
+        "\tat com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)",
+        "\tat com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)",
+        "\tat com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)",
+        "\tat com.openjiuwen.demo.credit.Worker.run(Worker.java:70)",
+        "\tat java.base/java.lang.Thread.run(Thread.java:1583)"
+      ]
+    },
+    "remote_tasks": {
+      "intake": "{\"state\": \"TASK_STATE_FAILED\", \"message\": \"{\\\"role\\\": \\\"ROLE_AGENT\\\", \\\"parts\\\": [{\\\"text\\\": \\\"Professional node failed\\\"}], \\\"messageId\\\": \\\"16279bd4-e176-4dd3-9982-ad2997a70f35\\\", \\\"metadata\\\": {\\\"openjiuwen.error\\\": {\\\"schemaVersion\\\": \\\"1\\\", \\\"code\\\": \\\"AGENT_EXECUTION_FAILED\\\", \\\"retryable\\\": false}}}\"}"
+    }
+  },
+  "m2": {
+    "run": "R2",
+    "record": {
+      "status": "failed",
+      "final": "blueprint id=team-graph step id=intake failed: Remote task ended: TASK_STATE_FAILED",
+      "leases": [
+        "2026-11-18T05:24:37Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+      ],
+      "lease_refusals": [],
+      "binding": {
+        "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+        "spec_version": "q-credit-eligibility@1.1.0",
+        "model": "glm-5-2-260617"
+      },
+      "calls": {
+        "intake": {
+          "request_id": "918063e5376ba66616a5b3db",
+          "remote_task_id": "037d158e-9652-447b-8888-626ee0e700e8",
+          "status": "failed",
+          "reason": "Remote task ended: TASK_STATE_FAILED",
+          "model_events": {},
+          "actual_models": null
+        }
+      },
+      "steps": {
+        "bureau": "pending",
+        "financial": "pending",
+        "industry": "pending",
+        "intake": "failed",
+        "judge": "pending",
+        "related": "pending",
+        "report": "pending"
+      }
+    },
+    "egress": [],
+    "checks": {
+      "completed": false,
+      "egress_requests": 0,
+      "all_egress_on_model_a": false,
+      "remote_events_record_model_a": false,
+      "binding_model_a": true
+    }
+  },
+  "finished_at": 1794979481.4730847,
+  "environment": {
+    "project": "agent-hub-m14f",
+    "base": "http://127.0.0.1:5291",
+    "source_commit": "41a36755563ebeb442f2d93050c1d3430d510e80",
+    "images": {
+      "/agent-hub-m14f-writer-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14f-material-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14f-analysis-agent-1": "sha256:2154dc58db632becb066446fb99d519dac18338505ba245b9d4af146e4a9ea0e",
+      "/agent-hub-m14f-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-m14f-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-m14f-orchestrator-1": "sha256:ac312605b005b83fb9313bbaa3ba53d97a23bcf43fdad72e80cd8953618ff1ee",
+      "/agent-hub-m14f-model-egress-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535",
+      "/agent-hub-m14f-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-m14f-credit-1": "sha256:4c47390ddd2c3f29a219bc89e6d2ed1feaaab9c0e6388876cbd8143572089501"
+    },
+    "config_sha256": {
+      "compose.yaml": "3766502dc524aed036cb3c8956930814dd3beaa530e79c768ed8851ff729ff34",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  }
+}
