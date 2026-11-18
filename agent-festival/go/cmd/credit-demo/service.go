@@ -204,11 +204,11 @@ func (s *Service) machine(runID string) (*adopt.Machine, error) {
 	}
 	dir := filepath.Join(s.cfg.DataDir, "runs", runID)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %v", errStorage, err)
 	}
 	m, err := adopt.Open(filepath.Join(dir, "adopt.jsonl"))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: adoption ledger: %v", errStorage, err)
 	}
 	s.machines[runID] = m
 	return m, nil
@@ -221,11 +221,11 @@ func (s *Service) evidLog(runID, step string) (*evidlog.Log, error) {
 	}
 	dir := filepath.Join(s.cfg.DataDir, "runs", runID)
 	if err := os.MkdirAll(dir, 0o755); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: %v", errStorage, err)
 	}
 	l, err := evidlog.Open(filepath.Join(dir, "evid-"+step+".jsonl"))
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("%w: evidence log: %v", errStorage, err)
 	}
 	s.logs[key] = l
 	return l, nil
@@ -868,7 +868,7 @@ func (s *Service) Judgment(runID, token, step, raw string) (string, error) {
 		if err := s.save(); err != nil {
 			return "", err
 		}
-		return "", fmt.Errorf("%w: adoption %s: %s", errJudgmentRejected, out.Status, out.Detail)
+		return "", adoptionError(out)
 	}
 	r.Decision, r.DecisionOp = decision, op
 	r.BusinessReq = req.Identity.BusinessRequestID
