@@ -1,0 +1,37 @@
+编排单
+T-01858b3e91f6a6c15f51ac96158ecb2e v1
+执行失败
+招商银行股份有限公司本集团口径2025年对比2024年经营与资产质量简报，覆盖八项指标及来源
+T-0949586ac6722295125f7aa057fb753f v1
+执行失败
+生成招商银行股份有限公司本集团口径2025年对比2024年的经营与资产质量简报，覆盖八项固定指标及来源，包含程序检查和最多一次定向修订
+T-20ef410acff24a0aab3afb19297656d8 v1
+执行失败
+招商银行股份有限公司本集团口径2025年对比2024年经营与资产质量简报，覆盖八项固定指标（revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced）及来源标注
+能力选择记录 selection-c314b1b1c6e4553455ab3dc672fddc4d
+正式状态：FAILED
+
+招商银行股份有限公司本集团口径2025年对比2024年经营与资产质量简报，覆盖八项指标及来源
+执行失败
+cmb-2025-annual-report-a · T-01858b3e91f6a6c15f51ac96158ecb2e v1
+Agent Bus DIRECT
+RDC 能力绑定 · 4 类服务 · 5 个远端节点
+关联任务 3 · 已保存 2 · 待核对 0 · 失败 1
+调用清单
+年报资料提取
+总线
+从固定年报快照 cmb-2025-annual-report-a 中提取本集团口径下2025年（对比2024年）的八项指标数据：营业收入（revenue）、归母净利润（net_profit_attributable）、净息差（net_interest_margin）、成本收入比（cost_to_income）、不良贷款余额（npl_balance）、不良贷款率（npl_ratio）、拨备覆盖率（provision_coverage）、高级法一级资本充足率（cet1_ratio_advanced）。逐项标注年报页码与表格来源。
+{"scope": {"basis": "本集团", "entity": "招商银行股份有限公司", "period": "2025", "currency_unit": "人民币百万元", "compare_period": "2024"}, "snapshot": "cmb-2025-annual-report-a", "indicators": [{"id": "revenue", "unit": "人民币百万元", "change": {"kind": "pct", "value": 0.01}, "values": {"2024": 337488, "2025": 337532}, "citation": {"quote": "营业收入 337,532 337,488 0.01 339,123", "pdf_page": 14, "printed_page": 13}}, {"id": "net_profit_attributable", "unit": "人民币百万元", "change": {"kind": "pct", "value": 1.21}, "values": {"2024": 148391, "2025": 150181}, "citation": {"quote": "归属于本行股东的净利润 150,181 148,391 1.21 146,602", "pdf_page": 14, "printed_page": 13}}, {"id": "net_interest_margin", "unit": "%", "change": {"kind": "pp", "value": -0.11}, "values": {"2024": 1.98, "2025": 1.87}, "citation": {"quote": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15", "pdf_page": 16, "printed_page": 15}}, {"id": "cost_to_income", "unit": "%", "change": {"kind": "pp", "value": 0.09}, "values": {"2024": 31.89, "2025": 31.98}, "citation": {"quote": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96", "pdf_page": 16, "printed_page": 15}}, {"id": "npl_balance", "unit": "人民币百万元", "change": {"kind": "pct", "value": 3.96}, "values": {"2024": 65610, "2025": 68206}, "citation": {"quote": "不良贷款 68,206 65,610 3.96 61,579", "pdf_page": 15, "printed_page": 14}}, {"id": "npl_ratio", "unit": "%", "change": {"kind": "pp", "value": -0.01}, "values": {"2024": 0.95, "2025": 0.94}, "citation": {"quote": "不良贷款率 0.94 0.95 下降0.01个百分点 0.95", "pdf_page": 16, "printed_page": 15}}, {"id": "provision_coverage", "unit": "%", "change": {"kind": "pp", "value": -20.19}, "values": {"2024": 411.98, "2025": 391.79}, "citation": {"quote": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70", "pdf_page": 16, "printed_page": 15}}, {"id": "cet1_ratio_advanced", "unit": "%", "change": {"kind": "pp", "value": -0.7}, "values": {"2024": 14.86, "2025": 14.16}, "citation": {"quote": "核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73", "pdf_page": 16, "printed_page": 15}}], "limitations": []}
+经营分析
+总线
+基于提取的指标数据，进行本集团口径下2025年对比2024年的经营分析，覆盖营业收入（revenue）、归母净利润（net_profit_attributable）、净息差（net_interest_margin）、成本收入比（cost_to_income）四项经营指标，说明同比变化方向与幅度，标注数据来源。
+{"findings": [{"text": "2025年本集团营业收入为337,532百万元，较2024年的337,488百万元同比微增0.01%。", "evidence": [{"indicator": "revenue"}]}, {"text": "2025年本集团归属于本行股东的净利润为150,181百万元，较2024年的148,391百万元同比增长1.21%。", "evidence": [{"indicator": "net_profit_attributable"}]}, {"text": "2025年本集团净利息收益率为1.87%，较2024年的1.98%下降0.11个百分点。", "evidence": [{"indicator": "net_interest_margin"}]}, {"text": "2025年本集团成本收入比为31.98%，较2024年的31.89%上升0.09个百分点。", "evidence": [{"indicator": "cost_to_income"}]}], "indicators": [{"id": "revenue", "unit": "人民币百万元", "change": {"kind": "pct", "value": 0.01}, "values": {"2024": 337488, "2025": 337532}, "citation": {"quote": "营业收入 337,532 337,488 0.01 339,123", "pdf_page": 14, "printed_page": 13}}, {"id": "net_profit_attributable", "unit": "人民币百万元", "change": {"kind": "pct", "value": 1.21}, "values": {"2024": 148391, "2025": 150181}, "citation": {"quote": "归属于本行股东的净利润 150,181 148,391 1.21 146,602", "pdf_page": 14, "printed_page": 13}}, {"id": "net_interest_margin", "unit": "%", "change": {"kind": "pp", "value": -0.11}, "values": {"2024": 1.98, "2025": 1.87}, "citation": {"quote": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15", "pdf_page": 16, "printed_page": 15}}, {"id": "cost_to_income", "unit": "%", "change": {"kind": "pp", "value": 0.09}, "values": {"2024": 31.89, "2025": 31.98}, "citation": {"quote": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96", "pdf_page": 16, "printed_page": 15}}, {"id": "npl_balance", "unit": "人民币百万元", "change": {"kind": "pct", "value": 3.96}, "values": {"2024": 65610, "2025": 68206}, "citation": {"quote": "不良贷款 68,206 65,610 3.96 61,579", "pdf_page": 15, "printed_page": 14}}, {"id": "npl_ratio", "unit": "%", "change": {"kind": "pp", "value": -0.01}, "values": {"2024": 0.95, "2025": 0.94}, "citation": {"quote": "不良贷款率 0.94 0.95 下降0.01个百分点 0.95", "pdf_page": 16, "printed_page": 15}}, {"id": "provision_coverage", "unit": "%", "change": {"kind": "pp", "value": -20.19}, "values": {"2024": 411.98, "2025": 391.79}, "citation": {"quote": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70", "pdf_page": 16, "printed_page": 15}}, {"id": "cet1_ratio_advanced", "unit": "%", "change": {"kind": "pp", "value": -0.7}, "values": {"2024": 14.86, "2025": 14.16}, "citation": {"quote": "核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73", "pdf_page": 16, "printed_page": 15}}], "section_id": "operating", "limitations": ["本次分析仅基于上游提取的指标数据，未对营业收入及归母净利润增长的具体驱动因素进行拆解，相关原因分析待人工核验。", "净息差下降及成本收入比上升对盈利能力的具体影响幅度未进行量化测算，待人工核验。"]}
+资产质量分析
+总线
+基于提取的指标数据，进行本集团口径下2025年对比2024年的资产质量分析，覆盖不良贷款余额（npl_balance）、不良贷款率（npl_ratio）、拨备覆盖率（provision_coverage）、高级法一级资本充足率（cet1_ratio_advanced）四项资产质量指标，说明同比变化方向与幅度，标注数据来源。
+执行失败
+报告写作与一次修订
+总线
+待核对
+汇总经营分析与资产质量分析，撰写本集团2025年对比2024年经营与资产质量简报初稿，完整覆盖八项指标（revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced），每项指标须标注来源页码与表格。
+WAIT

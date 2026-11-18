@@ -1,0 +1,49 @@
+{
+  "schema_version": "report-platform-smoke/1",
+  "phases": [
+    {
+      "phase": "new_dialogue_submitted",
+      "at": 1794982871.2964041
+    },
+    {
+      "phase": "fresh_candidate",
+      "at": 1794982933.587588,
+      "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+      "nodes": 8
+    },
+    {
+      "phase": "plugin_admission_submitted",
+      "at": 1794982934.2675154
+    },
+    {
+      "phase": "task_status",
+      "at": 1794982934.279648,
+      "status": "AWAITING_APPROVAL"
+    },
+    {
+      "phase": "task_status",
+      "at": 1794982935.3039563,
+      "status": "RUNNING"
+    },
+    {
+      "phase": "task_status",
+      "at": 1794983015.7540019,
+      "status": "FAILED"
+    },
+    {
+      "phase": "failed",
+      "at": 1794983015.818961
+    }
+  ],
+  "checks": {
+    "zero_calls_before_confirmation": true
+  },
+  "limits": [
+    "Actual local model/services; not peer independent replay or business signoff"
+  ],
+  "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+  "graph_digest": "sha256:2497251d4130ee1cd59c5d435a571d7c078f717539cb449cbc9a05ec36d51b49",
+  "execution_profile": "sha256:233e9a6f689cb8e366b274536f5f91b614d5955e16bc041b48cfae8fbc9caf10",
+  "model_binding_digest": "sha256:5036fa47d1d796084346c8dfb6e03b17f8a7137b70f5c7217dc9dee7bfd52b18",
+  "session_url": "http://127.0.0.1:5173/chat/web_1a1ed51027e_89b7f608ba65"
+}

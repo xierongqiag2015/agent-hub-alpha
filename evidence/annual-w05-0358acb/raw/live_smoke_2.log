@@ -1,0 +1,15 @@
+{"phase": "new_dialogue_submitted"}
+{"phase": "fresh_candidate", "task_id": "T-20ef410acff24a0aab3afb19297656d8", "nodes": 8}
+{"phase": "plugin_admission_submitted"}
+{"phase": "task_status", "status": "AWAITING_APPROVAL"}
+{"phase": "task_status", "status": "RUNNING"}
+{"phase": "task_status", "status": "FAILED"}
+{"phase": "failed"}
+Traceback (most recent call last):
+  File "<wsl-home>\report-demo-env\repo\demos\report-demo\tests\live_smoke.py", line 166, in <module>
+    main()
+    ~~~~^^
+  File "<wsl-home>\report-demo-env\repo\demos\report-demo\tests\live_smoke.py", line 109, in main
+    raise RuntimeError('Real task requires attention: ' + task['status'])
+RuntimeError: Real task requires attention: FAILED
+exit 1

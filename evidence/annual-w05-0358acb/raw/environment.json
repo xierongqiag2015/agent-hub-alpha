@@ -1,0 +1,16 @@
+{
+ "repo_head": "0358acbad0ce1b0ce73772f31eda845057ba4dc5",
+ "sources": {
+  "jiuwenswarm": "1f168664259fcdc088c2af50afd786e513a7d026",
+  "agent-solution": "eb48c4824491e3d462ae234ffaaf9736c174523e",
+  "agent-runtime-java": "77004f14162ec5b592efd95d30c037aa1bc83856",
+  "agent-core-java": "1cb70314065a9a3665c8c57106dd78598fb7a8ed"
+ },
+ "artifacts": {
+  "demos/report-demo/orchestrator-java/target/report-orchestrator.jar": "666f909383755025e12586a6b7dee213564684bad1e9ab6689c6aef371fefc62",
+  "demos/report-demo/experts-java/target/report-experts.jar": "3e165813191c726c9deeecea23378822c46bfe58478a2832ab061cf69c84cf28",
+  ".local/report-demo/bin/report-control": "180bfc895a6eba3bb29a485e092e65bc3484094784c46c16f64a512a18e0b56b"
+ },
+ "execution_profile": "sha256:233e9a6f689cb8e366b274536f5f91b614d5955e16bc041b48cfae8fbc9caf10",
+ "model_binding_digest": "sha256:5036fa47d1d796084346c8dfb6e03b17f8a7137b70f5c7217dc9dee7bfd52b18"
+}

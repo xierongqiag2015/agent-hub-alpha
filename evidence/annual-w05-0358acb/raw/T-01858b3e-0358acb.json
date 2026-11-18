@@ -1,0 +1,1193 @@
+{
+ "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+ "source": "0358acb",
+ "task": {
+  "bus_binding": {
+   "environment_id": "report-demo-781255125734a3f6cd169a8a928098b4",
+   "tenant": "demo",
+   "issuer": "http://127.0.0.1:8180/realms/report-demo",
+   "audience": "report-demo",
+   "caller_subject": "328f698a-ba27-48c7-8752-978aae04e5d9"
+  },
+  "identity_contract": "pr25/0.2.0@539d17a",
+  "execution_profile": "sha256:233e9a6f689cb8e366b274536f5f91b614d5955e16bc041b48cfae8fbc9caf10",
+  "model_binding_digest": "sha256:5036fa47d1d796084346c8dfb6e03b17f8a7137b70f5c7217dc9dee7bfd52b18",
+  "schema_version": "report-demo/1",
+  "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+  "graph_revision": "g1",
+  "status": "FAILED",
+  "generation": "236",
+  "graph": {
+   "selection": {
+    "id": "selection-c314b1b1c6e4553455ab3dc672fddc4d",
+    "digest": "sha256:755878dc01feae29180080380f93b2287e14adcbe44c35af330f047780018707"
+   },
+   "goal": "招商银行股份有限公司本集团口径2025年对比2024年经营与资产质量简报，覆盖八项指标及来源",
+   "material_id": "cmb-2025-annual-report-a",
+   "focus": "business+quality",
+   "nodes": [
+    {
+     "id": "extract",
+     "expert": "extractor@1",
+     "role": "年报资料提取",
+     "task": "从固定年报快照 cmb-2025-annual-report-a 中提取本集团口径下2025年（对比2024年）的八项指标数据：营业收入（revenue）、归母净利润（net_profit_attributable）、净息差（net_interest_margin）、成本收入比（cost_to_income）、不良贷款余额（npl_balance）、不良贷款率（npl_ratio）、拨备覆盖率（provision_coverage）、高级法一级资本充足率（cet1_ratio_advanced）。逐项标注年报页码与表格来源。"
+    },
+    {
+     "id": "business",
+     "expert": "business@1",
+     "role": "经营分析",
+     "task": "基于提取的指标数据，进行本集团口径下2025年对比2024年的经营分析，覆盖营业收入（revenue）、归母净利润（net_profit_attributable）、净息差（net_interest_margin）、成本收入比（cost_to_income）四项经营指标，说明同比变化方向与幅度，标注数据来源。",
+     "depends_on": [
+      "extract"
+     ]
+    },
+    {
+     "id": "quality",
+     "expert": "quality@1",
+     "role": "资产质量分析",
+     "task": "基于提取的指标数据，进行本集团口径下2025年对比2024年的资产质量分析，覆盖不良贷款余额（npl_balance）、不良贷款率（npl_ratio）、拨备覆盖率（provision_coverage）、高级法一级资本充足率（cet1_ratio_advanced）四项资产质量指标，说明同比变化方向与幅度，标注数据来源。",
+     "depends_on": [
+      "extract"
+     ]
+    },
+    {
+     "id": "draft0",
+     "expert": "writer@1",
+     "role": "报告写作与一次修订",
+     "task": "汇总经营分析与资产质量分析，撰写本集团2025年对比2024年经营与资产质量简报初稿，完整覆盖八项指标（revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced），每项指标须标注来源页码与表格。",
+     "depends_on": [
+      "business",
+      "quality"
+     ]
+    },
+    {
+     "id": "check0",
+     "expert": "checker@1",
+     "role": "数值/期间/口径/来源检查",
+     "task": "对简报初稿进行数值、期间、口径、来源检查：验证八项指标数值与年报快照一致、2025对比2024期间正确、本集团口径一致、每项指标来源页码与表格引用完整。输出PASS或REVISE结论。",
+     "depends_on": [
+      "draft0"
+     ]
+    },
+    {
+     "id": "revise1",
+     "expert": "writer@1",
+     "role": "报告写作与一次修订",
+     "task": "根据check0检查结果对初稿进行定向修订，修正数值、期间、口径或来源方面的偏差，产出修订稿，确保八项指标数据与来源完整准确。",
+     "depends_on": [
+      "draft0",
+      "check0"
+     ],
+     "condition": {
+      "step": "check0",
+      "outcome": "REVISE"
+     }
+    },
+    {
+     "id": "check1",
+     "expert": "checker@1",
+     "role": "数值/期间/口径/来源检查",
+     "task": "对修订稿进行数值、期间、口径、来源检查：验证修订后八项指标数值与年报快照一致、期间对比正确、本集团口径一致、来源引用完整。输出PASS或REVISE结论。",
+     "depends_on": [
+      "revise1",
+      "check0"
+     ],
+     "condition": {
+      "step": "check0",
+      "outcome": "REVISE"
+     }
+    },
+    {
+     "id": "select_report",
+     "expert": "select@1",
+     "role": "选择已通过检查的报告",
+     "task": "从通过检查的报告候选（初稿或修订稿）中选择最终报告，确保所选报告覆盖八项指标及来源、本集团口径一致、2025对比2024期间正确。",
+     "depends_on": [
+      "check0",
+      "check1"
+     ]
+    }
+   ],
+   "catalog_digest": "sha256:6df470d3860c155b11958b5f5ae365df38ed350c6c6c770f4427d2093cafedb5",
+   "policy_version": "annual-report-policy/1"
+  },
+  "graph_digest": "sha256:2497251d4130ee1cd59c5d435a571d7c078f717539cb449cbc9a05ec36d51b49",
+  "runtime_spec_digest": "sha256:e150fcba713e7b882bc1b4d983fce17e2d6d291611dc58b86f615a191833e3cd",
+  "pause_requested": false,
+  "approved_by": "demo",
+  "nodes": {
+   "business": {
+    "status": "COMMITTED",
+    "input_digest": "sha256:0a8165dcba374140ef41385812271d3b3ab38f9d0d6a6e8a792c459ab61e2322",
+    "attempt": 1,
+    "owner_epoch": "1",
+    "result": {
+     "identity": {
+      "business_request_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+      "evaluation_revision": "g1",
+      "operation_id": "sha256:7afa7dcd9cf091654e0089544dc4eb73d1bca23dcafaf7622c29e6edc4989bff",
+      "logical_execution": {
+       "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+       "graph_version": "g1",
+       "node_path": "business",
+       "iteration_path": "0"
+      },
+      "execution_generation": 1
+     },
+     "node_id": "business",
+     "input_digest": "sha256:0a8165dcba374140ef41385812271d3b3ab38f9d0d6a6e8a792c459ab61e2322",
+     "artifact_id": "b71916d268577fde5871c88e3d53daec79fc442009ec5053feeee924c8028a8b",
+     "artifact_digest": "sha256:b71916d268577fde5871c88e3d53daec79fc442009ec5053feeee924c8028a8b",
+     "receipt": "receipt-b85602c01bf4d26c31e136f8a3d6155a",
+     "valid": true,
+     "output": {
+      "findings": [
+       {
+        "text": "2025年本集团营业收入为337,532百万元，较2024年的337,488百万元同比微增0.01%。",
+        "evidence": [
+         {
+          "indicator": "revenue"
+         }
+        ]
+       },
+       {
+        "text": "2025年本集团归属于本行股东的净利润为150,181百万元，较2024年的148,391百万元同比增长1.21%。",
+        "evidence": [
+         {
+          "indicator": "net_profit_attributable"
+         }
+        ]
+       },
+       {
+        "text": "2025年本集团净利息收益率为1.87%，较2024年的1.98%下降0.11个百分点。",
+        "evidence": [
+         {
+          "indicator": "net_interest_margin"
+         }
+        ]
+       },
+       {
+        "text": "2025年本集团成本收入比为31.98%，较2024年的31.89%上升0.09个百分点。",
+        "evidence": [
+         {
+          "indicator": "cost_to_income"
+         }
+        ]
+       }
+      ],
+      "indicators": [
+       {
+        "id": "revenue",
+        "unit": "人民币百万元",
+        "change": {
+         "kind": "pct",
+         "value": 0.01
+        },
+        "values": {
+         "2024": 337488,
+         "2025": 337532
+        },
+        "citation": {
+         "quote": "营业收入 337,532 337,488 0.01 339,123",
+         "pdf_page": 14,
+         "printed_page": 13
+        }
+       },
+       {
+        "id": "net_profit_attributable",
+        "unit": "人民币百万元",
+        "change": {
+         "kind": "pct",
+         "value": 1.21
+        },
+        "values": {
+         "2024": 148391,
+         "2025": 150181
+        },
+        "citation": {
+         "quote": "归属于本行股东的净利润 150,181 148,391 1.21 146,602",
+         "pdf_page": 14,
+         "printed_page": 13
+        }
+       },
+       {
+        "id": "net_interest_margin",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -0.11
+        },
+        "values": {
+         "2024": 1.98,
+         "2025": 1.87
+        },
+        "citation": {
+         "quote": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "cost_to_income",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": 0.09
+        },
+        "values": {
+         "2024": 31.89,
+         "2025": 31.98
+        },
+        "citation": {
+         "quote": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "npl_balance",
+        "unit": "人民币百万元",
+        "change": {
+         "kind": "pct",
+         "value": 3.96
+        },
+        "values": {
+         "2024": 65610,
+         "2025": 68206
+        },
+        "citation": {
+         "quote": "不良贷款 68,206 65,610 3.96 61,579",
+         "pdf_page": 15,
+         "printed_page": 14
+        }
+       },
+       {
+        "id": "npl_ratio",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -0.01
+        },
+        "values": {
+         "2024": 0.95,
+         "2025": 0.94
+        },
+        "citation": {
+         "quote": "不良贷款率 0.94 0.95 下降0.01个百分点 0.95",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "provision_coverage",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -20.19
+        },
+        "values": {
+         "2024": 411.98,
+         "2025": 391.79
+        },
+        "citation": {
+         "quote": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "cet1_ratio_advanced",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -0.7
+        },
+        "values": {
+         "2024": 14.86,
+         "2025": 14.16
+        },
+        "citation": {
+         "quote": "核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       }
+      ],
+      "section_id": "operating",
+      "limitations": [
+       "本次分析仅基于上游提取的指标数据，未对营业收入及归母净利润增长的具体驱动因素进行拆解，相关原因分析待人工核验。",
+       "净息差下降及成本收入比上升对盈利能力的具体影响幅度未进行量化测算，待人工核验。"
+      ]
+     }
+    }
+   },
+   "check0": {
+    "status": "READY",
+    "attempt": 0
+   },
+   "check1": {
+    "status": "READY",
+    "attempt": 0
+   },
+   "draft0": {
+    "status": "UNKNOWN",
+    "attempt": 0,
+    "reason": "WAIT"
+   },
+   "extract": {
+    "status": "COMMITTED",
+    "input_digest": "sha256:8a29a6b05bf1e6aa8c1d15a2283a6124514ea166106f9a34760d421751681420",
+    "attempt": 1,
+    "owner_epoch": "1",
+    "result": {
+     "identity": {
+      "business_request_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+      "evaluation_revision": "g1",
+      "operation_id": "sha256:ab5b7f6878504e89143bfb77da0923d3b8195cf2585034aaf5b78a5a4e0dd264",
+      "logical_execution": {
+       "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+       "graph_version": "g1",
+       "node_path": "extract",
+       "iteration_path": "0"
+      },
+      "execution_generation": 1
+     },
+     "node_id": "extract",
+     "input_digest": "sha256:8a29a6b05bf1e6aa8c1d15a2283a6124514ea166106f9a34760d421751681420",
+     "artifact_id": "2ca20e2ac1175e8527cb3b79af77dec44a81063977bd0dd040a6eb60e60896a7",
+     "artifact_digest": "sha256:2ca20e2ac1175e8527cb3b79af77dec44a81063977bd0dd040a6eb60e60896a7",
+     "receipt": "receipt-f469c0bd2f643320ce590d4ff496b43c",
+     "valid": true,
+     "output": {
+      "scope": {
+       "basis": "本集团",
+       "entity": "招商银行股份有限公司",
+       "period": "2025",
+       "currency_unit": "人民币百万元",
+       "compare_period": "2024"
+      },
+      "snapshot": "cmb-2025-annual-report-a",
+      "indicators": [
+       {
+        "id": "revenue",
+        "unit": "人民币百万元",
+        "change": {
+         "kind": "pct",
+         "value": 0.01
+        },
+        "values": {
+         "2024": 337488,
+         "2025": 337532
+        },
+        "citation": {
+         "quote": "营业收入 337,532 337,488 0.01 339,123",
+         "pdf_page": 14,
+         "printed_page": 13
+        }
+       },
+       {
+        "id": "net_profit_attributable",
+        "unit": "人民币百万元",
+        "change": {
+         "kind": "pct",
+         "value": 1.21
+        },
+        "values": {
+         "2024": 148391,
+         "2025": 150181
+        },
+        "citation": {
+         "quote": "归属于本行股东的净利润 150,181 148,391 1.21 146,602",
+         "pdf_page": 14,
+         "printed_page": 13
+        }
+       },
+       {
+        "id": "net_interest_margin",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -0.11
+        },
+        "values": {
+         "2024": 1.98,
+         "2025": 1.87
+        },
+        "citation": {
+         "quote": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "cost_to_income",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": 0.09
+        },
+        "values": {
+         "2024": 31.89,
+         "2025": 31.98
+        },
+        "citation": {
+         "quote": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "npl_balance",
+        "unit": "人民币百万元",
+        "change": {
+         "kind": "pct",
+         "value": 3.96
+        },
+        "values": {
+         "2024": 65610,
+         "2025": 68206
+        },
+        "citation": {
+         "quote": "不良贷款 68,206 65,610 3.96 61,579",
+         "pdf_page": 15,
+         "printed_page": 14
+        }
+       },
+       {
+        "id": "npl_ratio",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -0.01
+        },
+        "values": {
+         "2024": 0.95,
+         "2025": 0.94
+        },
+        "citation": {
+         "quote": "不良贷款率 0.94 0.95 下降0.01个百分点 0.95",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "provision_coverage",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -20.19
+        },
+        "values": {
+         "2024": 411.98,
+         "2025": 391.79
+        },
+        "citation": {
+         "quote": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       },
+       {
+        "id": "cet1_ratio_advanced",
+        "unit": "%",
+        "change": {
+         "kind": "pp",
+         "value": -0.7
+        },
+        "values": {
+         "2024": 14.86,
+         "2025": 14.16
+        },
+        "citation": {
+         "quote": "核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73",
+         "pdf_page": 16,
+         "printed_page": 15
+        }
+       }
+      ],
+      "limitations": []
+     }
+    }
+   },
+   "quality": {
+    "status": "FAILED",
+    "input_digest": "sha256:f8be760fe2b2112c6ddf15db7232abc01296455d646039cbc9eea6451a54a097",
+    "attempt": 1,
+    "owner_epoch": "1",
+    "reason": "REMOTE_FAILED"
+   },
+   "revise1": {
+    "status": "READY",
+    "attempt": 0
+   },
+   "select_report": {
+    "status": "READY",
+    "attempt": 0
+   }
+  },
+  "created_at": "2026-11-18T06:22:12.529653146Z"
+ },
+ "calls": [
+  {
+   "call_id": "c-4a2dd2e54ca2f556b54a848a61e7b781",
+   "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+   "node_id": "quality",
+   "attempt": 1,
+   "input_digest": "sha256:f8be760fe2b2112c6ddf15db7232abc01296455d646039cbc9eea6451a54a097",
+   "agent_id": "asset-quality-analyst",
+   "message_id": "message-e97388b5eb481c993ec0937da1e01e48",
+   "context_id": "context-d59e2cf8225164b27109186decc20640",
+   "remote_task_id": "d86c7db9-920d-4d3d-9a62-822ce3a01924",
+   "state": "FAILED",
+   "route": {
+    "card": {
+     "name": "asset-quality-analyst",
+     "rawJson": "{\"name\": \"asset-quality-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"asset-quality-analyst\", \"name\": \"asset-quality-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+    },
+    "agent_id": "asset-quality-analyst",
+    "instances": {
+     "agentId": "asset-quality-analyst",
+     "instances": [
+      {
+       "card": {
+        "name": "asset-quality-analyst",
+        "rawJson": "{\"name\": \"asset-quality-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"asset-quality-analyst\", \"name\": \"asset-quality-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+       },
+       "health": "ONLINE",
+       "region": null,
+       "weight": 100,
+       "agentName": "asset-quality-analyst",
+       "serviceId": "asset-quality-analyst",
+       "instanceId": "i-8a4e816a69626666",
+       "routeHandle": "rh1:eyJ0ZW5hbnRJZCI6ImRlbW8iLCJhZ2VudElkIjoiYXNzZXQtcXVhbGl0eS1hbmFseXN0Iiwic2VydmljZUlkIjoiYXNzZXQtcXVhbGl0eS1hbmFseXN0IiwiaW5zdGFuY2VJZCI6ImktOGE0ZTgxNmE2OTYyNjY2NiIsInJvdXRlS2V5IjoiaS04YTRlODE2YTY5NjI2NjY2IiwiY29udHJhY3RWZXJzaW9uIjoiMS4wLjAiLCJjYXBhYmlsaXR5VmVyc2lvbiI6IjEuMC4wIn0.GTJuVuIYWhsMcTKwLiq82w",
+       "frameworkType": "JIUWEN",
+       "maxConcurrency": 1,
+       "contractVersion": "1.0.0",
+       "capabilityVersion": "1.0.0"
+      }
+     ]
+    },
+    "observed_at": "2026-11-18T06:22:43.453100152Z",
+    "gateway_mode": "DIRECT",
+    "actual_execution_instance": "not_collected"
+   },
+   "conflicted": false
+  },
+  {
+   "call_id": "c-1f514af876a78a565614d995c90a4cba",
+   "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+   "node_id": "extract",
+   "attempt": 1,
+   "input_digest": "sha256:8a29a6b05bf1e6aa8c1d15a2283a6124514ea166106f9a34760d421751681420",
+   "agent_id": "report-extractor",
+   "message_id": "message-06eab2308720f6c68ebfe7f21f9dd5a0",
+   "context_id": "context-68f4b5422073483d519ed9594a329815",
+   "remote_task_id": "4043b4cb-9f21-4b61-bcfe-b383faa73c79",
+   "state": "COMPLETED",
+   "route": {
+    "card": {
+     "name": "report-extractor",
+     "rawJson": "{\"name\": \"report-extractor\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"report-extractor\", \"name\": \"report-extractor\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+    },
+    "agent_id": "report-extractor",
+    "instances": {
+     "agentId": "report-extractor",
+     "instances": [
+      {
+       "card": {
+        "name": "report-extractor",
+        "rawJson": "{\"name\": \"report-extractor\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"report-extractor\", \"name\": \"report-extractor\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+       },
+       "health": "ONLINE",
+       "region": null,
+       "weight": 100,
+       "agentName": "report-extractor",
+       "serviceId": "report-extractor",
+       "instanceId": "i-3e0ab76d2ee46d4b",
+       "routeHandle": "rh1:eyJ0ZW5hbnRJZCI6ImRlbW8iLCJhZ2VudElkIjoicmVwb3J0LWV4dHJhY3RvciIsInNlcnZpY2VJZCI6InJlcG9ydC1leHRyYWN0b3IiLCJpbnN0YW5jZUlkIjoiaS0zZTBhYjc2ZDJlZTQ2ZDRiIiwicm91dGVLZXkiOiJpLTNlMGFiNzZkMmVlNDZkNGIiLCJjb250cmFjdFZlcnNpb24iOiIxLjAuMCIsImNhcGFiaWxpdHlWZXJzaW9uIjoiMS4wLjAifQ.01u0SNIi5p6yGxiE8e76dg",
+       "frameworkType": "JIUWEN",
+       "maxConcurrency": 1,
+       "contractVersion": "1.0.0",
+       "capabilityVersion": "1.0.0"
+      }
+     ]
+    },
+    "observed_at": "2026-11-18T06:22:14.795984279Z",
+    "gateway_mode": "DIRECT",
+    "actual_execution_instance": "not_collected"
+   },
+   "conflicted": false
+  },
+  {
+   "call_id": "c-1f5596953312bd0ea53bedb1783a29ef",
+   "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+   "node_id": "business",
+   "attempt": 1,
+   "input_digest": "sha256:0a8165dcba374140ef41385812271d3b3ab38f9d0d6a6e8a792c459ab61e2322",
+   "agent_id": "business-analyst",
+   "message_id": "message-2b2525942f1f8f8bea773e7ee9c61a1e",
+   "context_id": "context-0cc86c6bcae95e4526f48cad4e314837",
+   "remote_task_id": "e17d885e-200e-479d-afe5-0c45cb7a0ce5",
+   "state": "COMPLETED",
+   "route": {
+    "card": {
+     "name": "business-analyst",
+     "rawJson": "{\"name\": \"business-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"business-analyst\", \"name\": \"business-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+    },
+    "agent_id": "business-analyst",
+    "instances": {
+     "agentId": "business-analyst",
+     "instances": [
+      {
+       "card": {
+        "name": "business-analyst",
+        "rawJson": "{\"name\": \"business-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"business-analyst\", \"name\": \"business-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+       },
+       "health": "ONLINE",
+       "region": null,
+       "weight": 100,
+       "agentName": "business-analyst",
+       "serviceId": "business-analyst",
+       "instanceId": "i-6315f907fd8eae7b",
+       "routeHandle": "rh1:eyJ0ZW5hbnRJZCI6ImRlbW8iLCJhZ2VudElkIjoiYnVzaW5lc3MtYW5hbHlzdCIsInNlcnZpY2VJZCI6ImJ1c2luZXNzLWFuYWx5c3QiLCJpbnN0YW5jZUlkIjoiaS02MzE1ZjkwN2ZkOGVhZTdiIiwicm91dGVLZXkiOiJpLTYzMTVmOTA3ZmQ4ZWFlN2IiLCJjb250cmFjdFZlcnNpb24iOiIxLjAuMCIsImNhcGFiaWxpdHlWZXJzaW9uIjoiMS4wLjAifQ.LYMOUCdSbbIoCoYmoOspiQ",
+       "frameworkType": "JIUWEN",
+       "maxConcurrency": 1,
+       "contractVersion": "1.0.0",
+       "capabilityVersion": "1.0.0"
+      }
+     ]
+    },
+    "observed_at": "2026-11-18T06:22:43.444314719Z",
+    "gateway_mode": "DIRECT",
+    "actual_execution_instance": "not_collected"
+   },
+   "conflicted": false
+  }
+ ],
+ "verify": {
+  "audit_events": 236,
+  "authorized_skips": 0,
+  "claim": "artifact integrity and recorded formal facts; not independent business acceptance",
+  "evidence_intact": false,
+  "formal_nodes": 2,
+  "generation": "236",
+  "issues": [
+   {
+    "code": "NOT_FORMAL",
+    "node_id": "revise1"
+   },
+   {
+    "code": "NOT_FORMAL",
+    "node_id": "select_report"
+   },
+   {
+    "code": "NOT_FORMAL",
+    "node_id": "check0"
+   },
+   {
+    "code": "NOT_FORMAL",
+    "node_id": "check1"
+   },
+   {
+    "code": "NOT_FORMAL",
+    "node_id": "draft0"
+   },
+   {
+    "code": "NOT_FORMAL",
+    "node_id": "quality"
+   }
+  ],
+  "observations": 194,
+  "read_only": true,
+  "remote_calls": 3,
+  "status": "FAILED",
+  "task_id": "T-01858b3e91f6a6c15f51ac96158ecb2e"
+ },
+ "workbench": {
+  "bus": {
+   "completed": 2,
+   "failed": 1,
+   "linked_tasks": 3,
+   "planned_nodes": 5,
+   "reused": 0,
+   "services": 4,
+   "unresolved": 0
+  },
+  "case": "cmb-2025-annual-report-a",
+  "delivery_receipts": [],
+  "goal": "招商银行股份有限公司本集团口径2025年对比2024年经营与资产质量简报，覆盖八项指标及来源",
+  "hash": "sha256:2497251d4130ee1cd59c5d435a571d7c078f717539cb449cbc9a05ec36d51b49",
+  "layers": [
+   [
+    "extract"
+   ],
+   [
+    "business",
+    "quality"
+   ],
+   [
+    "draft0"
+   ],
+   [
+    "check0"
+   ],
+   [
+    "revise1"
+   ],
+   [
+    "check1"
+   ],
+   [
+    "select_report"
+   ]
+  ],
+  "nodes": [
+   {
+    "activity": "",
+    "contract": "extractor@1",
+    "deps": null,
+    "execution": {
+     "binding": {
+      "agent_id": "report-extractor",
+      "card_digest": "sha256:96eed5bbe65e66b8ef7c801aa8b6117f98916cb51904fa15e4d6d7d84a3ac507",
+      "version": "1.0.0"
+     },
+     "kind": "agent_bus",
+     "path_mode": "DIRECT"
+    },
+    "id": "extract",
+    "kind": "extract",
+    "name": "年报资料提取",
+    "output": "{\"scope\": {\"basis\": \"本集团\", \"entity\": \"招商银行股份有限公司\", \"period\": \"2025\", \"currency_unit\": \"人民币百万元\", \"compare_period\": \"2024\"}, \"snapshot\": \"cmb-2025-annual-report-a\", \"indicators\": [{\"id\": \"revenue\", \"unit\": \"人民币百万元\", \"change\": {\"kind\": \"pct\", \"value\": 0.01}, \"values\": {\"2024\": 337488, \"2025\": 337532}, \"citation\": {\"quote\": \"营业收入 337,532 337,488 0.01 339,123\", \"pdf_page\": 14, \"printed_page\": 13}}, {\"id\": \"net_profit_attributable\", \"unit\": \"人民币百万元\", \"change\": {\"kind\": \"pct\", \"value\": 1.21}, \"values\": {\"2024\": 148391, \"2025\": 150181}, \"citation\": {\"quote\": \"归属于本行股东的净利润 150,181 148,391 1.21 146,602\", \"pdf_page\": 14, \"printed_page\": 13}}, {\"id\": \"net_interest_margin\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -0.11}, \"values\": {\"2024\": 1.98, \"2025\": 1.87}, \"citation\": {\"quote\": \"净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"cost_to_income\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": 0.09}, \"values\": {\"2024\": 31.89, \"2025\": 31.98}, \"citation\": {\"quote\": \"成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"npl_balance\", \"unit\": \"人民币百万元\", \"change\": {\"kind\": \"pct\", \"value\": 3.96}, \"values\": {\"2024\": 65610, \"2025\": 68206}, \"citation\": {\"quote\": \"不良贷款 68,206 65,610 3.96 61,579\", \"pdf_page\": 15, \"printed_page\": 14}}, {\"id\": \"npl_ratio\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -0.01}, \"values\": {\"2024\": 0.95, \"2025\": 0.94}, \"citation\": {\"quote\": \"不良贷款率 0.94 0.95 下降0.01个百分点 0.95\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"provision_coverage\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -20.19}, \"values\": {\"2024\": 411.98, \"2025\": 391.79}, \"citation\": {\"quote\": \"拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"cet1_ratio_advanced\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -0.7}, \"values\": {\"2024\": 14.86, \"2025\": 14.16}, \"citation\": {\"quote\": \"核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73\", \"pdf_page\": 16, \"printed_page\": 15}}], \"limitations\": []}",
+    "remote": {
+     "agent_id": "report-extractor",
+     "artifact_digest": "sha256:2ca20e2ac1175e8527cb3b79af77dec44a81063977bd0dd040a6eb60e60896a7",
+     "artifact_id": "2ca20e2ac1175e8527cb3b79af77dec44a81063977bd0dd040a6eb60e60896a7",
+     "attempt": 1,
+     "context_id": "context-68f4b5422073483d519ed9594a329815",
+     "input_digest": "sha256:8a29a6b05bf1e6aa8c1d15a2283a6124514ea166106f9a34760d421751681420",
+     "node_execution_id": "c-1f514af876a78a565614d995c90a4cba",
+     "reason": "",
+     "request_id": "message-06eab2308720f6c68ebfe7f21f9dd5a0",
+     "status": "COMPLETED",
+     "task_id": "4043b4cb-9f21-4b61-bcfe-b383faa73c79"
+    },
+    "role": "年报资料提取",
+    "status": "done",
+    "task": "从固定年报快照 cmb-2025-annual-report-a 中提取本集团口径下2025年（对比2024年）的八项指标数据：营业收入（revenue）、归母净利润（net_profit_attributable）、净息差（net_interest_margin）、成本收入比（cost_to_income）、不良贷款余额（npl_balance）、不良贷款率（npl_ratio）、拨备覆盖率（provision_coverage）、高级法一级资本充足率（cet1_ratio_advanced）。逐项标注年报页码与表格来源。"
+   },
+   {
+    "activity": "",
+    "contract": "business@1",
+    "deps": [
+     "extract"
+    ],
+    "execution": {
+     "binding": {
+      "agent_id": "business-analyst",
+      "card_digest": "sha256:a8150b5b51c1d2eec90b6d81ea5dbe49aec2942e72a93a550ad8487c45ad2a90",
+      "version": "1.0.0"
+     },
+     "kind": "agent_bus",
+     "path_mode": "DIRECT"
+    },
+    "id": "business",
+    "kind": "business",
+    "name": "经营分析",
+    "output": "{\"findings\": [{\"text\": \"2025年本集团营业收入为337,532百万元，较2024年的337,488百万元同比微增0.01%。\", \"evidence\": [{\"indicator\": \"revenue\"}]}, {\"text\": \"2025年本集团归属于本行股东的净利润为150,181百万元，较2024年的148,391百万元同比增长1.21%。\", \"evidence\": [{\"indicator\": \"net_profit_attributable\"}]}, {\"text\": \"2025年本集团净利息收益率为1.87%，较2024年的1.98%下降0.11个百分点。\", \"evidence\": [{\"indicator\": \"net_interest_margin\"}]}, {\"text\": \"2025年本集团成本收入比为31.98%，较2024年的31.89%上升0.09个百分点。\", \"evidence\": [{\"indicator\": \"cost_to_income\"}]}], \"indicators\": [{\"id\": \"revenue\", \"unit\": \"人民币百万元\", \"change\": {\"kind\": \"pct\", \"value\": 0.01}, \"values\": {\"2024\": 337488, \"2025\": 337532}, \"citation\": {\"quote\": \"营业收入 337,532 337,488 0.01 339,123\", \"pdf_page\": 14, \"printed_page\": 13}}, {\"id\": \"net_profit_attributable\", \"unit\": \"人民币百万元\", \"change\": {\"kind\": \"pct\", \"value\": 1.21}, \"values\": {\"2024\": 148391, \"2025\": 150181}, \"citation\": {\"quote\": \"归属于本行股东的净利润 150,181 148,391 1.21 146,602\", \"pdf_page\": 14, \"printed_page\": 13}}, {\"id\": \"net_interest_margin\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -0.11}, \"values\": {\"2024\": 1.98, \"2025\": 1.87}, \"citation\": {\"quote\": \"净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"cost_to_income\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": 0.09}, \"values\": {\"2024\": 31.89, \"2025\": 31.98}, \"citation\": {\"quote\": \"成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"npl_balance\", \"unit\": \"人民币百万元\", \"change\": {\"kind\": \"pct\", \"value\": 3.96}, \"values\": {\"2024\": 65610, \"2025\": 68206}, \"citation\": {\"quote\": \"不良贷款 68,206 65,610 3.96 61,579\", \"pdf_page\": 15, \"printed_page\": 14}}, {\"id\": \"npl_ratio\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -0.01}, \"values\": {\"2024\": 0.95, \"2025\": 0.94}, \"citation\": {\"quote\": \"不良贷款率 0.94 0.95 下降0.01个百分点 0.95\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"provision_coverage\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -20.19}, \"values\": {\"2024\": 411.98, \"2025\": 391.79}, \"citation\": {\"quote\": \"拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70\", \"pdf_page\": 16, \"printed_page\": 15}}, {\"id\": \"cet1_ratio_advanced\", \"unit\": \"%\", \"change\": {\"kind\": \"pp\", \"value\": -0.7}, \"values\": {\"2024\": 14.86, \"2025\": 14.16}, \"citation\": {\"quote\": \"核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73\", \"pdf_page\": 16, \"printed_page\": 15}}], \"section_id\": \"operating\", \"limitations\": [\"本次分析仅基于上游提取的指标数据，未对营业收入及归母净利润增长的具体驱动因素进行拆解，相关原因分析待人工核验。\", \"净息差下降及成本收入比上升对盈利能力的具体影响幅度未进行量化测算，待人工核验。\"]}",
+    "remote": {
+     "agent_id": "business-analyst",
+     "artifact_digest": "sha256:b71916d268577fde5871c88e3d53daec79fc442009ec5053feeee924c8028a8b",
+     "artifact_id": "b71916d268577fde5871c88e3d53daec79fc442009ec5053feeee924c8028a8b",
+     "attempt": 1,
+     "context_id": "context-0cc86c6bcae95e4526f48cad4e314837",
+     "input_digest": "sha256:0a8165dcba374140ef41385812271d3b3ab38f9d0d6a6e8a792c459ab61e2322",
+     "node_execution_id": "c-1f5596953312bd0ea53bedb1783a29ef",
+     "reason": "",
+     "request_id": "message-2b2525942f1f8f8bea773e7ee9c61a1e",
+     "status": "COMPLETED",
+     "task_id": "e17d885e-200e-479d-afe5-0c45cb7a0ce5"
+    },
+    "role": "经营分析",
+    "status": "done",
+    "task": "基于提取的指标数据，进行本集团口径下2025年对比2024年的经营分析，覆盖营业收入（revenue）、归母净利润（net_profit_attributable）、净息差（net_interest_margin）、成本收入比（cost_to_income）四项经营指标，说明同比变化方向与幅度，标注数据来源。"
+   },
+   {
+    "activity": "REMOTE_FAILED",
+    "contract": "quality@1",
+    "deps": [
+     "extract"
+    ],
+    "execution": {
+     "binding": {
+      "agent_id": "asset-quality-analyst",
+      "card_digest": "sha256:a1ed838d25a6f47398769b09fa21e14c53489cf0bab44364d8fe75adf0380b72",
+      "version": "1.0.0"
+     },
+     "kind": "agent_bus",
+     "path_mode": "DIRECT"
+    },
+    "id": "quality",
+    "kind": "quality",
+    "name": "资产质量分析",
+    "remote": {
+     "agent_id": "asset-quality-analyst",
+     "attempt": 1,
+     "context_id": "context-d59e2cf8225164b27109186decc20640",
+     "input_digest": "sha256:f8be760fe2b2112c6ddf15db7232abc01296455d646039cbc9eea6451a54a097",
+     "node_execution_id": "c-4a2dd2e54ca2f556b54a848a61e7b781",
+     "reason": "REMOTE_FAILED",
+     "request_id": "message-e97388b5eb481c993ec0937da1e01e48",
+     "status": "FAILED",
+     "task_id": "d86c7db9-920d-4d3d-9a62-822ce3a01924"
+    },
+    "role": "资产质量分析",
+    "status": "failed",
+    "task": "基于提取的指标数据，进行本集团口径下2025年对比2024年的资产质量分析，覆盖不良贷款余额（npl_balance）、不良贷款率（npl_ratio）、拨备覆盖率（provision_coverage）、高级法一级资本充足率（cet1_ratio_advanced）四项资产质量指标，说明同比变化方向与幅度，标注数据来源。"
+   },
+   {
+    "activity": "WAIT",
+    "contract": "writer@1",
+    "deps": [
+     "business",
+     "quality"
+    ],
+    "execution": {
+     "binding": {
+      "agent_id": "report-writer",
+      "version": "1.0.0"
+     },
+     "kind": "agent_bus",
+     "path_mode": "DIRECT"
+    },
+    "id": "draft0",
+    "kind": "write",
+    "name": "报告写作与一次修订",
+    "role": "报告写作与一次修订",
+    "status": "unknown",
+    "task": "汇总经营分析与资产质量分析，撰写本集团2025年对比2024年经营与资产质量简报初稿，完整覆盖八项指标（revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced），每项指标须标注来源页码与表格。"
+   },
+   {
+    "activity": "",
+    "contract": "checker@1",
+    "deps": [
+     "draft0"
+    ],
+    "id": "check0",
+    "kind": "check",
+    "name": "数值/期间/口径/来源检查",
+    "role": "数值/期间/口径/来源检查",
+    "status": "pending",
+    "task": "对简报初稿进行数值、期间、口径、来源检查：验证八项指标数值与年报快照一致、2025对比2024期间正确、本集团口径一致、每项指标来源页码与表格引用完整。输出PASS或REVISE结论。"
+   },
+   {
+    "activity": "",
+    "contract": "writer@1",
+    "deps": [
+     "draft0",
+     "check0"
+    ],
+    "execution": {
+     "binding": {
+      "agent_id": "report-writer",
+      "version": "1.0.0"
+     },
+     "kind": "agent_bus",
+     "path_mode": "DIRECT"
+    },
+    "id": "revise1",
+    "kind": "write",
+    "name": "报告写作与一次修订",
+    "role": "报告写作与一次修订",
+    "status": "pending",
+    "task": "根据check0检查结果对初稿进行定向修订，修正数值、期间、口径或来源方面的偏差，产出修订稿，确保八项指标数据与来源完整准确。",
+    "when": {
+     "contains": "REVISE",
+     "step": "check0"
+    }
+   },
+   {
+    "activity": "",
+    "contract": "checker@1",
+    "deps": [
+     "revise1",
+     "check0"
+    ],
+    "id": "check1",
+    "kind": "check",
+    "name": "数值/期间/口径/来源检查",
+    "role": "数值/期间/口径/来源检查",
+    "status": "pending",
+    "task": "对修订稿进行数值、期间、口径、来源检查：验证修订后八项指标数值与年报快照一致、期间对比正确、本集团口径一致、来源引用完整。输出PASS或REVISE结论。",
+    "when": {
+     "contains": "REVISE",
+     "step": "check0"
+    }
+   },
+   {
+    "activity": "",
+    "contract": "select@1",
+    "deps": [
+     "check0",
+     "check1"
+    ],
+    "id": "select_report",
+    "kind": "select",
+    "name": "选择已通过检查的报告",
+    "role": "选择已通过检查的报告",
+    "status": "pending",
+    "task": "从通过检查的报告候选（初稿或修订稿）中选择最终报告，确保所选报告覆盖八项指标及来源、本集团口径一致、2025对比2024期间正确。"
+   }
+  ],
+  "ok": true,
+  "plan": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+  "reports": [],
+  "rev": "236",
+  "run": {
+   "decision": "FAILED",
+   "id": "T-01858b3e91f6a6c15f51ac96158ecb2e",
+   "leases": 1,
+   "status": "failed",
+   "url": ""
+  },
+  "selection": {
+   "id": "selection-c314b1b1c6e4553455ab3dc672fddc4d",
+   "package": {
+    "id": "annual-report-cmb-2025",
+    "version": "1",
+    "digest": "sha256:6df470d3860c155b11958b5f5ae365df38ed350c6c6c770f4427d2093cafedb5"
+   },
+   "query": {
+    "package": "annual-report-cmb-2025",
+    "entity": "招商银行股份有限公司",
+    "basis": "本集团",
+    "period": "2025",
+    "compare_period": "2024",
+    "focus": [
+     "经营",
+     "资产质量"
+    ],
+    "deliverable": "annual-report/1",
+    "materials": [
+     "cmb-2025-annual-report-a"
+    ]
+   },
+   "score_source": "场景包配置的权重：职责覆盖任务重点 2.00 + 输入有合格来源 1.00 + 获准包内当前版本 1.00；选择阈值 3.00。这是排序依据，不是成功概率。",
+   "recall": {
+    "method": "finite approved catalog; configured ranking, not semantic search",
+    "candidates": [
+     "extractor@1",
+     "business@1",
+     "quality@1",
+     "writer@1",
+     "parent-only@1",
+     "unknown@1"
+    ]
+   },
+   "eligibility": [
+    {
+     "capability": "extractor@1",
+     "version": "1",
+     "result": "pass",
+     "checks": {
+      "basis": "本集团 ⊆ [本集团]",
+      "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+      "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+      "periods": "2025/2024 ⊆ [2025, 2024]",
+      "templates": "annual-report/1 ⊆ [annual-report/1]"
+     },
+     "score": 4
+    },
+    {
+     "capability": "business@1",
+     "version": "1",
+     "result": "pass",
+     "checks": {
+      "basis": "本集团 ⊆ [本集团]",
+      "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+      "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+      "periods": "2025/2024 ⊆ [2025, 2024]",
+      "templates": "annual-report/1 ⊆ [annual-report/1]"
+     },
+     "score": 4
+    },
+    {
+     "capability": "quality@1",
+     "version": "1",
+     "result": "pass",
+     "checks": {
+      "basis": "本集团 ⊆ [本集团]",
+      "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+      "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+      "periods": "2025/2024 ⊆ [2025, 2024]",
+      "templates": "annual-report/1 ⊆ [annual-report/1]"
+     },
+     "score": 4
+    },
+    {
+     "capability": "writer@1",
+     "version": "1",
+     "result": "pass",
+     "checks": {
+      "basis": "本集团 ⊆ [本集团]",
+      "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+      "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+      "periods": "2025/2024 ⊆ [2025, 2024]",
+      "templates": "annual-report/1 ⊆ [annual-report/1]"
+     },
+     "score": 4
+    },
+    {
+     "capability": "parent-only@1",
+     "version": "1",
+     "result": "excluded",
+     "checks": {
+      "basis": "不满足",
+      "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+      "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+      "periods": "2025/2024 ⊆ [2025, 2024]",
+      "templates": "annual-report/1 ⊆ [annual-report/1]"
+     },
+     "reasons": [
+      "硬约束不满足：任务口径为 本集团，能力只支持 母公司"
+     ],
+     "score": 4
+    },
+    {
+     "capability": "unknown@1",
+     "version": "1",
+     "result": "unknown",
+     "reasons": [
+      "未声明输入",
+      "未声明输出",
+      "未声明适用范围（主体、口径、期间等）"
+     ],
+     "score": 3
+    }
+   ],
+   "ranking": [
+    {
+     "capability": "extractor@1",
+     "score": 4,
+     "basis": "不限任务重点"
+    },
+    {
+     "capability": "business@1",
+     "score": 4,
+     "basis": "覆盖重点「经营」"
+    },
+    {
+     "capability": "quality@1",
+     "score": 4,
+     "basis": "覆盖重点「资产质量」"
+    },
+    {
+     "capability": "writer@1",
+     "score": 4,
+     "basis": "不限任务重点"
+    }
+   ],
+   "selection": [
+    "extractor@1",
+    "business@1",
+    "quality@1",
+    "writer@1"
+   ],
+   "composition": {
+    "result": "compatible",
+    "bindings": [
+     {
+      "from": "task.materials[cmb-2025-annual-report-a]",
+      "to": "extract.input",
+      "check": "材料在能力适用范围内"
+     },
+     {
+      "from": "extract.output",
+      "to": "business.input",
+      "check": "输入类型 indicators/1 一致"
+     },
+     {
+      "from": "extract.output",
+      "to": "quality.input",
+      "check": "输入类型 indicators/1 一致"
+     },
+     {
+      "from": "business, quality.output",
+      "to": "write.input",
+      "check": "至少有一个所需段落（经营、资产质量）"
+     }
+    ]
+   },
+   "graph_mapping": [
+    {
+     "node": "extract",
+     "capability": "extractor@1"
+    },
+    {
+     "node": "business",
+     "capability": "business@1",
+     "depends_on": [
+      "extract"
+     ]
+    },
+    {
+     "node": "quality",
+     "capability": "quality@1",
+     "depends_on": [
+      "extract"
+     ]
+    },
+    {
+     "node": "write",
+     "capability": "writer@1",
+     "depends_on": [
+      "business",
+      "quality"
+     ],
+     "report": true
+    }
+   ],
+   "team": [
+    {
+     "id": "extract",
+     "expert": "extractor@1",
+     "role": "年报资料提取",
+     "task": "年报资料提取。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量"
+    },
+    {
+     "id": "business",
+     "expert": "business@1",
+     "role": "经营分析",
+     "task": "经营分析。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量",
+     "depends_on": [
+      "extract"
+     ]
+    },
+    {
+     "id": "quality",
+     "expert": "quality@1",
+     "role": "资产质量分析",
+     "task": "资产质量分析。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量",
+     "depends_on": [
+      "extract"
+     ]
+    },
+    {
+     "id": "write",
+     "expert": "writer@1",
+     "role": "报告写作与一次修订",
+     "task": "报告写作与一次修订。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量",
+     "depends_on": [
+      "business",
+      "quality"
+     ]
+    }
+   ],
+   "outcome": "graph",
+   "created_at": "2026-11-18T06:21:36.484256863Z",
+   "digest": "sha256:755878dc01feae29180080380f93b2287e14adcbe44c35af330f047780018707"
+  },
+  "task_status": "FAILED",
+  "version": 1
+ }
+}
