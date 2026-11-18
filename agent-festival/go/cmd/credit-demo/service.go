@@ -23,18 +23,20 @@ import (
 )
 
 type Config struct {
-	Addr             string
-	DataDir          string
-	OrchestratorURL  string
-	PublicURL        string   // where browsers reach this service: a path behind the front proxy, e.g. /credit
-	Origins          []string // browser origins of the WorkSwarm UI; the MCP App may fetch /api/graph from them
-	MemberMCPURL     string
-	Model            string
-	SpecPath         string
-	LeaseSeconds     int
-	BusRegistryURL   string
-	BusRegistryToken string
-	BusTenant        string
+	BuilderHubEnabled  bool
+	BuilderPublication *builderPublicationConfig
+	Addr               string
+	DataDir            string
+	OrchestratorURL    string
+	PublicURL          string   // where browsers reach this service: a path behind the front proxy, e.g. /credit
+	Origins            []string // browser origins of the WorkSwarm UI; the MCP App may fetch /api/graph from them
+	MemberMCPURL       string
+	Model              string
+	SpecPath           string
+	LeaseSeconds       int
+	BusRegistryURL     string
+	BusRegistryToken   string
+	BusTenant          string
 }
 
 // StepRec is the authoritative record of one blueprint step in a run.
@@ -851,7 +853,7 @@ func (s *Service) Judgment(runID, token, step, raw string) (string, error) {
 	q, _ := bs.spec["question"].(map[string]any)
 	op := "op-" + r.ID
 	req := &adopt.Request{
-		AdoptionVersion: "0.1.0",
+		AdoptionVersion: "0.2.0",
 		Identity:        ledger.Identity{BusinessRequestID: "br-" + strings.ToLower(r.CaseID) + "-" + strings.ToLower(r.ID), EvaluationRevision: "er-1", OperationID: op},
 		Versions: ledger.Versions{Evidence: sha(evidence...), Rule: fmt.Sprintf("%v@%v", q["question_id"], q["spec_version"]),
 			Model: s.runModel(r), Readout: "risk-readout-1", Policy: r.PlanHash},

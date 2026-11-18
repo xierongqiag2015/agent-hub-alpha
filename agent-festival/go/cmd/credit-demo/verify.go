@@ -175,7 +175,7 @@ func (s *Service) Verify(runID string, tamper bool) (*Report, error) {
 			steps = append(steps, st)
 		}
 		var doc map[string]any
-		rawDoc, _ := json.Marshal(map[string]any{"case_version": "0.1.0", "case_id": strings.ToLower(r.ID), "steps": steps,
+		rawDoc, _ := json.Marshal(map[string]any{"case_version": "0.2.0", "case_id": strings.ToLower(r.ID), "steps": steps,
 			"recorded_events": evs, "expected": map[string]any{"fidelity": "match", "conformance": "pass"}})
 		_ = numberDecode(rawDoc, &doc)
 		c, lerr := replay.LoadCase(doc)

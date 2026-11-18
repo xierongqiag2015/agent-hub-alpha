@@ -68,13 +68,14 @@ var page = template.Must(template.New("page").Funcs(template.FuncMap{
 	"json":   compact,
 }).Parse(`<!doctype html><html lang="zh"><head><meta charset="utf-8"><title>{{.Title}}</title>
 <link rel="stylesheet" href="{{$.Base}}/static/style.css"><script src="{{$.Base}}/static/graph-flow.js?v={{$.Lib}}" defer></script></head><body>
-<header><b>授信编排</b>{{if .User}}<span class="user">{{.User}}</span>{{else}}<a class="user" href="{{$.Base}}/ui/login?next={{.Path}}">登录</a>{{end}}</header>
+<header><b>授信编排</b>{{if .User}}{{if .BuilderHubEnabled}}<a href="{{$.Base}}/ui/builder">Builder</a>{{end}}<span class="user">{{.User}}</span>{{else}}<a class="user" href="{{$.Base}}/ui/login?next={{.Path}}">登录</a>{{end}}</header>
 <main>{{template "body" .}}</main>
 </body></html>`))
 
 func (s *Service) render(w http.ResponseWriter, body string, data map[string]any) {
 	data["Base"] = s.base()
 	data["Lib"] = libVersion
+	data["BuilderHubEnabled"] = s.cfg.BuilderHubEnabled
 	t := template.Must(template.Must(page.Clone()).New("body").Parse(body))
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	if err := t.ExecuteTemplate(w, "page", data); err != nil {
