@@ -1,0 +1,614 @@
+13:41:46.455 INFO  c.o.demo.credit.Main - credit orchestrator on :8195, record at http://credit:8091
+13:42:51.801 INFO  c.o.d.credit.Worker - run R1 leased (epoch 1)
+13:43:17.738 INFO  c.o.d.credit.Worker - run R1 step related: executing
+13:43:17.819 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+13:43:18.090 ERROR tool - Streamable-http connection failed to http://credit:8091/member-mcp/related-party: java.lang.InterruptedException
+13:43:18.091 WARN  i.m.s.McpClientSession - Abruptly terminating exchange for request a0821dcc-0
+13:43:18.101 WARN  c.o.d.credit.Worker - member MCP for related unavailable
+13:43:18.223 ERROR agent - ReAct iteration 1/10 failed
+java.util.concurrent.CancellationException: model call interrupted
+	at com.openjiuwen.core.foundation.llm.classification.ClassifiedModelErrors.toCancellation(ClassifiedModelErrors.java:59)
+	at com.openjiuwen.core.foundation.llm.classification.ModelCallRetrier.cancellation(ModelCallRetrier.java:161)
+	at com.openjiuwen.core.foundation.llm.classification.ModelCallRetrier.execute(ModelCallRetrier.java:83)
+	at com.openjiuwen.core.foundation.llm.modelclients.OpenAIModelClient.postJson(OpenAIModelClient.java:1507)
+	at com.openjiuwen.core.foundation.llm.modelclients.OpenAIModelClient.postJson(OpenAIModelClient.java:1485)
+	at com.openjiuwen.core.foundation.llm.modelclients.OpenAIModelClient.invoke(OpenAIModelClient.java:540)
+	at com.openjiuwen.core.foundation.llm.modelclients.BaseModelClient.invoke(BaseModelClient.java:406)
+	at com.openjiuwen.core.foundation.llm.Model.invoke(Model.java:319)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.invokeNonStreaming(ReActAgent.java:685)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.doRailedModelCall(ReActAgent.java:523)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent$1.execute(ReActAgent.java:479)
+	at com.openjiuwen.core.singleagent.rail.Rails.run(Rails.java:65)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.railedModelCall(ReActAgent.java:462)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.callModel(ReActAgent.java:441)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.innerInvoke(ReActAgent.java:2304)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.invoke(ReActAgent.java:2047)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.invoke(ReActAgent.java:1988)
+	at com.openjiuwen.core.singleagent.agents.ReActAgent.invoke(ReActAgent.java:1994)
+	at com.openjiuwen.agents.orchestration.ReActAgentMember.execute(ReActAgentMember.java:59)
+	at com.openjiuwen.agents.orchestration.ActivityAwareExecutor.execute(ActivityAwareExecutor.java:29)
+	at com.openjiuwen.demo.credit.Worker.lambda$member$3(Worker.java:192)
+	at com.openjiuwen.demo.credit.Worker$Ledgered.execute(Worker.java:333)
+	at com.openjiuwen.agents.orchestration.ActivityAwareExecutor.execute(ActivityAwareExecutor.java:29)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runStep(BlueprintScheduler.java:186)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.lambda$submitSteps$0(BlueprintScheduler.java:171)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+13:43:18.228 ERROR c.o.d.credit.Worker - run R1 failed
+com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=financial failed: Remote outcome unresolved; original task retained
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)
+	at com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:70)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+2026-11-18 13:43:20
+Full thread dump OpenJDK 64-Bit Server VM (21.0.13+9-1-deb13u2-Debian mixed mode, sharing)
+                 JDK version: OpenJDK Runtime Environment (21.0.13+9) (build 21.0.13+9-1-deb13u2-Debian)
+
+Threads class SMR info:
+_java_thread_list=0x00007dd070023ea0, length=44, elements={
+0x00007dd1200626b0, 0x00007dd120063c00, 0x00007dd120065370, 0x00007dd120066990,
+0x00007dd120067f10, 0x00007dd120069ab0, 0x00007dd12006b150, 0x00007dd120076fd0,
+0x00007dd120079650, 0x00007dd120445700, 0x00007dd120455030, 0x00007dd120458e90,
+0x00007dd1204777f0, 0x00007dd120018ee0, 0x00007dd07c00d3e0, 0x00007dd07c011f10,
+0x00007dd07401c9e0, 0x00007dd0780e5ef0, 0x00007dd078123580, 0x00007dd0781271b0,
+0x00007dd07812b2a0, 0x00007dd0781323f0, 0x00007dd09003d0e0, 0x00007dd09003d7f0,
+0x00007dd090042470, 0x00007dd07c018d30, 0x00007dd07c019a30, 0x00007dd08c05eb90,
+0x00007dd08c05fb00, 0x00007dd068001070, 0x00007dd068002310, 0x00007dd064001070,
+0x00007dd0640022f0, 0x00007dd0680075b0, 0x00007dd0640075a0, 0x00007dd08c060f90,
+0x00007dd060146d50, 0x00007dd0601a4570, 0x00007dd0601a53b0, 0x00007dd0601c1bf0,
+0x00007dd06035d810, 0x00007dd06035e330, 0x00007dd06038dae0, 0x00007dd010001070
+}
+
+"Reference Handler" #4 [10] daemon prio=10 os_prio=0 cpu=1.47ms elapsed=90.95s tid=0x00007dd1200626b0 nid=10 waiting on condition  [0x00007dd10890f000]
+   java.lang.Thread.State: RUNNABLE
+	at java.lang.ref.Reference.waitForReferencePendingList(java.base@21.0.13/Native Method)
+	at java.lang.ref.Reference.processPendingReferences(java.base@21.0.13/Reference.java:246)
+	at java.lang.ref.Reference$ReferenceHandler.run(java.base@21.0.13/Reference.java:208)
+
+"Finalizer" #5 [11] daemon prio=8 os_prio=0 cpu=0.25ms elapsed=90.95s tid=0x00007dd120063c00 nid=11 in Object.wait()  [0x00007dd10880f000]
+   java.lang.Thread.State: WAITING (on object monitor)
+	at java.lang.Object.wait0(java.base@21.0.13/Native Method)
+	- waiting on <0x00000000f2255f08> (a java.lang.ref.NativeReferenceQueue$Lock)
+	at java.lang.Object.wait(java.base@21.0.13/Object.java:366)
+	at java.lang.Object.wait(java.base@21.0.13/Object.java:339)
+	at java.lang.ref.NativeReferenceQueue.await(java.base@21.0.13/NativeReferenceQueue.java:48)
+	at java.lang.ref.ReferenceQueue.remove0(java.base@21.0.13/ReferenceQueue.java:158)
+	at java.lang.ref.NativeReferenceQueue.remove(java.base@21.0.13/NativeReferenceQueue.java:89)
+	- locked <0x00000000f2255f08> (a java.lang.ref.NativeReferenceQueue$Lock)
+	at java.lang.ref.Finalizer$FinalizerThread.run(java.base@21.0.13/Finalizer.java:173)
+
+"Signal Dispatcher" #6 [12] daemon prio=9 os_prio=0 cpu=0.43ms elapsed=90.95s tid=0x00007dd120065370 nid=12 waiting on condition  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Service Thread" #7 [13] daemon prio=9 os_prio=0 cpu=1.35ms elapsed=90.95s tid=0x00007dd120066990 nid=13 runnable  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Monitor Deflation Thread" #8 [14] daemon prio=9 os_prio=0 cpu=13.41ms elapsed=90.95s tid=0x00007dd120067f10 nid=14 runnable  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"C2 CompilerThread0" #9 [15] daemon prio=9 os_prio=0 cpu=1021.56ms elapsed=90.95s tid=0x00007dd120069ab0 nid=15 waiting on condition  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+   No compile task
+
+"C1 CompilerThread0" #17 [16] daemon prio=9 os_prio=0 cpu=640.88ms elapsed=90.95s tid=0x00007dd12006b150 nid=16 waiting on condition  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+   No compile task
+
+"Notification Thread" #21 [17] daemon prio=9 os_prio=0 cpu=0.21ms elapsed=90.95s tid=0x00007dd120076fd0 nid=17 runnable  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"Common-Cleaner" #22 [18] daemon prio=8 os_prio=0 cpu=1.03ms elapsed=90.95s tid=0x00007dd120079650 nid=18 waiting on condition  [0x00007dd0c6ffe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2256030> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:269)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(java.base@21.0.13/AbstractQueuedSynchronizer.java:1886)
+	at java.lang.ref.ReferenceQueue.await(java.base@21.0.13/ReferenceQueue.java:71)
+	at java.lang.ref.ReferenceQueue.remove0(java.base@21.0.13/ReferenceQueue.java:143)
+	at java.lang.ref.ReferenceQueue.remove(java.base@21.0.13/ReferenceQueue.java:218)
+	at jdk.internal.ref.CleanerImpl.run(java.base@21.0.13/CleanerImpl.java:140)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+	at jdk.internal.misc.InnocuousThread.run(java.base@21.0.13/InnocuousThread.java:186)
+
+"HttpClient-1-SelectorManager" #23 [26] daemon prio=5 os_prio=0 cpu=75.34ms elapsed=88.92s tid=0x00007dd120445700 nid=26 runnable  [0x00007dd0c6afe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2f83848> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2ffed40> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"idle-timeout-task" #24 [27] daemon prio=5 os_prio=0 cpu=5.28ms elapsed=88.87s tid=0x00007dd120455030 nid=27 in Object.wait()  [0x00007dd0c69fe000]
+   java.lang.Thread.State: TIMED_WAITING (on object monitor)
+	at java.lang.Object.wait0(java.base@21.0.13/Native Method)
+	- waiting on <0x00000000f2f838d8> (a java.util.TaskQueue)
+	at java.lang.Object.wait(java.base@21.0.13/Object.java:366)
+	at java.util.TimerThread.mainLoop(java.base@21.0.13/Timer.java:563)
+	- locked <0x00000000f2f838d8> (a java.util.TaskQueue)
+	at java.util.TimerThread.run(java.base@21.0.13/Timer.java:516)
+
+"HTTP-Dispatcher" #25 [28] prio=5 os_prio=0 cpu=30.86ms elapsed=88.86s tid=0x00007dd120458e90 nid=28 runnable  [0x00007dd0c68fe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2f839f0> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2f839a0> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at sun.net.httpserver.ServerImpl$Dispatcher.run(jdk.httpserver@21.0.13/ServerImpl.java:527)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"worker" #26 [29] prio=5 os_prio=0 cpu=175.75ms elapsed=88.85s tid=0x00007dd1204777f0 nid=29 waiting on condition  [0x00007dd0c67fe000]
+   java.lang.Thread.State: WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000eb47dd08> (a java.util.concurrent.CompletableFuture$Signaller)
+	at java.util.concurrent.locks.LockSupport.park(java.base@21.0.13/LockSupport.java:221)
+	at java.util.concurrent.CompletableFuture$Signaller.block(java.base@21.0.13/CompletableFuture.java:1864)
+	at java.util.concurrent.ForkJoinPool.unmanagedBlock(java.base@21.0.13/ForkJoinPool.java:3780)
+	at java.util.concurrent.ForkJoinPool.managedBlock(java.base@21.0.13/ForkJoinPool.java:3725)
+	at java.util.concurrent.CompletableFuture.waitingGet(java.base@21.0.13/CompletableFuture.java:1898)
+	at java.util.concurrent.CompletableFuture.get(java.base@21.0.13/CompletableFuture.java:2072)
+	at jdk.internal.net.http.HttpClientImpl.send(java.net.http@21.0.13/HttpClientImpl.java:934)
+	at jdk.internal.net.http.HttpClientFacade.send(java.net.http@21.0.13/HttpClientFacade.java:133)
+	at com.openjiuwen.demo.credit.GoClient.post(GoClient.java:74)
+	at com.openjiuwen.demo.credit.GoClient.lease(GoClient.java:109)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:66)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"DestroyJavaVM" #27 [7] prio=5 os_prio=0 cpu=1811.77ms elapsed=88.83s tid=0x00007dd120018ee0 nid=7 waiting on condition  [0x0000000000000000]
+   java.lang.Thread.State: RUNNABLE
+
+"HttpClient-1-Worker-0" #28 [30] daemon prio=5 os_prio=0 cpu=74.49ms elapsed=88.68s tid=0x00007dd07c00d3e0 nid=30 waiting on condition  [0x00007dd0c6bfe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffeff8> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-1-Worker-1" #29 [31] daemon prio=5 os_prio=0 cpu=45.02ms elapsed=88.68s tid=0x00007dd07c011f10 nid=31 waiting on condition  [0x00007dd0c66fe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffeff8> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"pool-1-thread-1" #31 [40] prio=5 os_prio=0 cpu=171.28ms elapsed=85.45s tid=0x00007dd07401c9e0 nid=40 waiting on condition  [0x00007dd0c6cfe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fc18a0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-2-SelectorManager" #33 [115] daemon prio=5 os_prio=0 cpu=26.54ms elapsed=26.99s tid=0x00007dd0780e5ef0 nid=115 runnable  [0x00007dd0c6dfe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2fff4c0> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2fff470> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"HttpClient-3-SelectorManager" #34 [116] daemon prio=5 os_prio=0 cpu=14.15ms elapsed=26.99s tid=0x00007dd078123580 nid=116 runnable  [0x00007dd0c6efe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2fff608> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2fff5b8> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"HttpClient-4-SelectorManager" #35 [117] daemon prio=5 os_prio=0 cpu=13.73ms elapsed=26.99s tid=0x00007dd0781271b0 nid=117 runnable  [0x00007dd0c64fe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2fff750> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2fff700> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"HttpClient-5-SelectorManager" #36 [118] daemon prio=5 os_prio=0 cpu=13.18ms elapsed=26.99s tid=0x00007dd07812b2a0 nid=118 runnable  [0x00007dd0c63fe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2fff898> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2fff848> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"HttpClient-6-SelectorManager" #37 [119] daemon prio=5 os_prio=0 cpu=0.94ms elapsed=26.98s tid=0x00007dd0781323f0 nid=119 runnable  [0x00007dd0c62fe000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f2fff9e0> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f2fff990> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"HttpClient-2-Worker-0" #39 [123] daemon prio=5 os_prio=0 cpu=7.19ms elapsed=26.94s tid=0x00007dd09003d0e0 nid=123 waiting on condition  [0x00007dd0c5efe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fffc48> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-2-Worker-1" #40 [124] daemon prio=5 os_prio=0 cpu=1.95ms elapsed=26.93s tid=0x00007dd09003d7f0 nid=124 waiting on condition  [0x00007dd0c5cf3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fffc48> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-2-Worker-2" #41 [125] daemon prio=5 os_prio=0 cpu=26.36ms elapsed=25.67s tid=0x00007dd090042470 nid=125 waiting on condition  [0x00007dd0c5ffe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fffc48> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-1-Worker-3" #44 [146] daemon prio=5 os_prio=0 cpu=0.40ms elapsed=12.25s tid=0x00007dd07c018d30 nid=146 waiting on condition  [0x00007dd0c5bf3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffeff8> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-1-Worker-4" #45 [147] daemon prio=5 os_prio=0 cpu=4.05ms elapsed=12.25s tid=0x00007dd07c019a30 nid=147 waiting on condition  [0x00007dd0c5af3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffeff8> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-3-Worker-0" #46 [148] daemon prio=5 os_prio=0 cpu=13.46ms elapsed=12.23s tid=0x00007dd08c05eb90 nid=148 waiting on condition  [0x00007dd0c59f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fffef0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-3-Worker-1" #47 [149] daemon prio=5 os_prio=0 cpu=1.01ms elapsed=12.23s tid=0x00007dd08c05fb00 nid=149 waiting on condition  [0x00007dd0c58f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fffef0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-5-Worker-0" #48 [150] daemon prio=5 os_prio=0 cpu=6.42ms elapsed=12.22s tid=0x00007dd068001070 nid=150 waiting on condition  [0x00007dd0c57f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffff58> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-5-Worker-1" #49 [151] daemon prio=5 os_prio=0 cpu=5.78ms elapsed=12.22s tid=0x00007dd068002310 nid=151 waiting on condition  [0x00007dd0c56f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffff58> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-4-Worker-0" #50 [152] daemon prio=5 os_prio=0 cpu=4.46ms elapsed=12.22s tid=0x00007dd064001070 nid=152 waiting on condition  [0x00007dd0c55f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffffc0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-4-Worker-1" #51 [153] daemon prio=5 os_prio=0 cpu=10.33ms elapsed=12.22s tid=0x00007dd0640022f0 nid=153 waiting on condition  [0x00007dd0c54f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffffc0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-5-Worker-2" #52 [154] daemon prio=5 os_prio=0 cpu=6.73ms elapsed=11.11s tid=0x00007dd0680075b0 nid=154 waiting on condition  [0x00007dd0c53f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffff58> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-4-Worker-2" #53 [155] daemon prio=5 os_prio=0 cpu=3.82ms elapsed=11.10s tid=0x00007dd0640075a0 nid=155 waiting on condition  [0x00007dd0c52f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2ffffc0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-3-Worker-2" #54 [156] daemon prio=5 os_prio=0 cpu=5.75ms elapsed=9.82s tid=0x00007dd08c060f90 nid=156 waiting on condition  [0x00007dd0c51f3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f2fffef0> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-7-SelectorManager" #57 [172] daemon prio=5 os_prio=0 cpu=0.18ms elapsed=2.75s tid=0x00007dd060146d50 nid=172 runnable  [0x00007dd0c50f3000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f31188c0> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f3118870> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"callback-delayed-trigger-1" #58 [173] daemon prio=5 os_prio=0 cpu=0.29ms elapsed=2.72s tid=0x00007dd0601a4570 nid=173 waiting on condition  [0x00007dd0c4ff3000]
+   java.lang.Thread.State: WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f31ab2c0> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.park(java.base@21.0.13/LockSupport.java:371)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(java.base@21.0.13/AbstractQueuedSynchronizer.java:519)
+	at java.util.concurrent.ForkJoinPool.unmanagedBlock(java.base@21.0.13/ForkJoinPool.java:3780)
+	at java.util.concurrent.ForkJoinPool.managedBlock(java.base@21.0.13/ForkJoinPool.java:3725)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(java.base@21.0.13/AbstractQueuedSynchronizer.java:1746)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:1170)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:899)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1070)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"callback-delayed-trigger-2" #59 [174] daemon prio=5 os_prio=0 cpu=0.25ms elapsed=2.72s tid=0x00007dd0601a53b0 nid=174 waiting on condition  [0x00007dd0c4ef3000]
+   java.lang.Thread.State: WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f31ab2c0> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.park(java.base@21.0.13/LockSupport.java:371)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionNode.block(java.base@21.0.13/AbstractQueuedSynchronizer.java:519)
+	at java.util.concurrent.ForkJoinPool.unmanagedBlock(java.base@21.0.13/ForkJoinPool.java:3780)
+	at java.util.concurrent.ForkJoinPool.managedBlock(java.base@21.0.13/ForkJoinPool.java:3725)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(java.base@21.0.13/AbstractQueuedSynchronizer.java:1746)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:1170)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:899)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1070)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-8-SelectorManager" #60 [175] daemon prio=5 os_prio=0 cpu=1.55ms elapsed=2.70s tid=0x00007dd0601c1bf0 nid=175 runnable  [0x00007dd0c4df3000]
+   java.lang.Thread.State: RUNNABLE
+	at sun.nio.ch.EPoll.wait(java.base@21.0.13/Native Method)
+	at sun.nio.ch.EPollSelectorImpl.doSelect(java.base@21.0.13/EPollSelectorImpl.java:121)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(java.base@21.0.13/SelectorImpl.java:130)
+	- locked <0x00000000f31ab540> (a sun.nio.ch.Util$2)
+	- locked <0x00000000f31ab4f0> (a sun.nio.ch.EPollSelectorImpl)
+	at sun.nio.ch.SelectorImpl.select(java.base@21.0.13/SelectorImpl.java:142)
+	at jdk.internal.net.http.HttpClientImpl$SelectorManager.run(java.net.http@21.0.13/HttpClientImpl.java:1376)
+
+"parallel-1" #61 [176] daemon prio=5 os_prio=0 cpu=0.25ms elapsed=2.53s tid=0x00007dd06035d810 nid=176 waiting on condition  [0x00007dd0c5dfe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f31ab598> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:269)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(java.base@21.0.13/AbstractQueuedSynchronizer.java:1797)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:1182)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:899)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1070)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"parallel-2" #62 [177] daemon prio=5 os_prio=0 cpu=0.30ms elapsed=2.53s tid=0x00007dd06035e330 nid=177 waiting on condition  [0x00007dd0c60fe000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f31ab630> (a java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:269)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(java.base@21.0.13/AbstractQueuedSynchronizer.java:1797)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:1182)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(java.base@21.0.13/ScheduledThreadPoolExecutor.java:899)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1070)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-8-Worker-0" #63 [178] daemon prio=5 os_prio=0 cpu=6.26ms elapsed=2.49s tid=0x00007dd06038dae0 nid=178 waiting on condition  [0x00007dd0c4cf3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f31ab6c8> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"HttpClient-8-Worker-1" #64 [179] daemon prio=5 os_prio=0 cpu=0.47ms elapsed=2.49s tid=0x00007dd010001070 nid=179 waiting on condition  [0x00007dd0c4bf3000]
+   java.lang.Thread.State: TIMED_WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@21.0.13/Native Method)
+	- parking to wait for  <0x00000000f31ab6c8> (a java.util.concurrent.SynchronousQueue$Transferer)
+	at java.util.concurrent.locks.LockSupport.parkNanos(java.base@21.0.13/LockSupport.java:410)
+	at java.util.concurrent.LinkedTransferQueue$DualNode.await(java.base@21.0.13/LinkedTransferQueue.java:452)
+	at java.util.concurrent.SynchronousQueue$Transferer.xferLifo(java.base@21.0.13/SynchronousQueue.java:194)
+	at java.util.concurrent.SynchronousQueue.xfer(java.base@21.0.13/SynchronousQueue.java:235)
+	at java.util.concurrent.SynchronousQueue.poll(java.base@21.0.13/SynchronousQueue.java:338)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(java.base@21.0.13/ThreadPoolExecutor.java:1069)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@21.0.13/ThreadPoolExecutor.java:1130)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@21.0.13/ThreadPoolExecutor.java:642)
+	at java.lang.Thread.runWith(java.base@21.0.13/Thread.java:1596)
+	at java.lang.Thread.run(java.base@21.0.13/Thread.java:1583)
+
+"VM Thread" os_prio=0 cpu=147.58ms elapsed=90.96s tid=0x00007dd120057eb0 nid=9 runnable  
+
+"VM Periodic Task Thread" os_prio=0 cpu=85.09ms elapsed=90.97s tid=0x00007dd120047060 nid=8 waiting on condition  
+
+JNI global refs: 22, weak refs: 0
+
+Heap
+ def new generation   total 13632K, used 2649K [0x00000000eb200000, 0x00000000ec0c0000, 0x00000000f2150000)
+  eden space 12160K,  21% used [0x00000000eb200000, 0x00000000eb496688, 0x00000000ebde0000)
+  from space 1472K,   0% used [0x00000000ebde0000, 0x00000000ebde0000, 0x00000000ebf50000)
+  to   space 1472K,   0% used [0x00000000ebf50000, 0x00000000ebf50000, 0x00000000ec0c0000)
+ tenured generation   total 30076K, used 18043K [0x00000000f2150000, 0x00000000f3eaf000, 0x0000000100000000)
+   the space 30076K,  59% used [0x00000000f2150000, 0x00000000f32eee00, 0x00000000f32eee00, 0x00000000f3eaf000)
+ Metaspace       used 27406K, committed 27904K, reserved 1114112K
+  class space    used 3259K, committed 3456K, reserved 1048576K
+
+13:43:23.250 INFO  c.o.d.credit.Worker - run R1 leased (epoch 2)
+13:43:23.324 INFO  c.o.d.credit.Worker - run R1 step related: executing
+13:43:23.326 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+13:43:32.587 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+13:43:32.591 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+13:43:32.595 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+13:44:03.507 WARN  llm - Model call will retry. {retry_count=1, max_retries=2, category=TEMPORARY, exception_type=java.io.IOException, delay_ms=445, delay_source=exponential_backoff}
+13:44:19.131 INFO  c.o.d.credit.Worker - run R1 step judge: executing
+13:44:19.132 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+13:44:34.185 INFO  c.o.d.credit.Worker - run R1 done (skipped [])

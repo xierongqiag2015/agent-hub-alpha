@@ -1,0 +1,78 @@
+== 2026-11-18T21:41:32+08:00 source e1961fe8dcfc1c859b515854f793f24948d844fe
+w05-e196/orchestrator:dev sha256:4d92ee97b81d3d72f4f8f154a09a382e35210f424aefcaf9571e26ec074d7e44
+w05-e196/professional:dev sha256:733535de333067caab73d4e5da5199d24c19812cc36b49ffcaca139799716506
+w05-e196/credit:dev sha256:d5c31ece3defb6c59054d01a8138298f22a1bba86645af43497240088d5138c0
+ Network agent-hub-e196_default Creating 
+ Network agent-hub-e196_default Created 
+ Volume agent-hub-e196_credit-data Creating 
+ Volume agent-hub-e196_credit-data Created 
+ Volume agent-hub-e196_rdc-data Creating 
+ Volume agent-hub-e196_rdc-data Created 
+ Container agent-hub-e196-material-agent-1 Creating 
+ Container agent-hub-e196-bus-db-1 Creating 
+ Container agent-hub-e196-writer-agent-1 Creating 
+ Container agent-hub-e196-analysis-agent-1 Creating 
+ Container agent-hub-e196-credit-1 Creating 
+ Container agent-hub-e196-fault-proxy-1 Creating 
+ Container agent-hub-e196-writer-agent-1 Created 
+ Container agent-hub-e196-fault-proxy-1 Created 
+ Container agent-hub-e196-material-agent-1 Created 
+ Container agent-hub-e196-analysis-agent-1 Created 
+ Container agent-hub-e196-credit-1 Created 
+ Container agent-hub-e196-orchestrator-1 Creating 
+ Container agent-hub-e196-bus-db-1 Created 
+ Container agent-hub-e196-rdc-1 Creating 
+ Container agent-hub-e196-orchestrator-1 Created 
+ Container agent-hub-e196-rdc-1 Created 
+ Container agent-hub-e196-gateway-1 Creating 
+ Container agent-hub-e196-gateway-1 Created 
+ Container agent-hub-e196-fault-proxy-1 Starting 
+ Container agent-hub-e196-writer-agent-1 Starting 
+ Container agent-hub-e196-material-agent-1 Starting 
+ Container agent-hub-e196-credit-1 Starting 
+ Container agent-hub-e196-analysis-agent-1 Starting 
+ Container agent-hub-e196-bus-db-1 Starting 
+ Container agent-hub-e196-bus-db-1 Started 
+ Container agent-hub-e196-bus-db-1 Waiting 
+ Container agent-hub-e196-writer-agent-1 Started 
+ Container agent-hub-e196-material-agent-1 Started 
+ Container agent-hub-e196-analysis-agent-1 Started 
+ Container agent-hub-e196-credit-1 Started 
+ Container agent-hub-e196-fault-proxy-1 Started 
+ Container agent-hub-e196-credit-1 Waiting 
+ Container agent-hub-e196-fault-proxy-1 Waiting 
+ Container agent-hub-e196-credit-1 Healthy 
+ Container agent-hub-e196-fault-proxy-1 Healthy 
+ Container agent-hub-e196-orchestrator-1 Starting 
+ Container agent-hub-e196-orchestrator-1 Started 
+ Container agent-hub-e196-bus-db-1 Healthy 
+ Container agent-hub-e196-rdc-1 Starting 
+ Container agent-hub-e196-rdc-1 Started 
+ Container agent-hub-e196-rdc-1 Waiting 
+ Container agent-hub-e196-rdc-1 Healthy 
+ Container agent-hub-e196-gateway-1 Starting 
+ Container agent-hub-e196-gateway-1 Started 
+ Container agent-hub-e196-rdc-1 Waiting 
+ Container agent-hub-e196-bus-db-1 Waiting 
+ Container agent-hub-e196-fault-proxy-1 Waiting 
+ Container agent-hub-e196-analysis-agent-1 Waiting 
+ Container agent-hub-e196-gateway-1 Waiting 
+ Container agent-hub-e196-writer-agent-1 Waiting 
+ Container agent-hub-e196-orchestrator-1 Waiting 
+ Container agent-hub-e196-material-agent-1 Waiting 
+ Container agent-hub-e196-credit-1 Waiting 
+ Container agent-hub-e196-material-agent-1 Healthy 
+ Container agent-hub-e196-rdc-1 Healthy 
+ Container agent-hub-e196-fault-proxy-1 Healthy 
+ Container agent-hub-e196-writer-agent-1 Healthy 
+ Container agent-hub-e196-credit-1 Healthy 
+ Container agent-hub-e196-bus-db-1 Healthy 
+ Container agent-hub-e196-orchestrator-1 Healthy 
+ Container agent-hub-e196-analysis-agent-1 Healthy 
+ Container agent-hub-e196-gateway-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-18T21:42:13+08:00 up exit 0
+== 2026-11-18T21:44:34+08:00 scenario exit 0
+== 2026-11-18T21:44:35+08:00 collected; stopping agent-hub-e196
+stopped agent-hub-e196
+== 2026-11-18T21:44:37+08:00 done <home>/e196-ra/20261118T214132

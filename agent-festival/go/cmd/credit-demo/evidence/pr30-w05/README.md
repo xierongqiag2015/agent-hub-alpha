@@ -215,6 +215,50 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
 - 推断（未直接观测）：Gateway（JVM）缓存了重建前的 DNS 解析。JVM 默认正向缓存 30 秒，与“等 35 秒后通过”一致。
 - 结论：这不是 AR-04 绑定的缺陷。问题出在原地重建 Runtime（同一主机名、新 IP）后的路由可用性，归 Gateway / 部署处理。实验的就绪条件改为：compose 健康检查通过，再等 35 秒（`M14_SETTLE`）。
 
+## R-A 同进程恢复：候选 e1961fe8（2026-11-18 21:42—21:44，`raw/d2-e196/`）
+
+**被测对象**：
+- 集成候选 `e1961fe8`，含 #44 的 SDK 关闭补丁：编排器内 `agent-core-ext-orchestration` 版本为 `0.1.3-aha-drain1`，已从镜像内 jar 读回。
+- 本地构建镜像 `w05-e196/{orchestrator,professional,credit}:dev`，完整 ID 见 `run.log`。
+- 独立 compose 项目 `agent-hub-e196`，credit 在 5391，不影响 41a3675 的 D2 环境；Runtime 健康后再等 35 秒。
+
+**做法**：
+- 沿用 `w05_rd_extra.py ra-completed-then-unknown`，以 `--resume external` 运行。
+- 外层 `e196_ra_watch.py` 在任务进入 waiting 后，向编排器 JVM 发 SIGQUIT 取线程转储，随后立即经 `/api/resume`（插件使用的同一接口）恢复，并在前后三次记录编排器进程标识。
+
+**结果（R1，一次恢复即完成）**：
+
+| 时刻（UTC） | 事件 |
+|---|---|
+| 13:42:51.801 | 第 1 次领取（epoch 1） |
+| 13:43:17.996 | intake、bureau 完成后注入 drop-query-once；financial 的查询应答被丢弃 |
+| 13:43:18.090 | related 的 member-MCP 连接被中断（InterruptedException） |
+| 13:43:18.223 | related 在途的模型调用被取消（CancellationException: model call interrupted） |
+| 13:43:18.228 | `run R1 failed`：try-with-resources 先执行 `close()`，等成员退出后才记录失败并上报，任务转 waiting |
+| 约 13:43:20.5 | 线程转储：所有线程栈中都没有 BlueprintScheduler / LoopForest / ReActAgent / RemoteAgentMember / Ledgered；只剩空闲线程池线程与 lease 轮询 |
+| 13:43:23.250 | 第 2 次领取（epoch 2），同一 JVM |
+| 13:44:34.185 | `run R1 done` |
+
+- waiting 时的状态：intake、bureau 完成；financial unknown；industry 远端在途；related 本地在途。
+- 同一进程：容器启动时间、重启次数（0）、宿主 PID、容器内 PID 1 的启动 tick，在恢复前、waiting 时、完成后三次一致。
+- 全程没有 `fork_subtask` 或重复注册错误。
+- intake、bureau 复用（request、产物、model_events 不变，各 2 条模型事件）；financial 按原 task 查询完成；industry 沿用原 request/task 完成；related 在新调度实例中重算后完成。
+- 原始传输事件：5 个 request 各 1 次 SendMessage，唯一故障是注入的那次 GetTask 503。
+
+**边界**：
+- 本次 related 的模型调用响应了中断。上游不响应中断时，`close()` 会一直等待，宿主被阻塞，这一边界未在此覆盖。
+- 恢复走的是 `/api/resume`，与插件同一接口；插件页面路径由 W02 覆盖。
+
+## report 的 400（W02 R9）：时钟回拨与 Java 修复候选
+
+- **被拒的是哪一次**：W02 记录中，report 的 SendMessage 与前 6 次 GetTask 都进了 Go 的记录。之后故障代理还记到一次 GetTask（`1ae4c563`，HTTP 200），它不在 Go 的记录里，之后再无请求。
+- **是哪个字段**：41a3675 的 `RemoteAgentMember.rpc()` 生成的各字段取值恒合规；唯一可能不满足的是 `end.Before(start)`，即调用前后两次读取墙钟之间墙钟回拨。
+- **旁证**：W05 本机 WSL2 内核日志有 `systemd-journald: Time jumped backwards`。
+- **修复候选**：fork 分支 `gateway-time-order`，基于 e1961fe8。
+  - `d1dec69`：加时钟注入点（行为不变）与测试。测试驱动真实的 `execute()`，墙钟每读一次后退 50 ms。
+  - `7de8c55`：`finished_at` = `started_at` + 单调时钟经过的时间，Go 校验不变。
+  - 结果（`raw/d2-e196/java-tests-red-green.log`）：`d1dec69` 上新测试失败（`started_at` 03.700Z，`finished_at` 03.650Z）；`7de8c55` 上 5/5 通过，含 SchedulerRecoveryTest 与 JudgmentErrorsTest。
+
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
 | 编号 | 本记录覆盖到的程度 | 仍需补的部分 |

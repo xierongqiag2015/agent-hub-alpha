@@ -1,0 +1,13 @@
+# Test-only overlay: run the candidate e1961fe8 images (built locally under
+# w05-e196/*) in the separate project agent-hub-e196.
+services:
+  credit:
+    image: w05-e196/credit:dev
+  orchestrator:
+    image: w05-e196/orchestrator:dev
+  material-agent:
+    image: w05-e196/professional:dev
+  analysis-agent:
+    image: w05-e196/professional:dev
+  writer-agent:
+    image: w05-e196/professional:dev

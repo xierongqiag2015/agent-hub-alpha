@@ -1,0 +1,14 @@
+R1 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 waiting [('intake', 'done'), ('financial', 'unknown'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+resume: waiting for an operator to resume R1 from the plugin
+R1 running [('intake', 'reused'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R1 running [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R1 done [('intake', 'reused'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'reused'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: <home>/.cache/agent-hub-alpha/issue16/evidence/agent-bus/ra-completed-then-unknown-1795009371.json
+checks: {"armed_after_two_completed": true, "was_waiting_with_unknown": true, "completed_before": ["bureau", "intake"], "completed_nodes_unchanged": true, "others_kept_request_and_task": true, "one_send_per_request": true, "send_counts": {"6437d3c3faa5316a0884f413": 1, "9192deda33ac55bd313bdfce": 1, "1e78dd2eb82fa7d0d601d9b5": 1, "90e286ad12a8a478c96e19d6": 1, "621b005456bcd6bb670506a0": 1}, "final_status": "done"}
