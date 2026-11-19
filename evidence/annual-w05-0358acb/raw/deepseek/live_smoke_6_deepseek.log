@@ -1,0 +1,11 @@
+{"phase": "new_dialogue_submitted"}
+{"phase": "fresh_candidate", "task_id": "T-8fae6cb5b646d334defc623e6e42e469", "nodes": 8}
+{"phase": "plugin_admission_submitted"}
+{"phase": "task_status", "status": "AWAITING_APPROVAL"}
+{"phase": "task_status", "status": "QUEUED"}
+{"phase": "task_status", "status": "RUNNING"}
+{"phase": "task_status", "status": "WAITING_REMOTE"}
+{"phase": "task_status", "status": "RUNNING"}
+{"phase": "task_status", "status": "AWAITING_ACCEPTANCE"}
+{"phase": "completed", "task_id": "T-8fae6cb5b646d334defc623e6e42e469", "status": "DELIVERED", "all_passed": true}
+exit 0

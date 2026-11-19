@@ -1,0 +1,19 @@
+{"phase": "new_dialogue_submitted"}
+{"phase": "fresh_candidate", "task_id": "T-bdc4aa18d8f8e0b979a7d0e628dc2e94", "nodes": 8}
+{"phase": "plugin_admission_submitted"}
+{"phase": "task_status", "status": "AWAITING_APPROVAL"}
+{"phase": "task_status", "status": "RUNNING"}
+{"phase": "task_status", "status": "WAITING_REMOTE"}
+{"phase": "task_status", "status": "RUNNING"}
+{"phase": "task_status", "status": "WAITING_REMOTE"}
+{"phase": "task_status", "status": "RUNNING"}
+{"phase": "task_status", "status": "WAITING_REMOTE"}
+{"phase": "failed"}
+Traceback (most recent call last):
+  File "\<wsl-home>\report-demo-env\repo\demos\report-demo\tests\live_smoke.py", line 166, in <module>
+    main()
+    ~~~~^^
+  File "\<wsl-home>\report-demo-env\repo\demos\report-demo\tests\live_smoke.py", line 112, in main
+    raise RuntimeError('Real experts did not settle within execution deadline')
+RuntimeError: Real experts did not settle within execution deadline
+exit 1

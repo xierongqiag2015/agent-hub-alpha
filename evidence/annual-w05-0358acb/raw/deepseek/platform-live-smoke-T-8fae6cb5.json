@@ -1,0 +1,76 @@
+{
+  "schema_version": "report-platform-smoke/1",
+  "phases": [
+    {
+      "phase": "new_dialogue_submitted",
+      "at": 1795069742.3943803
+    },
+    {
+      "phase": "fresh_candidate",
+      "at": 1795069765.6201859,
+      "task_id": "T-8fae6cb5b646d334defc623e6e42e469",
+      "nodes": 8
+    },
+    {
+      "phase": "plugin_admission_submitted",
+      "at": 1795069766.7568617
+    },
+    {
+      "phase": "task_status",
+      "at": 1795069766.7731862,
+      "status": "AWAITING_APPROVAL"
+    },
+    {
+      "phase": "task_status",
+      "at": 1795069767.7972143,
+      "status": "QUEUED"
+    },
+    {
+      "phase": "task_status",
+      "at": 1795069768.8213134,
+      "status": "RUNNING"
+    },
+    {
+      "phase": "task_status",
+      "at": 1795069788.536053,
+      "status": "WAITING_REMOTE"
+    },
+    {
+      "phase": "task_status",
+      "at": 1795069818.1397974,
+      "status": "RUNNING"
+    },
+    {
+      "phase": "task_status",
+      "at": 1795069946.5326397,
+      "status": "AWAITING_ACCEPTANCE"
+    },
+    {
+      "phase": "completed",
+      "at": 1795069950.4422433,
+      "task_id": "T-8fae6cb5b646d334defc623e6e42e469",
+      "status": "DELIVERED",
+      "all_passed": true
+    }
+  ],
+  "checks": {
+    "zero_calls_before_confirmation": true,
+    "four_real_experts": true,
+    "all_calls_have_unique_completed_remote_tasks": true,
+    "formally_delivered": true,
+    "download_exact_formal_bytes": true,
+    "evidence_intact": true
+  },
+  "limits": [
+    "Actual local model/services; not peer independent replay or business signoff"
+  ],
+  "task_id": "T-8fae6cb5b646d334defc623e6e42e469",
+  "graph_digest": "sha256:e52e04a1b44dd16dc65e4883ad2fe9328ae4ad4127564e8f96e7d7df8aa4a1ab",
+  "execution_profile": "sha256:adeb6664729e9fbe16de730f2419f9e45d2df59c9a5dadc82c550e9cee694839",
+  "model_binding_digest": "sha256:8f336627d4812aa1c2b4bd1651af9d0264a04cd55e518a2ae8db8514c70ceefd",
+  "session_url": "http://127.0.0.1:5173/chat/web_1a1f27e92a9_921cdf2f2d05",
+  "report_digest": "sha256:69d0d558052151351924b4b2991cfd00aaef7470d2e909ecd38812089e42eeb2",
+  "remote_calls": 4,
+  "status": "DELIVERED",
+  "all_passed": true
+}

@@ -1,4 +1,4 @@
-# W05 年报链单侧记录：`0358acb`（2026-11-18）
+# W05 年报链单侧记录：`0358acb`（2026-11-18 — 11-19）
 
 W05（xierongqiag2015）在自己的环境上按 B 方案部署 W03/W04 候选并实跑的记录。这是单侧记录，不代替共同 D1 接收、W06 业务验收或独立复跑。
 
@@ -24,7 +24,10 @@ W05（xierongqiag2015）在自己的环境上按 B 方案部署 W03/W04 候选�
 - **服务**：Windows 11 上的 WSL2 Ubuntu 24.04，按 `demos/report-demo/LINUX-RUN.md` 原生运行，全部只绑定 127.0.0.1。
 - **工具链**：OpenJDK 21.0.13、Go 1.25.0、Maven 3.9.16、Node 24.22.1、Python 3.12.3、uv 0.11.7、Keycloak 26.8.2。
 - **数据库**：PostgreSQL 16.16 容器（127.0.0.1:55432），库 `agent_hub_demo`、`agent_rdc`。
-- **模型**：GLM `glm-5-2-260617`，OpenAI 兼容接口，`DEMO_MODEL_ENDPOINT_PROFILE=openai`。专家预算用默认值（max_tokens 12000，迭代 4 / 8）。
+- **模型**：
+  - 11-18 前三次运行：GLM `glm-5-2-260617`；
+  - 11-18 22:21 起：`deepseek-v4-1-flash-260910`（同一接口与密钥，只换模型名并重新绑定；新绑定 `execution_profile` `sha256:adeb6664…`、`model_binding_digest` `sha256:8f336627…`，旧绑定已备份）。
+  - 均为 OpenAI 兼容接口，`DEMO_MODEL_ENDPOINT_PROFILE=openai`，专家预算用默认值（max_tokens 12000，迭代 4 / 8）。
 - **测试客户端**：Windows 上的 Python + Playwright + Edge，经 WSL 的 localhost 转发访问 5173。运行前核对过：Windows 侧这些端口都是 `wslrelay` 转发，`control_session_id` 与 WSL 内一致，没有命中 Windows 上的其他实例。
 - **凭据**：都在仓库外的 600 权限文件中。本目录文件已按实际取值扫描（26 个值），均未出现。
 
@@ -59,12 +62,54 @@ W05（xierongqiag2015）在自己的环境上按 B 方案部署 W03/W04 候选�
 | PG 正式结果 | `/verify`：`formal_nodes` 2（extract、business 为 `COMMITTED`）。`evidence_intact` 为 false，因为其余节点未成为正式结果 |
 | 插件 | 编排台显示同一任务：选择记录、正式状态 FAILED、Agent Bus DIRECT、“关联任务 3 · 已保存 2 · 待核对 0 · 失败 1”（`raw/plugin-T-01858b3e-0358acb.png`） |
 
+## deepseek 对照与 D1 全链（2026-11-18 22:21 — 11-19 14:32，`raw/deepseek/`）
+
+按 yougq 的建议，只把模型换成 deepseek-flash（`scripts/wsl_report_rebind.sh`：备份旧绑定 → 按归属核对停止 → `bind_profile.py` → 重启 → `validate_services`、`identity_probe` 通过）。
+
+| 任务 | 开始（UTC+8） | 结果 |
+|---|---|---|
+| `T-bdc4aa18d8f8e0b979a7d0e628dc2e94` | 11-18 22:23 | 四个专家全部完成；check0 程序检查无失败项、4 条待人工核验 → 人工核验通过后**死锁**，见下 |
+| `T-8fae6cb5b646d334defc623e6e42e469` | 11-19 14:29 | check0 直接 PASS；**一直走到 DELIVERED** |
+
+GLM 下三次运行都有专家输出不合约，deepseek 下两次运行四个专家全部完成：问题可归到 GLM 模型本身。
+
+### `T-8fae6cb5`：D1 链路逐段核对
+
+| 段 | 证据（`raw/deepseek/T-8fae6cb5-deepseek-delivered.json` 等） |
+|---|---|
+| 新对话 → 能力选择 → 新图 | 规划模型实时生成 8 节点图，选择记录 `selection-582b8d8b8d5a162b48bcafea7533b499`，模型绑定为 deepseek 的新摘要 |
+| 校验 / 确认 / 采纳 | 插件门禁提交；确认前远端调用为 0（`zero_calls_before_confirmation`） |
+| 真实 Bus 节点 | 4 次远端调用全部完成：report-extractor、business-analyst、asset-quality-analyst、report-writer，各自唯一远端 task |
+| W04 正式结果 | 6 个正式节点；revise1、check1 由 check0 PASS 授权跳过；select_report 选定报告 |
+| 检查 → 批准 → 交付 | check0 PASS；`REPORT_APPROVED`、`REPORT_DELIVERED` 各 1 次；交付回执 `delivery-receipt-7115403d8cc4ffb8a159813278e527ba`（14:32:29） |
+| 下载与完整性 | 下载字节与正式报告摘要 `sha256:69d0d558…` 一致；`/verify` 的 `evidence_intact` 为 true |
+| 插件 | 编排台显示同一任务（`plugin-T-8fae6cb5.png`），可信页报告区（`trusted-T-8fae6cb5-report.png`） |
+
+**批准与交付的操作方式（如实说明）**：
+- 本次批准与交付由候选自带的 `live_smoke.py` 用测试账号 `demo` 自动完成，不是人工批准。
+- 这违背了 W05 内部“提交前先由 xierongqiag2015 检查”的约定；事后 xierongqiag2015 核对了交付报告的内容，同意保留。
+- 报告的四条结论都是原文表格行的逐字引用，局限性一栏写明趋势解释未核验、风险部分为空。业务质量需 W06 业务验收。
+
+### `T-bdc4aa18`：HUMAN 路径（真实人工核验）与死锁
+
+- 22:25:43 check0 返回 HUMAN，4 条“Review finding support”。
+- 11-19 14:12:15 **xierongqiag2015 本人**在 W04 可信页完成人工核验：打开固定快照原文 PDF 第 14、16 页逐项核对，ACCEPT，回执 `human-review-67f5d31469ce3f88bf221f8155c62ecc`（使用测试账号 `demo` 登录，理由中写明本人与核验范围；见 `trusted-T-bdc4aa18-review.png`）。
+- 之前 11-18 23:14 有一次 W05 自动化代操作的提交，因可信页 3 秒刷新清空理由，返回 400，未留下核验记录（`human-proxy-attempt-T-bdc4aa18.json`）。
+- 核验后点“继续”，任务仍不推进。原因（已对照代码与事件）：
+  1. check0 返回 HUMAN 后，Java 紧接着解析 `select_report`，得到 `WAIT`；
+  2. Java 把 `WAIT` 映射为 `UNKNOWN` 上报，控制面把任务从 `WAITING_INPUT` 改为 `WAITING_REMOTE`，节点标为 UNKNOWN；
+  3. 恢复后 `resolve` 对 UNKNOWN 节点只返回 WAIT（远端核对分支），而 `select_report` 是本地节点，永远拿不到许可；
+  4. 租约不释放，Java 每约 30 秒重领一次，暂停前共 1802 次，审计事件 14775 条。
+- 11-19 14:27:10 在可信页“暂停新节点”，以让出单活动图名额、停止空转；任务与记录原样保留，未改 PG。
+- 已反馈 yougq：fork PR #1 [issuecomment-7001672877](https://github.com/yougq/agent-hub-alpha/pull/1#issuecomment-7001672877)。
+
 ## 开放项
 
-- **专家输出不符合声明的 JSON**：三次运行中，extract 失败一次（截断），quality 两次返回中文总结，后者可稳定复现。已在 yougq PR #1 反馈，等待对模型或输出策略的处理。完整报告的检查、批准和交付因此还没走到。
-- **日志缺 finish_reason**：无法确认截断是否由推理 token 占用预算造成。
-- **传输层计数代理尚未接入**：经 `config.bus.gateway_url` 接入，主链跑通后再接。
-- **实际执行实例**：仍为 `not_collected`。
+- **HUMAN 路径死锁**（候选缺陷）：程序检查返回 HUMAN 的任务，人工核验后无法继续。已反馈 yougq，待修复后在新任务上补验“HUMAN → 继续 → 选定 → 批准 → 交付”。
+- **可信页刷新清空核验理由**（候选缺陷）：已一并反馈。
+- **批准与交付未经人工操作**：`T-8fae6cb5` 的批准、交付由测试脚本自动完成；人工批准、交付及 W06 业务验收仍需在共同 D1/D2 中完成。
+- **GLM 输出不合约**：换用 deepseek-flash 后不再出现；GLM 本身的问题保留记录，未继续处理。
+- **传输层计数代理尚未接入**；**实际执行实例**仍为 `not_collected`。
 
 ## 复现
 

@@ -1,0 +1,12 @@
+{
+ "repo_head": "0358acbad0ce1b0ce73772f31eda845057ba4dc5",
+ "model": "deepseek-v4-1-flash-260910",
+ "endpoint_profile": "openai",
+ "execution_profile": "sha256:adeb6664729e9fbe16de730f2419f9e45d2df59c9a5dadc82c550e9cee694839",
+ "model_binding_digest": "sha256:8f336627d4812aa1c2b4bd1651af9d0264a04cd55e518a2ae8db8514c70ceefd",
+ "artifacts": {
+  "demos/report-demo/orchestrator-java/target/report-orchestrator.jar": "666f909383755025e12586a6b7dee213564684bad1e9ab6689c6aef371fefc62",
+  "demos/report-demo/experts-java/target/report-experts.jar": "3e165813191c726c9deeecea23378822c46bfe58478a2832ab061cf69c84cf28",
+  ".local/report-demo/bin/report-control": "180bfc895a6eba3bb29a485e092e65bc3484094784c46c16f64a512a18e0b56b"
+ }
+}
