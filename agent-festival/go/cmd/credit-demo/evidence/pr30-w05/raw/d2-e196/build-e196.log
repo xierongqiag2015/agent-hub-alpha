@@ -1,0 +1,84 @@
+== 2026-11-18T21:03:26+08:00 source e1961fe8dcfc1c859b515854f793f24948d844fe
+== 2026-11-18T21:03:26+08:00 build orchestrator
+#5 [build  1/10] FROM docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#9 [build  2/10] RUN apt-get update && apt-get install -y --no-install-recommends openjdk-21-jdk-headless maven ca-certificates patch     && rm -rf /var/lib/apt/lists/*
+#9 324.7   502  Bad Gateway [IP: 192.168.65.254 7890]
+#9 727.6  Failed to fetch http://deb.debian.org/debian/pool/main/p/pcsc-lite/libpcsclite1_2.3.3-1_amd64.deb  502  Bad Gateway [IP: 192.168.65.254 7890]
+#9 ERROR: process "/bin/sh -c apt-get update && apt-get install -y --no-install-recommends openjdk-21-jdk-headless maven ca-certificates patch     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+324.7   502  Bad Gateway [IP: 192.168.65.254 7890]
+727.6  Failed to fetch http://deb.debian.org/debian/pool/main/p/pcsc-lite/libpcsclite1_2.3.3-1_amd64.deb  502  Bad Gateway [IP: 192.168.65.254 7890]
+ERROR: failed to build: failed to solve: process "/bin/sh -c apt-get update && apt-get install -y --no-install-recommends openjdk-21-jdk-headless maven ca-certificates patch     && rm -rf /var/lib/apt/lists/*" did not complete successfully: exit code: 100
+== 2026-11-18T21:15:36+08:00 FAILED orchestrator
+== 2026-11-18T21:26:10+08:00 attempt 1
+== 2026-11-18T21:26:10+08:00 source e1961fe8dcfc1c859b515854f793f24948d844fe
+== 2026-11-18T21:26:10+08:00 build orchestrator
+#10 [build  3/10] COPY go/cmd/credit-demo/deploy/maven_settings.py /tmp/maven_settings.py
+#11 [build  4/10] COPY --from=solution-src pom.xml /src/solution/pom.xml
+#12 [build  5/10] COPY --from=solution-src common/agent-core-ext-java /src/solution/common/agent-core-ext-java
+#13 [build  6/10] COPY go/cmd/credit-demo/deploy/patches/blueprint-scheduler-drain.patch /tmp/blueprint-scheduler-drain.patch
+#14 [build  7/10] RUN patch --batch --fuzz=0 -d /src/solution -p1 < /tmp/blueprint-scheduler-drain.patch
+#14 0.243 patching file common/agent-core-ext-java/agent-core-ext-orchestration/src/main/java/com/openjiuwen/agents/orchestration/BlueprintScheduler.java
+#15 [build  8/10] RUN --mount=type=cache,id=issue16-maven,target=/root/.m2     python /tmp/maven_settings.py &&     mvn -B -s /tmp/maven-settings.xml -f /src/solution/pom.xml -N -Drevision=0.1.3-aha-drain1 -Dmaven.test.skip=true install &&     mvn -B -s /tmp/maven-settings.xml -f /src/solution/common/agent-core-ext-java/pom.xml       -pl agent-core-ext-orchestration -am -Drevision=0.1.3-aha-drain1 -Dmaven.test.skip=true install && rm /tmp/maven-settings.xml
+#15 1.347 [INFO] Building OpenJiuwen Solution parent 0.1.3-aha-drain1
+#15 1.536 [INFO] Generating flattened POM of project com.openjiuwen:agent-solution-parent:pom:0.1.3-aha-drain1...
+#15 1.641 [INFO] Installing /src/solution/.flattened-pom.xml to /root/.m2/repository/com/openjiuwen/agent-solution-parent/0.1.3-aha-drain1/agent-solution-parent-0.1.3-aha-drain1.pom
+#15 2.921 [INFO] Building agent-core-ext-java — Extensions to agent-core-java capabilities 0.1.3-aha-drain1 [1/4]
+#15 3.065 [INFO] Generating flattened POM of project com.openjiuwen:agent-core-ext-java:pom:0.1.3-aha-drain1...
+#15 3.178 [INFO] Installing /src/solution/common/agent-core-ext-java/.flattened-pom.xml to /root/.m2/repository/com/openjiuwen/agent-core-ext-java/0.1.3-aha-drain1/agent-core-ext-java-0.1.3-aha-drain1.pom
+#15 3.194 [INFO] Building agent-core-ext-tool-guardrail — Tool safety guardrail pipeline extension (allowed-tools gate + decision audit observer) 0.1.3-aha-drain1 [2/4]
+#15 4.317 [INFO] Generating flattened POM of project com.openjiuwen:agent-core-ext-tool-guardrail:jar:0.1.3-aha-drain1...
+#15 7.559 [INFO] Building jar: /src/solution/common/agent-core-ext-java/agent-core-ext-tool-guardrail/target/agent-core-ext-tool-guardrail-0.1.3-aha-drain1.jar
+#15 7.655 [INFO] Installing /src/solution/common/agent-core-ext-java/agent-core-ext-tool-guardrail/.flattened-pom.xml to /root/.m2/repository/com/openjiuwen/agent-core-ext-tool-guardrail/0.1.3-aha-drain1/agent-core-ext-tool-guardrail-0.1.3-aha-drain1.pom
+#15 7.697 [INFO] Installing /src/solution/common/agent-core-ext-java/agent-core-ext-tool-guardrail/target/agent-core-ext-tool-guardrail-0.1.3-aha-drain1.jar to /root/.m2/repository/com/openjiuwen/agent-core-ext-tool-guardrail/0.1.3-aha-drain1/agent-core-ext-tool-guardrail-0.1.3-aha-drain1.jar
+#15 7.703 [INFO] Building agent-core-ext-react-rails — Cognitive rails and reusable suites for ReActAgent 0.1.3-aha-drain1 [3/4]
+#15 7.878 [INFO] Generating flattened POM of project com.openjiuwen:agent-core-ext-react-rails:jar:0.1.3-aha-drain1...
+#15 10.05 [INFO] Building jar: /src/solution/common/agent-core-ext-java/agent-core-ext-react-rails/target/agent-core-ext-react-rails-0.1.3-aha-drain1.jar
+#15 10.10 [INFO] Installing /src/solution/common/agent-core-ext-java/agent-core-ext-react-rails/.flattened-pom.xml to /root/.m2/repository/com/openjiuwen/agent-core-ext-react-rails/0.1.3-aha-drain1/agent-core-ext-react-rails-0.1.3-aha-drain1.pom
+#15 10.10 [INFO] Installing /src/solution/common/agent-core-ext-java/agent-core-ext-react-rails/target/agent-core-ext-react-rails-0.1.3-aha-drain1.jar to /root/.m2/repository/com/openjiuwen/agent-core-ext-react-rails/0.1.3-aha-drain1/agent-core-ext-react-rails-0.1.3-aha-drain1.jar
+#15 10.10 [INFO] Building agent-core-ext-orchestration — Deterministic blueprint orchestration for team agents 0.1.3-aha-drain1 [4/4]
+#15 10.12 [INFO] Generating flattened POM of project com.openjiuwen:agent-core-ext-orchestration:jar:0.1.3-aha-drain1...
+#15 13.31 [INFO] Building jar: /src/solution/common/agent-core-ext-java/agent-core-ext-orchestration/target/agent-core-ext-orchestration-0.1.3-aha-drain1.jar
+#15 13.32 [INFO] Installing /src/solution/common/agent-core-ext-java/agent-core-ext-orchestration/.flattened-pom.xml to /root/.m2/repository/com/openjiuwen/agent-core-ext-orchestration/0.1.3-aha-drain1/agent-core-ext-orchestration-0.1.3-aha-drain1.pom
+#15 13.32 [INFO] Installing /src/solution/common/agent-core-ext-java/agent-core-ext-orchestration/target/agent-core-ext-orchestration-0.1.3-aha-drain1.jar to /root/.m2/repository/com/openjiuwen/agent-core-ext-orchestration/0.1.3-aha-drain1/agent-core-ext-orchestration-0.1.3-aha-drain1.jar
+#15 13.32 [INFO] Reactor Summary for agent-core-ext-java — Extensions to agent-core-java capabilities 0.1.3-aha-drain1:
+#16 [build  9/10] COPY examples/credit-orchestrator /src/orchestrator
+#17 [build 10/10] RUN --mount=type=cache,id=issue16-maven,target=/root/.m2     python /tmp/maven_settings.py &&     mvn -B -s /tmp/maven-settings.xml -f /src/orchestrator/pom.xml -DskipTests package && rm /tmp/maven-settings.xml
+#17 15.66 [INFO] Including com.openjiuwen:agent-core-ext-orchestration:jar:0.1.3-aha-drain1 in the shaded jar.
+#17 15.66 [INFO] Including com.openjiuwen:agent-core-ext-react-rails:jar:0.1.3-aha-drain1 in the shaded jar.
+#17 15.67 [INFO] Including com.openjiuwen:agent-core-ext-tool-guardrail:jar:0.1.3-aha-drain1 in the shaded jar.
+#17 24.98 [WARNING] SparseBitSet-1.3.jar, agent-core-ext-orchestration-0.1.3-aha-drain1.jar, agent-core-ext-react-rails-0.1.3-aha-drain1.jar, agent-core-ext-tool-guardrail-0.1.3-aha-drain1.jar, agent-core-java-0.1.17.jar, animal-sniffer-annotations-1.23.jar, annotations-17.0.0.jar, annotations-2.25.0.jar, annotations-4.1.1.4.jar, apache-client-2.25.0.jar, arns-2.25.0.jar, auth-2.25.0.jar, aws-core-2.25.0.jar, aws-query-protocol-2.25.0.jar, aws-xml-protocol-2.25.0.jar, bcpkix-jdk18on-1.84.jar, bcprov-jdk18on-1.85.jar, bcutil-jdk18on-1.84.jar, checker-qual-3.41.0.jar, checksums-2.25.0.jar, checksums-spi-2.25.0.jar, classmate-1.5.1.jar, commons-codec-1.15.jar, commons-collections4-4.3.jar, commons-compress-1.28.0.jar, commons-io-2.21.0.jar, commons-lang3-3.12.0.jar, commons-logging-1.2.jar, commons-math3-3.6.1.jar, commons-pool2-2.12.1.jar, commons-text-1.10.0.jar, credit-orchestrator.jar, crt-core-2.25.0.jar, curvesapi-1.08.jar, dashscope-sdk-java-2.22.17.jar, endpoints-spi-2.25.0.jar, error_prone_annotations-2.23.0.jar, eventstream-1.0.1.jar, failureaccess-1.0.2.jar, fontbox-2.0.37.jar, grpc-api-1.82.1.jar, grpc-context-1.82.1.jar, grpc-core-1.82.1.jar, grpc-netty-shaded-1.82.1.jar, grpc-stub-1.82.1.jar, grpc-util-1.82.1.jar, gson-2.13.2.jar, guava-33.0.0-jre.jar, http-auth-2.25.0.jar, http-auth-aws-2.25.0.jar, http-auth-spi-2.25.0.jar, http-client-spi-2.25.0.jar, httpclient-4.5.13.jar, httpcore-4.4.13.jar, identity-spi-2.25.0.jar, itu-1.14.0.jar, j2objc-annotations-2.8.jar, jackson-annotations-2.21.jar, jackson-core-2.21.5.jar, jackson-databind-2.21.5.jar, jackson-dataformat-yaml-2.21.5.jar, jackson-datatype-jsr310-2.21.5.jar, jedis-7.0.0.jar, jeromq-0.6.0.jar, jnacl-1.0.0.jar, json-20250517.jar, json-schema-validator-2.0.0.jar, json-utils-2.25.0.jar, jsonschema-generator-4.31.1.jar, jsoup-1.17.2.jar, jspecify-1.0.0.jar, jsr305-3.0.2.jar, kotlin-stdlib-1.9.10.jar, kotlin-stdlib-jdk7-1.9.10.jar, kotlin-stdlib-jdk8-1.9.10.jar, listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar, log4j-api-2.24.3.jar, logback-classic-1.5.37.jar, logback-core-1.5.37.jar, logging-interceptor-4.12.0.jar, lombok-1.18.26.jar, mcp-core-1.1.1.jar, mcp-json-jackson2-1.1.1.jar, metrics-spi-2.25.0.jar, milvus-sdk-java-2.6.22.jar, netty-buffer-4.1.107.Final.jar, netty-codec-4.1.107.Final.jar, netty-codec-http-4.1.107.Final.jar, netty-codec-http2-4.1.107.Final.jar, netty-common-4.1.107.Final.jar, netty-handler-4.1.107.Final.jar, netty-nio-client-2.25.0.jar, netty-resolver-4.1.107.Final.jar, netty-transport-4.1.107.Final.jar, netty-transport-classes-epoll-4.1.107.Final.jar, netty-transport-native-unix-common-4.1.107.Final.jar, okhttp-4.12.0.jar, okhttp-sse-4.12.0.jar, okio-3.6.0.jar, okio-jvm-3.6.0.jar, opentelemetry-api-1.64.0.jar, opentelemetry-api-incubator-1.56.0-alpha.jar, opentelemetry-common-1.56.0.jar, opentelemetry-context-1.56.0.jar, opentelemetry-exporter-common-1.64.0.jar, opentelemetry-exporter-logging-1.64.0.jar, opentelemetry-exporter-otlp-1.64.0.jar, opentelemetry-exporter-otlp-common-1.64.0.jar, opentelemetry-exporter-sender-grpc-managed-channel-1.64.0.jar, opentelemetry-exporter-sender-jdk-1.64.0.jar, opentelemetry-sdk-1.64.0.jar, opentelemetry-sdk-common-1.64.0.jar, opentelemetry-sdk-logs-1.64.0.jar, opentelemetry-sdk-metrics-1.64.0.jar, opentelemetry-sdk-trace-1.64.0.jar, pdfbox-2.0.37.jar, perfmark-api-0.26.0.jar, pgvector-0.1.6.jar, poi-5.5.1.jar, poi-ooxml-5.5.1.jar, poi-ooxml-lite-5.5.1.jar, postgresql-42.7.12.jar, profiles-2.25.0.jar, proto-google-common-protos-2.22.0.jar, protobuf-java-3.25.5.jar, protocol-core-2.25.0.jar, pulsar-client-4.2.3.jar, pulsar-client-admin-api-4.2.3.jar, pulsar-client-api-4.2.3.jar, reactive-streams-1.0.4.jar, reactor-core-3.8.6.jar, redis-authx-core-0.1.1-beta2.jar, regions-2.25.0.jar, rxjava-2.2.21.jar, s3-2.25.0.jar, sdk-core-2.25.0.jar, slf4j-api-2.0.17.jar, snakeyaml-2.5.jar, sqlite-jdbc-3.53.2.1.jar, third-party-jackson-core-2.25.0.jar, utils-2.25.0.jar, validation-api-1.1.0.Final.jar, xmlbeans-5.3.0.jar define 1 overlapping resource: 
+#18 [stage-1 2/4] RUN apt-get update && apt-get install -y --no-install-recommends openjdk-21-jre-headless ca-certificates     && rm -rf /var/lib/apt/lists/*
+#19 [stage-1 3/4] WORKDIR /app
+#20 [stage-1 4/4] COPY --from=build /src/orchestrator/target/credit-orchestrator.jar /app/credit-orchestrator.jar
+#21 naming to docker.io/w05-e196/orchestrator:dev done
+== 2026-11-18T21:35:43+08:00 built orchestrator sha256:4d92ee97b81d3d72f4f8f154a09a382e35210f424aefcaf9571e26ec074d7e44
+== 2026-11-18T21:35:43+08:00 build professional
+#4 [build 1/5] FROM docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#6 [build 2/5] RUN apt-get update && apt-get install -y --no-install-recommends openjdk-21-jdk-headless maven ca-certificates     && rm -rf /var/lib/apt/lists/*
+#7 [build 3/5] COPY go/cmd/credit-demo/deploy/maven_settings.py /tmp/maven_settings.py
+#8 [build 4/5] COPY examples/professional-agent-runtime /src/agent
+#9 [build 5/5] RUN --mount=type=cache,id=issue16-maven,target=/root/.m2     python /tmp/maven_settings.py &&     mvn -B -s /tmp/maven-settings.xml -f /src/agent/pom.xml -Dmaven.test.skip=true package && rm /tmp/maven-settings.xml
+#10 [stage-1 2/4] RUN apt-get update && apt-get install -y --no-install-recommends openjdk-21-jre-headless ca-certificates     && rm -rf /var/lib/apt/lists/*
+#11 [stage-1 3/4] WORKDIR /app
+#12 [stage-1 4/4] COPY --from=build /src/agent/target/professional-agent-runtime.jar /app/agent.jar
+#13 naming to docker.io/w05-e196/professional:dev done
+== 2026-11-18T21:39:18+08:00 built professional sha256:733535de333067caab73d4e5da5199d24c19812cc36b49ffcaca139799716506
+== 2026-11-18T21:39:18+08:00 build credit
+#6 [build  1/11] FROM docker.io/library/python:3.11-slim@sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535
+#10 [build  2/11] COPY --from=tools go.tar.gz /tmp/go.tar.gz
+#11 [build  3/11] RUN tar -xzf /tmp/go.tar.gz -C /usr/local && rm /tmp/go.tar.gz
+#12 [build  4/11] WORKDIR /src
+#15 [build  5/11] COPY go/go.mod go/go.sum ./go/
+#16 [build  6/11] COPY go/internal ./go/internal
+#17 [build  7/11] COPY go/cmd/credit-demo ./go/cmd/credit-demo
+#19 [build  8/11] COPY --from=card /src/web/graph-flow.js ./go/cmd/credit-demo/web/graph-flow.js
+#20 [build  9/11] COPY schema ./schema
+#21 [build 10/11] WORKDIR /src/go/cmd/credit-demo
+#22 [build 11/11] RUN --mount=type=cache,id=issue16-gomod,target=/root/go/pkg/mod     --mount=type=cache,id=issue16-gobuild,target=/root/.cache/go-build     go test ./... -count=1 && go vet ./... &&     go build -trimpath -ldflags="-s -w" -o /out/credit-demo .
+#23 [stage-2 2/5] COPY --from=build /out/credit-demo /opt/aha/run/credit/credit-demo
+#24 [stage-2 3/5] COPY schema/*.schema.json /opt/aha/schema/
+#25 [stage-2 4/5] COPY schema/examples/judgment/valid/judgment-spec-credit.json /opt/aha/run/credit/
+#26 [stage-2 5/5] WORKDIR /opt/aha/run/credit
+#27 naming to docker.io/w05-e196/credit:dev done
+== 2026-11-18T21:39:44+08:00 built credit sha256:d5c31ece3defb6c59054d01a8138298f22a1bba86645af43497240088d5138c0
+== 2026-11-18T21:39:45+08:00 all built

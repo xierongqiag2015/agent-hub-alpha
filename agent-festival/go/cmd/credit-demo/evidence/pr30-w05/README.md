@@ -221,6 +221,10 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
 - 集成候选 `e1961fe8`，含 #44 的 SDK 关闭补丁：编排器内 `agent-core-ext-orchestration` 版本为 `0.1.3-aha-drain1`，已从镜像内 jar 读回。
 - 本地构建镜像 `w05-e196/{orchestrator,professional,credit}:dev`，完整 ID 见 `run.log`。
 - 独立 compose 项目 `agent-hub-e196`，credit 在 5391，不影响 41a3675 的 D2 环境；Runtime 健康后再等 35 秒。
+- 镜像与源码的对应（11-20 应 W02 要求补充）：
+  - `raw/d2-e196/build-e196.log`：构建记录摘录，含源码 `e1961fe8dcfc1c859b515854f793f24948d844fe`、SDK 补丁应用（`patching file …BlueprintScheduler.java`）、以 `-Drevision=0.1.3-aha-drain1` 构建与安装 SDK 的各行，以及三个镜像 ID：orchestrator `4d92ee97b81d…`、professional `733535de3330…`、credit `d5c31ece3def…`。运行记录 `environment.images` 中的编排器镜像与之相同。
+  - `raw/d2-e196/orchestrator-sdk-readback.txt`：从同一编排器镜像内的 jar 读回 `agent-core-ext-orchestration` 的 `version=0.1.3-aha-drain1`；`BlueprintScheduler.class` 含 `shutdownNow`、`awaitTermination`、`isTerminated`（补丁后的 `close()`）。
+  - 工具注册释放没有单独的卸载日志；证据是间接的：恢复后同进程重新安装 Loop Forest，没有 `fork_subtask` 冲突。
 
 **做法**：
 - 沿用 `w05_rd_extra.py ra-completed-then-unknown`，以 `--resume external` 运行。
