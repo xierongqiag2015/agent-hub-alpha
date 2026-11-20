@@ -1,0 +1,16 @@
+R1 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R10 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R11 failed -> failed | final kept=true | 
+R12 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R13 waiting -> waiting | final kept=true | 
+R14 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R15 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R16 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R2 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R3 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R4 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R5 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对
+R6 waiting -> waiting | final kept=true | 
+R7 waiting -> waiting | final kept=true | 
+R8 failed -> failed | final kept=true | 
+R9 done -> done | final kept=true | reconciliation=RECONCILIATION_REQUIRED/LEGACY_ADOPTION_PROTOCOL note=采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对

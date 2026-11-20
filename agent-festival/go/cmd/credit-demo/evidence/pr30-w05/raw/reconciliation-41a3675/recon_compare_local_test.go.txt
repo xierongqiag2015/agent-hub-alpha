@@ -1,0 +1,52 @@
+package main
+
+// Local diagnostic, not committed: run the full startup reconciliation on a
+// scratch copy of a 41a3675 data directory and report each run before/after.
+
+import (
+	"encoding/json"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"sort"
+	"testing"
+)
+
+func TestReconCompare41(t *testing.T) {
+	src := os.Getenv("RECON_DIR")
+	if src == "" {
+		t.Skip("RECON_DIR not set")
+	}
+	dir := filepath.Join(t.TempDir(), "data")
+	if out, err := exec.Command("cp", "-a", src, dir).CombinedOutput(); err != nil {
+		t.Fatalf("copy: %v %s", err, out)
+	}
+	raw, _ := os.ReadFile(filepath.Join(dir, "state.json"))
+	var before, st State
+	_ = json.Unmarshal(raw, &before)
+	_ = json.Unmarshal(raw, &st)
+	s := &Service{cfg: Config{DataDir: dir, Model: os.Getenv("RECON_MODEL")}, st: &st, lastSaved: raw, writeState: writeJSON}
+	if err := s.reconcileAdoptions(); err != nil {
+		t.Fatal(err)
+	}
+	ids := []string{}
+	for id := range st.Runs {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	for _, id := range ids {
+		b, a := before.Runs[id], st.Runs[id]
+		t.Logf("%s %s -> %s | final kept=%v | %s", id, b.Status, a.Status, a.Final == b.Final, reasonText(a))
+	}
+}
+
+func reasonText(r *Run) string {
+	out := ""
+	if b := blockReasonOf(r); b != nil {
+		out += "blocked=" + b.Code + "/" + b.Cause + " "
+	}
+	if r.Reconciliation != nil {
+		out += "reconciliation=" + r.Reconciliation.Code + "/" + r.Reconciliation.Cause + " note=" + r.Reconciliation.Note
+	}
+	return out
+}

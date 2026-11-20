@@ -1,0 +1,95 @@
+package main
+
+// Local diagnostic, not committed: run e1961fe8's own reconciliation check
+// against a read-only copy of a 41a3675 data directory and report, per run,
+// where it fails (replay-case load, replay error, fidelity/conformance,
+// decision binding). RECON_DIR and RECON_MODEL select the copy and the
+// model that old runs were adopted under.
+
+import (
+	"encoding/json"
+	"os"
+	"path/filepath"
+	"sort"
+	"strings"
+	"testing"
+
+	"github.com/openjiuwen/agent-festival/go/internal/adopt"
+	"github.com/openjiuwen/agent-festival/go/internal/replay"
+)
+
+func TestReconDiag41(t *testing.T) {
+	dir := os.Getenv("RECON_DIR")
+	if dir == "" {
+		t.Skip("RECON_DIR not set")
+	}
+	raw, err := os.ReadFile(filepath.Join(dir, "state.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var st State
+	if err := json.Unmarshal(raw, &st); err != nil {
+		t.Fatal(err)
+	}
+	s := &Service{cfg: Config{DataDir: dir, Model: os.Getenv("RECON_MODEL")}, st: &st, lastSaved: raw}
+	ids := make([]string, 0, len(st.Runs))
+	for id := range st.Runs {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	for _, id := range ids {
+		r := st.Runs[id]
+		verdict := "ok"
+		if err := s.checkAdoptionSnapshot(r); err != nil {
+			verdict = "BLOCK: " + err.Error()
+		}
+		detail := ""
+		m, err := adopt.Open(filepath.Join(dir, "runs", r.ID, "adopt.jsonl"))
+		if err != nil {
+			detail = "adopt.Open: " + err.Error()
+		} else if events, err := m.Events(); err == nil && len(events) > 0 {
+			versions := map[string]bool{}
+			for _, step := range r.ReplaySteps {
+				if req, ok := step["request"].(map[string]any); ok {
+					versions[strings.TrimSpace(asString(req["adoption_version"]))] = true
+				}
+			}
+			doc := map[string]any{"case_version": "0.2.0", "case_id": strings.ToLower(r.ID), "steps": r.ReplaySteps,
+				"recorded_events": events, "expected": map[string]any{"fidelity": "match", "conformance": "pass"}}
+			b, _ := json.Marshal(doc)
+			var d map[string]any
+			_ = numberDecode(b, &d)
+			c, err := replay.LoadCase(d)
+			if err != nil {
+				detail = "LoadCase: " + err.Error()
+			} else if rep, err := replay.Replay(c); err != nil {
+				detail = "Replay: " + err.Error()
+			} else {
+				detail = "fidelity=" + string(rep.Fidelity) + " conformance=" + string(rep.Conformance) + " detail=" + rep.Detail
+			}
+			detail += " | request adoption_version=" + strings.Join(keys(versions), ",") + " | events=" + itoa(len(events))
+		}
+		t.Logf("%s status=%s steps=%d | %s | %s", r.ID, r.Status, len(r.ReplaySteps), verdict, clip(detail, 400))
+	}
+}
+
+func asString(v any) string {
+	if s, ok := v.(string); ok {
+		return s
+	}
+	return ""
+}
+
+func keys(m map[string]bool) []string {
+	out := []string{}
+	for k := range m {
+		out = append(out, k)
+	}
+	sort.Strings(out)
+	return out
+}
+
+func itoa(n int) string {
+	b, _ := json.Marshal(n)
+	return string(b)
+}

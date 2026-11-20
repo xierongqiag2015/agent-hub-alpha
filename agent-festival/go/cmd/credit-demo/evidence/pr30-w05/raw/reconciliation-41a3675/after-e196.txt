@@ -1,0 +1,16 @@
+R1 done -> blocked | final kept=false | e1961fe8
+R10 done -> blocked | final kept=false | e1961fe8
+R11 failed -> failed | final kept=true | e1961fe8
+R12 done -> blocked | final kept=false | e1961fe8
+R13 waiting -> waiting | final kept=true | e1961fe8
+R14 done -> blocked | final kept=false | e1961fe8
+R15 done -> blocked | final kept=false | e1961fe8
+R16 done -> blocked | final kept=false | e1961fe8
+R2 done -> blocked | final kept=false | e1961fe8
+R3 done -> blocked | final kept=false | e1961fe8
+R4 done -> blocked | final kept=false | e1961fe8
+R5 done -> blocked | final kept=false | e1961fe8
+R6 waiting -> waiting | final kept=true | e1961fe8
+R7 waiting -> waiting | final kept=true | e1961fe8
+R8 failed -> failed | final kept=true | e1961fe8
+R9 done -> blocked | final kept=false | e1961fe8
