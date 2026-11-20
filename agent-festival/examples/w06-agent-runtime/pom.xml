@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-parent</artifactId><version>4.0.7</version><relativePath/></parent>
+  <groupId>com.openjiuwen.demo</groupId><artifactId>w06-agent-runtime</artifactId><version>0.1.0</version>
+  <description>W05 Agent Bus wrapper: hosts the unchanged W06 (PR #36) role agents as A2A services on the openJiuwen Runtime.</description>
+  <properties><java.version>21</java.version><agent-runtime.version>0.1.4</agent-runtime.version><agent-core.version>0.1.17</agent-core.version><w06.version>0.1.0-SNAPSHOT</w06.version></properties>
+  <dependencyManagement><dependencies><dependency><groupId>com.openjiuwen</groupId><artifactId>agent-runtime-java</artifactId><version>${agent-runtime.version}</version><type>pom</type><scope>import</scope></dependency></dependencies></dependencyManagement>
+  <dependencies>
+    <dependency><groupId>com.openjiuwen</groupId><artifactId>agent-service-app</artifactId><version>${agent-runtime.version}</version></dependency>
+    <dependency><groupId>com.openjiuwen</groupId><artifactId>agent-core-java</artifactId><version>${agent-core.version}</version></dependency>
+    <!-- W06 library layer, built from PR #36 (W06-wanshoulu-1117/source/w06-annual-report-agent/agents) -->
+    <dependency><groupId>com.agenthub.w06</groupId><artifactId>agents</artifactId><version>${w06.version}</version></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-webmvc</artifactId></dependency>
+  </dependencies>
+  <build><finalName>w06-agent-runtime</finalName><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins></build>
+</project>

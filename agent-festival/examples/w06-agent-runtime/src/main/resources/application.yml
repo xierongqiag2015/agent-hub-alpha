@@ -1,0 +1,27 @@
+server:
+  port: ${SERVER_PORT:8090}
+  address: ${SERVER_ADDRESS:127.0.0.1}
+spring:
+  application:
+    name: ${AGENT_SERVICE_ID}
+openjiuwen:
+  service:
+    version: "1.0.0"
+    a2a:
+      public-url: ${AGENT_PUBLIC_URL}
+      streaming: false
+      agent-description: "W06 annual-report role agent (PR #36 library, unchanged) hosted by W05 on the openJiuwen Runtime"
+      provider-organization: "Agent Hub Alpha W06 / W05"
+      default-input-modes: ["text/plain"]
+      default-output-modes: ["text/plain"]
+      skills:
+        - id: ${AGENT_SERVICE_ID}
+          name: ${W06_ROLE}
+          description: "W06 annual-report role: material | metrics | operation | asset-quality | writer"
+          tags: ["issue16", "w06", "annual-report"]
+          input-modes: ["text/plain"]
+          output-modes: ["text/plain"]
+logging:
+  level:
+    root: WARN
+    com.openjiuwen.demo: INFO

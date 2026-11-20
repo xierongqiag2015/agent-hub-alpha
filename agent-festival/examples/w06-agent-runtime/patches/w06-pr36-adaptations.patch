@@ -1,0 +1,46 @@
+W05 adaptations of W06 PR #36 (71daf010a4), applied at build time only (build.sh); the W06
+source is otherwise unchanged. All are defects that stop the W06 role agents from working
+when hosted as written; to be fixed upstream by W06.
+
+1. MaterialAgentFactory.build() creates the snapshot store but never loads it (no call to
+   SnapshotStore.load() anywhere in the W06 source) and the store is a local variable the
+   wrapper cannot reach. Without the load every read_page call answers "快照中没有第 N 页".
+
+2. MetricAgentFactory's system prompt contains a literal "%" ("亿元/% 等") and is passed
+   through String.formatted(keys), which throws UnknownFormatConversionException ("Conversion
+   = ' '") while the agent is built: the metrics agent cannot start. Escaping it as "%%"
+   renders exactly the text W06 wrote.
+
+3. The ask_user tool card in the metrics, operation, asset-quality and writer factories has no
+   inputParams, so the model API rejects every request of these agents ("tools.N.function.
+   parameters must be a JSON Schema of type object", HTTP 400) before any reasoning. Giving it the
+   same empty object schema W06 already uses for list_metrics_index fixes it; the tool body is
+   unchanged (it only returns the AskUserRail placeholder).
+
+--- a/agents/src/main/java/com/agenthub/w06/agents/material/MaterialAgentFactory.java
++++ b/agents/src/main/java/com/agenthub/w06/agents/material/MaterialAgentFactory.java
+@@ -51,6 +51,7 @@
+     public static ReActAgent build(MaterialAgentProperties props, Path snapshotDir) {
+         props.requireConfigured();
+         SnapshotStore store = new SnapshotStore(snapshotDir);
++        store.load();
+
+         ReActAgentConfig config = ReActAgentConfig.builder()
+                 .maxIterations(props.getMaxIterations())
+--- a/agents/src/main/java/com/agenthub/w06/agents/metrics/MetricAgentFactory.java
++++ b/agents/src/main/java/com/agenthub/w06/agents/metrics/MetricAgentFactory.java
+@@ -91,7 +91,7 @@
+                 铁律：
+                 1. value 只能照抄原文数字（含千分位），禁止换算、四舍五入或推算；
+-                2. unit 用原文单位（亿元/% 等）；原文未写单位则输出 "UNSPECIFIED"，禁止猜；
++                2. unit 用原文单位（亿元/%% 等）；原文未写单位则输出 "UNSPECIFIED"，禁止猜；
+                 3. 找不到的指标输出该条并标 value="NOT_FOUND"，禁止编造数字；
+                 4. 每条必须携带输入片段的 digest 与 page；无来源的指标禁止输出。
+                 """.formatted(keys);
+--- a/agents/src/main/java/com/agenthub/w06/agents/{metrics/MetricAgentFactory,operation/OperationAgentFactory,assetquality/AssetQualityAgentFactory,writer/WriterAgentFactory}.java
++++ (same four files)
+@@ mountAskUserTool @@
+         com.openjiuwen.core.foundation.tool.ToolCard askCard = com.openjiuwen.core.foundation.tool.ToolCard.builder()
+                 .id("ask_user")
++                .inputParams(java.util.Map.of("type", "object", "properties", java.util.Map.of()))
+                 .name("ask_user")
