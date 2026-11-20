@@ -1,0 +1,62 @@
+{
+  "w06-material": {
+    "role": "material",
+    "port": 18111,
+    "pid": 12545,
+    "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb",
+    "start_ticks": 1787700,
+    "model": "deepseek-v4-1-flash-260910",
+    "started_at": 1795164530.795116,
+    "card_path": "/.well-known/agent-card.json",
+    "card_name": "w06-material",
+    "card_version": "1.0.0"
+  },
+  "w06-metrics": {
+    "role": "metrics",
+    "port": 18112,
+    "pid": 12546,
+    "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb",
+    "start_ticks": 1787701,
+    "model": "deepseek-v4-1-flash-260910",
+    "started_at": 1795164530.7956932,
+    "card_path": "/.well-known/agent-card.json",
+    "card_name": "w06-metrics",
+    "card_version": "1.0.0"
+  },
+  "w06-operation": {
+    "role": "operation",
+    "port": 18113,
+    "pid": 12547,
+    "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb",
+    "start_ticks": 1787701,
+    "model": "deepseek-v4-1-flash-260910",
+    "started_at": 1795164530.7963996,
+    "card_path": "/.well-known/agent-card.json",
+    "card_name": "w06-operation",
+    "card_version": "1.0.0"
+  },
+  "w06-asset-quality": {
+    "role": "asset-quality",
+    "port": 18114,
+    "pid": 12548,
+    "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb",
+    "start_ticks": 1787701,
+    "model": "deepseek-v4-1-flash-260910",
+    "started_at": 1795164530.7973773,
+    "card_path": "/.well-known/agent-card.json",
+    "card_name": "w06-asset-quality",
+    "card_version": "1.0.0"
+  },
+  "w06-writer": {
+    "role": "writer",
+    "port": 18115,
+    "pid": 12549,
+    "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb",
+    "start_ticks": 1787701,
+    "model": "deepseek-v4-1-flash-260910",
+    "started_at": 1795164530.7980728,
+    "card_path": "/.well-known/agent-card.json",
+    "card_name": "w06-writer",
+    "card_version": "1.0.0"
+  }
+}

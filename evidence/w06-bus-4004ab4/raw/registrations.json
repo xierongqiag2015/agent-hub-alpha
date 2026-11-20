@@ -1,0 +1,52 @@
+{
+  "w06-material": {
+    "agentId": "w06-material",
+    "serviceId": "w06-material",
+    "instanceId": "i-db5636ecd521e1d9",
+    "heartbeat": {
+      "intervalSeconds": 10,
+      "ttlSeconds": 30
+    },
+    "registeredAt": "2026-11-20T08:40:44.695494295Z"
+  },
+  "w06-metrics": {
+    "agentId": "w06-metrics",
+    "serviceId": "w06-metrics",
+    "instanceId": "i-2c53fa93026be749",
+    "heartbeat": {
+      "intervalSeconds": 10,
+      "ttlSeconds": 30
+    },
+    "registeredAt": "2026-11-20T08:40:44.728872789Z"
+  },
+  "w06-operation": {
+    "agentId": "w06-operation",
+    "serviceId": "w06-operation",
+    "instanceId": "i-1282157d6a6c4c2e",
+    "heartbeat": {
+      "intervalSeconds": 10,
+      "ttlSeconds": 30
+    },
+    "registeredAt": "2026-11-20T08:40:44.745242536Z"
+  },
+  "w06-asset-quality": {
+    "agentId": "w06-asset-quality",
+    "serviceId": "w06-asset-quality",
+    "instanceId": "i-20f64f7f745327df",
+    "heartbeat": {
+      "intervalSeconds": 10,
+      "ttlSeconds": 30
+    },
+    "registeredAt": "2026-11-20T08:40:44.762913642Z"
+  },
+  "w06-writer": {
+    "agentId": "w06-writer",
+    "serviceId": "w06-writer",
+    "instanceId": "i-eeedbf34049bd81b",
+    "heartbeat": {
+      "intervalSeconds": 10,
+      "ttlSeconds": 30
+    },
+    "registeredAt": "2026-11-20T08:40:44.777721363Z"
+  }
+}

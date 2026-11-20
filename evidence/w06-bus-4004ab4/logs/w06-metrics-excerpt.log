@@ -1,0 +1,10 @@
+13:2026-11-20T16:37:31.256+08:00  INFO 10935 --- [w06-metrics] [           main] c.o.demo.w06.W06AgentApplication         : Started W06AgentApplication in 6.845 seconds (process running for 8.398)
+16:java.util.UnknownFormatConversionException: Conversion = ' '
+84:Caused by: java.util.UnknownFormatConversionException: Conversion = ' '
+107:2026-11-20T16:39:42.635+08:00  INFO 11345 --- [w06-metrics] [           main] c.o.demo.w06.W06AgentApplication         : Started W06AgentApplication in 5.31 seconds (process running for 6.733)
+109:2026-11-20T16:42:03.305+08:00 ERROR 11345 --- [w06-metrics] [    a2a-agent-1] llm                                      : OpenAI API async invoke error. model call failed, reason: HTTP 400: {"error":{"code":"InvalidParameter","message":"tools.2.function.parameters must be a JSON Schema of type object Request id: 0217951641254857f7defdca68741f744da3a9cb51804c47d4e62","param":"","type":"BadRequest"}}
+112:[181001] model call failed, reason: HTTP 400: {"error":{"code":"InvalidParameter","message":"tools.2.function.parameters must be a JSON Schema of type object Request id: 0217951641254857f7defdca68741f744da3a9cb51804c47d4e62","param":"","type":"BadRequest"}}
+148:2026-11-20T16:42:03.316+08:00 ERROR 11345 --- [w06-metrics] [    a2a-agent-1] c.o.s.a.controller.a2a.A2AAgentExecutor  : Agent execution failed for contextId=context-47e71e62301d4cb9b7b390fd22aea88d
+163:Caused by: [181001] model call failed, reason: HTTP 400: {"error":{"code":"InvalidParameter","message":"tools.2.function.parameters must be a JSON Schema of type object Request id: 0217951641254857f7defdca68741f744da3a9cb51804c47d4e62","param":"","type":"BadRequest"}}
+201:2026-11-20T16:45:06.902+08:00  INFO 11946 --- [w06-metrics] [           main] c.o.demo.w06.W06AgentApplication         : Started W06AgentApplication in 5.828 seconds (process running for 7.292)
+214:2026-11-20T16:48:57.830+08:00  INFO 12546 --- [w06-metrics] [           main] c.o.demo.w06.W06AgentApplication         : Started W06AgentApplication in 5.616 seconds (process running for 7.032)

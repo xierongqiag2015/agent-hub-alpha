@@ -1,0 +1,155 @@
+{
+ "states": {
+  "w06-material": "COMPLETED",
+  "w06-metrics": "COMPLETED",
+  "w06-operation": "COMPLETED",
+  "w06-asset-quality": "COMPLETED",
+  "w06-writer": "COMPLETED"
+ },
+ "seconds": {
+  "w06-material": 10.2,
+  "w06-metrics": 18.9,
+  "w06-operation": 12.2,
+  "w06-asset-quality": 21.1,
+  "w06-writer": 39.1
+ },
+ "writer_keys": [
+  "citations",
+  "company",
+  "metrics",
+  "report_period",
+  "sections",
+  "task_id"
+ ],
+ "writer_metrics_verbatim": true,
+ "writer_sections": [
+  "经营分析",
+  "资产质量分析"
+ ],
+ "writer_citations": 8,
+ "metrics_vs_w01_2025": {
+  "OPERATING_REVENUE": {
+   "w06": "337,532",
+   "w01": 337532.0,
+   "match": true
+  },
+  "NET_PROFIT_ATTRIBUTABLE": {
+   "w06": "150,181",
+   "w01": 150181.0,
+   "match": true
+  },
+  "NET_INTEREST_MARGIN": {
+   "w06": "1.87",
+   "w01": 1.87,
+   "match": true
+  },
+  "COST_INCOME_RATIO": {
+   "w06": "31.98",
+   "w01": 31.98,
+   "match": true
+  },
+  "NPL_BALANCE": {
+   "w06": "68,206",
+   "w01": 68206.0,
+   "match": true
+  },
+  "NPL_RATIO": {
+   "w06": "0.94",
+   "w01": 0.94,
+   "match": true
+  },
+  "PROVISION_COVERAGE": {
+   "w06": "391.79",
+   "w01": 391.79,
+   "match": true
+  },
+  "CET1_RATIO": {
+   "w06": "14.16",
+   "w01": 14.16,
+   "match": true
+  }
+ },
+ "metrics_all_match": true,
+ "gateway_audit_window": {
+  "from": "2026-11-20T16:52:11",
+  "to": "2026-11-20T16:53:54",
+  "counts": {
+   "method=SendMessage outcome=PASSED": 5,
+   "method=GetTask outcome=PASSED": 46
+  },
+  "send_times": [
+   "2026-11-20T16:52:11.927+08:00",
+   "2026-11-20T16:52:22.105+08:00",
+   "2026-11-20T16:52:40.978+08:00",
+   "2026-11-20T16:52:53.200+08:00",
+   "2026-11-20T16:53:14.274+08:00"
+  ]
+ },
+ "instances": {
+  "w06-material": {
+   "rdc_instances": [
+    [
+     "i-db5636ecd521e1d9",
+     "ONLINE"
+    ]
+   ],
+   "pid": 12545,
+   "port": 18111,
+   "start_ticks_recorded": 1787700,
+   "start_ticks_live": 1787700,
+   "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb"
+  },
+  "w06-metrics": {
+   "rdc_instances": [
+    [
+     "i-2c53fa93026be749",
+     "ONLINE"
+    ]
+   ],
+   "pid": 12546,
+   "port": 18112,
+   "start_ticks_recorded": 1787701,
+   "start_ticks_live": 1787701,
+   "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb"
+  },
+  "w06-operation": {
+   "rdc_instances": [
+    [
+     "i-1282157d6a6c4c2e",
+     "ONLINE"
+    ]
+   ],
+   "pid": 12547,
+   "port": 18113,
+   "start_ticks_recorded": 1787701,
+   "start_ticks_live": 1787701,
+   "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb"
+  },
+  "w06-asset-quality": {
+   "rdc_instances": [
+    [
+     "i-20f64f7f745327df",
+     "ONLINE"
+    ]
+   ],
+   "pid": 12548,
+   "port": 18114,
+   "start_ticks_recorded": 1787701,
+   "start_ticks_live": 1787701,
+   "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb"
+  },
+  "w06-writer": {
+   "rdc_instances": [
+    [
+     "i-eeedbf34049bd81b",
+     "ONLINE"
+    ]
+   ],
+   "pid": 12549,
+   "port": 18115,
+   "start_ticks_recorded": 1787701,
+   "start_ticks_live": 1787701,
+   "boot_id": "4602f186-b3c7-48e3-87bc-d3e933ee05fb"
+  }
+ }
+}

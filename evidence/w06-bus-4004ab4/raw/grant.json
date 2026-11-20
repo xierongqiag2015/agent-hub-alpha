@@ -1,0 +1,119 @@
+{
+  "role": "w06-bus-trial",
+  "agents": [
+    "w06-material",
+    "w06-metrics",
+    "w06-operation",
+    "w06-asset-quality",
+    "w06-writer"
+  ],
+  "subject_roles_before": [
+    "report-demo-executor"
+  ],
+  "subject_roles_after": [
+    "report-demo-executor",
+    "w06-bus-trial"
+  ],
+  "permission_preview": {
+    "subjectType": "USER",
+    "subjectId": "<worker-subject>",
+    "userStatus": "ACTIVE",
+    "roles": [
+      "report-demo-executor",
+      "w06-bus-trial"
+    ],
+    "results": [
+      {
+        "targetAgentId": "asset-quality-analyst",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "report-demo-executor"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "business-analyst",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "report-demo-executor"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "report-extractor",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "report-demo-executor"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "report-writer",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "report-demo-executor"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "w06-asset-quality",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "w06-bus-trial"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "w06-material",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "w06-bus-trial"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "w06-metrics",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "w06-bus-trial"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "w06-operation",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "w06-bus-trial"
+          }
+        ]
+      },
+      {
+        "targetAgentId": "w06-writer",
+        "allowed": true,
+        "paths": [
+          {
+            "via": "ROLE_AGENT",
+            "roleId": "w06-bus-trial"
+          }
+        ]
+      }
+    ],
+    "truncated": false
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "from": "/home/xrq/w06-bus/calls-1795164408.json",
+  "call": {
+    "agent": "w06-writer",
+    "request_id": "b9026cf3-baa3-4733-876d-060ed3e7f771",
+    "message_id": "message-a5fcd6f04fe3437bbd33e07bfb9748b6",
+    "context_id": "context-e9797b469f1048528f39d663abdc63ad",
+    "prompt_chars": 3170,
+    "sent_at": 1795164554.6965775,
+    "send_http": 200,
+    "remote_task_id": "b2cf475d-4cfe-4a9c-b8df-845eceba8ccd",
+    "remote_context_id": "context-e9797b469f1048528f39d663abdc63ad",
+    "polls": 3,
+    "state": "FAILED",
+    "finished_at": 1795164560.9292977,
+    "seconds": 6.2,
+    "output": "W06 writer agent failed"
+  }
+}

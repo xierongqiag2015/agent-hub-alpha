@@ -1,0 +1,31 @@
+{
+  "snapshot": "cmb-2025-annual-report-a",
+  "title": "招商银行股份有限公司2025年度报告",
+  "material_digest": "sha256:52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da",
+  "projection_digest": "sha256:05f5c026bec2e00dcadd8022794efe84a1d0019d0bed0f97407cfea294954629",
+  "source": "annual chain verified projection (pages 14-16) + W01 answers.json cited pages",
+  "metric_index": {
+    "OPERATING_REVENUE": 14,
+    "NET_PROFIT_ATTRIBUTABLE": 14,
+    "NET_INTEREST_MARGIN": 16,
+    "COST_INCOME_RATIO": 16,
+    "NPL_BALANCE": 15,
+    "NPL_RATIO": 16,
+    "PROVISION_COVERAGE": 16,
+    "CET1_RATIO": 16
+  },
+  "pages": {
+    "14": {
+      "printed_page": "13",
+      "sha256": "bf49cd16135a2f14f6be6990592b7c135e05585f07542e120b1ee4cdb1a5a49c"
+    },
+    "15": {
+      "printed_page": "14",
+      "sha256": "e393b222acb4dc81dfabdf25128d4ede39b3cfc96ac47fd6e45118abb6ae6a2f"
+    },
+    "16": {
+      "printed_page": "15",
+      "sha256": "2d9597d402ad4540b42843bf8a2d6c4a32c164d2c4c66f0e82f551e4e4b40e00"
+    }
+  }
+}
