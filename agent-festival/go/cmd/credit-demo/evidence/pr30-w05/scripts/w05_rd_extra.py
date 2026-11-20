@@ -43,6 +43,10 @@ at the transport by its JSON-RPC id (= request_id).
                finish a run, read it through every read entry (plugin API,
                signed-in pages) from two clients and restart the services: no
                lease, epoch, state revision or send changes.
+  selection-incompatible
+               #33 counter-example through the planner MCP entry: select the
+               annual-report capabilities, then propose teams that do not
+               compose; each is refused before any plan, run or send.
 
 The script records what happened and evaluates checks; it does not stop at
 the first unexpected result, so a deviation is kept as evidence. Evidence
@@ -670,11 +674,82 @@ def history_read_no_lease(evidence):
     }
 
 
+def selection_incompatible(evidence):
+    """#33 counter-example from the real planner entry: a team that does not
+    compose is refused before any plan, run or send exists."""
+    planner = sb.Planner()
+    query = {"package": "annual-report-cmb-2025", "entity": "招商银行股份有限公司", "basis": "本集团", "period": "2025",
+             "compare_period": "2024", "focus": ["经营", "资产质量"], "deliverable": "demo/annual-report/report.schema.json",
+             "materials": ["cmb-2025-annual-report-a"]}
+
+    def counts():
+        state, _ = sb.request("/debug/state")
+        try:
+            sends = sum(1 for line in sb.docker("fault-proxy", "exec", "cat", "/tmp/bus-fault-events.jsonl").splitlines()
+                        if line.strip() and json.loads(line).get("method") == "SendMessage")
+        except Exception:
+            sends = 0
+        return {"plans": sum(len(v) for v in (state.get("plans") or {}).values()), "runs": len(state.get("runs") or {}),
+                "selections": len(state.get("selections") or {}), "sends": sends}
+
+    base = counts()
+    rec = planner.tool("select_capabilities", query)
+    evidence["selection"] = {k: rec.get(k) for k in ("id", "digest", "outcome", "reason", "composition", "selection", "team")}
+    evidence["eligibility"] = [{"capability": e.get("capability"), "result": e.get("result"), "reasons": e.get("reasons")}
+                               for e in rec.get("eligibility", [])]
+    after_select = counts()
+    team = rec.get("team") or []
+    attempts = []
+
+    def attempt(label, agents):
+        before = counts()
+        try:
+            p = planner.tool("propose_plan", {"selection_id": rec["id"], "goal": f"Agent Bus #33 反例 {label} {int(time.time())}，仅验证组合检查", "agents": agents})
+            out = {"label": label, "accepted": True, "plan_id": p.get("plan_id"), "precheck_ok": (p.get("precheck") or {}).get("ok")}
+        except RuntimeError as exc:
+            out = {"label": label, "accepted": False, "error": str(exc)[:500]}
+        out.update(before=before, after=counts())
+        attempts.append(out)
+        return out
+
+    def copy(agents):
+        return [dict(a, depends_on=list(a.get("depends_on") or [])) for a in agents]
+
+    analysts = [a["id"] for a in team if a.get("depends_on") and not any(w in a.get("expert", "") for w in ("writer",))]
+    cut = copy(team)
+    for a in cut:
+        if a["id"] in analysts[:1]:
+            a["depends_on"] = []
+    attempt("analyst-reads-from-nobody", cut)
+    roots = [a["id"] for a in team if not a.get("depends_on")]
+    attempt("extractor-removed", [a for a in copy(team) if a["id"] not in roots])
+    excluded = [e["capability"] for e in evidence["eligibility"] if e["result"] != "pass"]
+    if excluded and team:
+        extra = copy(team) + [{"id": "parent", "expert": excluded[0], "role": "母公司分析", "task": "母公司口径分析",
+                               "depends_on": [roots[0]] if roots else []}]
+        attempt("excluded-capability-added", extra)
+    control = attempt("selected-team-as-is", [])
+    evidence["attempts"] = attempts
+    final = counts()
+    refused = [a for a in attempts if a["label"] != "selected-team-as-is"]
+    evidence["checks"] = {
+        "selection_compatible": evidence["selection"]["outcome"] == "graph" and (evidence["selection"]["composition"] or {}).get("result") == "compatible",
+        "incompatible_attempts": len(refused),
+        "all_incompatible_refused": bool(refused) and all(not a["accepted"] for a in refused),
+        "refusal_reasons": [a.get("error", "")[:160] for a in refused],
+        "no_plan_or_run_from_refusals": all(a["before"]["plans"] == a["after"]["plans"] and a["before"]["runs"] == a["after"]["runs"] for a in refused),
+        "control_plan_created_not_run": control["accepted"] and bool(control.get("precheck_ok")) and final["runs"] == base["runs"],
+        "zero_sends": final["sends"] == base["sends"],
+        "counts": {"start": base, "after_select": after_select, "end": final},
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("scenario", choices=["go-kill", "two-clients", "storage-failure-traced", "ra-completed-then-unknown", "ra-unknown-at-report",
                                              "rc-resume-storage-failure", "rb-send-reply-lost", "rb-resume-reply-lost",
-                                             "rb-send-reply-lost-restart", "adopt-snapshot-fail", "history-read-no-lease"])
+                                             "rb-send-reply-lost-restart", "adopt-snapshot-fail", "history-read-no-lease",
+                                             "selection-incompatible"])
     parser.add_argument("--resume", choices=["api", "external"], default="api",
                         help="api: resume through /api/resume (the plugin's endpoint); external: wait for an operator in the plugin")
     args = parser.parse_args()
@@ -691,7 +766,7 @@ def main():
          "ra-unknown-at-report": lambda ev: ra_completed_then_unknown(ev, at_report=True), "rc-resume-storage-failure": rc_resume_storage_failure,
          "rb-send-reply-lost": rb_send_reply_lost, "rb-resume-reply-lost": rb_resume_reply_lost,
          "rb-send-reply-lost-restart": rb_send_reply_lost_restart, "adopt-snapshot-fail": adopt_snapshot_fail,
-         "history-read-no-lease": history_read_no_lease}[args.scenario](evidence)
+         "history-read-no-lease": history_read_no_lease, "selection-incompatible": selection_incompatible}[args.scenario](evidence)
     finally:
         evidence["finished_at"] = time.time()
         target.write_text(json.dumps(sb.redact(evidence), ensure_ascii=False, indent=2) + "\n")

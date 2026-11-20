@@ -289,6 +289,15 @@ PR #60 头 `5fb1c7c` 的镜像，跑在独立的 compose 项目上，链路为�
 
 权限复核没有单列真实入口场景；W07 的独立复核尚未进行。详见 [`raw/item2-5fb1c7c/README.md`](raw/item2-5fb1c7c/README.md)。
 
+## #33 反例：不兼容组合在派发前被拒（2026-11-20，`raw/alk05-counterexample-5fb1c7c/`）
+
+在 PR #60 镜像上，从规划器 MCP 入口用年报场景包先做能力选择，得到兼容的选择记录 `S1`。再提交三种不兼容的团队：
+- 断开数据绑定；
+- 去掉提取节点；
+- 加入已排除的能力。
+
+三种都在生成计划前被拒，并写明原因；计划、任务、发送计数都不变。原样提交则生成计划，预检通过。详见 [`raw/alk05-counterexample-5fb1c7c/README.md`](raw/alk05-counterexample-5fb1c7c/README.md)。
+
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
 | 编号 | 本记录覆盖到的程度 | 仍需补的部分 |
