@@ -1,0 +1,41 @@
+package main
+
+// Local diagnostic, not committed: run this build's startup reconciliation
+// (e1961fe8) on a copy of a 41a3675 data directory and keep the result in
+// RECON_OUT, as the older candidate would have left it after an upgrade.
+
+import (
+	"encoding/json"
+	"os"
+	"os/exec"
+	"testing"
+)
+
+func TestReconUpgradeE196(t *testing.T) {
+	src, out := os.Getenv("RECON_DIR"), os.Getenv("RECON_OUT")
+	if src == "" || out == "" {
+		t.Skip("RECON_DIR / RECON_OUT not set")
+	}
+	if _, err := os.Stat(out); err == nil {
+		t.Fatalf("%s exists", out)
+	}
+	if b, err := exec.Command("cp", "-a", src, out).CombinedOutput(); err != nil {
+		t.Fatalf("copy: %v %s", err, b)
+	}
+	raw, err := os.ReadFile(out + "/state.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var st State
+	if err := json.Unmarshal(raw, &st); err != nil {
+		t.Fatal(err)
+	}
+	s := &Service{cfg: Config{DataDir: out, Model: os.Getenv("RECON_MODEL")}, st: &st, writeState: writeJSON}
+	s.lastSaved, _ = json.Marshal(s.st)
+	if err := s.reconcileAdoptions(); err != nil {
+		t.Fatal(err)
+	}
+	for id, r := range st.Runs {
+		t.Logf("%s %s", id, r.Status)
+	}
+}

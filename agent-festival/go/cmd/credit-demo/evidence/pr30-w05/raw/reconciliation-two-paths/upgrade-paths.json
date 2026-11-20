@@ -1,0 +1,874 @@
+{
+  "files": {
+    "first": [
+      "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json"
+    ],
+    "second": [
+      "reconciliation-2e4d69cfd1ddd2693751fff4a6751aeb8ae5e632fdb40e774f66659db596f723.json",
+      "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition-2e4d69cfd1ddd2693751fff4a6751aeb8ae5e632fdb40e774f66659db596f723.json"
+    ]
+  },
+  "rows": [
+    {
+      "run": "R1",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:7d45142614b1539e2f724ab9dd3ba171357e2767b9783f5b41dcc41669529ef2",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:38e28d3114868446174eec30bb408addc0f1267dcc8cbec7cedbcc0634d46d89",
+        "decision_digest": "sha256:9706637b8d007a87db1429b4e0b3d3c02e64248637a03d147277b3661ed83f0f",
+        "decision_op": "op-R1",
+        "business_request": "br-c006-r1",
+        "adopt_ledger_digest": "sha256:df8c38ae538d62fd9e289258ffac79ec8abb65f720916f0bc46dbc0cd2251bad"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:38e28d3114868446174eec30bb408addc0f1267dcc8cbec7cedbcc0634d46d89",
+        "decision_digest": "sha256:9706637b8d007a87db1429b4e0b3d3c02e64248637a03d147277b3661ed83f0f",
+        "decision_op": "op-R1",
+        "business_request": "br-c006-r1",
+        "adopt_ledger_digest": "sha256:df8c38ae538d62fd9e289258ffac79ec8abb65f720916f0bc46dbc0cd2251bad",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:7d45142614b1539e2f724ab9dd3ba171357e2767b9783f5b41dcc41669529ef2",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:38e28d3114868446174eec30bb408addc0f1267dcc8cbec7cedbcc0634d46d89",
+        "decision_digest": "sha256:9706637b8d007a87db1429b4e0b3d3c02e64248637a03d147277b3661ed83f0f",
+        "decision_op": "op-R1",
+        "business_request": "br-c006-r1",
+        "adopt_ledger_digest": "sha256:df8c38ae538d62fd9e289258ffac79ec8abb65f720916f0bc46dbc0cd2251bad",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R1/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:7d45142614b1539e2f724ab9dd3ba171357e2767b9783f5b41dcc41669529ef2",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:38e28d3114868446174eec30bb408addc0f1267dcc8cbec7cedbcc0634d46d89",
+        "decision_digest": "sha256:9706637b8d007a87db1429b4e0b3d3c02e64248637a03d147277b3661ed83f0f",
+        "decision_op": "op-R1",
+        "business_request": "br-c006-r1",
+        "adopt_ledger_digest": "sha256:df8c38ae538d62fd9e289258ffac79ec8abb65f720916f0bc46dbc0cd2251bad",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R10",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:882ad9b8d42c725d87a0cc5be367511ed32e1b4cd1ec025cbc5b04d5374010e5",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:3588864b3d75f258d545079e6cbd76f7c152e4826c42e4ce731ad725b51ff796",
+        "decision_digest": "sha256:8680007cc5fe0aa9fb072c536317434080298453de42f4b3df2540e2e05c1f74",
+        "decision_op": "op-R10",
+        "business_request": "br-c006-r10",
+        "adopt_ledger_digest": "sha256:938727d6631e4aa65692ee8d3f4b6d897911d3fb09e542cef503d94c1411cb4f"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:3588864b3d75f258d545079e6cbd76f7c152e4826c42e4ce731ad725b51ff796",
+        "decision_digest": "sha256:8680007cc5fe0aa9fb072c536317434080298453de42f4b3df2540e2e05c1f74",
+        "decision_op": "op-R10",
+        "business_request": "br-c006-r10",
+        "adopt_ledger_digest": "sha256:938727d6631e4aa65692ee8d3f4b6d897911d3fb09e542cef503d94c1411cb4f",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:882ad9b8d42c725d87a0cc5be367511ed32e1b4cd1ec025cbc5b04d5374010e5",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:3588864b3d75f258d545079e6cbd76f7c152e4826c42e4ce731ad725b51ff796",
+        "decision_digest": "sha256:8680007cc5fe0aa9fb072c536317434080298453de42f4b3df2540e2e05c1f74",
+        "decision_op": "op-R10",
+        "business_request": "br-c006-r10",
+        "adopt_ledger_digest": "sha256:938727d6631e4aa65692ee8d3f4b6d897911d3fb09e542cef503d94c1411cb4f",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R10/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:882ad9b8d42c725d87a0cc5be367511ed32e1b4cd1ec025cbc5b04d5374010e5",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:3588864b3d75f258d545079e6cbd76f7c152e4826c42e4ce731ad725b51ff796",
+        "decision_digest": "sha256:8680007cc5fe0aa9fb072c536317434080298453de42f4b3df2540e2e05c1f74",
+        "decision_op": "op-R10",
+        "business_request": "br-c006-r10",
+        "adopt_ledger_digest": "sha256:938727d6631e4aa65692ee8d3f4b6d897911d3fb09e542cef503d94c1411cb4f",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R11",
+      "original_41a3675": {
+        "status": "failed",
+        "final_digest": "sha256:f69a5176d439b1801e285944894e643678ca9a2b1bd17a1cb0b1d1c10a004931",
+        "final_head": "blueprint id=team-graph step id=related failed: loop-forest …",
+        "steps_digest": "sha256:b9d5cc08504b1ac3e5ac18f4c4c550ac8ca85bc30ca4118aee9548f536417678",
+        "adopt_ledger_digest": "missing"
+      },
+      "after_e1961fe8": {
+        "status": "failed",
+        "final_digest": "sha256:f69a5176d439b1801e285944894e643678ca9a2b1bd17a1cb0b1d1c10a004931",
+        "final_head": "blueprint id=team-graph step id=related failed: loop-forest …",
+        "steps_digest": "sha256:b9d5cc08504b1ac3e5ac18f4c4c550ac8ca85bc30ca4118aee9548f536417678",
+        "adopt_ledger_digest": "missing"
+      },
+      "first_upgrade": {
+        "status": "failed",
+        "final_digest": "sha256:f69a5176d439b1801e285944894e643678ca9a2b1bd17a1cb0b1d1c10a004931",
+        "final_head": "blueprint id=team-graph step id=related failed: loop-forest …",
+        "steps_digest": "sha256:b9d5cc08504b1ac3e5ac18f4c4c550ac8ca85bc30ca4118aee9548f536417678",
+        "adopt_ledger_digest": "missing"
+      },
+      "second_upgrade": {
+        "status": "failed",
+        "final_digest": "sha256:f69a5176d439b1801e285944894e643678ca9a2b1bd17a1cb0b1d1c10a004931",
+        "final_head": "blueprint id=team-graph step id=related failed: loop-forest …",
+        "steps_digest": "sha256:b9d5cc08504b1ac3e5ac18f4c4c550ac8ca85bc30ca4118aee9548f536417678",
+        "adopt_ledger_digest": "missing"
+      }
+    },
+    {
+      "run": "R12",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:039ee82cca2a30fe7d9c3a4e576ec3e504360bbc3cf69dcf4dc908875d3e977b",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**案件号：** C006\n**任务说明：** Agent Bus …",
+        "steps_digest": "sha256:ddcdc459b5ecc3b1528d33da0a4a88801fc08b420e04246f2879c81a29e8c425",
+        "decision_digest": "sha256:214315444bbfe4e30e760b575bf8740605e5613ce5000ae976cccb83bc765b83",
+        "decision_op": "op-R12",
+        "business_request": "br-c006-r12",
+        "adopt_ledger_digest": "sha256:8484d256e0707c832c7188340437a0db992121ab593a29fa2dda3650dfaa0fbe"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:ddcdc459b5ecc3b1528d33da0a4a88801fc08b420e04246f2879c81a29e8c425",
+        "decision_digest": "sha256:214315444bbfe4e30e760b575bf8740605e5613ce5000ae976cccb83bc765b83",
+        "decision_op": "op-R12",
+        "business_request": "br-c006-r12",
+        "adopt_ledger_digest": "sha256:8484d256e0707c832c7188340437a0db992121ab593a29fa2dda3650dfaa0fbe",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:039ee82cca2a30fe7d9c3a4e576ec3e504360bbc3cf69dcf4dc908875d3e977b",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**案件号：** C006\n**任务说明：** Agent Bus …",
+        "steps_digest": "sha256:ddcdc459b5ecc3b1528d33da0a4a88801fc08b420e04246f2879c81a29e8c425",
+        "decision_digest": "sha256:214315444bbfe4e30e760b575bf8740605e5613ce5000ae976cccb83bc765b83",
+        "decision_op": "op-R12",
+        "business_request": "br-c006-r12",
+        "adopt_ledger_digest": "sha256:8484d256e0707c832c7188340437a0db992121ab593a29fa2dda3650dfaa0fbe",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R12/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:039ee82cca2a30fe7d9c3a4e576ec3e504360bbc3cf69dcf4dc908875d3e977b",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**案件号：** C006\n**任务说明：** Agent Bus …",
+        "steps_digest": "sha256:ddcdc459b5ecc3b1528d33da0a4a88801fc08b420e04246f2879c81a29e8c425",
+        "decision_digest": "sha256:214315444bbfe4e30e760b575bf8740605e5613ce5000ae976cccb83bc765b83",
+        "decision_op": "op-R12",
+        "business_request": "br-c006-r12",
+        "adopt_ledger_digest": "sha256:8484d256e0707c832c7188340437a0db992121ab593a29fa2dda3650dfaa0fbe",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R13",
+      "original_41a3675": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:8734d2b62a30a5727ebc5e73acac17cb37fbaa755a7256f04e8a85ec3f96bba4",
+        "adopt_ledger_digest": "missing"
+      },
+      "after_e1961fe8": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:8734d2b62a30a5727ebc5e73acac17cb37fbaa755a7256f04e8a85ec3f96bba4",
+        "adopt_ledger_digest": "missing"
+      },
+      "first_upgrade": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:8734d2b62a30a5727ebc5e73acac17cb37fbaa755a7256f04e8a85ec3f96bba4",
+        "adopt_ledger_digest": "missing"
+      },
+      "second_upgrade": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:8734d2b62a30a5727ebc5e73acac17cb37fbaa755a7256f04e8a85ec3f96bba4",
+        "adopt_ledger_digest": "missing"
+      }
+    },
+    {
+      "run": "R14",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:6c69496d99dfb43613e910c35be8761bdf87d7398f7e8e0d3a2e8b33d21cf5c5",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:e03aaa60d6d61757cd4584faf63488f1ce932947d8e0f50ffa870fc4a2297dcf",
+        "decision_digest": "sha256:64c09bd755652c9f220f98cfab31b71599cbf093d5abbb7bb0f4182ff2b6f93a",
+        "decision_op": "op-R14",
+        "business_request": "br-c006-r14",
+        "adopt_ledger_digest": "sha256:1c5d1fd2b80985e53a976df04d35f52b9aa018808481184b22ea31b920e2729b"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:e03aaa60d6d61757cd4584faf63488f1ce932947d8e0f50ffa870fc4a2297dcf",
+        "decision_digest": "sha256:64c09bd755652c9f220f98cfab31b71599cbf093d5abbb7bb0f4182ff2b6f93a",
+        "decision_op": "op-R14",
+        "business_request": "br-c006-r14",
+        "adopt_ledger_digest": "sha256:1c5d1fd2b80985e53a976df04d35f52b9aa018808481184b22ea31b920e2729b",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:6c69496d99dfb43613e910c35be8761bdf87d7398f7e8e0d3a2e8b33d21cf5c5",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:e03aaa60d6d61757cd4584faf63488f1ce932947d8e0f50ffa870fc4a2297dcf",
+        "decision_digest": "sha256:64c09bd755652c9f220f98cfab31b71599cbf093d5abbb7bb0f4182ff2b6f93a",
+        "decision_op": "op-R14",
+        "business_request": "br-c006-r14",
+        "adopt_ledger_digest": "sha256:1c5d1fd2b80985e53a976df04d35f52b9aa018808481184b22ea31b920e2729b",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R14/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:6c69496d99dfb43613e910c35be8761bdf87d7398f7e8e0d3a2e8b33d21cf5c5",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:e03aaa60d6d61757cd4584faf63488f1ce932947d8e0f50ffa870fc4a2297dcf",
+        "decision_digest": "sha256:64c09bd755652c9f220f98cfab31b71599cbf093d5abbb7bb0f4182ff2b6f93a",
+        "decision_op": "op-R14",
+        "business_request": "br-c006-r14",
+        "adopt_ledger_digest": "sha256:1c5d1fd2b80985e53a976df04d35f52b9aa018808481184b22ea31b920e2729b",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R15",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:82441a2a0eb523caa70daac9f6b259fc0c2b39c1e13a63ae3ef4d6d6279e509e",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**案件号：** C006\n**任务说明：** Agent Bus …",
+        "steps_digest": "sha256:c608516a4a339f2e08574cf36f4146e88666a8056aba43718fb46628bb47170a",
+        "decision_digest": "sha256:c2b2087e529f9bd30ec65bc0625b347f6991a0c591fe6541875f1d2ae801c812",
+        "decision_op": "op-R15",
+        "business_request": "br-c006-r15",
+        "adopt_ledger_digest": "sha256:9e57c4c442a9d7582cd6ef2c74819d4e68b2681042186faecf2dfa7c10682f84"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:c608516a4a339f2e08574cf36f4146e88666a8056aba43718fb46628bb47170a",
+        "decision_digest": "sha256:c2b2087e529f9bd30ec65bc0625b347f6991a0c591fe6541875f1d2ae801c812",
+        "decision_op": "op-R15",
+        "business_request": "br-c006-r15",
+        "adopt_ledger_digest": "sha256:9e57c4c442a9d7582cd6ef2c74819d4e68b2681042186faecf2dfa7c10682f84",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:82441a2a0eb523caa70daac9f6b259fc0c2b39c1e13a63ae3ef4d6d6279e509e",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**案件号：** C006\n**任务说明：** Agent Bus …",
+        "steps_digest": "sha256:c608516a4a339f2e08574cf36f4146e88666a8056aba43718fb46628bb47170a",
+        "decision_digest": "sha256:c2b2087e529f9bd30ec65bc0625b347f6991a0c591fe6541875f1d2ae801c812",
+        "decision_op": "op-R15",
+        "business_request": "br-c006-r15",
+        "adopt_ledger_digest": "sha256:9e57c4c442a9d7582cd6ef2c74819d4e68b2681042186faecf2dfa7c10682f84",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R15/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:82441a2a0eb523caa70daac9f6b259fc0c2b39c1e13a63ae3ef4d6d6279e509e",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**案件号：** C006\n**任务说明：** Agent Bus …",
+        "steps_digest": "sha256:c608516a4a339f2e08574cf36f4146e88666a8056aba43718fb46628bb47170a",
+        "decision_digest": "sha256:c2b2087e529f9bd30ec65bc0625b347f6991a0c591fe6541875f1d2ae801c812",
+        "decision_op": "op-R15",
+        "business_request": "br-c006-r15",
+        "adopt_ledger_digest": "sha256:9e57c4c442a9d7582cd6ef2c74819d4e68b2681042186faecf2dfa7c10682f84",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R16",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:6b072f99f06805a7eae245473322a1db283b9cf3ba53bd5b7136193867ce9aea",
+        "final_head": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：** C006  \n**任务标识：** Agent Bu…",
+        "steps_digest": "sha256:bc1f83fe43d9045511bddee0107376d80a06659b445f37a404d3649da8d3ac07",
+        "decision_digest": "sha256:3f0809a8ae67a25ff1f901f4652be90c1b27b78ccf9c143d495c2a88c569420f",
+        "decision_op": "op-R16",
+        "business_request": "br-c006-r16",
+        "adopt_ledger_digest": "sha256:097ca80a9264aa3517d86476d881dba424acbf892f39179cc9451d656a5b11c6"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:bc1f83fe43d9045511bddee0107376d80a06659b445f37a404d3649da8d3ac07",
+        "decision_digest": "sha256:3f0809a8ae67a25ff1f901f4652be90c1b27b78ccf9c143d495c2a88c569420f",
+        "decision_op": "op-R16",
+        "business_request": "br-c006-r16",
+        "adopt_ledger_digest": "sha256:097ca80a9264aa3517d86476d881dba424acbf892f39179cc9451d656a5b11c6",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:6b072f99f06805a7eae245473322a1db283b9cf3ba53bd5b7136193867ce9aea",
+        "final_head": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：** C006  \n**任务标识：** Agent Bu…",
+        "steps_digest": "sha256:bc1f83fe43d9045511bddee0107376d80a06659b445f37a404d3649da8d3ac07",
+        "decision_digest": "sha256:3f0809a8ae67a25ff1f901f4652be90c1b27b78ccf9c143d495c2a88c569420f",
+        "decision_op": "op-R16",
+        "business_request": "br-c006-r16",
+        "adopt_ledger_digest": "sha256:097ca80a9264aa3517d86476d881dba424acbf892f39179cc9451d656a5b11c6",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R16/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:6b072f99f06805a7eae245473322a1db283b9cf3ba53bd5b7136193867ce9aea",
+        "final_head": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：** C006  \n**任务标识：** Agent Bu…",
+        "steps_digest": "sha256:bc1f83fe43d9045511bddee0107376d80a06659b445f37a404d3649da8d3ac07",
+        "decision_digest": "sha256:3f0809a8ae67a25ff1f901f4652be90c1b27b78ccf9c143d495c2a88c569420f",
+        "decision_op": "op-R16",
+        "business_request": "br-c006-r16",
+        "adopt_ledger_digest": "sha256:097ca80a9264aa3517d86476d881dba424acbf892f39179cc9451d656a5b11c6",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R2",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:671695f02ead779b6f1e0ba0f06b2523f3d61f939eecd5946fb41ed62312bd67",
+        "final_head": "[step:report]\n**授信尽调报告（模拟）**\n\n**案件号：** C006\n**任务说明：** Agent …",
+        "steps_digest": "sha256:28336f843cfcaa12ce0fa75beb5603bd96cd6b23b9c7686c31872e027930c88b",
+        "decision_digest": "sha256:81965c60c3351a6e5ff14d032bcdf3ffe8229ffea590f5be1c06dd330a408068",
+        "decision_op": "op-R2",
+        "business_request": "br-c006-r2",
+        "adopt_ledger_digest": "sha256:3dfa9e68c999d3bd991ceb61d333a29150c74f2dcf3db22139b15f8ee832f6c3"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:28336f843cfcaa12ce0fa75beb5603bd96cd6b23b9c7686c31872e027930c88b",
+        "decision_digest": "sha256:81965c60c3351a6e5ff14d032bcdf3ffe8229ffea590f5be1c06dd330a408068",
+        "decision_op": "op-R2",
+        "business_request": "br-c006-r2",
+        "adopt_ledger_digest": "sha256:3dfa9e68c999d3bd991ceb61d333a29150c74f2dcf3db22139b15f8ee832f6c3",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:671695f02ead779b6f1e0ba0f06b2523f3d61f939eecd5946fb41ed62312bd67",
+        "final_head": "[step:report]\n**授信尽调报告（模拟）**\n\n**案件号：** C006\n**任务说明：** Agent …",
+        "steps_digest": "sha256:28336f843cfcaa12ce0fa75beb5603bd96cd6b23b9c7686c31872e027930c88b",
+        "decision_digest": "sha256:81965c60c3351a6e5ff14d032bcdf3ffe8229ffea590f5be1c06dd330a408068",
+        "decision_op": "op-R2",
+        "business_request": "br-c006-r2",
+        "adopt_ledger_digest": "sha256:3dfa9e68c999d3bd991ceb61d333a29150c74f2dcf3db22139b15f8ee832f6c3",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R2/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:671695f02ead779b6f1e0ba0f06b2523f3d61f939eecd5946fb41ed62312bd67",
+        "final_head": "[step:report]\n**授信尽调报告（模拟）**\n\n**案件号：** C006\n**任务说明：** Agent …",
+        "steps_digest": "sha256:28336f843cfcaa12ce0fa75beb5603bd96cd6b23b9c7686c31872e027930c88b",
+        "decision_digest": "sha256:81965c60c3351a6e5ff14d032bcdf3ffe8229ffea590f5be1c06dd330a408068",
+        "decision_op": "op-R2",
+        "business_request": "br-c006-r2",
+        "adopt_ledger_digest": "sha256:3dfa9e68c999d3bd991ceb61d333a29150c74f2dcf3db22139b15f8ee832f6c3",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R3",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:7c98ed7890b215de48b6ffdb9eca8df3152d7b421dde6890e391c9f60fa2551c",
+        "final_head": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：C006**\n**报告性质：模拟报告（Agent Bus…",
+        "steps_digest": "sha256:4b7246defa9b7e5baae63aac2ae18af8047b5cd170b6e41071723f25b2142e8a",
+        "decision_digest": "sha256:83ff017e0b06c2c7a14ae9783201ccc3d53d46fa139f6e78bcfdbbbfd0d474fe",
+        "decision_op": "op-R3",
+        "business_request": "br-c006-r3",
+        "adopt_ledger_digest": "sha256:be15bc6d686090fc179cb8832a486b964604f0f9881ca504b0b7f669ecb166ba"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:4b7246defa9b7e5baae63aac2ae18af8047b5cd170b6e41071723f25b2142e8a",
+        "decision_digest": "sha256:83ff017e0b06c2c7a14ae9783201ccc3d53d46fa139f6e78bcfdbbbfd0d474fe",
+        "decision_op": "op-R3",
+        "business_request": "br-c006-r3",
+        "adopt_ledger_digest": "sha256:be15bc6d686090fc179cb8832a486b964604f0f9881ca504b0b7f669ecb166ba",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:7c98ed7890b215de48b6ffdb9eca8df3152d7b421dde6890e391c9f60fa2551c",
+        "final_head": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：C006**\n**报告性质：模拟报告（Agent Bus…",
+        "steps_digest": "sha256:4b7246defa9b7e5baae63aac2ae18af8047b5cd170b6e41071723f25b2142e8a",
+        "decision_digest": "sha256:83ff017e0b06c2c7a14ae9783201ccc3d53d46fa139f6e78bcfdbbbfd0d474fe",
+        "decision_op": "op-R3",
+        "business_request": "br-c006-r3",
+        "adopt_ledger_digest": "sha256:be15bc6d686090fc179cb8832a486b964604f0f9881ca504b0b7f669ecb166ba",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R3/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:7c98ed7890b215de48b6ffdb9eca8df3152d7b421dde6890e391c9f60fa2551c",
+        "final_head": "[step:report]\n# 模拟授信尽调报告\n\n**案件号：C006**\n**报告性质：模拟报告（Agent Bus…",
+        "steps_digest": "sha256:4b7246defa9b7e5baae63aac2ae18af8047b5cd170b6e41071723f25b2142e8a",
+        "decision_digest": "sha256:83ff017e0b06c2c7a14ae9783201ccc3d53d46fa139f6e78bcfdbbbfd0d474fe",
+        "decision_op": "op-R3",
+        "business_request": "br-c006-r3",
+        "adopt_ledger_digest": "sha256:be15bc6d686090fc179cb8832a486b964604f0f9881ca504b0b7f669ecb166ba",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R4",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:4341f389772d945ddd09a68ef6547c2bf447aaedeaa34dd59dfd1e0e18850669",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:36489cf5a144c8ff313ea1a337e9aa202b5f461a4a2b58ba344a5ea06d835f34",
+        "decision_digest": "sha256:24447ca9b461844115aed384c484c26866f8a67b879fb17289e942a7ffbb74d4",
+        "decision_op": "op-R4",
+        "business_request": "br-c006-r4",
+        "adopt_ledger_digest": "sha256:53c2ccdd0d39749917e7c1236d0ed3af01459de97bba48dad84953373a546dd6"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:36489cf5a144c8ff313ea1a337e9aa202b5f461a4a2b58ba344a5ea06d835f34",
+        "decision_digest": "sha256:24447ca9b461844115aed384c484c26866f8a67b879fb17289e942a7ffbb74d4",
+        "decision_op": "op-R4",
+        "business_request": "br-c006-r4",
+        "adopt_ledger_digest": "sha256:53c2ccdd0d39749917e7c1236d0ed3af01459de97bba48dad84953373a546dd6",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:4341f389772d945ddd09a68ef6547c2bf447aaedeaa34dd59dfd1e0e18850669",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:36489cf5a144c8ff313ea1a337e9aa202b5f461a4a2b58ba344a5ea06d835f34",
+        "decision_digest": "sha256:24447ca9b461844115aed384c484c26866f8a67b879fb17289e942a7ffbb74d4",
+        "decision_op": "op-R4",
+        "business_request": "br-c006-r4",
+        "adopt_ledger_digest": "sha256:53c2ccdd0d39749917e7c1236d0ed3af01459de97bba48dad84953373a546dd6",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R4/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:4341f389772d945ddd09a68ef6547c2bf447aaedeaa34dd59dfd1e0e18850669",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n* 案件号：C006\n* 任务说明：Agent…",
+        "steps_digest": "sha256:36489cf5a144c8ff313ea1a337e9aa202b5f461a4a2b58ba344a5ea06d835f34",
+        "decision_digest": "sha256:24447ca9b461844115aed384c484c26866f8a67b879fb17289e942a7ffbb74d4",
+        "decision_op": "op-R4",
+        "business_request": "br-c006-r4",
+        "adopt_ledger_digest": "sha256:53c2ccdd0d39749917e7c1236d0ed3af01459de97bba48dad84953373a546dd6",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R5",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:e5a63fa4b2a47d9ce10abdc7c35c7f706112a684daf71af694c3d4fd9154fd76",
+        "final_head": "[step:report]\n授信尽调报告\n\n一、申请概况\n案件号：C006\n任务说明：Agent Bus storage…",
+        "steps_digest": "sha256:2a1138ecbbeed6c2cd920887bc7b3a4d92c2c6114e8b9267bc4bb268403a605a",
+        "decision_digest": "sha256:dd1fe0e1658ffb2fd07285917f7fd3d27ccc35a4f9ee1738f1d95307805a7ef1",
+        "decision_op": "op-R5",
+        "business_request": "br-c006-r5",
+        "adopt_ledger_digest": "sha256:b307713cb2a7f6219d899a6e40b010ffff3bd480dcae15bb632933795613b339"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:2a1138ecbbeed6c2cd920887bc7b3a4d92c2c6114e8b9267bc4bb268403a605a",
+        "decision_digest": "sha256:dd1fe0e1658ffb2fd07285917f7fd3d27ccc35a4f9ee1738f1d95307805a7ef1",
+        "decision_op": "op-R5",
+        "business_request": "br-c006-r5",
+        "adopt_ledger_digest": "sha256:b307713cb2a7f6219d899a6e40b010ffff3bd480dcae15bb632933795613b339",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:e5a63fa4b2a47d9ce10abdc7c35c7f706112a684daf71af694c3d4fd9154fd76",
+        "final_head": "[step:report]\n授信尽调报告\n\n一、申请概况\n案件号：C006\n任务说明：Agent Bus storage…",
+        "steps_digest": "sha256:2a1138ecbbeed6c2cd920887bc7b3a4d92c2c6114e8b9267bc4bb268403a605a",
+        "decision_digest": "sha256:dd1fe0e1658ffb2fd07285917f7fd3d27ccc35a4f9ee1738f1d95307805a7ef1",
+        "decision_op": "op-R5",
+        "business_request": "br-c006-r5",
+        "adopt_ledger_digest": "sha256:b307713cb2a7f6219d899a6e40b010ffff3bd480dcae15bb632933795613b339",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R5/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:e5a63fa4b2a47d9ce10abdc7c35c7f706112a684daf71af694c3d4fd9154fd76",
+        "final_head": "[step:report]\n授信尽调报告\n\n一、申请概况\n案件号：C006\n任务说明：Agent Bus storage…",
+        "steps_digest": "sha256:2a1138ecbbeed6c2cd920887bc7b3a4d92c2c6114e8b9267bc4bb268403a605a",
+        "decision_digest": "sha256:dd1fe0e1658ffb2fd07285917f7fd3d27ccc35a4f9ee1738f1d95307805a7ef1",
+        "decision_op": "op-R5",
+        "business_request": "br-c006-r5",
+        "adopt_ledger_digest": "sha256:b307713cb2a7f6219d899a6e40b010ffff3bd480dcae15bb632933795613b339",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    },
+    {
+      "run": "R6",
+      "original_41a3675": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:bf221702afc142b7ffe3a84099cc9161e98245e17409ee77b20a9b5c7c766df8",
+        "adopt_ledger_digest": "missing"
+      },
+      "after_e1961fe8": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:bf221702afc142b7ffe3a84099cc9161e98245e17409ee77b20a9b5c7c766df8",
+        "adopt_ledger_digest": "missing"
+      },
+      "first_upgrade": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:bf221702afc142b7ffe3a84099cc9161e98245e17409ee77b20a9b5c7c766df8",
+        "adopt_ledger_digest": "missing"
+      },
+      "second_upgrade": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:bf221702afc142b7ffe3a84099cc9161e98245e17409ee77b20a9b5c7c766df8",
+        "adopt_ledger_digest": "missing"
+      }
+    },
+    {
+      "run": "R7",
+      "original_41a3675": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:0c0de4cce63cbdfc75388bcdddbceb1e96314a77da4aa2a4bd5d7b60d9433f9d",
+        "adopt_ledger_digest": "missing"
+      },
+      "after_e1961fe8": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:0c0de4cce63cbdfc75388bcdddbceb1e96314a77da4aa2a4bd5d7b60d9433f9d",
+        "adopt_ledger_digest": "missing"
+      },
+      "first_upgrade": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:0c0de4cce63cbdfc75388bcdddbceb1e96314a77da4aa2a4bd5d7b60d9433f9d",
+        "adopt_ledger_digest": "missing"
+      },
+      "second_upgrade": {
+        "status": "waiting",
+        "final_digest": "sha256:e2e52f292137f3f5fe72f8fb21b85e89f59d1eded10405d985911d70cac84e26",
+        "final_head": "等待远端结果；未确认的调用不会自动重发",
+        "steps_digest": "sha256:0c0de4cce63cbdfc75388bcdddbceb1e96314a77da4aa2a4bd5d7b60d9433f9d",
+        "adopt_ledger_digest": "missing"
+      }
+    },
+    {
+      "run": "R8",
+      "original_41a3675": {
+        "status": "failed",
+        "final_digest": "sha256:7f77ce4a51410e35799a13642af0e79045e7c1a1d7bfeef9c70352aa1dddf1ba",
+        "final_head": "blueprint id=team-graph step id=financial failed: Remote tas…",
+        "steps_digest": "sha256:33dbcaa3a914eee88ce9eb08f6fc7d88530f927300199bead9945dceead104ac",
+        "adopt_ledger_digest": "missing"
+      },
+      "after_e1961fe8": {
+        "status": "failed",
+        "final_digest": "sha256:7f77ce4a51410e35799a13642af0e79045e7c1a1d7bfeef9c70352aa1dddf1ba",
+        "final_head": "blueprint id=team-graph step id=financial failed: Remote tas…",
+        "steps_digest": "sha256:33dbcaa3a914eee88ce9eb08f6fc7d88530f927300199bead9945dceead104ac",
+        "adopt_ledger_digest": "missing"
+      },
+      "first_upgrade": {
+        "status": "failed",
+        "final_digest": "sha256:7f77ce4a51410e35799a13642af0e79045e7c1a1d7bfeef9c70352aa1dddf1ba",
+        "final_head": "blueprint id=team-graph step id=financial failed: Remote tas…",
+        "steps_digest": "sha256:33dbcaa3a914eee88ce9eb08f6fc7d88530f927300199bead9945dceead104ac",
+        "adopt_ledger_digest": "missing"
+      },
+      "second_upgrade": {
+        "status": "failed",
+        "final_digest": "sha256:7f77ce4a51410e35799a13642af0e79045e7c1a1d7bfeef9c70352aa1dddf1ba",
+        "final_head": "blueprint id=team-graph step id=financial failed: Remote tas…",
+        "steps_digest": "sha256:33dbcaa3a914eee88ce9eb08f6fc7d88530f927300199bead9945dceead104ac",
+        "adopt_ledger_digest": "missing"
+      }
+    },
+    {
+      "run": "R9",
+      "original_41a3675": {
+        "status": "done",
+        "final_digest": "sha256:b40fb946c9c69c500ca69cf252ce3196ffbb168b08fd621f4d35de3301749571",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n案件号：C006\n任务说明：Agent Bus…",
+        "steps_digest": "sha256:bccfe7986b95747047c5f9ae3724b5b7791a853d22cc8999930d2fc0d0f938e5",
+        "decision_digest": "sha256:b66d797955ec068c09a5a9f01f698e0527cb37d5d092da685a944a84a172edbc",
+        "decision_op": "op-R9",
+        "business_request": "br-c006-r9",
+        "adopt_ledger_digest": "sha256:0fa95dd22afb7ddac1f9d96b15b6bee3d51dc5a2d1d9455be87d8e02cb907dbf"
+      },
+      "after_e1961fe8": {
+        "status": "blocked",
+        "final_digest": "sha256:90bc660f32aa23453e3efcd64e359ee1540fa28618210bf62a8ada47997703e2",
+        "final_head": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生…",
+        "steps_digest": "sha256:bccfe7986b95747047c5f9ae3724b5b7791a853d22cc8999930d2fc0d0f938e5",
+        "decision_digest": "sha256:b66d797955ec068c09a5a9f01f698e0527cb37d5d092da685a944a84a172edbc",
+        "decision_op": "op-R9",
+        "business_request": "br-c006-r9",
+        "adopt_ledger_digest": "sha256:0fa95dd22afb7ddac1f9d96b15b6bee3d51dc5a2d1d9455be87d8e02cb907dbf",
+        "blocked": {
+          "code": "RECONCILIATION_REQUIRED",
+          "note": "启动对账未通过，需人工核对",
+          "at": ""
+        }
+      },
+      "first_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:b40fb946c9c69c500ca69cf252ce3196ffbb168b08fd621f4d35de3301749571",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n案件号：C006\n任务说明：Agent Bus…",
+        "steps_digest": "sha256:bccfe7986b95747047c5f9ae3724b5b7791a853d22cc8999930d2fc0d0f938e5",
+        "decision_digest": "sha256:b66d797955ec068c09a5a9f01f698e0527cb37d5d092da685a944a84a172edbc",
+        "decision_op": "op-R9",
+        "business_request": "br-c006-r9",
+        "adopt_ledger_digest": "sha256:0fa95dd22afb7ddac1f9d96b15b6bee3d51dc5a2d1d9455be87d8e02cb907dbf",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "runs/R9/adopt.jsonl",
+          "disposition": "FLAGGED"
+        }
+      },
+      "second_upgrade": {
+        "status": "done",
+        "final_digest": "sha256:b40fb946c9c69c500ca69cf252ce3196ffbb168b08fd621f4d35de3301749571",
+        "final_head": "[step:report]\n**授信尽调报告**\n\n**一、申请概况**\n案件号：C006\n任务说明：Agent Bus…",
+        "steps_digest": "sha256:bccfe7986b95747047c5f9ae3724b5b7791a853d22cc8999930d2fc0d0f938e5",
+        "decision_digest": "sha256:b66d797955ec068c09a5a9f01f698e0527cb37d5d092da685a944a84a172edbc",
+        "decision_op": "op-R9",
+        "business_request": "br-c006-r9",
+        "adopt_ledger_digest": "sha256:0fa95dd22afb7ddac1f9d96b15b6bee3d51dc5a2d1d9455be87d8e02cb907dbf",
+        "reconciliation": {
+          "code": "RECONCILIATION_REQUIRED",
+          "cause": "LEGACY_ADOPTION_PROTOCOL",
+          "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+          "at": "2026-11-20T04:51:16Z",
+          "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+          "disposition": "RESTORED"
+        }
+      }
+    }
+  ]
+}

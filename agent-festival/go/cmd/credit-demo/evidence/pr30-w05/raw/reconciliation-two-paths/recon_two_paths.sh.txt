@@ -1,0 +1,20 @@
+#!/bin/sh
+# Two upgrade paths on read-only copies of the W05 41a3675 data:
+# e1961fe8 startup reconciliation -> ~/recon-diag/out-e196, then this branch
+# on the original (first upgrade) and on out-e196 (second upgrade).
+set -e
+export PATH=/d/agent-hub-alpha/_tools/go/bin:$PATH GOPATH=D:/agent-hub-alpha/_tools/gopath GOCACHE=D:/agent-hub-alpha/_tools/gocache GOPROXY=https://goproxy.cn,direct GOTOOLCHAIN=auto
+for wt in e196 blockr; do
+  cd /d/agent-hub-alpha/$wt/agent-festival/go/cmd/credit-demo
+  CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go test -c -o /d/agent-hub-alpha/_deploy175/$wt-up.test .
+done
+MSYS_NO_PATHCONV=1 wsl.exe -d Ubuntu -- sh -c '
+set -e
+rm -rf /tmp/recon-out-e196 && mkdir -p /tmp/recon2 && cp /mnt/d/agent-hub-alpha/_deploy175/e196-up.test /mnt/d/agent-hub-alpha/_deploy175/blockr-up.test /tmp/recon2/ && chmod +x /tmp/recon2/*.test
+# The ledger schema is found relative to the package directory: run there.
+cd /mnt/d/agent-hub-alpha/e196/agent-festival/go/cmd/credit-demo
+RECON_DIR=$HOME/recon-diag/data41 RECON_OUT=/tmp/recon-out-e196 RECON_MODEL=glm-5-2-260617 /tmp/recon2/e196-up.test -test.run TestReconUpgradeE196 -test.count=1 -test.v | tail -20
+mkdir -p /mnt/d/agent-hub-alpha/_deploy175/recon2
+cd /mnt/d/agent-hub-alpha/blockr/agent-festival/go/cmd/credit-demo
+RECON_DIR=$HOME/recon-diag/data41 RECON_E196=/tmp/recon-out-e196 RECON_REPORT=/mnt/d/agent-hub-alpha/_deploy175/recon2/upgrade-paths.json RECON_MODEL=glm-5-2-260617 /tmp/recon2/blockr-up.test -test.run TestReconUpgradePaths -test.count=1 -test.v
+'

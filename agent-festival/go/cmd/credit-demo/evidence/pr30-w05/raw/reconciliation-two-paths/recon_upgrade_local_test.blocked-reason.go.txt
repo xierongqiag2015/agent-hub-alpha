@@ -1,0 +1,143 @@
+package main
+
+// Local diagnostic, not committed: the two upgrade paths on copies of a
+// 41a3675 data directory. First: the 41a3675 data straight to this build.
+// Second: the data as e1961fe8 left it (RECON_E196, made by that build's
+// startup reconciliation), then this build. Writes one row per run with the
+// original, both results and their digests to RECON_REPORT.
+
+import (
+	"encoding/json"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"sort"
+	"testing"
+)
+
+type upgradeView struct {
+	Status       string       `json:"status"`
+	FinalDigest  string       `json:"final_digest"`
+	FinalHead    string       `json:"final_head"`
+	StepsDigest  string       `json:"steps_digest"`
+	Decision     string       `json:"decision_digest,omitempty"`
+	DecisionOp   string       `json:"decision_op,omitempty"`
+	BusinessReq  string       `json:"business_request,omitempty"`
+	Receipt      string       `json:"receipt,omitempty"`
+	ReceiptOf    string       `json:"receipt_status,omitempty"`
+	LedgerDigest string       `json:"adopt_ledger_digest"`
+	Blocked      *BlockReason `json:"blocked,omitempty"`
+	Recon        *BlockReason `json:"reconciliation,omitempty"`
+}
+
+func viewOf(dir string, r *Run) upgradeView {
+	steps, _ := json.Marshal(r.Steps)
+	ledger, err := os.ReadFile(filepath.Join(dir, "runs", r.ID, "adopt.jsonl"))
+	v := upgradeView{Status: r.Status, FinalDigest: sha(r.Final), FinalHead: clip(r.Final, 60), StepsDigest: sha(string(steps)),
+		DecisionOp: r.DecisionOp, BusinessReq: r.BusinessReq, Receipt: r.Receipt, ReceiptOf: r.ReceiptOf, LedgerDigest: "missing"}
+	if err == nil {
+		v.LedgerDigest = sha(string(ledger))
+	}
+	if r.Decision != nil {
+		d, _ := json.Marshal(r.Decision)
+		v.Decision = sha(string(d))
+	}
+	if r.Status == "blocked" {
+		v.Blocked = blockReasonOf(r)
+	}
+	v.Recon = r.Reconciliation
+	return v
+}
+
+func loadState(t *testing.T, dir string) *State {
+	raw, err := os.ReadFile(filepath.Join(dir, "state.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	var st State
+	if err := json.Unmarshal(raw, &st); err != nil {
+		t.Fatal(err)
+	}
+	return &st
+}
+
+// upgrade copies src and runs this build's startup reconciliation on it,
+// twice, as two restarts; the second must not change anything.
+func upgrade(t *testing.T, src, dir string) *State {
+	if b, err := exec.Command("cp", "-a", src, dir).CombinedOutput(); err != nil {
+		t.Fatalf("copy: %v %s", err, b)
+	}
+	var rev int64
+	for i := 0; i < 2; i++ {
+		s := &Service{cfg: Config{DataDir: dir, Model: os.Getenv("RECON_MODEL")}, st: loadState(t, dir), writeState: writeJSON}
+		s.lastSaved, _ = json.Marshal(s.st)
+		if err := s.reconcileAdoptions(); err != nil {
+			t.Fatal(err)
+		}
+		if i == 1 && s.st.Rev != rev {
+			t.Fatalf("%s: second restart changed the state (rev %d -> %d)", dir, rev, s.st.Rev)
+		}
+		rev = s.st.Rev
+	}
+	return loadState(t, dir)
+}
+
+func TestReconUpgradePaths(t *testing.T) {
+	orig, e196, report := os.Getenv("RECON_DIR"), os.Getenv("RECON_E196"), os.Getenv("RECON_REPORT")
+	if orig == "" || e196 == "" || report == "" {
+		t.Skip("RECON_DIR / RECON_E196 / RECON_REPORT not set")
+	}
+	base := t.TempDir()
+	first, second := filepath.Join(base, "first"), filepath.Join(base, "second")
+	o, mid := loadState(t, orig), loadState(t, e196)
+	a, b := upgrade(t, orig, first), upgrade(t, e196, second)
+	ids := []string{}
+	for id := range o.Runs {
+		ids = append(ids, id)
+	}
+	sort.Strings(ids)
+	type row struct {
+		Run      string      `json:"run"`
+		Original upgradeView `json:"original_41a3675"`
+		E196     upgradeView `json:"after_e1961fe8"`
+		First    upgradeView `json:"first_upgrade"`
+		Second   upgradeView `json:"second_upgrade"`
+	}
+	var rows []row
+	for _, id := range ids {
+		rw := row{id, viewOf(orig, o.Runs[id]), viewOf(e196, mid.Runs[id]), viewOf(first, a.Runs[id]), viewOf(second, b.Runs[id])}
+		rows = append(rows, rw)
+		t.Logf("%-4s orig=%-7s e196=%-7s first=%-7s second=%-7s final first=%v second=%v steps=%v ledger=%v | first %s | second %s", id,
+			rw.Original.Status, rw.E196.Status, rw.First.Status, rw.Second.Status,
+			rw.First.FinalDigest == rw.Original.FinalDigest, rw.Second.FinalDigest == rw.Original.FinalDigest,
+			rw.First.StepsDigest == rw.Original.StepsDigest && rw.Second.StepsDigest == rw.Original.StepsDigest,
+			rw.First.LedgerDigest == rw.Original.LedgerDigest && rw.Second.LedgerDigest == rw.Original.LedgerDigest,
+			disp(rw.First), disp(rw.Second))
+	}
+	files := map[string][]string{}
+	for name, dir := range map[string]string{"first": first, "second": second} {
+		paths, _ := filepath.Glob(filepath.Join(dir, "disposition-*.json"))
+		pre, _ := filepath.Glob(filepath.Join(dir, "reconciliation-*.json"))
+		for _, p := range pre { // full pre-upgrade state: listed, not copied (lease tokens)
+			files[name] = append(files[name], filepath.Base(p))
+		}
+		for _, p := range paths {
+			raw, _ := os.ReadFile(p)
+			files[name] = append(files[name], filepath.Base(p))
+			_ = os.WriteFile(filepath.Join(filepath.Dir(report), name+"-"+filepath.Base(p)), raw, 0600)
+		}
+	}
+	out, _ := json.MarshalIndent(map[string]any{"rows": rows, "files": files}, "", "  ")
+	if err := os.WriteFile(report, out, 0600); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func disp(v upgradeView) string {
+	for _, b := range []*BlockReason{v.Blocked, v.Recon} {
+		if b != nil {
+			return b.Disposition + "/" + b.Cause
+		}
+	}
+	return "-"
+}

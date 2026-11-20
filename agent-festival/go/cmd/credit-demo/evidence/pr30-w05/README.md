@@ -263,6 +263,18 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
   - `7de8c55`：`finished_at` = `started_at` + 单调时钟经过的时间，Go 校验不变。
   - 结果（`raw/d2-e196/java-tests-red-green.log`）：`d1dec69` 上新测试失败（`started_at` 03.700Z，`finished_at` 03.650Z）；`7de8c55` 上 5/5 通过，含 SchedulerRecoveryTest 与 JudgmentErrorsTest。
 
+## 旧任务对账：两条升级路径（2026-11-20，`raw/reconciliation-41a3675/`、`raw/reconciliation-two-paths/`）
+
+数据是 W05 41a3675 环境的只读拷贝，16 个任务，其中 11 个 done 任务的采纳记录是旧协议 0.1.0。
+- e1961fe8 把这 11 个 done 任务阻断，并用阻断原因覆盖了最终输出。
+- 修复分支 `blocked-reason` `5fb1c7c` 在两条路径上结果相同：
+  - 首次升级：任务保持 done，打 `FLAGGED` 标记；
+  - 已被 e1961fe8 阻断后再次升级：按 e1961fe8 留下的对账前快照恢复为 done，处置为 `RESTORED`。
+- 两条路径的最终输出、节点产物、决策、回执、采纳账本摘要都和原始数据逐一相同，第二次重启不改写状态。
+- 每次处置都存在 `disposition-<摘要>.json` 里，记有原因、来源和处置。
+
+逐项对照见 [`raw/reconciliation-two-paths/README.md`](raw/reconciliation-two-paths/README.md)。
+
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
 | 编号 | 本记录覆盖到的程度 | 仍需补的部分 |

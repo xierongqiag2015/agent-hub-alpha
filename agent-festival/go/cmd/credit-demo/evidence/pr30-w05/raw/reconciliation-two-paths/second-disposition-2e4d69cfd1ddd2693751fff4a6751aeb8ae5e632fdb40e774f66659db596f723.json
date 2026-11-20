@@ -1,0 +1,105 @@
+{
+  "at": "2026-11-20T04:51:16Z",
+  "pre_state": "reconciliation-2e4d69cfd1ddd2693751fff4a6751aeb8ae5e632fdb40e774f66659db596f723.json",
+  "records": [
+    {
+      "run": "R1",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R10",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R12",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R14",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R15",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R16",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R2",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R3",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R4",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R5",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    },
+    {
+      "run": "R9",
+      "from": "blocked",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+      "disposition": "RESTORED"
+    }
+  ]
+}

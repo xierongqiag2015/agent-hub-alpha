@@ -1,0 +1,105 @@
+{
+  "at": "2026-11-20T04:51:16Z",
+  "pre_state": "reconciliation-754187dadb5a9246579e2553c6eabd64ab3e4557fa9efebd96e49bb5f45e48ad.json",
+  "records": [
+    {
+      "run": "R1",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R1/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R10",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R10/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R12",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R12/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R14",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R14/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R15",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R15/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R16",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R16/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R2",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R2/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R3",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R3/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R4",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R4/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R5",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R5/adopt.jsonl",
+      "disposition": "FLAGGED"
+    },
+    {
+      "run": "R9",
+      "from": "done",
+      "to": "done",
+      "cause": "LEGACY_ADOPTION_PROTOCOL",
+      "note": "采纳记录使用旧协议 0.1.0（当前 0.2.0），当前回放不接受，未作一致性判定；需迁移或按旧协议人工核对",
+      "source": "runs/R9/adopt.jsonl",
+      "disposition": "FLAGGED"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+=== RUN   TestReconUpgradeE196
+    recon_upgrade_local_test.go:39: R10 blocked
+    recon_upgrade_local_test.go:39: R13 waiting
+    recon_upgrade_local_test.go:39: R6 waiting
+    recon_upgrade_local_test.go:39: R8 failed
+    recon_upgrade_local_test.go:39: R14 blocked
+    recon_upgrade_local_test.go:39: R15 blocked
+    recon_upgrade_local_test.go:39: R4 blocked
+    recon_upgrade_local_test.go:39: R1 blocked
+    recon_upgrade_local_test.go:39: R16 blocked
+    recon_upgrade_local_test.go:39: R3 blocked
+    recon_upgrade_local_test.go:39: R5 blocked
+    recon_upgrade_local_test.go:39: R7 waiting
+    recon_upgrade_local_test.go:39: R9 blocked
+    recon_upgrade_local_test.go:39: R11 failed
+    recon_upgrade_local_test.go:39: R12 blocked
+    recon_upgrade_local_test.go:39: R2 blocked
+--- PASS: TestReconUpgradeE196 (0.17s)
+PASS
+=== RUN   TestReconUpgradePaths
+    recon_upgrade_local_test.go:110: R1   orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R10  orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R11  orig=failed  e196=failed  first=failed  second=failed  final first=true second=true steps=true ledger=true | first - | second -
+    recon_upgrade_local_test.go:110: R12  orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R13  orig=waiting e196=waiting first=waiting second=waiting final first=true second=true steps=true ledger=true | first - | second -
+    recon_upgrade_local_test.go:110: R14  orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R15  orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R16  orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R2   orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R3   orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R4   orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R5   orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+    recon_upgrade_local_test.go:110: R6   orig=waiting e196=waiting first=waiting second=waiting final first=true second=true steps=true ledger=true | first - | second -
+    recon_upgrade_local_test.go:110: R7   orig=waiting e196=waiting first=waiting second=waiting final first=true second=true steps=true ledger=true | first - | second -
+    recon_upgrade_local_test.go:110: R8   orig=failed  e196=failed  first=failed  second=failed  final first=true second=true steps=true ledger=true | first - | second -
+    recon_upgrade_local_test.go:110: R9   orig=done    e196=blocked first=done    second=done    final first=true second=true steps=true ledger=true | first FLAGGED/LEGACY_ADOPTION_PROTOCOL | second RESTORED/LEGACY_ADOPTION_PROTOCOL
+--- PASS: TestReconUpgradePaths (0.22s)
+PASS
