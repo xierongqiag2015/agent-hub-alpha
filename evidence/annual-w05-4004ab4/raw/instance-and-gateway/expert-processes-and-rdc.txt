@@ -1,0 +1,14 @@
+boot_id 4602f186-b3c7-48e3-87bc-d3e933ee05fb
+report-extractor pid 3088 start_tick 420806 started Fri Nov 20 12:57:19 2026 port 8093 listening_pid_matches True recorded {'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb'}
+business-analyst pid 3163 start_tick 421551 started Fri Nov 20 12:57:26 2026 port 8094 listening_pid_matches True recorded {'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb'}
+asset-quality-analyst pid 3246 start_tick 422188 started Fri Nov 20 12:57:32 2026 port 8096 listening_pid_matches True recorded {'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb'}
+report-writer pid 3317 start_tick 422761 started Fri Nov 20 12:57:38 2026 port 8097 listening_pid_matches True recorded {'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb'}
+services.json expert keys: ['boot_id', 'created', 'health', 'pid', 'start_ticks']
+report-extractor {'pid': 3088, 'created': 1795149804.06, 'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb', 'start_ticks': 420806, 'health': 'http://127.0.0.1:8093/.well-known/agent-card.json'}
+business-analyst {'pid': 3163, 'created': 1795149813.51, 'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb', 'start_ticks': 421551, 'health': 'http://127.0.0.1:8094/.well-known/agent-card.json'}
+asset-quality-analyst {'pid': 3246, 'created': 1795149819.88, 'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb', 'start_ticks': 422188, 'health': 'http://127.0.0.1:8096/.well-known/agent-card.json'}
+report-writer {'pid': 3317, 'created': 1795149825.61, 'boot_id': '4602f186-b3c7-48e3-87bc-d3e933ee05fb', 'start_ticks': 422761, 'health': 'http://127.0.0.1:8097/.well-known/agent-card.json'}
+report-extractor rdc now: [('i-3e0ab76d2ee46d4b', 'ONLINE', None)]
+business-analyst rdc now: [('i-6315f907fd8eae7b', 'ONLINE', None)]
+asset-quality-analyst rdc now: [('i-8a4e816a69626666', 'ONLINE', None)]
+report-writer rdc now: [('i-d60a882b80276a7c', 'ONLINE', None)]

@@ -47,11 +47,41 @@ W05（xierongqiag2015）在自己的接收环境中，把 W03/W04 的 D2 修复�
 - **证据完整性**：`/verify` 返回 `evidence_intact=true`。
 - **报告核对**：8 项指标的两期数值、变动和 PDF 页码，都与 W01 `demo/annual-report/answers.json` 逐项一致；6 条结论都是年报表格行的逐字引用，所以检查器直接 PASS，没有进入 HUMAN。
 
+## 实际执行实例与 Gateway 发送次数（16:00 现场取证，`raw/instance-and-gateway/`）
+
+**Gateway 发送次数**：Gateway（agent-gateway 0.1.3，PID 1100）对每个请求写一行治理审计 `LoggingAuditSink`，含方法和结果，但不含请求号和目标 Agent。按时间窗口统计，从 12:45 升级重启到 16:00 取证：
+
+| 时间窗口（UTC+8） | SendMessage | GetTask |
+|---|---|---|
+| 12:45:00 – 14:07:14.2（准入前：规划、浏览、截图） | 0 | 0 |
+| 14:07:14.2 – 14:09:35.7（本任务执行） | **4**，全部 PASSED | 141，全部 PASSED |
+| 14:09:35.7 – 16:00（完成后：反复读取、截图、取证） | 0 | 0 |
+
+- 这段时间只有本任务处于执行状态，所以窗口内的请求都归属本任务。T-52b9df74 从未准入，更早的任务不在执行中。
+- 4 次 SendMessage 的时间是 14:07:16.987、14:07:46.414、14:07:46.428、14:09:01.296，与 Go 的 4 条 SEND_INTENT（14:07:15.715、14:07:46.387、14:07:46.395、14:09:01.275）一一对应。
+- 没有任何重发，完成后的读取和截图也没有产生发送。
+
+**实际执行实例**：
+- 每次调用时 RDC 都只返回 1 个实例（ONLINE，`maxConcurrency=1`），实例号记录在 `calls.json` 的路由里；
+- 16:00 再查 RDC，实例号与调用时相同，仍各只有 1 个；
+- 监听各端口的进程与服务记录的 PID、boot_id、启动 tick 一致，说明从 12:43 启动到取证时没有换过进程。
+
+| 节点 | Agent | RDC 实例 | 进程（boot `4602f186…`） |
+|---|---|---|---|
+| extract | report-extractor | `i-3e0ab76d2ee46d4b` | PID 3088，tick 420806，:8093 |
+| business | business-analyst | `i-6315f907fd8eae7b` | PID 3163，tick 421551，:8094 |
+| quality | asset-quality-analyst | `i-8a4e816a69626666` | PID 3246，tick 422188，:8096 |
+| draft0 | report-writer | `i-d60a882b80276a7c` | PID 3317，tick 422761，:8097 |
+
+**限制**：
+- 专家进程不在日志里记录任务号，所以“这次调用由该进程执行”是排他推断：只有一个登记实例，端口上始终是同一进程，Gateway 为 DIRECT 路由。这不是专家侧的直接观测。
+- 这个窗口内 Gateway 的计数靠时间和“只有一个任务在执行”来归属，不是按请求号逐一对应。
+- `ps` 显示的启动时间受 WSL btime 漂移影响，比日志晚约 14 分钟，所以进程身份以 boot_id 加启动 tick 为准。
+
 ## 未覆盖
 
 - **批准、交付、下载**：任务停在 AWAITING_ACCEPTANCE，由用户在编排台操作，本记录生成时还没进行。
 - **D2 要求的同一条真实 HUMAN 任务**：本任务没有触发 HUMAN。
-- **执行实例与 Gateway 发送次数**：路由记录为 `actual_execution_instance = not_collected`；只有控制面的 SEND_INTENT，没有 Gateway 侧计数。
 - **W06**：专家是 W03/W04 提供的 `experts-java`，基于 openJiuwen Runtime/Core，真实调用模型；W06 的实现（PR #36）没有接入。
 - **界面问题**（只记现象）：
   - 对话内的任务卡片显示 `Failed to fetch`，状态停在 AWAITING_APPROVAL（`shots/1a-…`）；
@@ -67,4 +97,5 @@ W05（xierongqiag2015）在自己的接收环境中，把 W03/W04 的 D2 修复�
 | `raw/T-824c5bf9/events.json` | 全部 359 条审计事件；超过 1500 字符的文档替换为长度和 sha256 |
 | `raw/T-824c5bf9/check0-artifact.json`、`report-draft0.json` | 程序检查结果、报告正文 |
 | `raw/T-824c5bf9/status-watch.jsonl` | 只读监视记录的状态变化 |
+| `raw/instance-and-gateway/` | Gateway 审计（12:45 起，主体 ID 已脱敏）、按窗口的计数、专家进程与 RDC 实例对照 |
 | `shots/` | 9 张真实页面截图，文件名带截取时间：规划对话、准入前编排台、选择记录、执行后编排台、Bus 调用清单与详情、报告。截图只浏览和展开，没有点击可信操作 |
