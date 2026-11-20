@@ -1,0 +1,4307 @@
+{
+ "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+ "count": 359,
+ "events": [
+  {
+   "at": "2026-11-20T12:47:01.860924+08:00",
+   "document": {
+    "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+    "graph_digest": "sha256:5c227314e0e4769336836b55f20b6e165071eaf1373ad3d512dee701477cfbc6"
+   },
+   "event_id": "event-7702cf59d17db575237155066179fb5e",
+   "kind": "PROPOSED",
+   "sequence": "15787"
+  },
+  {
+   "at": "2026-11-20T14:07:14.243403+08:00",
+   "document": {
+    "status": "QUEUED",
+    "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+    "graph_digest": "sha256:5c227314e0e4769336836b55f20b6e165071eaf1373ad3d512dee701477cfbc6"
+   },
+   "event_id": "event-732f35b056153b36dd1c1601fd8eb00c",
+   "kind": "ADMITTED",
+   "sequence": "15788"
+  },
+  {
+   "at": "2026-11-20T14:07:15.550398+08:00",
+   "document": {
+    "_trimmed_chars": 3777,
+    "_sha256": "25c9ddcad05e2e2c0612d4cfae7944d3d7bc1a7b7c9bab444cca188e9c3d1a05",
+    "node_id": null,
+    "status": null
+   },
+   "event_id": "event-d17f6be2b032e137665d1d6eb30a46a8",
+   "kind": "LEASE_CLAIMED",
+   "sequence": "15789"
+  },
+  {
+   "at": "2026-11-20T14:07:15.638097+08:00",
+   "document": {
+    "_trimmed_chars": 2154,
+    "_sha256": "8f98c370ab0f1d5053a62dbab9eaf5d3e49f9cefd811f6a5ff820af496ed6223",
+    "node_id": null,
+    "status": "GRANTED"
+   },
+   "event_id": "event-5a8407cf8c8a2b1371f92ce068350576",
+   "kind": "NODE_RESOLVED",
+   "sequence": "15790"
+  },
+  {
+   "at": "2026-11-20T14:07:15.715756+08:00",
+   "document": {
+    "_trimmed_chars": 3780,
+    "_sha256": "b35e6929d3c5f123f4b9eae5fbfe621880be95c0cf0e425efe050f08db24f759",
+    "node_id": "extract",
+    "status": null
+   },
+   "event_id": "event-272c95867193e9aa5998ed47da14a144",
+   "kind": "SEND_INTENT",
+   "sequence": "15791"
+  },
+  {
+   "at": "2026-11-20T14:07:17.319539+08:00",
+   "document": {
+    "_trimmed_chars": 6547,
+    "_sha256": "54ef74a6e3fa57ef1353e046f2aa2e26e633cc05c380a07e8c33683cdef8dc38",
+    "node_id": null,
+    "status": null
+   },
+   "event_id": "event-fe9b26564fdbbe4ca60a3ee85c6ac708",
+   "kind": "EXPERT_INPUT_AUTHORIZED",
+   "sequence": "15792"
+  },
+  {
+   "at": "2026-11-20T14:07:17.363748+08:00",
+   "document": {
+    "state": "SEND_INTENT",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-236219011f38968e92b83d9433c7386f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15793"
+  },
+  {
+   "at": "2026-11-20T14:07:17.373381+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-c077397faedde2119204f216da83a7b4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15794"
+  },
+  {
+   "at": "2026-11-20T14:07:18.444162+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-15c53a585711e0c4c8270659e024e83d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15795"
+  },
+  {
+   "at": "2026-11-20T14:07:18.453087+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-b10fd27e072788b51037224c003cc477",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15796"
+  },
+  {
+   "at": "2026-11-20T14:07:18.585309+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:07:48.584319+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-a85275d0b7288f5ead7f1f29a56a10cd",
+   "kind": "HEARTBEAT",
+   "sequence": "15797"
+  },
+  {
+   "at": "2026-11-20T14:07:19.528697+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-651ffa7c5670cd73c1caf7cc04a6e82e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15798"
+  },
+  {
+   "at": "2026-11-20T14:07:19.537885+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-c7cab9387532e6e1a1ead213c6141120",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15799"
+  },
+  {
+   "at": "2026-11-20T14:07:20.607407+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-d32eaed95fad2764a71a4ba0c21d1045",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15800"
+  },
+  {
+   "at": "2026-11-20T14:07:20.618223+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-e7897afc34ec4561be770e1d9e08a935",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15801"
+  },
+  {
+   "at": "2026-11-20T14:07:21.584426+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:07:51.583501+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-ff8bc9e98953e4cbe199d5184d2d15c7",
+   "kind": "HEARTBEAT",
+   "sequence": "15802"
+  },
+  {
+   "at": "2026-11-20T14:07:21.677879+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-fee4d8a9fef09f541b3a4f4a172942c6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15803"
+  },
+  {
+   "at": "2026-11-20T14:07:21.684613+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-6f6447604fa5f67548d37aab0d7f75a2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15804"
+  },
+  {
+   "at": "2026-11-20T14:07:22.742526+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-1e6d1cad473f6c21dfeead73150f47e5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15805"
+  },
+  {
+   "at": "2026-11-20T14:07:22.749439+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-fc1f763ee08a769b171c7ef8a3bb8173",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15806"
+  },
+  {
+   "at": "2026-11-20T14:07:23.804154+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-ec8dfd9512121e04b2c503b90b819235",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15807"
+  },
+  {
+   "at": "2026-11-20T14:07:23.810946+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-32c9b4d549c8153a136c5878eee30dfe",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15808"
+  },
+  {
+   "at": "2026-11-20T14:07:24.585036+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:07:54.584083+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-5fcfc98b030d242e47fa4642dbe33434",
+   "kind": "HEARTBEAT",
+   "sequence": "15809"
+  },
+  {
+   "at": "2026-11-20T14:07:24.865506+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-ccf7a5b8490c8e7dfa93433cec8f4808",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15810"
+  },
+  {
+   "at": "2026-11-20T14:07:24.872544+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-22ae7e28cfc0aaeef9337e75dc0d80f4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15811"
+  },
+  {
+   "at": "2026-11-20T14:07:25.929827+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-63093437731312d668321f32736df951",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15812"
+  },
+  {
+   "at": "2026-11-20T14:07:25.937068+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-fc4f9324ae3a5cc2876c041753ff370f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15813"
+  },
+  {
+   "at": "2026-11-20T14:07:27.021061+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-e9e074e4a22c245e1eb131e6bf6b8da8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15814"
+  },
+  {
+   "at": "2026-11-20T14:07:27.032464+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-58ff56aed9e59c4d72294750d50b3d5a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15815"
+  },
+  {
+   "at": "2026-11-20T14:07:27.584477+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:07:57.583463+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-d0aa2922dbb7f988316d343fcb624726",
+   "kind": "HEARTBEAT",
+   "sequence": "15816"
+  },
+  {
+   "at": "2026-11-20T14:07:28.08515+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-086ed3eddab619cde438aa16d1afec6b",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15817"
+  },
+  {
+   "at": "2026-11-20T14:07:28.093196+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-5c5e8436dfdb3c6e071508680616a83e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15818"
+  },
+  {
+   "at": "2026-11-20T14:07:29.14505+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-832ceecfd3dffed88d802a382ec4cd10",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15819"
+  },
+  {
+   "at": "2026-11-20T14:07:29.152274+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-b3f99eebb6eb6cb6f1f4794b29719070",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15820"
+  },
+  {
+   "at": "2026-11-20T14:07:32.448621+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-82b8c5d29ab0b3c6b6eb7e55aefcff65",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15821"
+  },
+  {
+   "at": "2026-11-20T14:07:32.456234+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-1cc1832e8b08ff224bf23451e5d21811",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15822"
+  },
+  {
+   "at": "2026-11-20T14:07:32.83013+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:02.82809+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-d9acc5779074f723bc4787bc77549ff6",
+   "kind": "HEARTBEAT",
+   "sequence": "15823"
+  },
+  {
+   "at": "2026-11-20T14:07:33.511841+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-b62dad25726ccebda5355191a9c51b77",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15824"
+  },
+  {
+   "at": "2026-11-20T14:07:33.523204+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-6fb79431c63e736d195f5164c20ba80f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15825"
+  },
+  {
+   "at": "2026-11-20T14:07:34.576255+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-f451c897bbc4a3450b9ab8afc21ec0a1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15826"
+  },
+  {
+   "at": "2026-11-20T14:07:34.583748+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-865975662eacb0504f8f9ec05e8a2271",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15827"
+  },
+  {
+   "at": "2026-11-20T14:07:35.641705+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-5ff334bdeab9a7d8498199799a1b04f8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15828"
+  },
+  {
+   "at": "2026-11-20T14:07:35.649031+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-066d23dcb258153d1c5ead00315c61fb",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15829"
+  },
+  {
+   "at": "2026-11-20T14:07:35.829998+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:05.828672+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-0d11ebf0b1c16761e0b6ed32006503d0",
+   "kind": "HEARTBEAT",
+   "sequence": "15830"
+  },
+  {
+   "at": "2026-11-20T14:07:36.704048+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-fd3da27d12bd1d93e285d69e8d1cfb96",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15831"
+  },
+  {
+   "at": "2026-11-20T14:07:36.712927+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-7db2834204ffe93a43ffd757fec2c510",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15832"
+  },
+  {
+   "at": "2026-11-20T14:07:37.762052+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-cab676273f683eb36ce30721685ce358",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15833"
+  },
+  {
+   "at": "2026-11-20T14:07:37.769061+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-6b74d43a879a7ae17ba6b56d12033495",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15834"
+  },
+  {
+   "at": "2026-11-20T14:07:38.82981+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:08.828503+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-a7108eaf91b66624610efa0e5b691169",
+   "kind": "HEARTBEAT",
+   "sequence": "15835"
+  },
+  {
+   "at": "2026-11-20T14:07:38.843482+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-857959208642088ef61a30f413f03693",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15836"
+  },
+  {
+   "at": "2026-11-20T14:07:38.852085+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-01fdbb0b188e4af5ac9e20274e651f7d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15837"
+  },
+  {
+   "at": "2026-11-20T14:07:39.902777+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-a89952a11b953836ef53340d0fee42c2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15838"
+  },
+  {
+   "at": "2026-11-20T14:07:39.910797+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-a9d57a7250da8d189e063bde876dbecf",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15839"
+  },
+  {
+   "at": "2026-11-20T14:07:40.9626+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-afad032f912b2ac642225b958cb48fbd",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15840"
+  },
+  {
+   "at": "2026-11-20T14:07:40.96939+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-58842dd4777559094367fd196b3d9375",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15841"
+  },
+  {
+   "at": "2026-11-20T14:07:41.828886+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:11.827802+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-dcb4453c89262a47162ed08db631874f",
+   "kind": "HEARTBEAT",
+   "sequence": "15842"
+  },
+  {
+   "at": "2026-11-20T14:07:42.019919+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-d8dd000edb2be5d6a928657191b837ac",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15843"
+  },
+  {
+   "at": "2026-11-20T14:07:42.027473+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-f2f2998da3d568284295c97337e5ebf0",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15844"
+  },
+  {
+   "at": "2026-11-20T14:07:43.089062+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-89739360c9b747ef8b5e53609cea5d4e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15845"
+  },
+  {
+   "at": "2026-11-20T14:07:43.097859+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-67914427eccee346ab2508d3677fdd93",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15846"
+  },
+  {
+   "at": "2026-11-20T14:07:44.158726+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-25580b266c6e818d92e3c7112fe0d88f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15847"
+  },
+  {
+   "at": "2026-11-20T14:07:44.173285+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-80ee6f71a9f31a50b7c603b3b35bb632",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15848"
+  },
+  {
+   "at": "2026-11-20T14:07:44.829495+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:14.828257+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-5dd9f307197d931c6e4994fd2c6096de",
+   "kind": "HEARTBEAT",
+   "sequence": "15849"
+  },
+  {
+   "at": "2026-11-20T14:07:45.225421+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-e462e5b006d9be8350acfaceeac9338c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15850"
+  },
+  {
+   "at": "2026-11-20T14:07:45.232563+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-d60a51041b4f511125f5f73a0ccd62a6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15851"
+  },
+  {
+   "at": "2026-11-20T14:07:46.291278+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-48d5b0e2a435de06cd81240520ef3de1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15852"
+  },
+  {
+   "at": "2026-11-20T14:07:46.306176+08:00",
+   "document": {
+    "state": "COMPLETED",
+    "status": "OBSERVED",
+    "call_id": "c-1e0178ca460f6c6bb27749687a4649a4",
+    "conflict": false
+   },
+   "event_id": "event-59533e4a1110ef841c6872d4f6d8cfe2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15853"
+  },
+  {
+   "at": "2026-11-20T14:07:46.347883+08:00",
+   "document": {
+    "_trimmed_chars": 2836,
+    "_sha256": "142096e137e70d861c9bf6531e22401de49696bcdc008ead97e4e74b6c6f34e0",
+    "node_id": "extract",
+    "status": null
+   },
+   "event_id": "event-b1fd258df83355e991744e132fa18ccc",
+   "kind": "RESULT_COMMITTED",
+   "sequence": "15854"
+  },
+  {
+   "at": "2026-11-20T14:07:46.365485+08:00",
+   "document": {
+    "_trimmed_chars": 4940,
+    "_sha256": "ba0b3f63944f5a719c0c3ae9c26ba6f68cb20f6a0f2271fc3e2544e4b561f794",
+    "node_id": null,
+    "status": "GRANTED"
+   },
+   "event_id": "event-7f9b231efb7f03a89449d5a40238c1d7",
+   "kind": "NODE_RESOLVED",
+   "sequence": "15855"
+  },
+  {
+   "at": "2026-11-20T14:07:46.376087+08:00",
+   "document": {
+    "_trimmed_chars": 4941,
+    "_sha256": "ca0086e3458ed1e9eaac9e0baff19e51e8fb4897d0f41b3f6d8be209d248dfa0",
+    "node_id": null,
+    "status": "GRANTED"
+   },
+   "event_id": "event-fe46a8a888eefb2263ba161e6c25a279",
+   "kind": "NODE_RESOLVED",
+   "sequence": "15856"
+  },
+  {
+   "at": "2026-11-20T14:07:46.387822+08:00",
+   "document": {
+    "_trimmed_chars": 3781,
+    "_sha256": "2e78d05c9a99ee1480d5d8dc0adff6f4f9b1edffd8ce8b387a71e79e126ad2a4",
+    "node_id": "business",
+    "status": null
+   },
+   "event_id": "event-914e5a949ed2566cfa80f926d74cd61c",
+   "kind": "SEND_INTENT",
+   "sequence": "15857"
+  },
+  {
+   "at": "2026-11-20T14:07:46.395497+08:00",
+   "document": {
+    "_trimmed_chars": 3858,
+    "_sha256": "59b8d4401ec7cc684a17ca8c376343e5830bcd9976baaaf5893ebe869b8777f8",
+    "node_id": "quality",
+    "status": null
+   },
+   "event_id": "event-bf55ecd38b6e37dabfd83f1108754b16",
+   "kind": "SEND_INTENT",
+   "sequence": "15858"
+  },
+  {
+   "at": "2026-11-20T14:07:46.899406+08:00",
+   "document": {
+    "_trimmed_chars": 9334,
+    "_sha256": "7c957e620a7798b8288ccddd7bf50b12a8342d1bb34207a9dc98c8e15739dd55",
+    "node_id": null,
+    "status": null
+   },
+   "event_id": "event-bf58e892437672683e32ea969f120367",
+   "kind": "EXPERT_INPUT_AUTHORIZED",
+   "sequence": "15859"
+  },
+  {
+   "at": "2026-11-20T14:07:46.940059+08:00",
+   "document": {
+    "state": "SEND_INTENT",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-27c699b25222a2ad1f4e1cbba57b5353",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15860"
+  },
+  {
+   "at": "2026-11-20T14:07:46.95167+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-7c9de572ae088482877d2cd118c76eb8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15861"
+  },
+  {
+   "at": "2026-11-20T14:07:47.142819+08:00",
+   "document": {
+    "_trimmed_chars": 9333,
+    "_sha256": "bc069c81c5fb32d7dc7787c5e5575ab4e46b1b2b4c4882a3e35b07f6f697916f",
+    "node_id": null,
+    "status": null
+   },
+   "event_id": "event-a91750a4cfac8d7356a48621f559327d",
+   "kind": "EXPERT_INPUT_AUTHORIZED",
+   "sequence": "15862"
+  },
+  {
+   "at": "2026-11-20T14:07:47.178695+08:00",
+   "document": {
+    "state": "SEND_INTENT",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-e26cbf333e5747f8575b430582310bfa",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15863"
+  },
+  {
+   "at": "2026-11-20T14:07:47.188962+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-bbb6392aa875bdfaae72271be596e8b5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15864"
+  },
+  {
+   "at": "2026-11-20T14:07:47.82946+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:17.828467+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-39d7223fdfd60ffc39173657a143d194",
+   "kind": "HEARTBEAT",
+   "sequence": "15865"
+  },
+  {
+   "at": "2026-11-20T14:07:48.016495+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-66de293ca814c3e34a2758b708722bc6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15866"
+  },
+  {
+   "at": "2026-11-20T14:07:48.024662+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-7db9bed3ae0be345be91af62bf85bb95",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15867"
+  },
+  {
+   "at": "2026-11-20T14:07:48.242723+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-6c75a7baab7296ba4ba0c9a538ae70c5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15868"
+  },
+  {
+   "at": "2026-11-20T14:07:48.250269+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-2b2665034ce35ff87c09916bd853c81e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15869"
+  },
+  {
+   "at": "2026-11-20T14:07:49.078445+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-2c2e806d36faf5b8d8c5811887daa8d8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15870"
+  },
+  {
+   "at": "2026-11-20T14:07:49.085957+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-16f0e264444166dfb5c6185df1bcf658",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15871"
+  },
+  {
+   "at": "2026-11-20T14:07:49.30266+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-c8df7c9a54e70b64fc395f0dea737afe",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15872"
+  },
+  {
+   "at": "2026-11-20T14:07:49.31032+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-180da7073dca1cf56f7dd1558ca3e52c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15873"
+  },
+  {
+   "at": "2026-11-20T14:07:50.134922+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-e31731ee9ebbd50046a221caede2d4fb",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15874"
+  },
+  {
+   "at": "2026-11-20T14:07:50.142319+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-553a686e7a64c891c29e7169e0cfc4a5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15875"
+  },
+  {
+   "at": "2026-11-20T14:07:50.355879+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-b1ab7754f09bb2c4fa66775d6b16cb3b",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15876"
+  },
+  {
+   "at": "2026-11-20T14:07:50.362318+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-8f1f27cdb047f626a3777c7614b742f0",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15877"
+  },
+  {
+   "at": "2026-11-20T14:07:50.830218+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:20.828956+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-e57c7bb4c1df58bdc8efaf0152415f13",
+   "kind": "HEARTBEAT",
+   "sequence": "15878"
+  },
+  {
+   "at": "2026-11-20T14:07:51.19442+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-1549d63b7a21c741da39c34e8d7ab948",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15879"
+  },
+  {
+   "at": "2026-11-20T14:07:51.201715+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-9f92c4110ba902e64d7f47aaba2b79f8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15880"
+  },
+  {
+   "at": "2026-11-20T14:07:51.409126+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-589b6eb80dcd2b9475d7868ae7c28f5a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15881"
+  },
+  {
+   "at": "2026-11-20T14:07:51.416994+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-f68ab3ef943b2014b36b413d50bdbaf0",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15882"
+  },
+  {
+   "at": "2026-11-20T14:07:52.259679+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-eb6d0ad153d0528b25f50512e4a79871",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15883"
+  },
+  {
+   "at": "2026-11-20T14:07:52.26952+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-a53c00964c9d4871667cb030403c6612",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15884"
+  },
+  {
+   "at": "2026-11-20T14:07:52.47654+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-a3f98de6e1dd7ef23e456925f01bcc13",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15885"
+  },
+  {
+   "at": "2026-11-20T14:07:52.485288+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-933a4c72714c1dab161457921d8624b8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15886"
+  },
+  {
+   "at": "2026-11-20T14:07:53.335709+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-d3122022e1294437caf5075af54612d5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15887"
+  },
+  {
+   "at": "2026-11-20T14:07:53.347201+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-33611122ee7ae622d1f6bc27435b1a39",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15888"
+  },
+  {
+   "at": "2026-11-20T14:07:53.55911+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-b671b2ae7304a100a42071e49bc89c98",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15889"
+  },
+  {
+   "at": "2026-11-20T14:07:53.567654+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-088b4351a5ca1c6a59663c112ed1a34b",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15890"
+  },
+  {
+   "at": "2026-11-20T14:07:53.829326+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:23.828107+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-d6c6b56ec05090273862d13bcd82af98",
+   "kind": "HEARTBEAT",
+   "sequence": "15891"
+  },
+  {
+   "at": "2026-11-20T14:07:54.397984+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-739e40ecc5ef0ec78eb6b0a02563b522",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15892"
+  },
+  {
+   "at": "2026-11-20T14:07:54.405532+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-9a021239414a88bbb120785a07410be2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15893"
+  },
+  {
+   "at": "2026-11-20T14:07:54.621476+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-82e6252349d1609bdadde5877d3e52e3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15894"
+  },
+  {
+   "at": "2026-11-20T14:07:54.629516+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-f3b0cfc9e895a02051278f8a21490d85",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15895"
+  },
+  {
+   "at": "2026-11-20T14:07:55.478414+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-8beb2734d1b1922b11fb582986180172",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15896"
+  },
+  {
+   "at": "2026-11-20T14:07:55.488573+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b429ba3fdb0c9ecd418da10c2dc5c513",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15897"
+  },
+  {
+   "at": "2026-11-20T14:07:55.694976+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-b42af43d69f63abdc33f0956b30e9a57",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15898"
+  },
+  {
+   "at": "2026-11-20T14:07:55.707639+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-5087bd42e35911e72944d3126b96b409",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15899"
+  },
+  {
+   "at": "2026-11-20T14:07:56.540671+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-608245ed3395d7167f6e2eb4256e8708",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15900"
+  },
+  {
+   "at": "2026-11-20T14:07:56.548106+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b39cbbd528274ba70fc67a6457ddd6b4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15901"
+  },
+  {
+   "at": "2026-11-20T14:07:56.760494+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-977eb7fb603c8ea6a0414c792d3b64bf",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15902"
+  },
+  {
+   "at": "2026-11-20T14:07:56.768516+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-4bdffee7a6198696db2179cfa5c172ea",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15903"
+  },
+  {
+   "at": "2026-11-20T14:07:56.829965+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:26.828983+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-868686a61f9cddc5be31bb1a68a810c0",
+   "kind": "HEARTBEAT",
+   "sequence": "15904"
+  },
+  {
+   "at": "2026-11-20T14:07:57.600101+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5e3c91dd7158397a3a897a6b01c828f5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15905"
+  },
+  {
+   "at": "2026-11-20T14:07:57.607719+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-3d3d654a4125697fd646e3016b6661a1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15906"
+  },
+  {
+   "at": "2026-11-20T14:07:57.815506+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-21121df8ee1db3cafa234afd68e84db8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15907"
+  },
+  {
+   "at": "2026-11-20T14:07:57.821933+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-24b5d96fe2bb4a427d555c9ad210e8c4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15908"
+  },
+  {
+   "at": "2026-11-20T14:07:58.651025+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-7c89847fa24cdc5ff722fafa42463b4d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15909"
+  },
+  {
+   "at": "2026-11-20T14:07:58.657521+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b85585ce703fe3980a2deefc298982d6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15910"
+  },
+  {
+   "at": "2026-11-20T14:07:58.865259+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-95fed6560599ac232527ea5ccad2dc1d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15911"
+  },
+  {
+   "at": "2026-11-20T14:07:58.871009+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-5c380a5cd900a004f8a731316f917ee4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15912"
+  },
+  {
+   "at": "2026-11-20T14:07:59.701731+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-a08ca5523aba73354e8a5bf5a14daf71",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15913"
+  },
+  {
+   "at": "2026-11-20T14:07:59.709091+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-1ee3e9eeb6060f4b18e60940d59ab141",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15914"
+  },
+  {
+   "at": "2026-11-20T14:07:59.829489+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:29.82837+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-c5759b2365b99ad1a67dca50e6f9b79a",
+   "kind": "HEARTBEAT",
+   "sequence": "15915"
+  },
+  {
+   "at": "2026-11-20T14:07:59.919581+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-77376aae8ae8a74a42db3f1ca6624491",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15916"
+  },
+  {
+   "at": "2026-11-20T14:07:59.926691+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-f169d0fc8c6257dd421a2ecddfeb4439",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15917"
+  },
+  {
+   "at": "2026-11-20T14:08:00.763087+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-41ca4464146d9ae3c3b1e47ea0e27699",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15918"
+  },
+  {
+   "at": "2026-11-20T14:08:00.771312+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-474e1c19441f6661230ca7743d644d66",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15919"
+  },
+  {
+   "at": "2026-11-20T14:08:01.001627+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-b7053ea5ccedeeb3565781cf9e18e5b8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15920"
+  },
+  {
+   "at": "2026-11-20T14:08:01.008003+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-23e826eab7da26558a9b4414cdbd1e4f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15921"
+  },
+  {
+   "at": "2026-11-20T14:08:02.679998+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-d3493fbbc3c2c259b6f5ef94968c0650",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15922"
+  },
+  {
+   "at": "2026-11-20T14:08:02.687656+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-9c75ee2cc1fbbd8a2b0459964c2fdd4d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15923"
+  },
+  {
+   "at": "2026-11-20T14:08:02.916545+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-b0dbed5710210a9f0d41c91f7ae09ecc",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15924"
+  },
+  {
+   "at": "2026-11-20T14:08:02.924663+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-71519a749be5fb63b9df984777283fd7",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15925"
+  },
+  {
+   "at": "2026-11-20T14:08:03.691273+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:33.688472+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-c55373fccda375f82805f690cc47c86b",
+   "kind": "HEARTBEAT",
+   "sequence": "15926"
+  },
+  {
+   "at": "2026-11-20T14:08:03.746208+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-556673453480af160935c9dccc6752ff",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15927"
+  },
+  {
+   "at": "2026-11-20T14:08:03.754097+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-dc7d13ce0c52921cd71d565b4d4db7eb",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15928"
+  },
+  {
+   "at": "2026-11-20T14:08:03.97041+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-615a4bae7ec36f817f0aded24186688b",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15929"
+  },
+  {
+   "at": "2026-11-20T14:08:03.978644+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-7a1ceca2b13880c88cfba518eb5ee6c1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15930"
+  },
+  {
+   "at": "2026-11-20T14:08:04.800759+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-240cdc246b5b828cacd61ee1e85f50e9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15931"
+  },
+  {
+   "at": "2026-11-20T14:08:04.808148+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-d059ea5615ba2a6e1309e86bacfaee06",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15932"
+  },
+  {
+   "at": "2026-11-20T14:08:05.025458+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-20437f251e27b6b6fe1b42d3a73e56a8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15933"
+  },
+  {
+   "at": "2026-11-20T14:08:05.032566+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-e4cd23e81b4bf4e42610b7460d44ccf9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15934"
+  },
+  {
+   "at": "2026-11-20T14:08:05.858905+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-e6b0ea816fac51008f1e417a34e634e3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15935"
+  },
+  {
+   "at": "2026-11-20T14:08:05.867164+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-21c44ce7f61d359f571c4d53c589dc26",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15936"
+  },
+  {
+   "at": "2026-11-20T14:08:06.078771+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-5d058162bf34a6ef50481fea0744097d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15937"
+  },
+  {
+   "at": "2026-11-20T14:08:06.085689+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-53a82e9fddeb3614568ead31637f628c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15938"
+  },
+  {
+   "at": "2026-11-20T14:08:06.689589+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:36.68794+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-3f6a67403c8bba244e71f49520e7895e",
+   "kind": "HEARTBEAT",
+   "sequence": "15939"
+  },
+  {
+   "at": "2026-11-20T14:08:06.921116+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-bd3eb3c717075e8f7a09b493431b98b3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15940"
+  },
+  {
+   "at": "2026-11-20T14:08:06.92891+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-4fbc93c252b283526fe30bf5d48880d3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15941"
+  },
+  {
+   "at": "2026-11-20T14:08:07.134522+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-9d4263eb2c5ae6a231132152d6e1347d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15942"
+  },
+  {
+   "at": "2026-11-20T14:08:07.142232+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-e2a751070b27b813159009adf5daf528",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15943"
+  },
+  {
+   "at": "2026-11-20T14:08:07.978282+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-69c9c3e9d61eacd9492fd1c386018d4c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15944"
+  },
+  {
+   "at": "2026-11-20T14:08:07.985604+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-3edc3101bd022ade2d09d0daddb40691",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15945"
+  },
+  {
+   "at": "2026-11-20T14:08:08.18506+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-9f4480aa655a15f13b06769979b6074a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15946"
+  },
+  {
+   "at": "2026-11-20T14:08:08.19176+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-0c66237691c758d1524bffba3d3bc0dc",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15947"
+  },
+  {
+   "at": "2026-11-20T14:08:09.026137+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6494a98f0832c34e29cd451920d6feea",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15948"
+  },
+  {
+   "at": "2026-11-20T14:08:09.032865+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-03b709c0fa8fe46e75103cb632727f2f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15949"
+  },
+  {
+   "at": "2026-11-20T14:08:09.24961+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-cf5a7e0192c2ab71cddc33cc635a7b1f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15950"
+  },
+  {
+   "at": "2026-11-20T14:08:09.264554+08:00",
+   "document": {
+    "state": "COMPLETED",
+    "status": "OBSERVED",
+    "call_id": "c-975c2a0e8d22e7a7daefea584a623ac4",
+    "conflict": false
+   },
+   "event_id": "event-43cb3c85cc91d7d3b40be5cf4261a757",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15951"
+  },
+  {
+   "at": "2026-11-20T14:08:09.296386+08:00",
+   "document": {
+    "_trimmed_chars": 4134,
+    "_sha256": "67e0211784bf5304a1e74919a312c54addc9c86e17802473aeba9ee8f0320608",
+    "node_id": "business",
+    "status": null
+   },
+   "event_id": "event-2d41f43886fe4df7c85233e234c8b3b4",
+   "kind": "RESULT_COMMITTED",
+   "sequence": "15952"
+  },
+  {
+   "at": "2026-11-20T14:08:09.688317+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:39.687117+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-8848cb62a5e6039935e8e4f4ae88f0c8",
+   "kind": "HEARTBEAT",
+   "sequence": "15953"
+  },
+  {
+   "at": "2026-11-20T14:08:10.074584+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-253e5bd0636b754309963c07cd526ad2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15954"
+  },
+  {
+   "at": "2026-11-20T14:08:10.081744+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-1cbb13b72c200d56b45ff9f4bc26f951",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15955"
+  },
+  {
+   "at": "2026-11-20T14:08:11.12127+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-d21b430647f237fc0dca909788aa2d3d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15956"
+  },
+  {
+   "at": "2026-11-20T14:08:11.128118+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-ce17ea6e7e5ed7841bb77c1b66a3546b",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15957"
+  },
+  {
+   "at": "2026-11-20T14:08:12.169844+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-81c3b23ed52278b8594a32759ad390f7",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15958"
+  },
+  {
+   "at": "2026-11-20T14:08:12.17644+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-30e1f97decf6f191e69dcc14a50c6e57",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15959"
+  },
+  {
+   "at": "2026-11-20T14:08:12.689629+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:42.687768+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-a0782ae7a65dde63a37ffc84945c10ac",
+   "kind": "HEARTBEAT",
+   "sequence": "15960"
+  },
+  {
+   "at": "2026-11-20T14:08:13.216595+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5b03d5e323b663484046ebaec494951a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15961"
+  },
+  {
+   "at": "2026-11-20T14:08:13.223786+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-e3109a033293cd9c58b19a650ac7b129",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15962"
+  },
+  {
+   "at": "2026-11-20T14:08:14.265304+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-1b5a6cd349f2dec1de3ab1d7b2a28f40",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15963"
+  },
+  {
+   "at": "2026-11-20T14:08:14.273163+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-61cd4d8dd0632cb5efefdf3b28674d4e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15964"
+  },
+  {
+   "at": "2026-11-20T14:08:15.315619+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-569a39bc24e1695facb25cd1f41f9915",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15965"
+  },
+  {
+   "at": "2026-11-20T14:08:15.323973+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-bd4d1a71a0f6fc0a6d1a94482777d39c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15966"
+  },
+  {
+   "at": "2026-11-20T14:08:15.688721+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:45.687517+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-53f6fbd33e6114d8be1dca1596179026",
+   "kind": "HEARTBEAT",
+   "sequence": "15967"
+  },
+  {
+   "at": "2026-11-20T14:08:16.367211+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-7260a624dd90248ac077aaf837464a72",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15968"
+  },
+  {
+   "at": "2026-11-20T14:08:16.374494+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6ff2ce02792b38771a7671eb05772471",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15969"
+  },
+  {
+   "at": "2026-11-20T14:08:17.417774+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-20417cc476c24b7cc9b53e6b0098b12e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15970"
+  },
+  {
+   "at": "2026-11-20T14:08:17.424976+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-fc3274f11c8d2bf867792ecebbd1eb27",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15971"
+  },
+  {
+   "at": "2026-11-20T14:08:21.026014+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-11b622b0a1b2cdd09990966bfb870699",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15972"
+  },
+  {
+   "at": "2026-11-20T14:08:21.03729+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-c423e64dba511f9285494622d9deb85c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15973"
+  },
+  {
+   "at": "2026-11-20T14:08:21.240725+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:51.239427+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-7c6cda1262bd00a18bae0261960c8753",
+   "kind": "HEARTBEAT",
+   "sequence": "15974"
+  },
+  {
+   "at": "2026-11-20T14:08:22.080775+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-948b7b752b4d23ca4b2eb950129ad906",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15975"
+  },
+  {
+   "at": "2026-11-20T14:08:22.088366+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-f141d7c6d14063130e9b588867037573",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15976"
+  },
+  {
+   "at": "2026-11-20T14:08:23.132672+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-e6e337b6af791f9069ad3553dfe6f856",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15977"
+  },
+  {
+   "at": "2026-11-20T14:08:23.140453+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-3e400e4909b21aeeb47527b9941348d2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15978"
+  },
+  {
+   "at": "2026-11-20T14:08:24.190746+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5472ed57ac35665e35645ed0b085a733",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15979"
+  },
+  {
+   "at": "2026-11-20T14:08:24.199314+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-0afed0df06c87f588e0b9edd957b2460",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15980"
+  },
+  {
+   "at": "2026-11-20T14:08:24.240012+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:54.238351+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-734f7fa4d3785871ea4900aac052eaa8",
+   "kind": "HEARTBEAT",
+   "sequence": "15981"
+  },
+  {
+   "at": "2026-11-20T14:08:25.245776+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-efdd9265d269419e81f96e01ed1d2cb6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15982"
+  },
+  {
+   "at": "2026-11-20T14:08:25.253707+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-a04073aff26b65dde19d1d30c8b27437",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15983"
+  },
+  {
+   "at": "2026-11-20T14:08:26.311429+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-a4b220db17f72b58c42072f656be662c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15984"
+  },
+  {
+   "at": "2026-11-20T14:08:26.319422+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-f2bd8b4dbfebf29e52398579f586c066",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15985"
+  },
+  {
+   "at": "2026-11-20T14:08:27.241007+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:08:57.239475+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-c48394416920fbd04386c502c82417ac",
+   "kind": "HEARTBEAT",
+   "sequence": "15986"
+  },
+  {
+   "at": "2026-11-20T14:08:27.381218+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-2d4f01c63d62fc838cac51f18305195a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15987"
+  },
+  {
+   "at": "2026-11-20T14:08:27.391963+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-ad9b2e24f1d78a7ff3eee16f19bc4261",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15988"
+  },
+  {
+   "at": "2026-11-20T14:08:28.469802+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-4cad75c76ac2b72b5b4c3821cd31c772",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15989"
+  },
+  {
+   "at": "2026-11-20T14:08:28.484094+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5798771aed1fbfb0a0645b6854df25f3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15990"
+  },
+  {
+   "at": "2026-11-20T14:08:29.565923+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6e1857667ed119df3b2151c862502df4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15991"
+  },
+  {
+   "at": "2026-11-20T14:08:29.575876+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-ee9ff2ad5edd623f6a9dfc1af05e6ee9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15992"
+  },
+  {
+   "at": "2026-11-20T14:08:30.239492+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:00.238102+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-ee0b6573ac5e7a20b4fd6ad56e3db7b5",
+   "kind": "HEARTBEAT",
+   "sequence": "15993"
+  },
+  {
+   "at": "2026-11-20T14:08:30.628308+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-e584484b85a0c334c4e67aeb34080ac6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15994"
+  },
+  {
+   "at": "2026-11-20T14:08:30.636356+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6317cff84b9abdd6d2ac76e371a58e4e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15995"
+  },
+  {
+   "at": "2026-11-20T14:08:31.688107+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-95cb7cc9445bebb266dc1bb5f0f49a03",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15996"
+  },
+  {
+   "at": "2026-11-20T14:08:31.697563+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-f97c6f6a8ae15ab37096686d275bd86c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15997"
+  },
+  {
+   "at": "2026-11-20T14:08:32.743279+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-effb9949ba85f0e9c2d8e2e83366bad8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15998"
+  },
+  {
+   "at": "2026-11-20T14:08:32.750741+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-64516795e42cc9365830c046299d9e29",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "15999"
+  },
+  {
+   "at": "2026-11-20T14:08:33.238967+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:03.237845+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-9c7f8c3ca737b96c12d21b00a5c4d6df",
+   "kind": "HEARTBEAT",
+   "sequence": "16000"
+  },
+  {
+   "at": "2026-11-20T14:08:33.794959+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-693f4a543919b66f34b3b31a834a219c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16001"
+  },
+  {
+   "at": "2026-11-20T14:08:33.802378+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5d1c3edd4883bbc462a5e7a33fc8d494",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16002"
+  },
+  {
+   "at": "2026-11-20T14:08:34.486904+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-c0dfe6910a969966be859d8b8cf1f7ba",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16003"
+  },
+  {
+   "at": "2026-11-20T14:08:34.497894+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-ac880bfcca7167e873f1ada145f6202e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16004"
+  },
+  {
+   "at": "2026-11-20T14:08:36.98341+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-cdd4cd0c511db2362b8ca88929e78310",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16005"
+  },
+  {
+   "at": "2026-11-20T14:08:36.990841+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-f939c4c9a76dc5779101de6f787baea7",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16006"
+  },
+  {
+   "at": "2026-11-20T14:08:37.313316+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:07.311858+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-d87b27e7875df705555e123a9bbbddbd",
+   "kind": "HEARTBEAT",
+   "sequence": "16007"
+  },
+  {
+   "at": "2026-11-20T14:08:38.032716+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-ca04d3d67808525b3470d1f45f0f94b1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16008"
+  },
+  {
+   "at": "2026-11-20T14:08:38.040018+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-307bbb960c573a24cedc8fc73335997d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16009"
+  },
+  {
+   "at": "2026-11-20T14:08:39.089478+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-058f3076528cc922d7597ad6587f52e8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16010"
+  },
+  {
+   "at": "2026-11-20T14:08:39.100139+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-359ec57f4c5402c311f2dfcb03107474",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16011"
+  },
+  {
+   "at": "2026-11-20T14:08:40.146573+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-a42f95775171ba8387e471fc1649e77f",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16012"
+  },
+  {
+   "at": "2026-11-20T14:08:40.154454+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-c5dbb263c7eabfe7ad86da829863e548",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16013"
+  },
+  {
+   "at": "2026-11-20T14:08:40.314177+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:10.312014+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-daca9e420bdf166a2b46094182638308",
+   "kind": "HEARTBEAT",
+   "sequence": "16014"
+  },
+  {
+   "at": "2026-11-20T14:08:41.193649+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-2ac45a54a0e262365d80a7bc62510902",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16015"
+  },
+  {
+   "at": "2026-11-20T14:08:41.199818+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-99fdb55c1e53cc471650f6e1c689d14b",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16016"
+  },
+  {
+   "at": "2026-11-20T14:08:42.240406+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-29ec66c6f20ad5d39e957f60f93ae27c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16017"
+  },
+  {
+   "at": "2026-11-20T14:08:42.247741+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-3c4d7d28a5bd5e1171438637251a3787",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16018"
+  },
+  {
+   "at": "2026-11-20T14:08:43.290434+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b0d57677f4a3b8737a779de7490f4ab6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16019"
+  },
+  {
+   "at": "2026-11-20T14:08:43.297335+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-8189c26d06bdb4569831acd499da2382",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16020"
+  },
+  {
+   "at": "2026-11-20T14:08:43.312959+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:13.311694+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-86df4b016e9aed3e304346d0a17d7a02",
+   "kind": "HEARTBEAT",
+   "sequence": "16021"
+  },
+  {
+   "at": "2026-11-20T14:08:44.351537+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-80d997d24617bc95c391eeefb46d56ef",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16022"
+  },
+  {
+   "at": "2026-11-20T14:08:44.363891+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-352afd71cc319b4c33cc44e221f600b6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16023"
+  },
+  {
+   "at": "2026-11-20T14:08:45.406103+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b163b2097511f3ef13db07af63ff09ef",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16024"
+  },
+  {
+   "at": "2026-11-20T14:08:45.41337+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-bb9257d95f3900d088bed65b91358530",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16025"
+  },
+  {
+   "at": "2026-11-20T14:08:46.313048+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:16.311582+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-7db48ee6bd74d2f7ac5919ca7eaeee3b",
+   "kind": "HEARTBEAT",
+   "sequence": "16026"
+  },
+  {
+   "at": "2026-11-20T14:08:46.454007+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-303d686b81f6e7967505b4f17e2688aa",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16027"
+  },
+  {
+   "at": "2026-11-20T14:08:46.461594+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b859c5379f29c855367124b592f4a97a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16028"
+  },
+  {
+   "at": "2026-11-20T14:08:47.507278+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-dc854b61639968c3f72c70de592c70d8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16029"
+  },
+  {
+   "at": "2026-11-20T14:08:47.514546+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-9e264b13f047575c39baa498b9728761",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16030"
+  },
+  {
+   "at": "2026-11-20T14:08:48.575586+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-d3cbdc63524a374b8772f765f337bf45",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16031"
+  },
+  {
+   "at": "2026-11-20T14:08:48.58298+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-4f2e95c35187bcc9622aaedae9259290",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16032"
+  },
+  {
+   "at": "2026-11-20T14:08:49.312697+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:19.311361+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-8f1633072ecaf97d42c5663cb64d3ab0",
+   "kind": "HEARTBEAT",
+   "sequence": "16033"
+  },
+  {
+   "at": "2026-11-20T14:08:49.623645+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-1c2e5bec77f3310ff7af5176841fb799",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16034"
+  },
+  {
+   "at": "2026-11-20T14:08:49.631355+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-fd6784869849074731ea229b2cc6dcfd",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16035"
+  },
+  {
+   "at": "2026-11-20T14:08:50.669696+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-35dc866949f7d32c1b1570701b443ac9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16036"
+  },
+  {
+   "at": "2026-11-20T14:08:50.67597+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-f5c919424afcee4a2c5f853edec13db0",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16037"
+  },
+  {
+   "at": "2026-11-20T14:08:51.718161+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-77bf688f5ba5a698b89baef6f362eec3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16038"
+  },
+  {
+   "at": "2026-11-20T14:08:51.725334+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6cc1756cd5273345d1fd82118e95d1da",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16039"
+  },
+  {
+   "at": "2026-11-20T14:08:52.312566+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:22.311341+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-5e0d2a402abf59f27fbc2a1cd67365e7",
+   "kind": "HEARTBEAT",
+   "sequence": "16040"
+  },
+  {
+   "at": "2026-11-20T14:08:52.771974+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-e50aabc9530f72d022d1a3f772bcc810",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16041"
+  },
+  {
+   "at": "2026-11-20T14:08:52.779485+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-46005fc70b29fd15090bb0a53081d841",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16042"
+  },
+  {
+   "at": "2026-11-20T14:08:53.82497+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-200419578c8a901e2da9bb8efce70b39",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16043"
+  },
+  {
+   "at": "2026-11-20T14:08:53.832812+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-73b7d8f1502e674a66ac0974ecb1cecc",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16044"
+  },
+  {
+   "at": "2026-11-20T14:08:54.88788+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5cfa6bad555a9711a257b92e0db8e35c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16045"
+  },
+  {
+   "at": "2026-11-20T14:08:54.894473+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-faf4b818fef9db7ed9cb292c409bb202",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16046"
+  },
+  {
+   "at": "2026-11-20T14:08:55.313461+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:25.312082+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-f43fb38a8dba71f5d5d71c827d1002ce",
+   "kind": "HEARTBEAT",
+   "sequence": "16047"
+  },
+  {
+   "at": "2026-11-20T14:08:55.935581+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-2e2c094465f853e64efcf0e2cdaf05b9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16048"
+  },
+  {
+   "at": "2026-11-20T14:08:55.942182+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-5c636b072765a6204ad3eaade80b6876",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16049"
+  },
+  {
+   "at": "2026-11-20T14:08:56.982196+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-9b8771a0837ccb5af52acb72331cb0ff",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16050"
+  },
+  {
+   "at": "2026-11-20T14:08:56.989197+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6dea7d9c0ebbc78f24430a1a99270333",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16051"
+  },
+  {
+   "at": "2026-11-20T14:08:58.032792+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-73f1231ad5bb0c502364c7dc3c07f5a7",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16052"
+  },
+  {
+   "at": "2026-11-20T14:08:58.039445+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-d4d441453b515f305381abc37400c36c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16053"
+  },
+  {
+   "at": "2026-11-20T14:08:58.312722+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:28.31141+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-e724048458def0540ccc9832ca6de5d4",
+   "kind": "HEARTBEAT",
+   "sequence": "16054"
+  },
+  {
+   "at": "2026-11-20T14:08:59.087684+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-6f02f4b6ef1342914d7d7d0ff33a4091",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16055"
+  },
+  {
+   "at": "2026-11-20T14:08:59.094563+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-c290a305a922e8a141b88cd9bde014d4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16056"
+  },
+  {
+   "at": "2026-11-20T14:09:00.135326+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-4d3575b728c9fc2ba7985d323636ba4d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16057"
+  },
+  {
+   "at": "2026-11-20T14:09:00.14181+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-41ffcddbb87e24152e5e93bf2fca1891",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16058"
+  },
+  {
+   "at": "2026-11-20T14:09:01.202013+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-a9a0d29ecec933f877d344d9a6499001",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16059"
+  },
+  {
+   "at": "2026-11-20T14:09:01.220755+08:00",
+   "document": {
+    "state": "COMPLETED",
+    "status": "OBSERVED",
+    "call_id": "c-995f9669364b9a04b4b5435727eda8f1",
+    "conflict": false
+   },
+   "event_id": "event-b8dadd7be8656ec03ec2bedc9da6dbe4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16060"
+  },
+  {
+   "at": "2026-11-20T14:09:01.242135+08:00",
+   "document": {
+    "_trimmed_chars": 5037,
+    "_sha256": "a3aaea84f69a315c4b0f4f100fef94f53783da395e04dc65799eb32df572776a",
+    "node_id": "quality",
+    "status": null
+   },
+   "event_id": "event-5f5405a4e5adbd29a12bd02863f6e9c2",
+   "kind": "RESULT_COMMITTED",
+   "sequence": "16061"
+  },
+  {
+   "at": "2026-11-20T14:09:01.257327+08:00",
+   "document": {
+    "_trimmed_chars": 11198,
+    "_sha256": "630e54eac38bbd22e048e406272f83997a2487478e9f80db0669b1741a957c94",
+    "node_id": null,
+    "status": "GRANTED"
+   },
+   "event_id": "event-2b965e07bc39acafd73f82d1fa2e8c54",
+   "kind": "NODE_RESOLVED",
+   "sequence": "16062"
+  },
+  {
+   "at": "2026-11-20T14:09:01.275379+08:00",
+   "document": {
+    "_trimmed_chars": 3732,
+    "_sha256": "a62ce56d68b9587366fc6bd2096fc5fea497bed640ae561c32422025fef94492",
+    "node_id": "draft0",
+    "status": null
+   },
+   "event_id": "event-8ff5555f34ca9bb93c35c985fbcd8cef",
+   "kind": "SEND_INTENT",
+   "sequence": "16063"
+  },
+  {
+   "at": "2026-11-20T14:09:01.313959+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:31.312112+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-7a83ff81cb9c36688c2e454e41681462",
+   "kind": "HEARTBEAT",
+   "sequence": "16064"
+  },
+  {
+   "at": "2026-11-20T14:09:01.642903+08:00",
+   "document": {
+    "_trimmed_chars": 15591,
+    "_sha256": "3239365edf1e3f193c35c7ef7f19f2dcd0c3c692ded6eba156029f4369e0d634",
+    "node_id": null,
+    "status": null
+   },
+   "event_id": "event-0a756b99e5844f3ff310d4e9ac2ae5dd",
+   "kind": "EXPERT_INPUT_AUTHORIZED",
+   "sequence": "16065"
+  },
+  {
+   "at": "2026-11-20T14:09:01.653889+08:00",
+   "document": {
+    "state": "SEND_INTENT",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-fb5ebb11b9e7ac9c389e86861f7edbe7",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16066"
+  },
+  {
+   "at": "2026-11-20T14:09:01.662378+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-df329bcb078c04b72cfca2768309439c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16067"
+  },
+  {
+   "at": "2026-11-20T14:09:02.719376+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-95dcc94709be8374e3fdd16946b9e391",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16068"
+  },
+  {
+   "at": "2026-11-20T14:09:02.728583+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-764119da692f8fa12672af5312b85307",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16069"
+  },
+  {
+   "at": "2026-11-20T14:09:03.772084+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-9637da7036a97cfca656b1c6117e616a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16070"
+  },
+  {
+   "at": "2026-11-20T14:09:03.77948+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-f0a4512bb0f185550ecc65ba454aa0d9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16071"
+  },
+  {
+   "at": "2026-11-20T14:09:04.313055+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:34.311558+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-61c5b549e632ea4b842d6028dca2cce1",
+   "kind": "HEARTBEAT",
+   "sequence": "16072"
+  },
+  {
+   "at": "2026-11-20T14:09:04.824291+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-01c0b3588935fbe4ce31150e17a20917",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16073"
+  },
+  {
+   "at": "2026-11-20T14:09:04.831345+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-a12f64f67e27e1b534715e44fc2722c1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16074"
+  },
+  {
+   "at": "2026-11-20T14:09:05.87379+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-bef30997ea69a6d206009b9d99845f51",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16075"
+  },
+  {
+   "at": "2026-11-20T14:09:05.88088+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-f8658014f319304eebda7055fe5c0f59",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16076"
+  },
+  {
+   "at": "2026-11-20T14:09:09.209251+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-c9110d18e52392c6a3a8b1d4a9217a50",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16077"
+  },
+  {
+   "at": "2026-11-20T14:09:09.216242+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-acc6204f19f47a8393c50adc0110470d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16078"
+  },
+  {
+   "at": "2026-11-20T14:09:09.597309+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:39.595897+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-6e24f514ccbd92b4824d4addc3694305",
+   "kind": "HEARTBEAT",
+   "sequence": "16079"
+  },
+  {
+   "at": "2026-11-20T14:09:10.261812+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-7eb50a1ec510aead3c954962a1541dc9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16080"
+  },
+  {
+   "at": "2026-11-20T14:09:10.26876+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-19fc1c384890d814cd14f4841036d2f3",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16081"
+  },
+  {
+   "at": "2026-11-20T14:09:11.309051+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-9e88d9e59c1f56ecaf774dcc7d604ea4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16082"
+  },
+  {
+   "at": "2026-11-20T14:09:11.3164+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-28e8d4f83f32be7d42c817d67788c8cd",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16083"
+  },
+  {
+   "at": "2026-11-20T14:09:12.35676+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-03746b6ac794d8a505e40a6ac54e32e1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16084"
+  },
+  {
+   "at": "2026-11-20T14:09:12.364069+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-d6d79976e2820aa0730e9941191ee12a",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16085"
+  },
+  {
+   "at": "2026-11-20T14:09:12.597804+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:42.596352+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-beb8e03b6e42e76eb578561ffca72e50",
+   "kind": "HEARTBEAT",
+   "sequence": "16086"
+  },
+  {
+   "at": "2026-11-20T14:09:13.412492+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-9d4fe738babc6f687c6a2405b2f992f5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16087"
+  },
+  {
+   "at": "2026-11-20T14:09:13.41933+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-45640d9ff412be622767fb8df5fdd002",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16088"
+  },
+  {
+   "at": "2026-11-20T14:09:14.470177+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-2d81ac486a2c1e801a581d9c2e01c996",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16089"
+  },
+  {
+   "at": "2026-11-20T14:09:14.482476+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-a8ebb6dc664eed1beda1c928a17ec683",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16090"
+  },
+  {
+   "at": "2026-11-20T14:09:15.527917+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-8c61c1e2e4245ee5a4764026a262b6b2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16091"
+  },
+  {
+   "at": "2026-11-20T14:09:15.534831+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-daff4fd446841ce1a80d8ba276761866",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16092"
+  },
+  {
+   "at": "2026-11-20T14:09:15.597583+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:45.595748+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-319264cbc8857b1080ee91cb90508bc3",
+   "kind": "HEARTBEAT",
+   "sequence": "16093"
+  },
+  {
+   "at": "2026-11-20T14:09:16.582377+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-db6693ef7fde5b4257da6b193c8455a4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16094"
+  },
+  {
+   "at": "2026-11-20T14:09:16.58967+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-d540eba2b9cba625c37e3d071cdb86f2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16095"
+  },
+  {
+   "at": "2026-11-20T14:09:17.649083+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-6d4a1388f685f8296d81c03465e8968d",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16096"
+  },
+  {
+   "at": "2026-11-20T14:09:17.656832+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-e88f740048a588e80027e233d697beb2",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16097"
+  },
+  {
+   "at": "2026-11-20T14:09:18.59731+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:48.595728+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-0ff3d30153a384e63da1c5f3ac34f950",
+   "kind": "HEARTBEAT",
+   "sequence": "16098"
+  },
+  {
+   "at": "2026-11-20T14:09:18.696621+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-08a49df79b479a60870fb2885d3edb69",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16099"
+  },
+  {
+   "at": "2026-11-20T14:09:18.703694+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-ee584bc4e676d7de0e897693cdca9e91",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16100"
+  },
+  {
+   "at": "2026-11-20T14:09:19.744001+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-c4d9398a4c9074e1059ab4ff93c45597",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16101"
+  },
+  {
+   "at": "2026-11-20T14:09:19.752217+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-da9071ad86efa9495ce6272a141cfba6",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16102"
+  },
+  {
+   "at": "2026-11-20T14:09:20.790879+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-a64a21e014244318e7674c362719b6ef",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16103"
+  },
+  {
+   "at": "2026-11-20T14:09:20.797522+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-4694dd26b751dbfdfbc6296420a50ab1",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16104"
+  },
+  {
+   "at": "2026-11-20T14:09:21.597239+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:51.595454+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-ae65afa7862ab3d5428de9fa5fd38816",
+   "kind": "HEARTBEAT",
+   "sequence": "16105"
+  },
+  {
+   "at": "2026-11-20T14:09:21.836162+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-577744f03cb9d33fd65ed9244ab3c671",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16106"
+  },
+  {
+   "at": "2026-11-20T14:09:21.843904+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-9be9491c08f544bb7f51d7ce22fcccbd",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16107"
+  },
+  {
+   "at": "2026-11-20T14:09:22.882786+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-4980e150db66f69ceb71ef850e23e9b8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16108"
+  },
+  {
+   "at": "2026-11-20T14:09:22.890542+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-6e5303cb767b416e3859d9ca628d3923",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16109"
+  },
+  {
+   "at": "2026-11-20T14:09:23.957559+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-9a3ded813447059388e98ad7f65ee129",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16110"
+  },
+  {
+   "at": "2026-11-20T14:09:23.969546+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-2dccbe4a4410da51de5cdddd9410c7c8",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16111"
+  },
+  {
+   "at": "2026-11-20T14:09:24.597228+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:54.595677+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-1a258b725e7d84fc04f2ff161c2a33ba",
+   "kind": "HEARTBEAT",
+   "sequence": "16112"
+  },
+  {
+   "at": "2026-11-20T14:09:25.012617+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-888bd00176fd4fe7eccfd12c6912cbbb",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16113"
+  },
+  {
+   "at": "2026-11-20T14:09:25.020381+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-831e7f7a5aa81e8c7ce7db3e597782fc",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16114"
+  },
+  {
+   "at": "2026-11-20T14:09:26.059679+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-f8d370da079b28e044e222cd154856fd",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16115"
+  },
+  {
+   "at": "2026-11-20T14:09:26.066587+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-4ac992212a3f9e879b7de6fbcadcf454",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16116"
+  },
+  {
+   "at": "2026-11-20T14:09:27.103777+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-c237f086e9d1bbbe1ed9b06cce5c3b8c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16117"
+  },
+  {
+   "at": "2026-11-20T14:09:27.110662+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-f66e3cd51d5a580c55ef29977d1e07cf",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16118"
+  },
+  {
+   "at": "2026-11-20T14:09:27.598346+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:09:57.596054+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-7f5a001a172738a11e2a2c3187299f7c",
+   "kind": "HEARTBEAT",
+   "sequence": "16119"
+  },
+  {
+   "at": "2026-11-20T14:09:28.14829+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-20160ca2cea5df3efb36569fef4e2c58",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16120"
+  },
+  {
+   "at": "2026-11-20T14:09:28.155313+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-6f5075e55c24025e209a9dc724910c5e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16121"
+  },
+  {
+   "at": "2026-11-20T14:09:29.192774+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-b7c5572b43ae748b779e540632cebfed",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16122"
+  },
+  {
+   "at": "2026-11-20T14:09:29.200446+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-856a531e6d97bd7c419a5f412df496ee",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16123"
+  },
+  {
+   "at": "2026-11-20T14:09:30.237183+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-8216f367c3716d9737ab5fbe16e2ab35",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16124"
+  },
+  {
+   "at": "2026-11-20T14:09:30.244203+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-5cae3cec12bc2c854e8dc6335eebb00e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16125"
+  },
+  {
+   "at": "2026-11-20T14:09:30.596845+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:10:00.595432+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-664cdf63b182c43182f4ede2abde6bf1",
+   "kind": "HEARTBEAT",
+   "sequence": "16126"
+  },
+  {
+   "at": "2026-11-20T14:09:31.285411+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-1c1cbbe462d81a121cd75836705ec53e",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16127"
+  },
+  {
+   "at": "2026-11-20T14:09:31.29252+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-23686d48cb1923e5c3c7be26f214fb45",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16128"
+  },
+  {
+   "at": "2026-11-20T14:09:32.337445+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-0029b7e59b1b6b7097b9ae9caa11a3b4",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16129"
+  },
+  {
+   "at": "2026-11-20T14:09:32.344384+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-37a4790c87616560a67bf2d50003de50",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16130"
+  },
+  {
+   "at": "2026-11-20T14:09:33.398448+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-52e9e7271a6eb60ec91d9ee04a02c5a5",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16131"
+  },
+  {
+   "at": "2026-11-20T14:09:33.409355+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-c9e43714a9c42ad78a84a5c3cc0b1be9",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16132"
+  },
+  {
+   "at": "2026-11-20T14:09:33.597837+08:00",
+   "document": {
+    "epoch": "1",
+    "expires_at": "2026-11-20T14:10:03.59603+08:00",
+    "pause_requested": false
+   },
+   "event_id": "event-d4116f7dc45024d58df976de753504b7",
+   "kind": "HEARTBEAT",
+   "sequence": "16133"
+  },
+  {
+   "at": "2026-11-20T14:09:34.449715+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-21415521f209044032465b660e6a223c",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16134"
+  },
+  {
+   "at": "2026-11-20T14:09:34.456808+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-5b1e3dace9ac822556e9595df7f3ae03",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16135"
+  },
+  {
+   "at": "2026-11-20T14:09:35.497442+08:00",
+   "document": {
+    "state": "WORKING",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-6a1bd46abed25952bdb72593694e0c24",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16136"
+  },
+  {
+   "at": "2026-11-20T14:09:35.508976+08:00",
+   "document": {
+    "state": "COMPLETED",
+    "status": "OBSERVED",
+    "call_id": "c-fad3a765676bb3c8c04f68ad0aac03f2",
+    "conflict": false
+   },
+   "event_id": "event-50e33ba140f795590c60e227767e5446",
+   "kind": "REMOTE_OBSERVATION",
+   "sequence": "16137"
+  },
+  {
+   "at": "2026-11-20T14:09:35.528195+08:00",
+   "document": {
+    "_trimmed_chars": 4089,
+    "_sha256": "95788397a63d9a8da86d3b8bdec16db36b2fb1e024fabcae3271c4f0bf8dc5d6",
+    "node_id": "draft0",
+    "status": null
+   },
+   "event_id": "event-3820858519127400874e3a9b0c7a478b",
+   "kind": "RESULT_COMMITTED",
+   "sequence": "16138"
+  },
+  {
+   "at": "2026-11-20T14:09:35.540458+08:00",
+   "document": {
+    "_trimmed_chars": 5650,
+    "_sha256": "8a98dee495dd8968321b08c450562045eef3fc52d45ee1d04d266497c01b7b2a",
+    "node_id": null,
+    "status": "GRANTED"
+   },
+   "event_id": "event-0a7f086ab2d5a44741c1f1733be1699b",
+   "kind": "NODE_RESOLVED",
+   "sequence": "16139"
+  },
+  {
+   "at": "2026-11-20T14:09:35.593104+08:00",
+   "document": {
+    "valid": true,
+    "output": {
+     "scope": "structure, source rows, units, periods, arithmetic and bounded numeric claims; no global semantic guarantee",
+     "outcome": "PASS",
+     "failures": [],
+     "human_review": [],
+     "object_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+     "checker_version": "annual-report-checker/1"
+    },
+    "node_id": "check0",
+    "receipt": "receipt-d303dbeafa5521d27b88681024ae4904",
+    "identity": {
+     "operation_id": "sha256:5a867324c48d548cd8ae2ff7c008a7fdd2fdb2056f58de35f712de894cbace2f",
+     "logical_execution": {
+      "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+      "node_path": "check0",
+      "graph_version": "g1",
+      "iteration_path": "0"
+     },
+     "business_request_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+     "evaluation_revision": "g1",
+     "execution_generation": 1
+    },
+    "artifact_id": "d768bb326ba984ad2372ea6f820835b7c6f858b74b17d02ca4f807f8366ff781",
+    "input_digest": "sha256:11f16e87903e95b62efeccb339c994a3dd8fe93d56d518457acf10d0ae1cfcd2",
+    "artifact_digest": "sha256:d768bb326ba984ad2372ea6f820835b7c6f858b74b17d02ca4f807f8366ff781"
+   },
+   "event_id": "event-b62230f8f383c5dac99383a72a73ebd4",
+   "kind": "RESULT_COMMITTED",
+   "sequence": "16140"
+  },
+  {
+   "at": "2026-11-20T14:09:35.603908+08:00",
+   "document": {
+    "status": "AUTHORIZED_SKIP",
+    "node_id": "revise1",
+    "check_ref": "d768bb326ba984ad2372ea6f820835b7c6f858b74b17d02ca4f807f8366ff781"
+   },
+   "event_id": "event-0582a89e074ecae0611096bd23ba60d8",
+   "kind": "SKIP_AUTHORIZED",
+   "sequence": "16141"
+  },
+  {
+   "at": "2026-11-20T14:09:35.613748+08:00",
+   "document": {
+    "status": "AUTHORIZED_SKIP",
+    "node_id": "check1",
+    "check_ref": "d768bb326ba984ad2372ea6f820835b7c6f858b74b17d02ca4f807f8366ff781"
+   },
+   "event_id": "event-5310f3edd56dbc65daa8f06df4708e20",
+   "kind": "SKIP_AUTHORIZED",
+   "sequence": "16142"
+  },
+  {
+   "at": "2026-11-20T14:09:35.625443+08:00",
+   "document": {
+    "_trimmed_chars": 2740,
+    "_sha256": "fa18db09e28efadb74f57b3c8a72853bc39387aae8ba5ce6a0dc0734f499bc16",
+    "node_id": null,
+    "status": "GRANTED"
+   },
+   "event_id": "event-31ed5ddbc3db23f19d736acd2b99f402",
+   "kind": "NODE_RESOLVED",
+   "sequence": "16143"
+  },
+  {
+   "at": "2026-11-20T14:09:35.639798+08:00",
+   "document": {
+    "valid": true,
+    "output": {
+     "status": "CHECKED_NOT_USER_ACCEPTED",
+     "human_review": null,
+     "check_version": "annual-report-checker/1",
+     "qualification": "PROGRAM_CHECK",
+     "artifact_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d"
+    },
+    "node_id": "select_report",
+    "receipt": "receipt-f6f28774b9786fd1deb15612fcd4b302",
+    "identity": {
+     "operation_id": "sha256:b305b6f8e3e9421bae2dd62cba2c91afd11a4ca9cb9609753dc4549f07b9623a",
+     "logical_execution": {
+      "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+      "node_path": "select_report",
+      "graph_version": "g1",
+      "iteration_path": "0"
+     },
+     "business_request_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+     "evaluation_revision": "g1",
+     "execution_generation": 1
+    },
+    "artifact_id": "5bff8518fa7854b66d1ffdefc35d78865abb6f7740c7d627e8fdebdfaa6fc264",
+    "input_digest": "sha256:99a7e1b70847e153556d2a1e220137fdddf70f934323a7638bbefcf81877985b",
+    "artifact_digest": "sha256:5bff8518fa7854b66d1ffdefc35d78865abb6f7740c7d627e8fdebdfaa6fc264"
+   },
+   "event_id": "event-5d05793037bcb1dc95133ed61f3c8fcd",
+   "kind": "RESULT_COMMITTED",
+   "sequence": "16144"
+  },
+  {
+   "at": "2026-11-20T14:09:35.648893+08:00",
+   "document": {
+    "status": "AWAITING_ACCEPTANCE",
+    "task_id": "T-824c5bf97f244563f9cd9e2a4579302e"
+   },
+   "event_id": "event-78c9262e8428fee7f433ea8aa14c6640",
+   "kind": "COMPLETION_CHECKED",
+   "sequence": "16145"
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+{
+  "outcome": "PASS",
+  "object_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+  "failures": [],
+  "human_review": [],
+  "scope": "structure, source rows, units, periods, arithmetic and bounded numeric claims; no global semantic guarantee",
+  "checker_version": "annual-report-checker/1"
+}

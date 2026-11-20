@@ -1,0 +1,439 @@
+{
+  "approve": "plugin",
+  "bus": {
+    "completed": 0,
+    "failed": 0,
+    "linked_tasks": 0,
+    "planned_nodes": 5,
+    "reused": 0,
+    "services": 4,
+    "unresolved": 0
+  },
+  "case": "cmb-2025-annual-report-a",
+  "delivery_receipts": [],
+  "goal": "基于固定招商银行2025年报快照，产出本集团2025年对比2024年的经营与资产质量简报，覆盖八项固定指标及其来源",
+  "hash": "sha256:5c227314e0e4769336836b55f20b6e165071eaf1373ad3d512dee701477cfbc6",
+  "layers": [
+    [
+      "extract"
+    ],
+    [
+      "business",
+      "quality"
+    ],
+    [
+      "draft0"
+    ],
+    [
+      "check0"
+    ],
+    [
+      "revise1"
+    ],
+    [
+      "check1"
+    ],
+    [
+      "select_report"
+    ]
+  ],
+  "nodes": [
+    {
+      "activity": "",
+      "contract": "extractor@1",
+      "deps": null,
+      "execution": {
+        "binding": {
+          "agent_id": "report-extractor",
+          "version": "1.0.0"
+        },
+        "kind": "agent_bus",
+        "path_mode": "DIRECT"
+      },
+      "id": "extract",
+      "kind": "extract",
+      "name": "年报资料提取",
+      "role": "年报资料提取",
+      "status": "pending",
+      "task": "从固定材料 cmb-2025-annual-report-a 中提取招商银行股份有限公司本集团 2025 年（对比 2024 年）的八项固定指标：revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced；每项须给出数值、期间、口径及年报来源（章节/报表/页码），不得引入材料外数据，不得使用参考数值。"
+    },
+    {
+      "activity": "",
+      "contract": "business@1",
+      "deps": [
+        "extract"
+      ],
+      "execution": {
+        "binding": {
+          "agent_id": "business-analyst",
+          "version": "1.0.0"
+        },
+        "kind": "agent_bus",
+        "path_mode": "DIRECT"
+      },
+      "id": "business",
+      "kind": "business",
+      "name": "经营分析",
+      "role": "经营分析",
+      "status": "pending",
+      "task": "消费 extract 的 indicators/1 输出，就招商银行股份有限公司本集团 2025 年对比 2024 年的经营情况进行分析，覆盖 revenue、net_profit_attributable、net_interest_margin、cost_to_income 四项指标，说明变动方向、幅度与来源，仅使用提取结果中的数据。"
+    },
+    {
+      "activity": "",
+      "contract": "quality@1",
+      "deps": [
+        "extract"
+      ],
+      "execution": {
+        "binding": {
+          "agent_id": "asset-quality-analyst",
+          "version": "1.0.0"
+        },
+        "kind": "agent_bus",
+        "path_mode": "DIRECT"
+      },
+      "id": "quality",
+      "kind": "quality",
+      "name": "资产质量分析",
+      "role": "资产质量分析",
+      "status": "pending",
+      "task": "消费 extract 的 indicators/1 输出，就招商银行股份有限公司本集团 2025 年对比 2024 年的资产质量进行分析，覆盖 npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced 四项指标，说明变动方向、幅度与来源，仅使用提取结果中的数据。"
+    },
+    {
+      "activity": "",
+      "contract": "writer@1",
+      "deps": [
+        "business",
+        "quality"
+      ],
+      "execution": {
+        "binding": {
+          "agent_id": "report-writer",
+          "version": "1.0.0"
+        },
+        "kind": "agent_bus",
+        "path_mode": "DIRECT"
+      },
+      "id": "draft0",
+      "kind": "write",
+      "name": "报告写作与一次修订",
+      "role": "报告写作（初稿）",
+      "status": "pending",
+      "task": "汇总经营分析与资产质量分析，撰写本集团 2025 年对比 2024 年的经营与资产质量简报初稿，八项指标齐全并标注来源，输出 report/1。"
+    },
+    {
+      "activity": "",
+      "contract": "checker@1",
+      "deps": [
+        "draft0"
+      ],
+      "id": "check0",
+      "kind": "check",
+      "name": "数值/期间/口径/来源检查",
+      "role": "初稿程序检查",
+      "status": "pending",
+      "task": "对 draft0 执行数值、期间、口径、来源一致性的确定性检查，输出 check/1 及 PASS 或 REVISE 结论。"
+    },
+    {
+      "activity": "",
+      "contract": "writer@1",
+      "deps": [
+        "draft0",
+        "check0"
+      ],
+      "execution": {
+        "binding": {
+          "agent_id": "report-writer",
+          "version": "1.0.0"
+        },
+        "kind": "agent_bus",
+        "path_mode": "DIRECT"
+      },
+      "id": "revise1",
+      "kind": "write",
+      "name": "报告写作与一次修订",
+      "role": "报告定向修订（最多一次）",
+      "status": "pending",
+      "task": "仅在 check0 结论为 REVISE 时，针对检查指出的问题对初稿做一次定向修订，输出修订稿 report/1；不得改变核定口径与来源。",
+      "when": {
+        "contains": "REVISE",
+        "step": "check0"
+      }
+    },
+    {
+      "activity": "",
+      "contract": "checker@1",
+      "deps": [
+        "revise1",
+        "check0"
+      ],
+      "id": "check1",
+      "kind": "check",
+      "name": "数值/期间/口径/来源检查",
+      "role": "修订稿程序检查",
+      "status": "pending",
+      "task": "对 revise1 修订稿执行与 check0 相同的数值、期间、口径、来源确定性检查，输出 check/1 及 PASS 或 REVISE 结论。",
+      "when": {
+        "contains": "REVISE",
+        "step": "check0"
+      }
+    },
+    {
+      "activity": "",
+      "contract": "select@1",
+      "deps": [
+        "check0",
+        "check1"
+      ],
+      "id": "select_report",
+      "kind": "select",
+      "name": "选择已通过检查的报告",
+      "role": "报告选择",
+      "status": "pending",
+      "task": "无条件消费 check0 与 check1 的全部检查结果，输出通过检查的最终报告 selection/1。"
+    }
+  ],
+  "ok": true,
+  "plan": "T-824c5bf97f244563f9cd9e2a4579302e",
+  "reports": [],
+  "rev": "1",
+  "selection": {
+    "id": "selection-d535ace2a4bb4ef8ba1af09376ce35d7",
+    "package": {
+      "id": "annual-report-cmb-2025",
+      "version": "1",
+      "digest": "sha256:6df470d3860c155b11958b5f5ae365df38ed350c6c6c770f4427d2093cafedb5"
+    },
+    "query": {
+      "package": "annual-report-cmb-2025",
+      "entity": "招商银行股份有限公司",
+      "basis": "本集团",
+      "period": "2025",
+      "compare_period": "2024",
+      "focus": [
+        "经营",
+        "资产质量"
+      ],
+      "deliverable": "annual-report/1",
+      "materials": [
+        "cmb-2025-annual-report-a"
+      ]
+    },
+    "score_source": "场景包配置的权重：职责覆盖任务重点 2.00 + 输入有合格来源 1.00 + 获准包内当前版本 1.00；选择阈值 3.00。这是排序依据，不是成功概率。",
+    "recall": {
+      "method": "finite approved catalog; configured ranking, not semantic search",
+      "candidates": [
+        "extractor@1",
+        "business@1",
+        "quality@1",
+        "writer@1",
+        "parent-only@1",
+        "unknown@1"
+      ]
+    },
+    "eligibility": [
+      {
+        "capability": "extractor@1",
+        "version": "1",
+        "result": "pass",
+        "checks": {
+          "basis": "本集团 ⊆ [本集团]",
+          "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+          "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+          "periods": "2025/2024 ⊆ [2025, 2024]",
+          "templates": "annual-report/1 ⊆ [annual-report/1]"
+        },
+        "score": 4
+      },
+      {
+        "capability": "business@1",
+        "version": "1",
+        "result": "pass",
+        "checks": {
+          "basis": "本集团 ⊆ [本集团]",
+          "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+          "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+          "periods": "2025/2024 ⊆ [2025, 2024]",
+          "templates": "annual-report/1 ⊆ [annual-report/1]"
+        },
+        "score": 4
+      },
+      {
+        "capability": "quality@1",
+        "version": "1",
+        "result": "pass",
+        "checks": {
+          "basis": "本集团 ⊆ [本集团]",
+          "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+          "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+          "periods": "2025/2024 ⊆ [2025, 2024]",
+          "templates": "annual-report/1 ⊆ [annual-report/1]"
+        },
+        "score": 4
+      },
+      {
+        "capability": "writer@1",
+        "version": "1",
+        "result": "pass",
+        "checks": {
+          "basis": "本集团 ⊆ [本集团]",
+          "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+          "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+          "periods": "2025/2024 ⊆ [2025, 2024]",
+          "templates": "annual-report/1 ⊆ [annual-report/1]"
+        },
+        "score": 4
+      },
+      {
+        "capability": "parent-only@1",
+        "version": "1",
+        "result": "excluded",
+        "checks": {
+          "basis": "不满足",
+          "entities": "招商银行股份有限公司 ⊆ [招商银行股份有限公司]",
+          "materials": "cmb-2025-annual-report-a ⊆ [cmb-2025-annual-report-a]",
+          "periods": "2025/2024 ⊆ [2025, 2024]",
+          "templates": "annual-report/1 ⊆ [annual-report/1]"
+        },
+        "reasons": [
+          "硬约束不满足：任务口径为 本集团，能力只支持 母公司"
+        ],
+        "score": 4
+      },
+      {
+        "capability": "unknown@1",
+        "version": "1",
+        "result": "unknown",
+        "reasons": [
+          "未声明输入",
+          "未声明输出",
+          "未声明适用范围（主体、口径、期间等）"
+        ],
+        "score": 3
+      }
+    ],
+    "ranking": [
+      {
+        "capability": "extractor@1",
+        "score": 4,
+        "basis": "不限任务重点"
+      },
+      {
+        "capability": "business@1",
+        "score": 4,
+        "basis": "覆盖重点「经营」"
+      },
+      {
+        "capability": "quality@1",
+        "score": 4,
+        "basis": "覆盖重点「资产质量」"
+      },
+      {
+        "capability": "writer@1",
+        "score": 4,
+        "basis": "不限任务重点"
+      }
+    ],
+    "selection": [
+      "extractor@1",
+      "business@1",
+      "quality@1",
+      "writer@1"
+    ],
+    "composition": {
+      "result": "compatible",
+      "bindings": [
+        {
+          "from": "task.materials[cmb-2025-annual-report-a]",
+          "to": "extract.input",
+          "check": "材料在能力适用范围内"
+        },
+        {
+          "from": "extract.output",
+          "to": "business.input",
+          "check": "输入类型 indicators/1 一致"
+        },
+        {
+          "from": "extract.output",
+          "to": "quality.input",
+          "check": "输入类型 indicators/1 一致"
+        },
+        {
+          "from": "business, quality.output",
+          "to": "write.input",
+          "check": "至少有一个所需段落（经营、资产质量）"
+        }
+      ]
+    },
+    "graph_mapping": [
+      {
+        "node": "extract",
+        "capability": "extractor@1"
+      },
+      {
+        "node": "business",
+        "capability": "business@1",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "node": "quality",
+        "capability": "quality@1",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "node": "write",
+        "capability": "writer@1",
+        "depends_on": [
+          "business",
+          "quality"
+        ],
+        "report": true
+      }
+    ],
+    "team": [
+      {
+        "id": "extract",
+        "expert": "extractor@1",
+        "role": "年报资料提取",
+        "task": "年报资料提取。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量"
+      },
+      {
+        "id": "business",
+        "expert": "business@1",
+        "role": "经营分析",
+        "task": "经营分析。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "id": "quality",
+        "expert": "quality@1",
+        "role": "资产质量分析",
+        "task": "资产质量分析。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "id": "write",
+        "expert": "writer@1",
+        "role": "报告写作与一次修订",
+        "task": "报告写作与一次修订。范围：招商银行股份有限公司，本集团口径，2025 年（对比 2024 年）；任务重点：经营、资产质量",
+        "depends_on": [
+          "business",
+          "quality"
+        ]
+      }
+    ],
+    "outcome": "graph",
+    "created_at": "2026-11-20T04:46:53.051326254Z",
+    "digest": "sha256:af9264fea5175ff33b09eb243d5e47f5cb7394514a687e5e30edf1bc17df4776"
+  },
+  "task_status": "AWAITING_APPROVAL",
+  "version": 1
+}

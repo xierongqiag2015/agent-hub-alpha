@@ -1,0 +1,32 @@
+{
+  "operator": "W05 automation (dialogue and planning only), authorised by xierongqiag2015",
+  "stops_before": "plugin admission",
+  "prompt": "请使用年报协作技能，基于固定招商银行2025年报快照，生成本集团2025对比2024的经营与资产质量简报计划，覆盖八项指标及来源。独立资料提取、经营、资产质量专家工作后交写作专家，包含程序检查和最多一次定向修订。先真实读取目录和调用能力选择工具，再生成带选择记录的新候选图，交我确认。本次为新任务，请不要使用历史任务图。",
+  "phases": [
+    {
+      "phase": "dialogue_submitted",
+      "at": 1795150006.111748
+    },
+    {
+      "phase": "candidate",
+      "at": 1795150027.6080415,
+      "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+      "status": "AWAITING_APPROVAL",
+      "nodes": 8,
+      "calls": 0
+    },
+    {
+      "phase": "stopped_before_admission",
+      "at": 1795150032.458288,
+      "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+      "status": "AWAITING_APPROVAL"
+    }
+  ],
+  "session_url": "http://127.0.0.1:5173/chat/web_1a1f7474bdb_cd37d4078af3",
+  "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+  "status": "AWAITING_APPROVAL",
+  "graph_digest": "sha256:5c227314e0e4769336836b55f20b6e165071eaf1373ad3d512dee701477cfbc6",
+  "execution_profile": "sha256:7347e6987981a8804e30958a753bdf1da08d4d2fea1757f8fce1326bfcad63d1",
+  "model_binding_digest": "sha256:8f336627d4812aa1c2b4bd1651af9d0264a04cd55e518a2ae8db8514c70ceefd",
+  "zero_calls_before_admission": true
+}
