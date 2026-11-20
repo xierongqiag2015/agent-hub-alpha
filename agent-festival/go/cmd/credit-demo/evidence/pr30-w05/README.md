@@ -275,6 +275,20 @@ R10 最终完成，intake 未重算（四项检查同原场景）。完整序列
 
 逐项对照见 [`raw/reconciliation-two-paths/README.md`](raw/reconciliation-two-paths/README.md)。
 
+## #30 第 2 条：从真实派发入口验证（2026-11-20，`raw/item2-5fb1c7c/`）
+
+PR #60 头 `5fb1c7c` 的镜像，跑在独立的 compose 项目上，链路为真实 RDC/Gateway 和三个专业 Agent，编排器经故障代理访问 Gateway。
+- **读历史不领执行权**：已完成任务经 5 个读入口被读 50 次，再重启 credit 和编排器；epoch、租约、状态版本都不变，也没有新发送。
+- **采纳后快照写入失败**：账本里留下 `op-R2`，快照写入失败。重启后：
+  - 任务阻断为 `RECONCILIATION_REQUIRED / LEDGER_SNAPSHOT_MISMATCH`；
+  - 账本字节不变，决策不重新生成；
+  - 恢复返回 409，不被领取；
+  - 远端请求各发送 1 次。
+- **已发出而回执未知**：重启前后请求号不变，不重发，节点保持未解决。
+- **AR-04 M1–M3 复跑**：规约或执行模型不符时，拒绝领取或阻断，模型请求为 0。
+
+权限复核没有单列真实入口场景；W07 的独立复核尚未进行。详见 [`raw/item2-5fb1c7c/README.md`](raw/item2-5fb1c7c/README.md)。
+
 ## 对照 PR #30 的 R-A…U-B 矩阵
 
 | 编号 | 本记录覆盖到的程度 | 仍需补的部分 |

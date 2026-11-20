@@ -1,0 +1,5 @@
+R3 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R3 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rb-send-reply-lost-restart-1795159516.json
+checks: {"was_waiting": true, "receipt_lost_node": ["intake"], "remote_task_created_upstream": true, "waiting_after_restart": true, "request_kept_across_restart": true, "no_resend": true, "send_counts": {"d0ab8fc7e1ebb46532440080": 1}, "still_unresolved": true, "final_status": "waiting"}

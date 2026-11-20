@@ -1,0 +1,12 @@
+R4 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R4 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/history-read-no-lease-1795159621.json
+checks: {"done_before_reads": true, "reads": 50, "unchanged_by_reads": true, "unchanged_by_restart": true, "rev_before_reads_and_after_restart": [229, 229], "no_new_send": true, "send_counts": {"0c8ff15d18638ddb7ead70c7": 1, "d8ae8eedff62dfb52c216da2": 1, "071cf599716afd4874c59e30": 1, "f4c4a5cc1bb29e3dc1b70e13": 1, "94837ec72312dfe4330e7415": 1}, "kept_request_and_task": true}

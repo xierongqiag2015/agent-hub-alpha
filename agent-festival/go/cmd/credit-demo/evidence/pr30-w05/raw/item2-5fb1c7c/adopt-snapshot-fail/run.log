@@ -1,0 +1,10 @@
+== 2026-11-20T15:18:56+08:00 source 5fb1c7c4664ba29aa3e0101a2f67f614727787d2
+w05-5fb1/orchestrator:dev sha256:10da4a5b8cb0fe8b7359697c05adfa2bca35412bb2a35061e9f75acb24d79d22
+w05-5fb1/professional:dev sha256:7e639549a02d6b13b3f121b769cdd735b1c2d01f706228dd784ce18136de8625
+w05-5fb1/credit:dev sha256:2120f0ad721eac6b8d08f81ad0030b73ec815cbabfd12616e54d53b8f217a98f
+All three Agent Bus roles discovered and online
+== 2026-11-20T15:19:22+08:00 up exit 0
+== 2026-11-20T15:23:31+08:00 scenario exit 0
+== 2026-11-20T15:23:32+08:00 collected; stopping agent-hub-5fb1
+stopped agent-hub-5fb1
+== 2026-11-20T15:23:33+08:00 done /home/xrq/w05-5fb1-runs/20261120T151856-adopt-snapshot-fail

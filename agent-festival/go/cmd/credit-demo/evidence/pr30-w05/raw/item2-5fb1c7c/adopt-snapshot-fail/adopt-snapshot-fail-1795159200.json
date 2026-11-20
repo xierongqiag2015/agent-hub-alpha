@@ -1,0 +1,1518 @@
+{
+  "scenario": "adopt-snapshot-fail",
+  "started_at": 1795159200.065954,
+  "script": "evidence/pr30-w05/scripts/w05_rd_extra.py",
+  "scope": "W05 single-side R-D extras on synthetic credit data",
+  "snapshots": [],
+  "environment": {
+    "project": "agent-hub-5fb1",
+    "base": "http://127.0.0.1:5392",
+    "source_commit": "5fb1c7c4664ba29aa3e0101a2f67f614727787d2",
+    "images": {
+      "/agent-hub-5fb1-gateway-1": "sha256:cac5d07658aed46bb1cd7e8506533f910a0e43e8a8aac4262d72497939933161",
+      "/agent-hub-5fb1-rdc-1": "sha256:315186974da9a316a26219fcdfe89f7f408791d1f05316a4446979d93f760590",
+      "/agent-hub-5fb1-orchestrator-1": "sha256:10da4a5b8cb0fe8b7359697c05adfa2bca35412bb2a35061e9f75acb24d79d22",
+      "/agent-hub-5fb1-bus-db-1": "sha256:09e4f20b14ddb3dfe3a0c825b206032aaf8f28300ba2070c0b60fc1c10c6abc7",
+      "/agent-hub-5fb1-fault-proxy-1": "sha256:07d4824036af339fa1b6ef769cc99d9c10a141769538b52b3b597c84f7a7b535",
+      "/agent-hub-5fb1-credit-1": "sha256:2120f0ad721eac6b8d08f81ad0030b73ec815cbabfd12616e54d53b8f217a98f",
+      "/agent-hub-5fb1-writer-agent-1": "sha256:7e639549a02d6b13b3f121b769cdd735b1c2d01f706228dd784ce18136de8625",
+      "/agent-hub-5fb1-analysis-agent-1": "sha256:7e639549a02d6b13b3f121b769cdd735b1c2d01f706228dd784ce18136de8625",
+      "/agent-hub-5fb1-material-agent-1": "sha256:7e639549a02d6b13b3f121b769cdd735b1c2d01f706228dd784ce18136de8625"
+    },
+    "config_sha256": {
+      "compose.yaml": "a34ba0cb6834ff2049723e7cbbbc2ee3448e13288d9208e68deeb9c25b5f585a",
+      "compose.bus.yaml": "9be9ee4c3ddf6ed4d20d1bb4cb1d4bdf968cff20da70d9e0ede920cd069146fb",
+      "compose.bus-test.yaml": "ac4461f03d1d47e66ed445d84af749b04f4799b4602c224289bf0badd11a7555",
+      "bus/rdc.yml": "d48e67478f189088744442a28bede8e145c8310d538216a17aaccc83b3f3f7c1",
+      "sources.lock.json": "bbf15ebf3a25dea6b1f6685062b88e35a93c536192c5e705f8b97e0bc8cfa329"
+    }
+  },
+  "run_id": "R2",
+  "plan_id": "P2",
+  "judge_running_seen": true,
+  "before_fault": {
+    "bureau": {
+      "request_id": "03eeb50ca86f8a8047ebbbb7",
+      "remote_task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "artifact_id": "artifact-ab3be10a689d838a8892075962062f33034a3876f5f191aa4d81ca74efb125cc",
+      "artifact_digest": "sha256:8a407011f3a58fa115e4977c290039b303e02a827f2f0b873ac56d96cabecaef",
+      "model_events": {
+        "035a1d81-393a-4dea-ac47-cc9891b957ff": "2026-11-20T07:20:14Z",
+        "2c2fefcb-3269-4b07-8a3b-2e49f47e8ef8": "2026-11-20T07:20:16Z"
+      },
+      "context_id": "ctx-e7f2326838c5974464d532c9",
+      "status": "completed"
+    },
+    "financial": {
+      "request_id": "6ba2e082cf51207087980f79",
+      "remote_task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "artifact_id": "artifact-e4fc635db8329295f347f4d2f7eb00d5b8444b70a4d1afdb2497b873fb64e611",
+      "artifact_digest": "sha256:cf94d94647f8ba95f9bbc2b7b3c6a5d7ccf75c0fe573469a7add52e2e398cd7a",
+      "model_events": {
+        "7db41169-9202-4ee1-8e85-cb32d7a5ccb8": "2026-11-20T07:20:14Z",
+        "eb55d4d6-02b5-4220-b55b-166be8bff637": "2026-11-20T07:20:17Z"
+      },
+      "context_id": "ctx-7b631f39ef07149aa96d9ccd",
+      "status": "completed"
+    },
+    "industry": {
+      "request_id": "1ab3963d89643d4d10bb55dc",
+      "remote_task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "artifact_id": "artifact-5d8dbb4678027691ed2763105705c524219821a2d7632d778df1084bf017b136",
+      "artifact_digest": "sha256:e5eef73879e96654bdd1c1841f45221e124bc430518188531579522a1847516a",
+      "model_events": {
+        "c67e220b-3ea1-4980-a43f-4b1f9eda240d": "2026-11-20T07:20:16Z",
+        "e9ce0f5a-3d7f-494d-b504-bd4c59ea159d": "2026-11-20T07:20:14Z"
+      },
+      "context_id": "ctx-c0f8bf753385a7f4bc32131a",
+      "status": "completed"
+    },
+    "intake": {
+      "request_id": "6afdaaa53bb4676d891d05ef",
+      "remote_task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "artifact_id": "artifact-08c0acf22889f43404b8d15cdd888d0be2ec0a12bce906138b210e5ce6fd1320",
+      "artifact_digest": "sha256:98ab3dece3845abbdbe98a21e562bb6c32426bfe147ece161cbe696ec3e74ec9",
+      "model_events": {
+        "2a0a2ead-cb46-446b-954d-d1ccf0f23e1c": "2026-11-20T07:20:01Z",
+        "971d2e16-ba0c-4aa0-a3bb-993338451d52": "2026-11-20T07:20:03Z"
+      },
+      "context_id": "ctx-50490984d735716cf30841d2",
+      "status": "completed"
+    }
+  },
+  "steps_before": {
+    "bureau": "done",
+    "financial": "done",
+    "industry": "done",
+    "intake": "done",
+    "judge": "running",
+    "related": "done",
+    "report": "pending"
+  },
+  "epoch_before": 1,
+  "leases_before": 1,
+  "ledger_before": null,
+  "injected_at": 1795159284.0781748,
+  "frozen_at": 1795159313.676935,
+  "ledger_during_fault": "{\"event_type\": \"adoption\", \"arbitration_seq\": 0, \"identity\": {\"business_request_id\": \"br-c006-r2\", \"evaluation_revision\": \"er-1\", \"operation_id\": \"op-R2\"}, \"versions\": {\"evidence\": \"sha256:df288909105ae6f2c9889ece7427f24b98c3fdf5f545071ce467e815cf50aa6b\", \"rule\": \"q-credit-eligibility@1.1.0\", \"model\": \"glm-5-2-260617\", \"readout\": \"risk-readout-1\", \"policy\": \"sha256:a545ff9b792fa417842d424432cec07867d4846a9d9952dfc4d60f79baa285d2\"}, \"idempotency\": {\"operation_id\": \"op-R2\", \"payload_digest\": \"sha256:e48a3f96e1574e6857ea4227c063e2ea466228027f0bb801313534b4c95e7a08\"}, \"grants_at_decision\": [{\"kind\": \"tool\", \"selector\": \"credit.apply\", \"actions\": [\"execute\"], \"effect\": \"irreversible\"}], \"outcome\": {\"status\": \"adopted\", \"detail\": \"adopted by the gate\"}, \"accountability\": {\"session\": \"R2\", \"skill\": \"risk-judge\", \"role\": \"customer-manager\"}}",
+  "restore_at": 1795159315.8254497,
+  "restarts": [
+    {
+      "label": "credit+orchestrator after repair",
+      "at": 1795159315.9868946,
+      "healthy": true,
+      "ready_at": 1795159330.8165228
+    }
+  ],
+  "status_after_restart": "blocked",
+  "final_after_restart": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生成决策。",
+  "graph_run_after": {
+    "id": "R2",
+    "status": "blocked",
+    "leases": 1,
+    "url": "/ui/run/R2",
+    "blocked": {
+      "code": "RECONCILIATION_REQUIRED",
+      "cause": "LEDGER_SNAPSHOT_MISMATCH",
+      "note": "采纳账本与快照操作序列不一致",
+      "at": "2026-11-20T07:21:56Z",
+      "source": "runs/R2/adopt.jsonl",
+      "disposition": "BLOCKED"
+    }
+  },
+  "plan_row_after": [
+    {
+      "plan": "P2",
+      "version": 1,
+      "case": "C006",
+      "goal": "Agent Bus adopt-snapshot 验证 1795159200，仅生成模拟授信报告，不提交银行操作",
+      "ok": true,
+      "proposed_at": "2026-11-20T07:20:00Z",
+      "run": "R2",
+      "run_status": "blocked",
+      "blocked": {
+        "code": "RECONCILIATION_REQUIRED",
+        "cause": "LEDGER_SNAPSHOT_MISMATCH",
+        "note": "采纳账本与快照操作序列不一致",
+        "at": "2026-11-20T07:21:56Z",
+        "source": "runs/R2/adopt.jsonl",
+        "disposition": "BLOCKED"
+      }
+    }
+  ],
+  "ledger_after": "{\"event_type\": \"adoption\", \"arbitration_seq\": 0, \"identity\": {\"business_request_id\": \"br-c006-r2\", \"evaluation_revision\": \"er-1\", \"operation_id\": \"op-R2\"}, \"versions\": {\"evidence\": \"sha256:df288909105ae6f2c9889ece7427f24b98c3fdf5f545071ce467e815cf50aa6b\", \"rule\": \"q-credit-eligibility@1.1.0\", \"model\": \"glm-5-2-260617\", \"readout\": \"risk-readout-1\", \"policy\": \"sha256:a545ff9b792fa417842d424432cec07867d4846a9d9952dfc4d60f79baa285d2\"}, \"idempotency\": {\"operation_id\": \"op-R2\", \"payload_digest\": \"sha256:e48a3f96e1574e6857ea4227c063e2ea466228027f0bb801313534b4c95e7a08\"}, \"grants_at_decision\": [{\"kind\": \"tool\", \"selector\": \"credit.apply\", \"actions\": [\"execute\"], \"effect\": \"irreversible\"}], \"outcome\": {\"status\": \"adopted\", \"detail\": \"adopted by the gate\"}, \"accountability\": {\"session\": \"R2\", \"skill\": \"risk-judge\", \"role\": \"customer-manager\"}}",
+  "epoch_after": 1,
+  "leases_after": 1,
+  "decision_after": null,
+  "judge_after": {
+    "id": "judge",
+    "expert": "risk-judge",
+    "status": "running",
+    "started_at": "2026-11-20T07:21:23Z",
+    "epoch": 1,
+    "activity": "按规约判断"
+  },
+  "resume_after_restart": {
+    "at": 1795159378.626737,
+    "http": 409,
+    "body": "{\"error\": \"任务不存在或已不在等待状态，请刷新查看原任务\"}"
+  },
+  "status_after_resume_attempt": "blocked",
+  "epoch_after_wait": 1,
+  "leases_after_wait": 1,
+  "data_files": [
+    "disposition-6d639e25fb214f46568a85627d043742bcb04fe8d650082e07b48da0f1406f63.json",
+    "publisher.pem",
+    "reconciliation-6d639e25fb214f46568a85627d043742bcb04fe8d650082e07b48da0f1406f63.json",
+    "runs",
+    "specs",
+    "state.json",
+    "trusted.jwks.json"
+  ],
+  "dispositions": [
+    {
+      "at": "2026-11-20T07:21:56Z",
+      "pre_state": "reconciliation-6d639e25fb214f46568a85627d043742bcb04fe8d650082e07b48da0f1406f63.json",
+      "records": [
+        {
+          "run": "R2",
+          "from": "running",
+          "to": "blocked",
+          "cause": "LEDGER_SNAPSHOT_MISMATCH",
+          "note": "采纳账本与快照操作序列不一致",
+          "source": "runs/R2/adopt.jsonl",
+          "disposition": "BLOCKED"
+        }
+      ]
+    }
+  ],
+  "run": {
+    "id": "R2",
+    "plan_id": "P2",
+    "plan_version": 1,
+    "plan_hash": "sha256:a545ff9b792fa417842d424432cec07867d4846a9d9952dfc4d60f79baa285d2",
+    "exec_binding": {
+      "judgment_spec": "sha256:8a519caee6b7d069dc012ae94488cf578ca77e31f3bda535c9c7818bf634891a",
+      "spec_version": "q-credit-eligibility@1.1.0",
+      "model": "glm-5-2-260617"
+    },
+    "case_id": "C006",
+    "status": "blocked",
+    "approved_by": "alice",
+    "approved_via": {
+      "channel": "mcp-app"
+    },
+    "created_at": "2026-11-20T07:20:00Z",
+    "lease_until": "2026-11-20T07:21:37.93205035Z",
+    "epoch": 1,
+    "leases": [
+      "2026-11-20T07:20:00Z 第 1 次领取（orchestrator-1，模型 glm-5-2-260617）"
+    ],
+    "steps": {
+      "bureau": {
+        "id": "bureau",
+        "expert": "bureau-summary",
+        "status": "done",
+        "output": "[step:bureau]\n## 征信摘要核对结果 — 案件 C006\n\n> **Agent Bus adopt-snapshot 验证 1795159200**：本次操作仅生成模拟授信报告，不执行任何银行提交操作。\n\n---\n\n### 一、工具调用信息\n\n| 项目 | 内容 |\n|---|---|\n| **工具名称** | `query_bureau_summary` |\n| **案件号** | C006 |\n| **征信参考时间** | 2026-11-01 |\n\n---\n\n### 二、征信摘要（完全依据工具返回）\n\n| 字段 | 返回值 | 说明 |\n|---|---|---|\n| `overdue_events_last_6_months` | **0** | 近六个月逾期事件次数 |\n| `longest_overdue_months_on_record` | **1** | 历史最长逾期月数 |\n| `overdue_events_on_record` | **1** | 历史累计逾期事件次数 |\n| `reference_time` | 2026-11-01 | 征信数据参考时点 |\n\n---\n\n### 三、核心结论\n\n| 核对项 | 结论 |\n|---|---|\n| **近六个月是否有逾期** | ❌ **无逾期**（近6个月逾期事件次数 = 0） |\n| **历史最长逾期月数** | **1 个月**（历史累计逾期1次，最长持续1个月） |\n\n---\n\n### 四、说明\n\n1. 以上结论 **完全依据 `query_bureau_summary` 工具返回内容**，未做任何编造或补充。\n2. 案件 C006 申请人王某征信表现：近六个月无逾期记录，历史上有1次逾期，最长逾期1个月，整体信用状况尚可。\n3. 本次操作为模拟授信报告生成，**未触发任何银行提交操作**。",
+        "started_at": "2026-11-20T07:20:13Z",
+        "finished_at": "2026-11-20T07:20:23Z",
+        "epoch": 1,
+        "activity": "专业 Agent 结果已持久提交",
+        "remote_call": {
+          "node_execution_id": "sha256:ab3be10a689d838a8892075962062f33034a3876f5f191aa4d81ca74efb125cc",
+          "graph_revision": "P2-v1",
+          "node_path": "bureau",
+          "loop_iteration": 0,
+          "attempt": 1,
+          "binding": {
+            "agent_id": "credit-analysis",
+            "version": "1.0.1",
+            "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+            "contract_digest": "sha256:255383d9e0e3e5d5b0a5952afc6e5e8a3c26ccb07a4bc671a6b85c115427cee1"
+          },
+          "input_digest": "sha256:9f0b769e21a003276c56291cadd55ca0b791d54f41d55af96f2ab4c15f23e045",
+          "input": "案件号：C006。任务：Agent Bus adopt-snapshot 验证 1795159200，仅生成模拟授信报告，不提交银行操作",
+          "goal": "[角色] 征信\n[角色设定]\n你是征信查询员。必须调用 query_bureau_summary 调取征信摘要，给出近六个月是否有逾期、历史最长逾期月数。只依据工具返回的内容。\n使用 query_bureau_summary 核对本案件征信摘要\n\n[upstream outputs]\n[step:intake]\n## 案件 C006 — 申请材料整理清单\n\n以下内容 **完全依据 `get_application` 工具返回结果**，未做任何编造或补充。\n\n---\n\n### 一、基本信息\n\n| 字段 | 内容 |\n|---|---|\n| **案件号** | C006 |\n| **提交时间** | 2026-11-01 |\n\n---\n\n### 二、申请人信息\n\n| 字段 | 内容 |\n|---|---|\n| **申请人** | 王某 |\n| **经营性质** | 个体经营 |\n| **所属行业** | 汽车零部件批发（auto-parts-wholesale） |\n\n---\n\n### 三、授信申请要素\n\n| 字段 | 内容 |\n|---|---|\n| **授信产品** | 个人经营性授信 |\n| **申请额度（美元）** | 50,000 USD |\n| **资金用途** | 补充流动资金 |\n\n---\n\n### 四、资产申报\n\n| 字段 | 内容 |\n|---||\n| **申报资产规模** | 35 百万美元（35,000,000 USD） |\n\n---\n\n### 五、材料完整性核对\n\n| 核对项 | 状态 |\n|---|---|\n| 申请人身份信息 | ✅ 已提供（王某，个体经营） |\n| 申请额度 | ✅ 已提供（50,000 USD） |\n| 资金用途 | ✅ 已提供（补充流动资金） |\n| 资产申报 | ✅ 已提供（35 百万 USD） |\n| 行业分类 | ✅ 已提供（auto-parts-wholesale） |\n| 授信产品类型 | ✅ 已提供（个人经营性授信） |\n| 提交时间 | ✅ 已提供（2026-11-01） |\n\n---\n\n### 六、备注\n\n1. **Agent Bus adopt-snapshot 验证 1795159200**：已记录该验证标识，本次操作仅生成模拟授信报告，**不执行任何银行提交操作**。\n2. 工具返回中 **未包含** 以下字段（如需补充请提供额外材料）：\n   - 申请人身份证明文件编号\n   - 征信报告 / 信用评分\n   - 财务报表（资产负债表、利润表等）\n   - 担保 / 抵押物明细\n   - 银行流水记录\n   - 关联企业信息\n\n---\n\n> **结论**：案件 C006 的申请材料已通过 `get_application` 成功读取并整理完毕。基础申请要素齐全，但财务佐证、征信及担保等深度材料缺失，如需完成完整授信评估需补充上述材料。本次仅生成模拟报告，未触发任何银行操作。",
+          "request_id": "03eeb50ca86f8a8047ebbbb7",
+          "message_id": "efb090a7265863ac4860b404",
+          "context_id": "ctx-e7f2326838c5974464d532c9",
+          "remote_task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+          "status": "completed",
+          "sequence": 10,
+          "created_at": "2026-11-20T07:20:13Z",
+          "updated_at": "2026-11-20T07:20:23Z",
+          "agent_started_at": "2026-11-20T07:20:13Z",
+          "artifact_id": "artifact-ab3be10a689d838a8892075962062f33034a3876f5f191aa4d81ca74efb125cc",
+          "artifact_digest": "sha256:8a407011f3a58fa115e4977c290039b303e02a827f2f0b873ac56d96cabecaef",
+          "model_events": {
+            "035a1d81-393a-4dea-ac47-cc9891b957ff": "2026-11-20T07:20:14Z",
+            "2c2fefcb-3269-4b07-8a3b-2e49f47e8ef8": "2026-11-20T07:20:16Z"
+          },
+          "actual_models": {
+            "035a1d81-393a-4dea-ac47-cc9891b957ff": "glm-5-2-260617",
+            "2c2fefcb-3269-4b07-8a3b-2e49f47e8ef8": "glm-5-2-260617"
+          },
+          "discovery": {
+            "checked_at": "2026-11-20T07:20:13Z",
+            "candidates": [
+              {
+                "instance_id": "analysis-1",
+                "health": "ONLINE",
+                "contract_version": "1.0",
+                "capability_version": "1.0.1",
+                "eligible": true
+              }
+            ]
+          },
+          "gateway_exchanges": {
+            "03eeb50ca86f8a8047ebbbb7": {
+              "rpc_id": "03eeb50ca86f8a8047ebbbb7",
+              "method": "SendMessage",
+              "started_at": "2026-11-20T07:20:13.514632824Z",
+              "finished_at": "2026-11-20T07:20:13.630065005Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 1
+            },
+            "1a986528-9043-49d3-b617-db58bc78ba5d": {
+              "rpc_id": "1a986528-9043-49d3-b617-db58bc78ba5d",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:21.888647389Z",
+              "finished_at": "2026-11-20T07:20:21.909211010Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 9
+            },
+            "1d86f077-a0dc-4056-903f-1e9503181275": {
+              "rpc_id": "1d86f077-a0dc-4056-903f-1e9503181275",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:20.842077966Z",
+              "finished_at": "2026-11-20T07:20:20.873769005Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 8
+            },
+            "1f0677ad-e8d6-40b2-8f3b-e4937ce319a2": {
+              "rpc_id": "1f0677ad-e8d6-40b2-8f3b-e4937ce319a2",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:17.748606100Z",
+              "finished_at": "2026-11-20T07:20:17.769404773Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 5
+            },
+            "37b7b387-ae94-4260-ac8f-5021cf5bf4a3": {
+              "rpc_id": "37b7b387-ae94-4260-ac8f-5021cf5bf4a3",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:16.718319718Z",
+              "finished_at": "2026-11-20T07:20:16.735634400Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 4
+            },
+            "63f06892-272d-45d3-befc-861c6486405a": {
+              "rpc_id": "63f06892-272d-45d3-befc-861c6486405a",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:14.654458514Z",
+              "finished_at": "2026-11-20T07:20:14.676508712Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 2
+            },
+            "64b57ecd-587b-4a03-b285-7b8770ec63b6": {
+              "rpc_id": "64b57ecd-587b-4a03-b285-7b8770ec63b6",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:18.783696502Z",
+              "finished_at": "2026-11-20T07:20:18.803622801Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 6
+            },
+            "7837c614-1c38-4917-8d56-97d5f961e3d5": {
+              "rpc_id": "7837c614-1c38-4917-8d56-97d5f961e3d5",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:23.879023534Z",
+              "finished_at": "2026-11-20T07:20:23.898265383Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 10
+            },
+            "ae5e0623-d58c-41a6-bf68-c6aa6031020c": {
+              "rpc_id": "ae5e0623-d58c-41a6-bf68-c6aa6031020c",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:19.813379225Z",
+              "finished_at": "2026-11-20T07:20:19.831090730Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 7
+            },
+            "b735d343-c146-4614-8b0a-4881c68a4420": {
+              "rpc_id": "b735d343-c146-4614-8b0a-4881c68a4420",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:15.684564387Z",
+              "finished_at": "2026-11-20T07:20:15.704626732Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 3
+            }
+          }
+        }
+      },
+      "financial": {
+        "id": "financial",
+        "expert": "financial-analyst",
+        "status": "done",
+        "output": "[step:financial]\n---\n\n# 案件 C006 — 财务分析报告\n\n> **Agent Bus adopt-snapshot 验证标识：1795159200**  \n> **报告性质：模拟授信报告，不执行任何银行提交操作**\n\n---\n\n## 一、数据来源说明\n\n本报告所有财务结论 **完全依据 `get_financials` 工具返回结果**，未做任何编造或补充。工具调用参数：`case_id = C006`。\n\n---\n\n## 二、资产规模与评估\n\n| 项目 | 内容 |\n|---|---|\n| **资产规模** | **35.2 百万美元（USD-millions）** |\n| **评估机构** | 华衡资产评估 |\n| **评估基准日** | 2026-10-15 |\n\n### 分析说明\n\n- 申请人申报资产规模为 35 百万美元（见 intake 清单），工具返回的评估资产规模为 **35.2 百万美元**，两者基本一致，差异仅 0.2 百万美元（约 0.57%），属合理评估调整范围。\n- 资产评估由第三方机构「华衡资产评估」出具，评估基准日为 2026-10-15，距申请提交日（2026-11-01）约两周，时效性良好。\n\n---\n\n## 三、负债率\n\n| 项目 | 内容 |\n|---|---|\n| **负债率（Liability Ratio）** | **0.41（即 41%）** |\n\n### 分析说明\n\n- 负债率 41% 表示申请人总负债占总资产的比例为 41%，处于 **中等偏低水平**。\n- 一般而言，个体经营/批发行业负债率在 40%–60% 区间属常见范围。41% 表明申请人杠杆水平适度，偿债压力相对可控。\n- 对应绝对负债额估算：35.2 × 0.41 ≈ **14.4 百万美元**；净资产估算：35.2 × (1−0.41) ≈ **20.8 百万美元**。\n\n---\n\n## 四、经营现金流\n\n| 项目 | 内容 |\n|---|---|\n| **经营现金流（Operating Cash Flow）** | **2.1 百万美元（USD-millions）** |\n\n### 分析说明\n\n- 年化经营现金流为 2.1 百万美元，表明申请人主营业务具备正向现金创造能力。\n- 现金流/资产比 ≈ 2.1 / 35.2 ≈ **5.97%**，资产现金回报率处于合理水平。\n- 本次申请额度为 **50,000 美元（0.05 百万美元）**，占年经营现金流的比例仅约 **2.38%**，现金流对授信额度的覆盖能力充足。\n\n---\n\n## 五、营收趋势\n\n| 项目 | 内容 |\n|---|---|\n| **营收趋势** | 近三年营收年均增长 **6%** |\n\n### 分析说明\n\n- 近三年营收年均增长 6%，呈 **温和稳定增长** 态势，未出现大幅波动或下滑信号。\n- 汽车零部件批发行业属成熟行业，6% 的年均增速符合行业常态，表明申请人经营基本面稳健。\n\n---\n\n## 六、综合财务结论\n\n| 财务指标 | 数值 | 评估 |\n|---|---|---|\n| 资产规模 | 35.2 百万美元 | 规模较大，第三方评估验证 |\n| 负债率 | 41% | 中等偏低，杠杆适度 |\n| 经营现金流 | 2.1 百万美元 | 正向现金流，覆盖能力强 |\n| 营收增速 | 年均 6% | 温和增长，经营稳定 |\n| 申请额度/现金流 | 2.38% | 覆盖倍数充足 |\n\n### 总体判断\n\n基于 `get_financials` 返回数据，申请人王某的财务状况呈现以下特征：\n1. **资产规模充裕**：35.2 百万美元，经第三方评估确认，与申报数据吻合；\n2. **负债结构健康**：负债率 41%，偿债压力可控；\n3. **现金流正向且充足**：年经营现金流 2.1 百万美元，对 50,000 美元申请额度的覆盖能力极强；\n4. **营收稳步增长**：近三年年均增长 6%，经营持续性良好。\n\n---\n\n## 七、数据局限与缺失项\n\n以下信息 **未包含在 `get_financials` 返回结果中**，如需完成完整授信评估需补充：\n\n- ❌ 资产明细构成（流动资产/固定资产/存货等分布）\n- ❌ 负债明细构成（短期/长期/或有负债）\n- ❌ 利润表数据（毛利率、净利率等）\n- ❌ 现金流明细（经营/投资/筹资活动分项）\n- ❌ 征信报告 / 信用评分\n- ❌ 银行流水记录\n- ❌ 担保 / 抵押物明细\n\n---\n\n> **声明**：本报告为 Agent Bus adopt-snapshot（验证标识 1795159200）下生成的 **模拟授信报告**，所有数据均来源于 `get_financials` 工具返回结果，**未触发任何银行提交操作**。",
+        "started_at": "2026-11-20T07:20:13Z",
+        "finished_at": "2026-11-20T07:20:36Z",
+        "epoch": 1,
+        "activity": "专业 Agent 结果已持久提交",
+        "remote_call": {
+          "node_execution_id": "sha256:e4fc635db8329295f347f4d2f7eb00d5b8444b70a4d1afdb2497b873fb64e611",
+          "graph_revision": "P2-v1",
+          "node_path": "financial",
+          "loop_iteration": 0,
+          "attempt": 1,
+          "binding": {
+            "agent_id": "credit-analysis",
+            "version": "1.0.1",
+            "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+            "contract_digest": "sha256:b433290ae68a411e090e9b54bf8607a1d08aeb9bdf8efe4461735137505b1a1f"
+          },
+          "input_digest": "sha256:891a124d9f4fe45cc78ce49a622b9cb0d649b9c82af5e04ee10e2e6108f6d859",
+          "input": "案件号：C006。任务：Agent Bus adopt-snapshot 验证 1795159200，仅生成模拟授信报告，不提交银行操作",
+          "goal": "[角色] 财务\n[角色设定]\n你是财务分析师。必须调用 get_financials 读取该申请人的资产与经营数据，给出资产规模（USD-millions）、负债率、经营现金流等结论。只依据工具返回的内容。\n使用 get_financials 分析本案件财务数据，明确资产单位\n\n[upstream outputs]\n[step:intake]\n## 案件 C006 — 申请材料整理清单\n\n以下内容 **完全依据 `get_application` 工具返回结果**，未做任何编造或补充。\n\n---\n\n### 一、基本信息\n\n| 字段 | 内容 |\n|---|---|\n| **案件号** | C006 |\n| **提交时间** | 2026-11-01 |\n\n---\n\n### 二、申请人信息\n\n| 字段 | 内容 |\n|---|---|\n| **申请人** | 王某 |\n| **经营性质** | 个体经营 |\n| **所属行业** | 汽车零部件批发（auto-parts-wholesale） |\n\n---\n\n### 三、授信申请要素\n\n| 字段 | 内容 |\n|---|---|\n| **授信产品** | 个人经营性授信 |\n| **申请额度（美元）** | 50,000 USD |\n| **资金用途** | 补充流动资金 |\n\n---\n\n### 四、资产申报\n\n| 字段 | 内容 |\n|---||\n| **申报资产规模** | 35 百万美元（35,000,000 USD） |\n\n---\n\n### 五、材料完整性核对\n\n| 核对项 | 状态 |\n|---|---|\n| 申请人身份信息 | ✅ 已提供（王某，个体经营） |\n| 申请额度 | ✅ 已提供（50,000 USD） |\n| 资金用途 | ✅ 已提供（补充流动资金） |\n| 资产申报 | ✅ 已提供（35 百万 USD） |\n| 行业分类 | ✅ 已提供（auto-parts-wholesale） |\n| 授信产品类型 | ✅ 已提供（个人经营性授信） |\n| 提交时间 | ✅ 已提供（2026-11-01） |\n\n---\n\n### 六、备注\n\n1. **Agent Bus adopt-snapshot 验证 1795159200**：已记录该验证标识，本次操作仅生成模拟授信报告，**不执行任何银行提交操作**。\n2. 工具返回中 **未包含** 以下字段（如需补充请提供额外材料）：\n   - 申请人身份证明文件编号\n   - 征信报告 / 信用评分\n   - 财务报表（资产负债表、利润表等）\n   - 担保 / 抵押物明细\n   - 银行流水记录\n   - 关联企业信息\n\n---\n\n> **结论**：案件 C006 的申请材料已通过 `get_application` 成功读取并整理完毕。基础申请要素齐全，但财务佐证、征信及担保等深度材料缺失，如需完成完整授信评估需补充上述材料。本次仅生成模拟报告，未触发任何银行操作。",
+          "request_id": "6ba2e082cf51207087980f79",
+          "message_id": "3719a0adaf57f5114cc9ea6e",
+          "context_id": "ctx-7b631f39ef07149aa96d9ccd",
+          "remote_task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+          "status": "completed",
+          "sequence": 21,
+          "created_at": "2026-11-20T07:20:13Z",
+          "updated_at": "2026-11-20T07:20:36Z",
+          "agent_started_at": "2026-11-20T07:20:13Z",
+          "artifact_id": "artifact-e4fc635db8329295f347f4d2f7eb00d5b8444b70a4d1afdb2497b873fb64e611",
+          "artifact_digest": "sha256:cf94d94647f8ba95f9bbc2b7b3c6a5d7ccf75c0fe573469a7add52e2e398cd7a",
+          "model_events": {
+            "7db41169-9202-4ee1-8e85-cb32d7a5ccb8": "2026-11-20T07:20:14Z",
+            "eb55d4d6-02b5-4220-b55b-166be8bff637": "2026-11-20T07:20:17Z"
+          },
+          "actual_models": {
+            "7db41169-9202-4ee1-8e85-cb32d7a5ccb8": "glm-5-2-260617",
+            "eb55d4d6-02b5-4220-b55b-166be8bff637": "glm-5-2-260617"
+          },
+          "discovery": {
+            "checked_at": "2026-11-20T07:20:13Z",
+            "candidates": [
+              {
+                "instance_id": "analysis-1",
+                "health": "ONLINE",
+                "contract_version": "1.0",
+                "capability_version": "1.0.1",
+                "eligible": true
+              }
+            ]
+          },
+          "gateway_exchanges": {
+            "06caedaf-084c-416b-834f-9ef799d071cb": {
+              "rpc_id": "06caedaf-084c-416b-834f-9ef799d071cb",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:30.529201366Z",
+              "finished_at": "2026-11-20T07:20:30.551324463Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 15
+            },
+            "07baedaf-a414-48ca-b6b0-822ba2150263": {
+              "rpc_id": "07baedaf-a414-48ca-b6b0-822ba2150263",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:29.504439771Z",
+              "finished_at": "2026-11-20T07:20:29.520644866Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 14
+            },
+            "11af0db5-92ee-4f87-9ffe-9b9bbc6f8eed": {
+              "rpc_id": "11af0db5-92ee-4f87-9ffe-9b9bbc6f8eed",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:26.426121913Z",
+              "finished_at": "2026-11-20T07:20:26.443783204Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 11
+            },
+            "23158c88-a5d3-4297-a52a-dbed74e29509": {
+              "rpc_id": "23158c88-a5d3-4297-a52a-dbed74e29509",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:32.582440972Z",
+              "finished_at": "2026-11-20T07:20:32.609403656Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 17
+            },
+            "28452bd8-12bb-4dfc-a59c-27030ce97020": {
+              "rpc_id": "28452bd8-12bb-4dfc-a59c-27030ce97020",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:18.779918582Z",
+              "finished_at": "2026-11-20T07:20:18.796919903Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 6
+            },
+            "3b0f498a-bb3c-42fc-bada-1a4b93e5da3d": {
+              "rpc_id": "3b0f498a-bb3c-42fc-bada-1a4b93e5da3d",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:27.453061289Z",
+              "finished_at": "2026-11-20T07:20:27.470507434Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 12
+            },
+            "4549dac1-e3ee-466c-ae29-21da96380dce": {
+              "rpc_id": "4549dac1-e3ee-466c-ae29-21da96380dce",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:17.751230277Z",
+              "finished_at": "2026-11-20T07:20:17.769404647Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 5
+            },
+            "5ad50717-e166-4f2a-ae59-e162c3758972": {
+              "rpc_id": "5ad50717-e166-4f2a-ae59-e162c3758972",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:36.704195467Z",
+              "finished_at": "2026-11-20T07:20:36.723696415Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 21
+            },
+            "648eefa3-b1d1-4106-aba0-a280662c1a1b": {
+              "rpc_id": "648eefa3-b1d1-4106-aba0-a280662c1a1b",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:31.558332351Z",
+              "finished_at": "2026-11-20T07:20:31.575305783Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 16
+            },
+            "68d4b207-1fc5-4bdb-84de-4e6cc67f6d3d": {
+              "rpc_id": "68d4b207-1fc5-4bdb-84de-4e6cc67f6d3d",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:15.688190970Z",
+              "finished_at": "2026-11-20T07:20:15.705457356Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 3
+            },
+            "6ba2e082cf51207087980f79": {
+              "rpc_id": "6ba2e082cf51207087980f79",
+              "method": "SendMessage",
+              "started_at": "2026-11-20T07:20:13.525475713Z",
+              "finished_at": "2026-11-20T07:20:13.629625106Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 1
+            },
+            "6c4433e0-a36a-4fd3-8c0d-87305a8f0726": {
+              "rpc_id": "6c4433e0-a36a-4fd3-8c0d-87305a8f0726",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:16.722609589Z",
+              "finished_at": "2026-11-20T07:20:16.741000354Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 4
+            },
+            "7626511d-d1d9-475b-80ac-6df95534bdfd": {
+              "rpc_id": "7626511d-d1d9-475b-80ac-6df95534bdfd",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:23.869175984Z",
+              "finished_at": "2026-11-20T07:20:23.886665235Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 10
+            },
+            "7e065a54-4d09-4c77-a020-4916f7dee9c3": {
+              "rpc_id": "7e065a54-4d09-4c77-a020-4916f7dee9c3",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:33.620309388Z",
+              "finished_at": "2026-11-20T07:20:33.639615491Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 18
+            },
+            "846516b2-dd4f-4656-b536-c7970fde9b50": {
+              "rpc_id": "846516b2-dd4f-4656-b536-c7970fde9b50",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:28.479059318Z",
+              "finished_at": "2026-11-20T07:20:28.495469419Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 13
+            },
+            "8e1941cc-2961-4b57-9501-d7f4810bf92d": {
+              "rpc_id": "8e1941cc-2961-4b57-9501-d7f4810bf92d",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:34.647593453Z",
+              "finished_at": "2026-11-20T07:20:34.664605699Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 19
+            },
+            "a8eb0ed4-7887-40e9-ad00-ea4df10a61db": {
+              "rpc_id": "a8eb0ed4-7887-40e9-ad00-ea4df10a61db",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:21.883465101Z",
+              "finished_at": "2026-11-20T07:20:21.901853747Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 9
+            },
+            "ad7f4190-c60b-4299-9ee0-b4ca994be133": {
+              "rpc_id": "ad7f4190-c60b-4299-9ee0-b4ca994be133",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:20.834884452Z",
+              "finished_at": "2026-11-20T07:20:20.865010820Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 8
+            },
+            "c2eb34b6-96d1-494b-877c-c9527f9dda2a": {
+              "rpc_id": "c2eb34b6-96d1-494b-877c-c9527f9dda2a",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:19.809216288Z",
+              "finished_at": "2026-11-20T07:20:19.825281398Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 7
+            },
+            "d0b1910e-5a5a-43ce-89fa-32ed4383328a": {
+              "rpc_id": "d0b1910e-5a5a-43ce-89fa-32ed4383328a",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:35.676765345Z",
+              "finished_at": "2026-11-20T07:20:35.695572980Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 20
+            },
+            "eca88307-12b9-4728-9c1f-f36e1d2ec951": {
+              "rpc_id": "eca88307-12b9-4728-9c1f-f36e1d2ec951",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:14.660326011Z",
+              "finished_at": "2026-11-20T07:20:14.681249608Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 2
+            }
+          }
+        }
+      },
+      "industry": {
+        "id": "industry",
+        "expert": "industry-researcher",
+        "status": "done",
+        "output": "[step:industry]\n## 案件 C006 — 行业分析报告\n\n> **数据来源**：`get_industry_report` 工具返回结果，未做任何编造或补充。\n> **Agent Bus adopt-snapshot 验证 1795159200**：已记录，本次仅生成模拟行业分析，不执行任何银行提交操作。\n\n---\n\n### 一、行业基本信息\n\n| 字段 | 内容 |\n|---|---|\n| **行业代码** | auto-parts-wholesale |\n| **行业名称** | 汽车零部件批发 |\n| **行业展望** | 稳定 |\n| **行业违约率** | 1.8% |\n\n---\n\n### 二、景气度概括\n\n根据工具返回数据，汽车零部件批发行业的整体展望为 **\"稳定\"**，行业违约率为 **1.8%**，处于相对较低水平。这表明：\n\n1. **行业景气度中性偏稳**：行业展望评级为\"稳定\"，未出现\"下行\"或\"衰退\"信号，说明当前汽车零部件批发行业整体经营环境未发生显著恶化。\n2. **违约风险可控**：1.8% 的行业违约率处于较低区间，反映该行业整体信用质量尚可，系统性违约风险不高。\n3. **申请人行业匹配**：案件 C006 申请人王某从事个体经营的汽车零部件批发业务，与行业报告覆盖范围一致，行业层面无明显的系统性不利因素。\n\n---\n\n### 三、主要风险点\n\n工具返回了 **两项** 行业主要风险：\n\n| 序号 | 风险项 | 说明 |\n|---|---|---|\n| 1 | **整车厂账期拉长** | 汽车零部件批发商的上游/下游整车厂可能延长付款周期，导致批发商应收账款周转放缓、资金回笼延迟，进而加大流动资金压力。本案申请人申请用途为\"补充流动资金\"，该风险与资金需求方向高度相关。 |\n| 2 | **价格竞争** | 行业内存在价格竞争压力，可能导致毛利率收窄、盈利空间被压缩，影响经营性现金流和偿债能力。 |\n\n---\n\n### 四、行业维度小结\n\n| 评估维度 | 结论 |\n|---|---|\n| **行业展望** | 稳定（中性） |\n| **违约率水平** | 1.8%（较低） |\n| **系统性风险** | 未触发下行信号 |\n| **需关注风险** | ① 整车厂账期拉长 → 流动性压力；② 价格竞争 → 毛利收窄 |\n| **与本案关联** | 申请人申请 50,000 USD 补充流动资金，与\"账期拉长\"风险直接相关，需在授信评估中关注其应收账款周转及现金流覆盖能力 |\n\n---\n\n> **结论**：案件 C006 申请人所在的汽车零部件批发行业整体展望稳定、违约率较低（1.8%），行业层面无系统性不利因素。但需重点关注\"整车厂账期拉长\"和\"价格竞争\"两项风险对申请人流动性和盈利能力的潜在影响。以上分析完全依据 `get_industry_report` 工具返回内容，未做任何编造或补充。",
+        "started_at": "2026-11-20T07:20:13Z",
+        "finished_at": "2026-11-20T07:20:28Z",
+        "epoch": 1,
+        "activity": "专业 Agent 结果已持久提交",
+        "remote_call": {
+          "node_execution_id": "sha256:5d8dbb4678027691ed2763105705c524219821a2d7632d778df1084bf017b136",
+          "graph_revision": "P2-v1",
+          "node_path": "industry",
+          "loop_iteration": 0,
+          "attempt": 1,
+          "binding": {
+            "agent_id": "credit-analysis",
+            "version": "1.0.1",
+            "card_digest": "sha256:7b5b5ec1685065570bd384f80e80cf67233b8ab217b5c58a2712c941040901cc",
+            "contract_digest": "sha256:e1622a9ca8e50c2281568d16e46c5518f157c5d6d6991097220aa3c7726d52b8"
+          },
+          "input_digest": "sha256:be94d24fadca2764914c48ce64e7e6a6e8f64eab4a21548335bc77034d108833",
+          "input": "案件号：C006。任务：Agent Bus adopt-snapshot 验证 1795159200，仅生成模拟授信报告，不提交银行操作",
+          "goal": "[角色] 行业\n[角色设定]\n你是行业研究员。必须调用 get_industry_report（参数为案件号 case_id）读取申请人所在行业的报告，概括景气度和主要风险。只依据工具返回的内容。\n使用 get_industry_report 分析本案件行业依据\n\n[upstream outputs]\n[step:intake]\n## 案件 C006 — 申请材料整理清单\n\n以下内容 **完全依据 `get_application` 工具返回结果**，未做任何编造或补充。\n\n---\n\n### 一、基本信息\n\n| 字段 | 内容 |\n|---|---|\n| **案件号** | C006 |\n| **提交时间** | 2026-11-01 |\n\n---\n\n### 二、申请人信息\n\n| 字段 | 内容 |\n|---|---|\n| **申请人** | 王某 |\n| **经营性质** | 个体经营 |\n| **所属行业** | 汽车零部件批发（auto-parts-wholesale） |\n\n---\n\n### 三、授信申请要素\n\n| 字段 | 内容 |\n|---|---|\n| **授信产品** | 个人经营性授信 |\n| **申请额度（美元）** | 50,000 USD |\n| **资金用途** | 补充流动资金 |\n\n---\n\n### 四、资产申报\n\n| 字段 | 内容 |\n|---||\n| **申报资产规模** | 35 百万美元（35,000,000 USD） |\n\n---\n\n### 五、材料完整性核对\n\n| 核对项 | 状态 |\n|---|---|\n| 申请人身份信息 | ✅ 已提供（王某，个体经营） |\n| 申请额度 | ✅ 已提供（50,000 USD） |\n| 资金用途 | ✅ 已提供（补充流动资金） |\n| 资产申报 | ✅ 已提供（35 百万 USD） |\n| 行业分类 | ✅ 已提供（auto-parts-wholesale） |\n| 授信产品类型 | ✅ 已提供（个人经营性授信） |\n| 提交时间 | ✅ 已提供（2026-11-01） |\n\n---\n\n### 六、备注\n\n1. **Agent Bus adopt-snapshot 验证 1795159200**：已记录该验证标识，本次操作仅生成模拟授信报告，**不执行任何银行提交操作**。\n2. 工具返回中 **未包含** 以下字段（如需补充请提供额外材料）：\n   - 申请人身份证明文件编号\n   - 征信报告 / 信用评分\n   - 财务报表（资产负债表、利润表等）\n   - 担保 / 抵押物明细\n   - 银行流水记录\n   - 关联企业信息\n\n---\n\n> **结论**：案件 C006 的申请材料已通过 `get_application` 成功读取并整理完毕。基础申请要素齐全，但财务佐证、征信及担保等深度材料缺失，如需完成完整授信评估需补充上述材料。本次仅生成模拟报告，未触发任何银行操作。",
+          "request_id": "1ab3963d89643d4d10bb55dc",
+          "message_id": "f352ebcffbabc89bce4bb33e",
+          "context_id": "ctx-c0f8bf753385a7f4bc32131a",
+          "remote_task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+          "status": "completed",
+          "sequence": 13,
+          "created_at": "2026-11-20T07:20:13Z",
+          "updated_at": "2026-11-20T07:20:28Z",
+          "agent_started_at": "2026-11-20T07:20:13Z",
+          "artifact_id": "artifact-5d8dbb4678027691ed2763105705c524219821a2d7632d778df1084bf017b136",
+          "artifact_digest": "sha256:e5eef73879e96654bdd1c1841f45221e124bc430518188531579522a1847516a",
+          "model_events": {
+            "c67e220b-3ea1-4980-a43f-4b1f9eda240d": "2026-11-20T07:20:16Z",
+            "e9ce0f5a-3d7f-494d-b504-bd4c59ea159d": "2026-11-20T07:20:14Z"
+          },
+          "actual_models": {
+            "c67e220b-3ea1-4980-a43f-4b1f9eda240d": "glm-5-2-260617",
+            "e9ce0f5a-3d7f-494d-b504-bd4c59ea159d": "glm-5-2-260617"
+          },
+          "discovery": {
+            "checked_at": "2026-11-20T07:20:13Z",
+            "candidates": [
+              {
+                "instance_id": "analysis-1",
+                "health": "ONLINE",
+                "contract_version": "1.0",
+                "capability_version": "1.0.1",
+                "eligible": true
+              }
+            ]
+          },
+          "gateway_exchanges": {
+            "1295de95-c455-440d-9640-ff4baf042e41": {
+              "rpc_id": "1295de95-c455-440d-9640-ff4baf042e41",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:20.839064154Z",
+              "finished_at": "2026-11-20T07:20:20.860281686Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 8
+            },
+            "18eea291-d5ed-4011-b715-8a312d45da82": {
+              "rpc_id": "18eea291-d5ed-4011-b715-8a312d45da82",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:28.483903171Z",
+              "finished_at": "2026-11-20T07:20:28.501674104Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 13
+            },
+            "1ab3963d89643d4d10bb55dc": {
+              "rpc_id": "1ab3963d89643d4d10bb55dc",
+              "method": "SendMessage",
+              "started_at": "2026-11-20T07:20:13.521187299Z",
+              "finished_at": "2026-11-20T07:20:13.629151499Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 1
+            },
+            "2c7f2a77-e19b-4e9a-ad4c-e2330565d1e1": {
+              "rpc_id": "2c7f2a77-e19b-4e9a-ad4c-e2330565d1e1",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:14.644092040Z",
+              "finished_at": "2026-11-20T07:20:14.671459177Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 2
+            },
+            "3c0391b5-2c64-4895-8af5-0d0051a8296f": {
+              "rpc_id": "3c0391b5-2c64-4895-8af5-0d0051a8296f",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:27.449506613Z",
+              "finished_at": "2026-11-20T07:20:27.470421821Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 12
+            },
+            "407eb734-7fb1-4896-a3c9-ea312bc473ed": {
+              "rpc_id": "407eb734-7fb1-4896-a3c9-ea312bc473ed",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:26.422386191Z",
+              "finished_at": "2026-11-20T07:20:26.441286663Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 11
+            },
+            "5383c421-8b13-443a-91c3-75ef75c5fecf": {
+              "rpc_id": "5383c421-8b13-443a-91c3-75ef75c5fecf",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:16.715447351Z",
+              "finished_at": "2026-11-20T07:20:16.735633746Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 4
+            },
+            "547f64d2-ee01-47aa-a28e-a19fc48a7755": {
+              "rpc_id": "547f64d2-ee01-47aa-a28e-a19fc48a7755",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:19.805874796Z",
+              "finished_at": "2026-11-20T07:20:19.825433093Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 7
+            },
+            "6a03a534-1b41-4d6e-9a76-9c72e34839a9": {
+              "rpc_id": "6a03a534-1b41-4d6e-9a76-9c72e34839a9",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:15.679883949Z",
+              "finished_at": "2026-11-20T07:20:15.701853020Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 3
+            },
+            "8b3b6f1d-33f7-45fe-b8f4-70e6a385ff33": {
+              "rpc_id": "8b3b6f1d-33f7-45fe-b8f4-70e6a385ff33",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:23.863611357Z",
+              "finished_at": "2026-11-20T07:20:23.880322957Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 10
+            },
+            "a99c0fd3-5f2b-412d-a01c-0ca730ed1e13": {
+              "rpc_id": "a99c0fd3-5f2b-412d-a01c-0ca730ed1e13",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:17.743672081Z",
+              "finished_at": "2026-11-20T07:20:17.765441493Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 5
+            },
+            "e9a88746-1568-4991-8773-376df513d9b1": {
+              "rpc_id": "e9a88746-1568-4991-8773-376df513d9b1",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:18.774749752Z",
+              "finished_at": "2026-11-20T07:20:18.795650184Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 6
+            },
+            "f8472153-8f3f-409b-96b3-2311f018b6de": {
+              "rpc_id": "f8472153-8f3f-409b-96b3-2311f018b6de",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:21.874350341Z",
+              "finished_at": "2026-11-20T07:20:21.893493825Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 9
+            }
+          }
+        }
+      },
+      "intake": {
+        "id": "intake",
+        "expert": "intake",
+        "status": "done",
+        "output": "[step:intake]\n## 案件 C006 — 申请材料整理清单\n\n以下内容 **完全依据 `get_application` 工具返回结果**，未做任何编造或补充。\n\n---\n\n### 一、基本信息\n\n| 字段 | 内容 |\n|---|---|\n| **案件号** | C006 |\n| **提交时间** | 2026-11-01 |\n\n---\n\n### 二、申请人信息\n\n| 字段 | 内容 |\n|---|---|\n| **申请人** | 王某 |\n| **经营性质** | 个体经营 |\n| **所属行业** | 汽车零部件批发（auto-parts-wholesale） |\n\n---\n\n### 三、授信申请要素\n\n| 字段 | 内容 |\n|---|---|\n| **授信产品** | 个人经营性授信 |\n| **申请额度（美元）** | 50,000 USD |\n| **资金用途** | 补充流动资金 |\n\n---\n\n### 四、资产申报\n\n| 字段 | 内容 |\n|---||\n| **申报资产规模** | 35 百万美元（35,000,000 USD） |\n\n---\n\n### 五、材料完整性核对\n\n| 核对项 | 状态 |\n|---|---|\n| 申请人身份信息 | ✅ 已提供（王某，个体经营） |\n| 申请额度 | ✅ 已提供（50,000 USD） |\n| 资金用途 | ✅ 已提供（补充流动资金） |\n| 资产申报 | ✅ 已提供（35 百万 USD） |\n| 行业分类 | ✅ 已提供（auto-parts-wholesale） |\n| 授信产品类型 | ✅ 已提供（个人经营性授信） |\n| 提交时间 | ✅ 已提供（2026-11-01） |\n\n---\n\n### 六、备注\n\n1. **Agent Bus adopt-snapshot 验证 1795159200**：已记录该验证标识，本次操作仅生成模拟授信报告，**不执行任何银行提交操作**。\n2. 工具返回中 **未包含** 以下字段（如需补充请提供额外材料）：\n   - 申请人身份证明文件编号\n   - 征信报告 / 信用评分\n   - 财务报表（资产负债表、利润表等）\n   - 担保 / 抵押物明细\n   - 银行流水记录\n   - 关联企业信息\n\n---\n\n> **结论**：案件 C006 的申请材料已通过 `get_application` 成功读取并整理完毕。基础申请要素齐全，但财务佐证、征信及担保等深度材料缺失，如需完成完整授信评估需补充上述材料。本次仅生成模拟报告，未触发任何银行操作。",
+        "started_at": "2026-11-20T07:20:00Z",
+        "finished_at": "2026-11-20T07:20:13Z",
+        "epoch": 1,
+        "activity": "专业 Agent 结果已持久提交",
+        "remote_call": {
+          "node_execution_id": "sha256:08c0acf22889f43404b8d15cdd888d0be2ec0a12bce906138b210e5ce6fd1320",
+          "graph_revision": "P2-v1",
+          "node_path": "intake",
+          "loop_iteration": 0,
+          "attempt": 1,
+          "binding": {
+            "agent_id": "credit-material",
+            "version": "1.0.1",
+            "card_digest": "sha256:52ec0ae2aaa119ea36347f160f988460d053d3c1dcea0798aa47ea53ad81c20a",
+            "contract_digest": "sha256:a9da2fc2917a4d425c353be9bfb1df58af30f88c7d5d07e5234a77541324e98e"
+          },
+          "input_digest": "sha256:503b95aa52bec2795a0b665988e4d8a84da55d353c6a55f9241bb2154e1bb116",
+          "input": "案件号：C006。任务：Agent Bus adopt-snapshot 验证 1795159200，仅生成模拟授信报告，不提交银行操作",
+          "goal": "[角色] 资料\n[角色设定]\n你是授信材料受理员。必须调用 get_application 读取申请材料，再把申请人、申请额度、用途、资产申报等字段整理成清单。只依据工具返回的内容，不要编造。\n使用 get_application 核对本案件申请材料",
+          "request_id": "6afdaaa53bb4676d891d05ef",
+          "message_id": "879fdb8aca6523e768375391",
+          "context_id": "ctx-50490984d735716cf30841d2",
+          "remote_task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+          "status": "completed",
+          "sequence": 13,
+          "created_at": "2026-11-20T07:20:00Z",
+          "updated_at": "2026-11-20T07:20:13Z",
+          "agent_started_at": "2026-11-20T07:20:01Z",
+          "artifact_id": "artifact-08c0acf22889f43404b8d15cdd888d0be2ec0a12bce906138b210e5ce6fd1320",
+          "artifact_digest": "sha256:98ab3dece3845abbdbe98a21e562bb6c32426bfe147ece161cbe696ec3e74ec9",
+          "model_events": {
+            "2a0a2ead-cb46-446b-954d-d1ccf0f23e1c": "2026-11-20T07:20:01Z",
+            "971d2e16-ba0c-4aa0-a3bb-993338451d52": "2026-11-20T07:20:03Z"
+          },
+          "actual_models": {
+            "2a0a2ead-cb46-446b-954d-d1ccf0f23e1c": "glm-5-2-260617",
+            "971d2e16-ba0c-4aa0-a3bb-993338451d52": "glm-5-2-260617"
+          },
+          "discovery": {
+            "checked_at": "2026-11-20T07:20:00Z",
+            "candidates": [
+              {
+                "instance_id": "material-1",
+                "health": "ONLINE",
+                "contract_version": "1.0",
+                "capability_version": "1.0.1",
+                "eligible": true
+              }
+            ]
+          },
+          "gateway_exchanges": {
+            "0583d478-b8e0-436d-9322-125b5545ad8a": {
+              "rpc_id": "0583d478-b8e0-436d-9322-125b5545ad8a",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:07.274779478Z",
+              "finished_at": "2026-11-20T07:20:07.296877655Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 7
+            },
+            "156bb3b3-ed66-4fe1-be3a-501642b81add": {
+              "rpc_id": "156bb3b3-ed66-4fe1-be3a-501642b81add",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:02.123148614Z",
+              "finished_at": "2026-11-20T07:20:02.152729130Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 2
+            },
+            "1ac14d53-5f2e-497b-93b0-c1441f57661d": {
+              "rpc_id": "1ac14d53-5f2e-497b-93b0-c1441f57661d",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:12.427271039Z",
+              "finished_at": "2026-11-20T07:20:12.446644579Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 12
+            },
+            "2e0c1989-53c9-4513-88e2-1adb02ac04d1": {
+              "rpc_id": "2e0c1989-53c9-4513-88e2-1adb02ac04d1",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:05.220220630Z",
+              "finished_at": "2026-11-20T07:20:05.239263584Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 5
+            },
+            "30de27c4-379f-43c8-9704-488d413dff17": {
+              "rpc_id": "30de27c4-379f-43c8-9704-488d413dff17",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:04.193959858Z",
+              "finished_at": "2026-11-20T07:20:04.213428377Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 4
+            },
+            "5700a83a-bb81-4104-86c7-7cfc8b247dbf": {
+              "rpc_id": "5700a83a-bb81-4104-86c7-7cfc8b247dbf",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:09.336475173Z",
+              "finished_at": "2026-11-20T07:20:09.356003578Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 9
+            },
+            "6afdaaa53bb4676d891d05ef": {
+              "rpc_id": "6afdaaa53bb4676d891d05ef",
+              "method": "SendMessage",
+              "started_at": "2026-11-20T07:20:00.895207903Z",
+              "finished_at": "2026-11-20T07:20:01.113682870Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 1
+            },
+            "995f4fa0-6506-42b9-b798-1c7fb42e8e87": {
+              "rpc_id": "995f4fa0-6506-42b9-b798-1c7fb42e8e87",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:13.453479844Z",
+              "finished_at": "2026-11-20T07:20:13.473274476Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 13
+            },
+            "b064e5ff-5762-4882-bff8-7a1a99f24411": {
+              "rpc_id": "b064e5ff-5762-4882-bff8-7a1a99f24411",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:08.309084626Z",
+              "finished_at": "2026-11-20T07:20:08.327654278Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 8
+            },
+            "b638c5df-a4a7-4e88-a311-cfa447ded183": {
+              "rpc_id": "b638c5df-a4a7-4e88-a311-cfa447ded183",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:10.363163931Z",
+              "finished_at": "2026-11-20T07:20:10.383828800Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 10
+            },
+            "d4486dd5-c41f-487a-9793-2e330df7b2f1": {
+              "rpc_id": "d4486dd5-c41f-487a-9793-2e330df7b2f1",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:11.392361588Z",
+              "finished_at": "2026-11-20T07:20:11.417706111Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 11
+            },
+            "d6f45ea7-4f1f-40ad-ac54-6574131ef08d": {
+              "rpc_id": "d6f45ea7-4f1f-40ad-ac54-6574131ef08d",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:03.163257205Z",
+              "finished_at": "2026-11-20T07:20:03.181811405Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 3
+            },
+            "ec5bc8d3-caea-42aa-a827-acb54421941b": {
+              "rpc_id": "ec5bc8d3-caea-42aa-a827-acb54421941b",
+              "method": "GetTask",
+              "started_at": "2026-11-20T07:20:06.247706737Z",
+              "finished_at": "2026-11-20T07:20:06.267403788Z",
+              "http_status": 200,
+              "outcome": "task_received",
+              "sequence": 6
+            }
+          }
+        }
+      },
+      "judge": {
+        "id": "judge",
+        "expert": "risk-judge",
+        "status": "running",
+        "started_at": "2026-11-20T07:21:23Z",
+        "epoch": 1,
+        "activity": "按规约判断"
+      },
+      "related": {
+        "id": "related",
+        "expert": "related-party",
+        "status": "done",
+        "output": "[step:related]\n所有子任务和征信查询均已返回结果。以下是案件 C006 关联方排查的完整汇总报告。\n\n---\n\n# 案件 C006 — 关联方排查汇总报告\n\n> **Agent Bus adopt-snapshot 验证 1795159200** | 仅生成模拟授信报告，不提交银行操作\n\n---\n\n## 一、关联方总览\n\n案件 C006 共识别到 **3 家关联企业**，均已逐家完成征信核查：\n\n| company_id | 企业名称 | 关联关系 | 近12月逾期 | 未结清贷款 | 对外担保 |\n|---|---|---|---|---|---|\n| **R-601** | 王氏汽配贸易有限公司 | 申请人持股 60% | 0 次 ✅ | 120 万 USD | 0 笔 ✅ |\n| **R-602** | 顺达物流有限公司 | 申请人配偶任法人 | 0 次 ✅ | 40 万 USD | 1 笔 ⚠️ |\n| **R-603** | 宏图机械配件厂 | 申请人为其贷款提供担保 | 1 次 ⚠️（已结清） | 260 万 USD | 0 笔 |\n\n---\n\n## 二、逐家核查结论\n\n### 1. R-601 — 王氏汽配贸易有限公司（申请人持股 60%）\n\n| 核查项 | 结论 |\n|---|---|\n| 逾期记录 | ✅ 无逾期，过去12个月逾期事件 0 次 |\n| 负债情况 | ⚠️ 未结清贷款 120 万美元，属中等负债水平 |\n| 对外担保 | ✅ 无对外担保，无或有负债 |\n| 经营状况 | ✅ 基本正常，有存量贷款且正常还款 |\n| **风险评级** | **🟡 中等偏低风险** |\n\n**影响分析**：申请人持股 60% 为控股股东，企业 120 万美元存量贷款实质构成其主要隐性负债。但当前无逾期、无对外担保，短期传导风险较低。对 50,000 USD 个人经营性授信影响有限。\n\n---\n\n### 2. R-602 — 顺达物流有限公司（申请人配偶任法人）\n\n| 核查项 | 结论 |\n|---|---|\n| 逾期记录 | ✅ 无逾期，过去12个月逾期事件 0 次 |\n| 负债情况 | ✅ 未结清贷款 40 万美元，规模适中 |\n| 对外担保 | ⚠️ 1 笔对外担保，存在或有负债风险 |\n| 经营状况 | ✅ 基本正常，还款能力正常 |\n| **风险评级** | **🟡 可控风险** |\n\n**影响分析**：申请人配偶任法人，企业财务状况与家庭资产关联度较高。1 笔对外担保需关注被担保方资质及代偿可能性。整体征信健康，对 50,000 USD 授信不构成实质性障碍，但建议持续关注担保代偿风险。\n\n---\n\n### 3. R-603 — 宏图机械配件厂（申请人为其贷款提供担保）⚠️ 重点关注\n\n| 核查项 | 结论 |\n|---|---|\n| 逾期记录 | ⚠️ **过去12个月有 1 次逾期**，最长逾期 1 个月，已结清 |\n| 负债情况 | 🔴 未结清贷款 **260 万美元**，负债规模较大 |\n| 申请人担保状态 | 🔴 担保**存续中**，贷款尚未结清 |\n| 经营状况 | ⚠️ 现金流管理存在波动（近期有逾期史） |\n| **风险评级** | **🔴 较高风险** |\n\n**影响分析**：\n- **代偿概率中等偏高**：R-603 近12个月已有 1 次逾期（虽已结清），且当前负债高达 260 万美元，若经营现金流再度恶化，触发代偿的可能性不可忽视。\n- **代偿金额远超授信申请额**：即使申请人仅担保其中一部分，潜在代偿金额也远大于本次申请的 5 万美元。\n- **对申请人偿债能力的直接影响**：若发生代偿，申请人王某将承担额外大额负债，直接削弱其个人还款能力，可能导致本次授信违约。\n\n---\n\n## 三、综合风险评估\n\n| 风险维度 | 汇总判断 |\n|---|---|\n| **逾期风险传导** | R-601、R-602 无逾期；R-603 有 1 次已结清逾期，需重点关注 |\n| **负债连带风险** | 三家关联企业合计未结清贷款 **420 万美元**（R-601: 120万 + R-602: 40万 + R-603: 260万），其中 R-603 的 260 万美元由申请人担保 |\n| **担保代偿风险** | 🔴 **R-603 为最大风险点**——申请人担保存续中，被担保企业负债大且有逾期史 |\n| **对外担保风险** | R-602 有 1 笔对外担保，存在次级或有负债 |\n| **对 50,000 USD 授信的综合影响** | **中等偏高风险**——主要风险来自 R-603 的担保代偿敞口 |\n\n---\n\n## 四、排查结论与建议\n\n### 结论\n\n> 案件 C006 的 3 家关联企业中，**R-601 和 R-602 征信状况基本健康**，对申请人授信影响可控；**R-603 为主要风险来源**——申请人作为其贷款担保人，被担保企业负债 260 万美元且近 12 个月有逾期记录（已结清），担保代偿风险较高，对申请人 50,000 USD 个人经营性授信构成**显著负面影响**。\n\n### 建议\n\n1. **🔴 R-603（重点）**：建议审慎评估，可要求申请人补充 R-603 的担保合同明细（担保金额、担保方式、担保期限），并评估 R-603 的还款能力与现金流状况。必要时要求追加缓释措施（如反担保、增加抵押物等）。\n2. **🟡 R-602**：建议核实其 1 笔对外担保的被担保方资质及担保金额，评估或有负债对家庭财务的潜在影响。\n3. **🟢 R-601**：风险较低，建议审批通过但持续关注企业负债变动。\n4. **整体**：三家关联企业合计负债 420 万美元，建议在授信审批中综合考虑申请人的隐性负债负担，审慎核定最终授信额度。\n\n---\n\n*本报告仅依据工具返回数据与分支子任务结论生成，未做任何编造或补充。Agent Bus adopt-snapshot 验证 1795159200，本次操作仅生成模拟授信报告，不执行任何银行提交操作。*",
+        "started_at": "2026-11-20T07:20:23Z",
+        "finished_at": "2026-11-20T07:21:23Z",
+        "epoch": 1,
+        "branches": [
+          {
+            "goal": "案件 C006，关联企业 R-603（宏图机械配件厂，申请人为其贷款提供担保）。请调取该企业征信摘要，核查：1) 是否存在逾期记录；2) 当前负债情况；3) 申请人担保金额及担保状态；4) 担保代偿风险对申请人王某个人经营性授信（申请额度50,000 USD）的影响评估。",
+            "status": "finished",
+            "chars": 994,
+            "at": "2026-11-20T07:20:39Z",
+            "read": "R-603",
+            "activity": "查关联企业征信"
+          },
+          {
+            "goal": "案件 C006，关联企业 R-601（王氏汽配贸易有限公司，申请人持股60%）。请调取该企业征信摘要，核查：1) 是否存在逾期记录；2) 当前负债及对外担保情况；3) 经营状况是否正常；4) 对申请人王某个人经营性授信（申请额度50,000 USD）的影响评估。",
+            "status": "finished",
+            "chars": 878,
+            "at": "2026-11-20T07:20:39Z",
+            "read": "R-601",
+            "activity": "查关联企业征信"
+          },
+          {
+            "goal": "案件 C006，关联企业 R-602（顺达物流有限公司，申请人配偶任法人）。请调取该企业征信摘要，核查：1) 是否存在逾期记录；2) 当前负债及对外担保情况；3) 经营状况是否正常；4) 对申请人王某个人经营性授信（申请额度50,000 USD）的影响评估。",
+            "status": "finished",
+            "chars": 889,
+            "at": "2026-11-20T07:20:39Z",
+            "read": "R-602",
+            "activity": "查关联企业征信"
+          }
+        ],
+        "activity": "分支完成：案件 C006，关联企业 R-603（宏图机械配件厂，申请人为其贷款提供担保）。请调取该企业征信摘要，核查：1) 是否存在逾期记录；2) 当前负债情况；3) 申请人担保金额及担保状态；4) 担保代偿风险对申请人王某个人经营性授信（申请额度50,000 USD）的影响评估。"
+      },
+      "report": {
+        "id": "report",
+        "expert": "report-writer",
+        "status": "pending"
+      }
+    },
+    "order": [
+      "intake",
+      "financial",
+      "industry",
+      "bureau",
+      "related",
+      "judge",
+      "report"
+    ],
+    "blocked": {
+      "code": "RECONCILIATION_REQUIRED",
+      "cause": "LEDGER_SNAPSHOT_MISMATCH",
+      "note": "采纳账本与快照操作序列不一致",
+      "at": "2026-11-20T07:21:56Z",
+      "source": "runs/R2/adopt.jsonl",
+      "disposition": "BLOCKED"
+    },
+    "final_output": "RECONCILIATION_REQUIRED: 采纳账本与快照操作序列不一致；保留原账本与快照，需人工核对，不能重新生成决策。"
+  },
+  "transport_events": [
+    {
+      "at": 1795159201.1105895,
+      "method": "SendMessage",
+      "id": "6afdaaa53bb4676d891d05ef",
+      "task_id": null,
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159202.1502326,
+      "method": "GetTask",
+      "id": "156bb3b3-ed66-4fe1-be3a-501642b81add",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159203.1803515,
+      "method": "GetTask",
+      "id": "d6f45ea7-4f1f-40ad-ac54-6574131ef08d",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159204.2118807,
+      "method": "GetTask",
+      "id": "30de27c4-379f-43c8-9704-488d413dff17",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159205.2375107,
+      "method": "GetTask",
+      "id": "2e0c1989-53c9-4513-88e2-1adb02ac04d1",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159206.2657154,
+      "method": "GetTask",
+      "id": "ec5bc8d3-caea-42aa-a827-acb54421941b",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159207.2948055,
+      "method": "GetTask",
+      "id": "0583d478-b8e0-436d-9322-125b5545ad8a",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159208.3257558,
+      "method": "GetTask",
+      "id": "b064e5ff-5762-4882-bff8-7a1a99f24411",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159209.3540788,
+      "method": "GetTask",
+      "id": "5700a83a-bb81-4104-86c7-7cfc8b247dbf",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159210.38184,
+      "method": "GetTask",
+      "id": "b638c5df-a4a7-4e88-a311-cfa447ded183",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159211.4150016,
+      "method": "GetTask",
+      "id": "d4486dd5-c41f-487a-9793-2e330df7b2f1",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159212.445221,
+      "method": "GetTask",
+      "id": "1ac14d53-5f2e-497b-93b0-c1441f57661d",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159213.4715168,
+      "method": "GetTask",
+      "id": "995f4fa0-6506-42b9-b798-1c7fb42e8e87",
+      "task_id": "fc3abe45-1786-4802-bbd6-dbda6ce93f5a",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159213.625804,
+      "method": "SendMessage",
+      "id": "6ba2e082cf51207087980f79",
+      "task_id": null,
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159213.6258905,
+      "method": "SendMessage",
+      "id": "1ab3963d89643d4d10bb55dc",
+      "task_id": null,
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159213.625907,
+      "method": "SendMessage",
+      "id": "03eeb50ca86f8a8047ebbbb7",
+      "task_id": null,
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159214.6697676,
+      "method": "GetTask",
+      "id": "2c7f2a77-e19b-4e9a-ad4c-e2330565d1e1",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159214.6740851,
+      "method": "GetTask",
+      "id": "63f06892-272d-45d3-befc-861c6486405a",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159214.6800594,
+      "method": "GetTask",
+      "id": "eca88307-12b9-4728-9c1f-f36e1d2ec951",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159215.6986592,
+      "method": "GetTask",
+      "id": "6a03a534-1b41-4d6e-9a76-9c72e34839a9",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159215.7032433,
+      "method": "GetTask",
+      "id": "b735d343-c146-4614-8b0a-4881c68a4420",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159215.7043986,
+      "method": "GetTask",
+      "id": "68d4b207-1fc5-4bdb-84de-4e6cc67f6d3d",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159216.7340324,
+      "method": "GetTask",
+      "id": "5383c421-8b13-443a-91c3-75ef75c5fecf",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159216.7341087,
+      "method": "GetTask",
+      "id": "37b7b387-ae94-4260-ac8f-5021cf5bf4a3",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159216.73939,
+      "method": "GetTask",
+      "id": "6c4433e0-a36a-4fd3-8c0d-87305a8f0726",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159217.7636566,
+      "method": "GetTask",
+      "id": "a99c0fd3-5f2b-412d-a01c-0ca730ed1e13",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159217.7679875,
+      "method": "GetTask",
+      "id": "4549dac1-e3ee-466c-ae29-21da96380dce",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159217.768044,
+      "method": "GetTask",
+      "id": "1f0677ad-e8d6-40b2-8f3b-e4937ce319a2",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159218.7942398,
+      "method": "GetTask",
+      "id": "e9a88746-1568-4991-8773-376df513d9b1",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159218.795636,
+      "method": "GetTask",
+      "id": "28452bd8-12bb-4dfc-a59c-27030ce97020",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159218.8020802,
+      "method": "GetTask",
+      "id": "64b57ecd-587b-4a03-b285-7b8770ec63b6",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159219.8237586,
+      "method": "GetTask",
+      "id": "c2eb34b6-96d1-494b-877c-c9527f9dda2a",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159219.8237932,
+      "method": "GetTask",
+      "id": "547f64d2-ee01-47aa-a28e-a19fc48a7755",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159219.8295903,
+      "method": "GetTask",
+      "id": "ae5e0623-d58c-41a6-bf68-c6aa6031020c",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159220.8577743,
+      "method": "GetTask",
+      "id": "1295de95-c455-440d-9640-ff4baf042e41",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159220.8611922,
+      "method": "GetTask",
+      "id": "ad7f4190-c60b-4299-9ee0-b4ca994be133",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159220.872129,
+      "method": "GetTask",
+      "id": "1d86f077-a0dc-4056-903f-1e9503181275",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159221.8919702,
+      "method": "GetTask",
+      "id": "f8472153-8f3f-409b-96b3-2311f018b6de",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159221.8995147,
+      "method": "GetTask",
+      "id": "a8eb0ed4-7887-40e9-ad00-ea4df10a61db",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159221.9074383,
+      "method": "GetTask",
+      "id": "1a986528-9043-49d3-b617-db58bc78ba5d",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159223.8791444,
+      "method": "GetTask",
+      "id": "8b3b6f1d-33f7-45fe-b8f4-70e6a385ff33",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159223.8854096,
+      "method": "GetTask",
+      "id": "7626511d-d1d9-475b-80ac-6df95534bdfd",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159223.8967695,
+      "method": "GetTask",
+      "id": "7837c614-1c38-4917-8d56-97d5f961e3d5",
+      "task_id": "14c56418-4229-498a-88f3-e7b4ec9f4dda",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159226.438709,
+      "method": "GetTask",
+      "id": "407eb734-7fb1-4896-a3c9-ea312bc473ed",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159226.4423864,
+      "method": "GetTask",
+      "id": "11af0db5-92ee-4f87-9ffe-9b9bbc6f8eed",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159227.4689386,
+      "method": "GetTask",
+      "id": "3b0f498a-bb3c-42fc-bada-1a4b93e5da3d",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159227.4689753,
+      "method": "GetTask",
+      "id": "3c0391b5-2c64-4895-8af5-0d0051a8296f",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159228.4940424,
+      "method": "GetTask",
+      "id": "846516b2-dd4f-4656-b536-c7970fde9b50",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159228.5001547,
+      "method": "GetTask",
+      "id": "18eea291-d5ed-4011-b715-8a312d45da82",
+      "task_id": "8bc803ee-4bb2-4108-99b8-9a8b20eb7a76",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159229.51934,
+      "method": "GetTask",
+      "id": "07baedaf-a414-48ca-b6b0-822ba2150263",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159230.5499732,
+      "method": "GetTask",
+      "id": "06caedaf-084c-416b-834f-9ef799d071cb",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159231.5741017,
+      "method": "GetTask",
+      "id": "648eefa3-b1d1-4106-aba0-a280662c1a1b",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159232.6081202,
+      "method": "GetTask",
+      "id": "23158c88-a5d3-4297-a52a-dbed74e29509",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159233.6376607,
+      "method": "GetTask",
+      "id": "7e065a54-4d09-4c77-a020-4916f7dee9c3",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159234.66292,
+      "method": "GetTask",
+      "id": "8e1941cc-2961-4b57-9501-d7f4810bf92d",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159235.693709,
+      "method": "GetTask",
+      "id": "d0b1910e-5a5a-43ce-89fa-32ed4383328a",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    },
+    {
+      "at": 1795159236.721548,
+      "method": "GetTask",
+      "id": "5ad50717-e166-4f2a-ae59-e162c3758972",
+      "task_id": "74602d24-7c1b-448f-913e-35f8a076fd98",
+      "status": 200,
+      "fault": "pass"
+    }
+  ],
+  "checks": {
+    "judge_running_when_injected": true,
+    "service_froze": true,
+    "adoption_reached_ledger": true,
+    "ledger_operation": [
+      "op-R2"
+    ],
+    "ledger_unchanged_by_restart": true,
+    "restored": true,
+    "blocked_after_restart": true,
+    "blocked_projection": {
+      "code": "RECONCILIATION_REQUIRED",
+      "cause": "LEDGER_SNAPSHOT_MISMATCH",
+      "disposition": "BLOCKED",
+      "source": "runs/R2/adopt.jsonl"
+    },
+    "decision_not_regenerated": true,
+    "resume_refused": true,
+    "not_leased_after_restart": true,
+    "disposition_recorded": true,
+    "kept_request_and_task": true,
+    "one_send_per_request": true,
+    "send_counts": {
+      "6afdaaa53bb4676d891d05ef": 1,
+      "6ba2e082cf51207087980f79": 1,
+      "1ab3963d89643d4d10bb55dc": 1,
+      "03eeb50ca86f8a8047ebbbb7": 1
+    }
+  },
+  "finished_at": 1795159411.726381
+}

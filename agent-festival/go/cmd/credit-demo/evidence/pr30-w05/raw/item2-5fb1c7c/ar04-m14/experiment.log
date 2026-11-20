@@ -1,0 +1,9 @@
+== 2026-11-20T15:32:21+08:00 start all phases
+m3 {"blocked": true, "reason_names_unresolvable_spec": true, "no_new_lease_after_upgrade": true, "no_model_request_after_upgrade": true, "no_new_remote_call": true}
+m1-local {"still_queued_for_a_matching_executor": true, "refusal_names_both_models": true, "refused_polls": 22, "never_leased": true, "no_remote_call": true, "no_model_request_started": true}
+m1-remote {"blocked": true, "reason_names_both_models": true, "no_model_event_recorded": true, "no_runtime_model_request": true, "no_request_for_model_b": true}
+m2 {"completed": true, "egress_requests": 19, "all_egress_on_model_a": true, "remote_events_record_model_a": true, "binding_model_a": true}
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/ar04-m14-1795159941.json
+== 2026-11-20T15:36:03+08:00 exit 0
+== 2026-11-20T15:36:04+08:00 logs exported to /home/xrq/m14-5fb1-diag/20261120T153603
+== 2026-11-20T15:36:05+08:00 m14 project stopped

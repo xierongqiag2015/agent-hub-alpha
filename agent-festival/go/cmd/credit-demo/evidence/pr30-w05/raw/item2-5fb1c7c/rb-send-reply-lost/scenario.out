@@ -1,0 +1,5 @@
+R1 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rb-send-reply-lost-1795158778.json
+checks: {"was_waiting": true, "receipt_lost_node": ["intake"], "remote_task_created_upstream": true, "no_resend_after_resume": true, "send_counts": {"1f3bf89c2578fbe7a970c10d": 1}, "still_unresolved_after_resume": true, "final_status": "waiting", "note": "without a remote task id the call stays UNKNOWN and is never resent; the upstream task is an orphan that needs manual reconciliation"}

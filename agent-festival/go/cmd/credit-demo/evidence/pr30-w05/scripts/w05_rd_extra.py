@@ -29,6 +29,20 @@ at the transport by its JSON-RPC id (= request_id).
   rb-resume-reply-lost
                send a resume and drop the connection before the reply; the
                resume is persisted and a repeated resume has no second effect.
+  rb-send-reply-lost-restart
+               rb-send-reply-lost, then restart the Go control service and the
+               orchestrator: request id and send count are kept across the
+               restart and the call is still never resent.
+  adopt-snapshot-fail
+               fail the state write while the local judge is running, so the
+               adoption reaches the ledger but not the snapshot; repair and
+               restart: the run is blocked with its reason, the ledger keeps the
+               original operation, no decision is regenerated, lease and resume
+               are refused, remote calls are not resent.
+  history-read-no-lease
+               finish a run, read it through every read entry (plugin API,
+               signed-in pages) from two clients and restart the services: no
+               lease, epoch, state revision or send changes.
 
 The script records what happened and evaluates checks; it does not stop at
 the first unexpected result, so a deviation is kept as evidence. Evidence
@@ -456,10 +470,211 @@ def rb_resume_reply_lost(evidence):
     }
 
 
+def state_rev():
+    state, _ = sb.request("/debug/state")
+    return state.get("rev")
+
+
+def restart_services(evidence, label):
+    evidence.setdefault("restarts", []).append({"label": label, "at": time.time()})
+    sb.docker("credit", "restart")
+    healthy = wait_healthy("credit")
+    sb.docker("orchestrator", "restart")
+    healthy = wait_healthy("orchestrator") and healthy
+    evidence["restarts"][-1].update(healthy=healthy, ready_at=time.time())
+    return healthy
+
+
+def data_file(path):
+    """Text of a file in the credit data volume, read through the container, or None."""
+    try:
+        return sb.docker("credit", "exec", "cat", path)
+    except Exception:
+        return None
+
+
+def rb_send_reply_lost_restart(evidence):
+    set_fault("drop-send-reply-once")
+    run_id, plan_id = sb.new_run("rb-send-restart")
+    evidence.update(run_id=run_id, plan_id=plan_id)
+    graph = sb.wait_run(run_id, evidence)
+    run = sb.read_run(run_id)
+    before = sb.call_snapshot(run)
+    evidence.update(status_before_restart=graph["run"]["status"], before_restart=before,
+                    epoch_before=run.get("epoch"), leases_before=len(run.get("leases", [])))
+    first_events = transport_sends({c["request_id"] for c in before.values()})[1]
+    evidence["forwarded_send"] = [e for e in first_events if e.get("forwarded")]
+    restart_services(evidence, "credit+orchestrator")
+    time.sleep(20)
+    run = sb.read_run(run_id)
+    mid = sb.call_snapshot(run)
+    evidence.update(status_after_restart=run["status"], after_restart=mid)
+    resume_once(run_id, evidence, "resume-after-restart")
+    graph = sb.wait_run(run_id, evidence, timeout=300)
+    run, after, sends = summarize(run_id, evidence)
+    lost = [k for k, c in before.items() if not c["remote_task_id"]]
+    forwarded = evidence["forwarded_send"]
+    evidence["checks"] = {
+        "was_waiting": evidence["status_before_restart"] == "waiting",
+        "receipt_lost_node": lost,
+        "remote_task_created_upstream": bool(forwarded) and bool(forwarded[0]["forwarded"].get("remote_task_id")),
+        "waiting_after_restart": evidence["status_after_restart"] == "waiting",
+        "request_kept_across_restart": kept_identity(before, mid, list(before)) and kept_identity(before, after, list(before)),
+        "no_resend": bool(sends) and all(n == 1 for n in sends.values()),
+        "send_counts": sends,
+        "still_unresolved": graph["run"]["status"] == "waiting" and bool(lost) and all(not after[k]["remote_task_id"] for k in lost),
+        "final_status": graph["run"]["status"],
+    }
+
+
+def adopt_snapshot_fail(evidence):
+    run_id, plan_id = sb.new_run("adopt-snapshot")
+    evidence.update(run_id=run_id, plan_id=plan_id)
+    ledger = f"/data/runs/{run_id}/adopt.jsonl"
+    deadline = time.monotonic() + 600
+    run = None
+    while time.monotonic() < deadline:
+        run = sb.read_run(run_id)
+        if run["steps"]["judge"]["status"] == "running" or run["status"] not in ("queued", "running"):
+            break
+        time.sleep(0.3)
+    evidence["judge_running_seen"] = bool(run) and run["steps"]["judge"]["status"] == "running"
+    before = sb.call_snapshot(run)
+    evidence.update(before_fault=before, steps_before={k: s["status"] for k, s in run["steps"].items()},
+                    epoch_before=run.get("epoch"), leases_before=len(run.get("leases", [])),
+                    ledger_before=data_file(ledger))
+    injected = restored = False
+    try:
+        evidence["injected_at"] = time.time()
+        sb.docker("credit", "exec", "python", "-c", "from pathlib import Path; p=Path('/data/state.json'); backup=p.with_suffix('.bus-test-backup'); assert not backup.exists(); p.rename(backup); p.mkdir()")
+        injected = True
+        frozen = None
+        for _ in range(240):
+            try:
+                sb.request("/healthz")
+            except urllib.error.HTTPError as exc:
+                if exc.code == 503:
+                    frozen = time.time()
+                    break
+            except ValueError:
+                pass
+            time.sleep(0.5)
+        evidence["frozen_at"] = frozen
+        time.sleep(2)
+        evidence["ledger_during_fault"] = data_file(ledger)
+    finally:
+        if injected:
+            evidence["restore_at"] = time.time()
+            sb.docker("credit", "exec", "python", "-c", "from pathlib import Path; p=Path('/data/state.json'); p.rmdir(); p.with_suffix('.bus-test-backup').rename(p)")
+            restored = True
+            restart_services(evidence, "credit+orchestrator after repair")
+    time.sleep(45)
+    run = sb.read_run(run_id)
+    graph, _ = sb.request(f"/api/graph?plan={plan_id}&v=1")
+    plans, _ = sb.request("/api/plans")
+    rows = plans if isinstance(plans, list) else plans.get("plans", [])
+    evidence.update(status_after_restart=run["status"], final_after_restart=(run.get("final_output") or "")[:300],
+                    graph_run_after=graph.get("run"), plan_row_after=[p for p in rows if p.get("run") == run_id],
+                    ledger_after=data_file(ledger), epoch_after=run.get("epoch"), leases_after=len(run.get("leases", [])),
+                    decision_after=run.get("decision"), judge_after=run["steps"]["judge"])
+    resume = api_resume(run_id)
+    evidence["resume_after_restart"] = resume
+    time.sleep(30)
+    run2 = sb.read_run(run_id)
+    evidence.update(status_after_resume_attempt=run2["status"], epoch_after_wait=run2.get("epoch"), leases_after_wait=len(run2.get("leases", [])))
+    files = sb.docker("credit", "exec", "sh", "-c", "ls /data").split()
+    evidence["data_files"] = files
+    evidence["dispositions"] = [json.loads(data_file("/data/" + f) or "{}") for f in files if f.startswith("disposition-")]
+    run, after, sends = summarize(run_id, evidence)
+    blocked = (graph.get("run") or {}).get("blocked") or {}
+    ledger_lines = [json.loads(line) for line in (evidence["ledger_during_fault"] or "").splitlines() if line.strip()]
+    adopted = [line for line in ledger_lines if (line.get("outcome") or {}).get("status") == "adopted"]
+    evidence["checks"] = {
+        "judge_running_when_injected": evidence["judge_running_seen"],
+        "service_froze": bool(evidence["frozen_at"]),
+        "adoption_reached_ledger": bool(adopted),
+        "ledger_operation": [(line.get("identity") or {}).get("operation_id") for line in adopted],
+        "ledger_unchanged_by_restart": evidence["ledger_during_fault"] is not None and evidence["ledger_during_fault"] == evidence["ledger_after"],
+        "restored": restored,
+        "blocked_after_restart": evidence["status_after_restart"] == "blocked",
+        "blocked_projection": {k: blocked.get(k) for k in ("code", "cause", "disposition", "source")},
+        "decision_not_regenerated": not evidence["decision_after"] and evidence["judge_after"].get("status") != "done",
+        "resume_refused": resume.get("http") not in (200, None),
+        "not_leased_after_restart": run2["status"] == "blocked" and evidence["leases_after_wait"] == evidence["leases_after"],
+        "disposition_recorded": any(r.get("run") == run_id and r.get("disposition") == "BLOCKED"
+                                    for d in evidence["dispositions"] for r in d.get("records", [])),
+        "kept_request_and_task": kept_identity(before, after, list(before)),
+        "one_send_per_request": bool(sends) and all(n == 1 for n in sends.values()),
+        "send_counts": sends,
+    }
+
+
+def history_read_no_lease(evidence):
+    run_id, plan_id = sb.new_run("history-read")
+    evidence.update(run_id=run_id, plan_id=plan_id)
+    graph = sb.wait_run(run_id, evidence, timeout=600)
+    time.sleep(5)
+    run = sb.read_run(run_id)
+    before = sb.call_snapshot(run)
+    sends_before = transport_sends({c["request_id"] for c in before.values()},
+                                   {c["remote_task_id"] for c in before.values() if c["remote_task_id"]})[0]
+
+    def snap(r):
+        return {"status": r["status"], "epoch": r.get("epoch"), "leases": len(r.get("leases", [])),
+                "final_output_len": len(r.get("final_output") or ""), "token_set": bool(r.get("token"))}
+
+    evidence.update(status_done=graph["run"]["status"], before_reads=snap(run), rev_before=state_rev(), sends_before=sends_before)
+    sessions = []
+    for _ in range(2):
+        cookies = http.cookiejar.CookieJar()
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookies))
+        try:
+            opener.open(sb.BASE + "/ui/login", urllib.parse.urlencode({"user": "alice", "password": PASSWORD, "next": "/ui/"}).encode(), timeout=10).close()
+        except urllib.error.HTTPError as exc:
+            if exc.code != 404:
+                raise
+        sessions.append(opener)
+    reads = []
+
+    def read_all(opener, n):
+        for path in (f"/api/graph?plan={plan_id}&v=1", "/api/plans", "/ui/", f"/ui/plan/{plan_id}/v1", f"/ui/run/{run_id}"):
+            try:
+                with opener.open(sb.BASE + path, timeout=10) as resp:
+                    reads.append({"client": n, "path": path.split("?")[0], "http": resp.status})
+            except urllib.error.HTTPError as exc:
+                reads.append({"client": n, "path": path.split("?")[0], "http": exc.code})
+
+    for _ in range(5):
+        threads = [threading.Thread(target=read_all, args=(o, i)) for i, o in enumerate(sessions)]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+    evidence["reads"] = {"count": len(reads), "statuses": sorted({(r["path"], r["http"]) for r in reads})}
+    run = sb.read_run(run_id)
+    evidence.update(after_reads=snap(run), rev_after_reads=state_rev())
+    restart_services(evidence, "credit+orchestrator")
+    time.sleep(45)
+    run = sb.read_run(run_id)
+    evidence.update(after_restart=snap(run), rev_after_restart=state_rev())
+    run, after, sends = summarize(run_id, evidence)
+    evidence["checks"] = {
+        "done_before_reads": evidence["status_done"] == "done",
+        "reads": evidence["reads"]["count"],
+        "unchanged_by_reads": evidence["before_reads"] == evidence["after_reads"] and evidence["rev_before"] == evidence["rev_after_reads"],
+        "unchanged_by_restart": evidence["before_reads"] == evidence["after_restart"],
+        "rev_before_reads_and_after_restart": [evidence["rev_before"], evidence["rev_after_restart"]],
+        "no_new_send": sends == sends_before,
+        "send_counts": sends,
+        "kept_request_and_task": kept_identity(before, after, list(before)),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("scenario", choices=["go-kill", "two-clients", "storage-failure-traced", "ra-completed-then-unknown", "ra-unknown-at-report",
-                                             "rc-resume-storage-failure", "rb-send-reply-lost", "rb-resume-reply-lost"])
+                                             "rc-resume-storage-failure", "rb-send-reply-lost", "rb-resume-reply-lost",
+                                             "rb-send-reply-lost-restart", "adopt-snapshot-fail", "history-read-no-lease"])
     parser.add_argument("--resume", choices=["api", "external"], default="api",
                         help="api: resume through /api/resume (the plugin's endpoint); external: wait for an operator in the plugin")
     args = parser.parse_args()
@@ -474,7 +689,9 @@ def main():
         {"go-kill": go_kill, "two-clients": two_clients, "storage-failure-traced": storage_failure_traced,
          "ra-completed-then-unknown": ra_completed_then_unknown,
          "ra-unknown-at-report": lambda ev: ra_completed_then_unknown(ev, at_report=True), "rc-resume-storage-failure": rc_resume_storage_failure,
-         "rb-send-reply-lost": rb_send_reply_lost, "rb-resume-reply-lost": rb_resume_reply_lost}[args.scenario](evidence)
+         "rb-send-reply-lost": rb_send_reply_lost, "rb-resume-reply-lost": rb_resume_reply_lost,
+         "rb-send-reply-lost-restart": rb_send_reply_lost_restart, "adopt-snapshot-fail": adopt_snapshot_fail,
+         "history-read-no-lease": history_read_no_lease}[args.scenario](evidence)
     finally:
         evidence["finished_at"] = time.time()
         target.write_text(json.dumps(sb.redact(evidence), ensure_ascii=False, indent=2) + "\n")
