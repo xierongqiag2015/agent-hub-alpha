@@ -1,0 +1,40 @@
+17:08:35.155 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Starting AgentCore Runner
+17:08:35.262 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 started
+17:08:35.444 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=system
+17:08:35.444 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=user
+17:08:35.456 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_started agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f model_name=deepseek-v4-1-flash-260910 streaming=false message_count=2 tool_count=3
+17:08:35.464 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before request chat model, LLM request params ready. {client_name=OpenAI client, model_name=deepseek-v4-1-flash-260910, model_provider=OpenAI, temperature=0.95, top_p=0.1, max_tokens=null, is_stream=false, extra_params={}, stop=null}
+17:08:35.465 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before create openai client, model client config params ready. {stream_idle_seconds=600.0, connect_timeout_seconds=10.0, max_retries=2, header_wait_seconds=600.0}
+17:09:07.340 [ForkJoinPool.commonPool-worker-1] INFO llm -- OpenAI API response received. {response=[redacted]}
+17:09:07.341 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_response agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f content_length=0 reasoning_length=15479 tool_call_count=3 usage_present=true finish_reason=tool_calls
+17:09:07.341 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_completed agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f streaming=false status=success model_duration_ms=29175.83 prompt_tokens=5728 completion_tokens=5447 total_tokens=11175
+17:09:07.342 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM] <<< response: role=assistant
+17:09:07.342 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM]   tool_call: eval_expression
+17:09:07.342 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM]   tool_call: eval_expression
+17:09:07.342 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM]   tool_call: eval_expression
+17:09:07.350 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f tool_call_id=call_00_3m5tzpuxldbfwy0ixjywr2uw tool_name=eval_expression
+17:09:07.350 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:09:07.353 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f tool_call_id=call_01_q788gdeaqfb7na9ceyu75be9 tool_name=eval_expression
+17:09:07.353 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:09:07.353 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f tool_call_id=call_02_zrmny55fdxpbf56joo0vxerl tool_name=eval_expression
+17:09:07.353 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:09:07.376 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f tool_call_id=call_00_3m5tzpuxldbfwy0ixjywr2uw tool_name=eval_expression outcome=success duration_ms=31.12
+17:09:07.376 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f tool_call_id=call_01_q788gdeaqfb7na9ceyu75be9 tool_name=eval_expression outcome=success duration_ms=23.42
+17:09:07.376 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f tool_call_id=call_02_zrmny55fdxpbf56joo0vxerl tool_name=eval_expression outcome=success duration_ms=23.17
+17:09:07.387 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 ended
+17:09:07.387 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 2/4 started
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=system
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=user
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=assistant
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_started agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f model_name=deepseek-v4-1-flash-260910 streaming=false message_count=6 tool_count=3
+17:09:07.388 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before request chat model, LLM request params ready. {client_name=OpenAI client, model_name=deepseek-v4-1-flash-260910, model_provider=OpenAI, temperature=0.95, top_p=0.1, max_tokens=null, is_stream=false, extra_params={}, stop=null}
+17:09:07.389 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before create openai client, model client config params ready. {stream_idle_seconds=600.0, connect_timeout_seconds=10.0, max_retries=2, header_wait_seconds=600.0}
+17:09:16.799 [ForkJoinPool.commonPool-worker-1] INFO llm -- OpenAI API response received. {response=[redacted]}
+17:09:16.799 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_response agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f content_length=6654 reasoning_length=23 tool_call_count=0 usage_present=true finish_reason=stop
+17:09:16.799 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_completed agent_id=report-writer session_id=probe-a0d8c1b3-691a-48a3-a1d9-55cefc687b5f streaming=false status=success model_duration_ms=10825.11 prompt_tokens=11238 completion_tokens=2728 total_tokens=13966
+17:09:16.799 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM] <<< response: role=assistant
+17:09:16.802 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 2/4 ended
+17:09:16.830 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Stopping AgentCore Runner

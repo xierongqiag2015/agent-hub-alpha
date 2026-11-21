@@ -1,0 +1,65 @@
+{
+ "extract/baseline": {
+  "seconds": 12.7,
+  "platform_parse": "accepted",
+  "error": null,
+  "contract": {
+   "missing_keys": [],
+   "indicators": "ok"
+  }
+ },
+ "extract/w06": {
+  "seconds": 8.8,
+  "platform_parse": "rejected: Expert output must be one complete JSON object",
+  "error": null,
+  "raw_head": "[{\"key\":\"OPERATING_REVENUE\",\"value\":\"337,532\",\"unit\":\"人民币百万元\",\"period\":\"2025年\",\"source_document_digest\":\"sha256:52c49dcdc00d4f5436adabc6561044d7a539e9bb0a8ebbdb692a1da6237459da\",\"page\":14,\"evidence_ex"
+ },
+ "business/baseline": {
+  "seconds": 29.7,
+  "platform_parse": "accepted",
+  "error": null,
+  "contract": {
+   "missing_keys": [],
+   "section_id": "operating",
+   "indicators": "ok",
+   "findings_shape": true
+  }
+ },
+ "business/w06": {
+  "seconds": 24.5,
+  "platform_parse": "rejected: Unexpected character ('#' (code 35)): expected a valid value (JSON String, Number, Array, Object or token 'null', 'true' or 'false')\n at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 1]",
+  "error": null,
+  "raw_head": "## 经营分析\n\n以下为本集团（招商银行股份有限公司，人民币百万元）2025年对比2024年的四项经营指标表现，数值均取自同一报告的两期对比列。\n\n**营业收入**：2025年为 337,532 百万元，2024年为 337,488 百万元 [C-1]。基于 [C-1] 计算同比变动：(337,532 − 337,488) / 337,488 × 100% = 0.01%，即收入端同比基本持平、微"
+ },
+ "write/baseline": {
+  "seconds": 21.5,
+  "platform_parse": "accepted",
+  "error": null,
+  "contract": {
+   "missing_keys": [],
+   "indicators": "ok",
+   "section_ids": [
+    "asset_quality",
+    "operating",
+    "risks"
+   ],
+   "sections_ok": true
+  }
+ },
+ "write/w06": {
+  "seconds": 40.4,
+  "platform_parse": "accepted",
+  "error": null,
+  "contract": {
+   "missing_keys": [
+    "snapshot",
+    "scope",
+    "indicators",
+    "limitations"
+   ],
+   "indicators": "indicators not a list",
+   "section_ids": [],
+   "sections_ok": false
+  }
+ }
+}

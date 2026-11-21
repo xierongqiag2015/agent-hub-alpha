@@ -1,0 +1,14 @@
+17:08:08.830 [main] INFO common -- Virtual threads supported: java version=21, reflection-based virtual thread factory resolved
+17:08:08.921 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Starting AgentCore Runner
+17:08:09.044 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 started
+17:08:09.226 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=system
+17:08:09.226 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=user
+17:08:09.238 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_started agent_id=report-writer session_id=probe-27cd58a5-b069-4f78-9bf2-82a9caaf7c1e model_name=deepseek-v4-1-flash-260910 streaming=false message_count=2 tool_count=0
+17:08:09.244 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before request chat model, LLM request params ready. {client_name=OpenAI client, model_name=deepseek-v4-1-flash-260910, model_provider=OpenAI, temperature=0.1, top_p=0.1, max_tokens=12000, is_stream=false, extra_params={}, stop=null}
+17:08:09.244 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before create openai client, model client config params ready. {max_retries=2, connect_timeout_seconds=10.0, stream_idle_seconds=600.0, header_wait_seconds=600.0}
+17:08:33.210 [ForkJoinPool.commonPool-worker-1] INFO llm -- OpenAI API response received. {response=[redacted]}
+17:08:33.211 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_response agent_id=report-writer session_id=probe-27cd58a5-b069-4f78-9bf2-82a9caaf7c1e content_length=2745 reasoning_length=8661 tool_call_count=0 usage_present=true finish_reason=stop
+17:08:33.211 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_completed agent_id=report-writer session_id=probe-27cd58a5-b069-4f78-9bf2-82a9caaf7c1e streaming=false status=success model_duration_ms=21209.75 prompt_tokens=5691 completion_tokens=3543 total_tokens=9234
+17:08:33.212 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM] <<< response: role=assistant
+17:08:33.214 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 ended
+17:08:33.238 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Stopping AgentCore Runner

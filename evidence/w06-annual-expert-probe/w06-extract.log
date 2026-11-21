@@ -1,0 +1,18 @@
+17:06:54.120 [main] INFO common -- Virtual threads supported: java version=21, reflection-based virtual thread factory resolved
+17:06:54.222 [main] INFO com.openjiuwen.core.runner.resourcemanager.TagManager -- Added tags to resource. resource_id=eval_expression, added_tags=[report-extractor], current_tags=[report-extractor]
+17:06:54.224 [main] INFO com.openjiuwen.core.runner.resourcemanager.TagManager -- Added tags to resource. resource_id=yoy_calc, added_tags=[report-extractor], current_tags=[report-extractor]
+17:06:54.225 [main] INFO com.openjiuwen.core.runner.resourcemanager.TagManager -- Added tags to resource. resource_id=ask_user, added_tags=[report-extractor], current_tags=[report-extractor]
+17:06:54.266 [main] INFO com.openjiuwen.core.runner.callback.AsyncCallbackFramework -- Registered callback: report-extractor_AgentCallbackEvent.BEFORE_TOOL_CALL -> com.openjiuwen.core.singleagent.AgentCallbackManager$ReflectionRunnerCallbackFramework$$Lambda/0x00007963ec111cb0@47caedad
+17:06:54.269 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Starting AgentCore Runner
+17:06:54.390 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 started
+17:06:54.588 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=system
+17:06:54.588 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=user
+17:06:54.599 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_started agent_id=report-extractor session_id=probe-aa4de9dc-c5b9-4801-a7c3-a78fc758fe4f model_name=deepseek-v4-1-flash-260910 streaming=false message_count=2 tool_count=3
+17:06:54.608 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before request chat model, LLM request params ready. {client_name=OpenAI client, model_name=deepseek-v4-1-flash-260910, model_provider=OpenAI, temperature=0.95, top_p=0.1, max_tokens=null, is_stream=false, extra_params={}, stop=null}
+17:06:54.608 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before create openai client, model client config params ready. {header_wait_seconds=600.0, max_retries=2, connect_timeout_seconds=10.0, stream_idle_seconds=600.0}
+17:07:03.095 [ForkJoinPool.commonPool-worker-1] INFO llm -- OpenAI API response received. {response=[redacted]}
+17:07:03.097 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_response agent_id=report-extractor session_id=probe-aa4de9dc-c5b9-4801-a7c3-a78fc758fe4f content_length=2292 reasoning_length=1935 tool_call_count=0 usage_present=true finish_reason=stop
+17:07:03.097 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_completed agent_id=report-extractor session_id=probe-aa4de9dc-c5b9-4801-a7c3-a78fc758fe4f streaming=false status=success model_duration_ms=8498.06 prompt_tokens=4070 completion_tokens=1766 total_tokens=5836
+17:07:03.097 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM] <<< response: role=assistant
+17:07:03.099 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 ended
+17:07:03.121 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Stopping AgentCore Runner

@@ -1,0 +1,40 @@
+17:07:48.875 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM]   tool_call: eval_expression
+17:07:48.875 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM]   tool_call: eval_expression
+17:07:48.888 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_00_evg458l4o5mnnx46dwvzpfsg tool_name=yoy_calc
+17:07:48.888 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: yoy_calc
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_01_1nmgidb5p372dpgz5wvsbeno tool_name=yoy_calc
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: yoy_calc
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_02_zhwkwzokawhfo0arg10g4wst tool_name=eval_expression
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_03_mucpy6pdk5vddd01p7nepdqw tool_name=eval_expression
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_04_x9fun3c5pnfg6rhpmfc8fjzr tool_name=eval_expression
+17:07:48.891 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:07:48.892 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_05_49hq2pilzub34nqjfd5w7t3e tool_name=eval_expression
+17:07:48.892 [ForkJoinPool.commonPool-worker-1] INFO tool -- Executing tool: eval_expression
+17:07:48.922 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_00_evg458l4o5mnnx46dwvzpfsg tool_name=yoy_calc outcome=success duration_ms=42.67
+17:07:48.922 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_01_1nmgidb5p372dpgz5wvsbeno tool_name=yoy_calc outcome=success duration_ms=31.4
+17:07:48.922 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_02_zhwkwzokawhfo0arg10g4wst tool_name=eval_expression outcome=success duration_ms=31.31
+17:07:48.923 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_03_mucpy6pdk5vddd01p7nepdqw tool_name=eval_expression outcome=success duration_ms=31.3
+17:07:48.923 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_04_x9fun3c5pnfg6rhpmfc8fjzr tool_name=eval_expression outcome=success duration_ms=31.39
+17:07:48.923 [ForkJoinPool.commonPool-worker-1] INFO tool -- event=react_tool_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 tool_call_id=call_05_49hq2pilzub34nqjfd5w7t3e tool_name=eval_expression outcome=success duration_ms=31.48
+17:07:48.937 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 1/4 ended
+17:07:48.937 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 2/4 started
+17:07:48.938 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=system
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=user
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=assistant
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO agent -- logLlmMessage role=tool
+17:07:48.939 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_started agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 model_name=deepseek-v4-1-flash-260910 streaming=false message_count=9 tool_count=3
+17:07:48.940 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before request chat model, LLM request params ready. {client_name=OpenAI client, model_name=deepseek-v4-1-flash-260910, model_provider=OpenAI, temperature=0.95, top_p=0.1, max_tokens=null, is_stream=false, extra_params={}, stop=null}
+17:07:48.940 [ForkJoinPool.commonPool-worker-1] INFO llm -- Before create openai client, model client config params ready. {header_wait_seconds=600.0, max_retries=2, connect_timeout_seconds=10.0, stream_idle_seconds=600.0}
+17:08:06.913 [ForkJoinPool.commonPool-worker-1] INFO llm -- OpenAI API response received. {response=[redacted]}
+17:08:06.914 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_response agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 content_length=1743 reasoning_length=6178 tool_call_count=0 usage_present=true finish_reason=stop
+17:08:06.914 [ForkJoinPool.commonPool-worker-1] INFO llm -- event=react_model_call_completed agent_id=business-analyst session_id=probe-090dfc01-513d-40fa-a650-c79585cb8e81 streaming=false status=success model_duration_ms=17974.35 prompt_tokens=3902 completion_tokens=3086 total_tokens=6988
+17:08:06.914 [ForkJoinPool.commonPool-worker-1] INFO agent -- [LLM] <<< response: role=assistant
+17:08:06.920 [ForkJoinPool.commonPool-worker-1] INFO agent -- ReAct iteration 2/4 ended
+17:08:06.944 [main] INFO com.openjiuwen.service.adapters.agentcore.agentfw.JiuwenCoreAgentHandler -- Stopping AgentCore Runner
