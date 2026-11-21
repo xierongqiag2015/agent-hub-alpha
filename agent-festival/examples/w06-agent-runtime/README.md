@@ -39,6 +39,7 @@ python3 ops/w06_snapshot.py ~/w06-bus/snapshot     # 由已核验的招行第 14
 python3 ops/w06_services.py start                  # 五个实例，127.0.0.1:18111—18115，模型取环境配置
 python3 ops/w06_bus_register.py register           # RDC 登记；新建角色 w06-bus-trial 追加给执行身份，原角色不动
 python3 ops/w06_bus_register.py heartbeat &        # 每 8 秒心跳，404 时重新登记
+python3 ops/w06_services.py ensure                 # 重启后：只拉起没在运行的实例和心跳（按 PID + boot_id + 启动 tick 判断）
 python3 ops/w06_bus_call.py                        # 经 Gateway 以执行身份调用：资料→指标→经营∥资产质量→写作
 python3 ops/w06_check_run.py <calls.json> <起> <止> # 核对原样转抄、对照 W01、Gateway 审计计数、RDC 实例与进程身份
 ```

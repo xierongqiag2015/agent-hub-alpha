@@ -1,5 +1,5 @@
 """Start (or stop) the five W06 role agents as detached native processes in WSL.
-Usage: w06_services.py start|stop|status. State in ~/w06-bus/services.json; logs in ~/w06-bus/logs/.
+Usage: w06_services.py start|stop|status|ensure (ensure: start what is not running, plus the heartbeat). State in ~/w06-bus/services.json; logs in ~/w06-bus/logs/.
 Model key/base are read from the private secrets file into the child environment only."""
 import json
 import os
@@ -43,14 +43,17 @@ def card(port):
     return None, None
 
 
-def start():
+def start(only=None):
     HOME.mkdir(exist_ok=True)
     (HOME / "logs").mkdir(exist_ok=True)
     jar = HOME / "w06-agent-runtime.jar"
-    shutil.copy(JAR_SRC, jar)
+    if only is None or not jar.exists():
+        shutil.copy(JAR_SRC, jar)
     s = secrets()
-    state = {}
+    state = json.loads(STATE.read_text()) if only is not None and STATE.exists() else {}
     for role, port in ROLES.items():
+        if only is not None and role not in only:
+            continue
         sid = "w06-" + role
         env = {k: v for k, v in os.environ.items() if k.lower() not in ("http_proxy", "https_proxy", "all_proxy")}
         env.update(AGENT_SERVICE_ID=sid, W06_ROLE=role, SERVER_PORT=str(port), SERVER_ADDRESS="127.0.0.1",
@@ -63,7 +66,7 @@ def start():
         print(json.dumps({"started": sid, "pid": p.pid, "port": port}), flush=True)
     STATE.write_text(json.dumps(state, indent=2))
     deadline = time.monotonic() + 150
-    pending = dict(state)
+    pending = {sid: rec for sid, rec in state.items() if only is None or rec["role"] in only}
     while pending and time.monotonic() < deadline:
         for sid, rec in list(pending.items()):
             path, c = card(rec["port"])
@@ -101,4 +104,24 @@ def status():
         print(json.dumps({"service": sid, "pid": rec["pid"], "owned_and_running": owned(rec), "card": bool(c)}))
 
 
-{"start": start, "stop": stop, "status": status}[sys.argv[1]]()
+def ensure():
+    """Start only the role agents that are not running (by recorded pid + boot id + start tick),
+    then make sure the RDC heartbeat loop is running."""
+    state = json.loads(STATE.read_text()) if STATE.exists() else {}
+    missing = [role for role in ROLES if not (("w06-" + role) in state and owned(state["w06-" + role]))]
+    if missing:
+        start(missing)
+    else:
+        print(json.dumps({"w06_agents": "all running"}))
+    hb = HOME / "heartbeat.json"
+    if hb.exists() and owned(json.loads(hb.read_text())):
+        print(json.dumps({"heartbeat": "running"}))
+        return
+    p = subprocess.Popen(["python3", str(Path(__file__).with_name("w06_bus_register.py")), "heartbeat"], cwd=str(HOME),
+                         stdout=open(HOME / "logs" / "heartbeat.log", "ab"), stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL,
+                         start_new_session=True)
+    hb.write_text(json.dumps({"pid": p.pid, **identity(p.pid)}))
+    print(json.dumps({"heartbeat": "started", "pid": p.pid}))
+
+
+{"start": start, "stop": stop, "status": status, "ensure": ensure}[sys.argv[1]]()
