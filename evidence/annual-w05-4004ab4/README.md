@@ -1,6 +1,6 @@
 # W05 年报链单侧记录：`4004ab4`（2026-11-20）
 
-W05（xierongqiag2015）在自己的接收环境中，把 W03/W04 的 D2 修复交接点 `4004ab4` 从真实对话跑到“待验收”。这是单侧记录，不代替 D2 联合验收、W06 业务验收或 W07 独立复核。
+W05（xierongqiag2015）在自己的接收环境中，把 W03/W04 的 D2 修复交接点 `4004ab4` 从真实对话跑到**正式交付**（11-21 由用户批准、交付、下载）。这是单侧记录，不代替 D2 联合验收、W06 业务验收或 W07 独立复核。
 
 ## 接收对象与版本
 
@@ -32,6 +32,12 @@ W05（xierongqiag2015）在自己的接收环境中，把 W03/W04 的 D2 修复�
 | 14:09:01.3 → 14:09:35.5 | draft0 → report-writer | 系统 / Bus |
 | 14:09:35.593 | check0 = PASS，failures 为空；revise1、check1 按图授权跳过；select_report 选中 draft0 | 系统 |
 | 14:09:35.648 | COMPLETION_CHECKED → AWAITING_ACCEPTANCE | 系统 |
+
+| 11-21 16:53:13 | REPORT_APPROVED：`approval-04f93ecfe5c93c7b6216446faeb8b843`，报告 `dd786aba…320d` | **用户 xierongqiag2015**（编排台，演示账号） |
+| 11-21 16:53:32 | REPORT_DELIVERED：回执 `delivery-receipt-d32695c79eacfa1cb3b8e049e7331361`，delivery `0eb9c269-…`，artifact_digest `sha256:dd786aba…320d` | **用户 xierongqiag2015** |
+| 11-21 16:53 | 下载正式 JSON：4,076 字节，sha256 `dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d`，与报告摘要和交付回执一致 | **用户 xierongqiag2015** |
+
+验收后 `/verify`：`status=DELIVERED`、`evidence_intact=true`、`issues=[]`、`remote_calls=4`、`formal_nodes=6`、审计事件 361 条。从 11-21 11:20 服务重启到验收完成，Gateway 审计为 0 行：批准、交付、下载都不经 Bus，没有任何重发（`raw/T-824c5bf9/task-after-delivery.json`、`verify-after-delivery.json`、`events-acceptance.json`、`download-check.json`；截图 `shots/8-plugin-delivered-1655.png`）。
 
 **选择记录 → 获准 Graph → Bus 服务 → 正式结果**
 
@@ -80,7 +86,6 @@ W05（xierongqiag2015）在自己的接收环境中，把 W03/W04 的 D2 修复�
 
 ## 未覆盖
 
-- **批准、交付、下载**：任务停在 AWAITING_ACCEPTANCE，由用户在编排台操作，本记录生成时还没进行。
 - **D2 要求的同一条真实 HUMAN 任务**：本任务没有触发 HUMAN。
 - **W06**：专家是 W03/W04 提供的 `experts-java`，基于 openJiuwen Runtime/Core，真实调用模型；W06 的实现（PR #36）没有接入。
 - **界面问题**（只记现象）：

@@ -1,0 +1,9 @@
+{
+  "file": "T-824c5bf97f244563f9cd9e2a4579302e-annual-report.json",
+  "bytes": 4076,
+  "sha256": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+  "report_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+  "delivery_receipt_artifact_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+  "match": true,
+  "operator": "xierongqiag2015 (plugin, demo account) — approve 16:53:13, deliver 16:53:32, download 16:53 UTC+8"
+}

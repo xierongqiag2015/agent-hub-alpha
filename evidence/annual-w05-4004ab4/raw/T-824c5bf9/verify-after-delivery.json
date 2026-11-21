@@ -1,0 +1,14 @@
+{
+  "audit_events": 361,
+  "authorized_skips": 2,
+  "claim": "artifact integrity and recorded formal facts; not independent business acceptance",
+  "evidence_intact": true,
+  "formal_nodes": 6,
+  "generation": "361",
+  "issues": [],
+  "observations": 290,
+  "read_only": true,
+  "remote_calls": 4,
+  "status": "DELIVERED",
+  "task_id": "T-824c5bf97f244563f9cd9e2a4579302e"
+}

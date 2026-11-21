@@ -1,0 +1,31 @@
+[
+ {
+  "at": "2026-11-21T16:53:13.054992+08:00",
+  "document": {
+   "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+   "approval_id": "approval-04f93ecfe5c93c7b6216446faeb8b843",
+   "artifact_id": "dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+   "artifact_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d"
+  },
+  "event_id": "event-751a268d334d8087b8d7c3286e296724",
+  "kind": "REPORT_APPROVED",
+  "sequence": "16146"
+ },
+ {
+  "at": "2026-11-21T16:53:32.532371+08:00",
+  "document": {
+   "epoch": "1",
+   "status": "DELIVERED",
+   "task_id": "T-824c5bf97f244563f9cd9e2a4579302e",
+   "renderer": "structured-json/1",
+   "receipt_id": "delivery-receipt-d32695c79eacfa1cb3b8e049e7331361",
+   "artifact_id": "dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d",
+   "delivery_id": "0eb9c269-f889-46f6-918f-b66861b0524a",
+   "recorded_at": "2026-11-21T08:53:32.52889369Z",
+   "artifact_digest": "sha256:dd786aba46e6bfd932da9c753e70161b083c1adc4e8284efa062ffb113c0320d"
+  },
+  "event_id": "event-2cfce39511195268ffba821616fcb4b0",
+  "kind": "REPORT_DELIVERED",
+  "sequence": "16147"
+ }
+]
