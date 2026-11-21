@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-parent</artifactId><version>4.0.7</version><relativePath/></parent>
+  <groupId>com.openjiuwen.demo</groupId><artifactId>w06-annual-expert</artifactId><version>0.1.0</version>
+  <description>W05: the W03/W04 annual expert platform layer (4004ab4, reused unchanged) with W06 (PR #36) business agents behind it.</description>
+  <properties><java.version>21</java.version><w06.version>0.1.0-SNAPSHOT</w06.version></properties>
+  <!-- Same Runtime / extension versions as W03/W04 experts-java (4004ab4). -->
+  <dependencyManagement><dependencies><dependency><groupId>com.openjiuwen</groupId><artifactId>agent-runtime-java</artifactId><version>0.1.4</version><type>pom</type><scope>import</scope></dependency></dependencies></dependencyManagement>
+  <dependencies>
+    <dependency><groupId>com.openjiuwen</groupId><artifactId>agent-service-app</artifactId><version>0.1.4</version></dependency>
+    <dependency><groupId>com.openjiuwen</groupId><artifactId>agent-service-adapters-agentcore</artifactId><version>0.1.4</version></dependency>
+    <dependency><groupId>com.openjiuwen</groupId><artifactId>agent-core-ext-react-rails</artifactId><version>0.1.3</version></dependency>
+    <dependency><groupId>com.openjiuwen</groupId><artifactId>agent-core-ext-orchestration</artifactId><version>0.1.3</version></dependency>
+    <!-- W06 library layer, built from PR #36 with adapt-w06.sh (../w06-agent-runtime) -->
+    <dependency><groupId>com.agenthub.w06</groupId><artifactId>agents</artifactId><version>${w06.version}</version></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-webmvc</artifactId></dependency>
+  </dependencies>
+  <build><finalName>w06-annual-expert</finalName><plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId>
+    <configuration><mainClass>com.openjiuwen.demo.expert.W06ExpertApplication</mainClass></configuration></plugin></plugins></build>
+</project>
