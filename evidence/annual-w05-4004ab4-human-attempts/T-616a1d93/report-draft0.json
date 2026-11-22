@@ -1,0 +1,211 @@
+{
+  "snapshot": "cmb-2025-annual-report-a",
+  "scope": {
+    "entity": "招商银行股份有限公司",
+    "basis": "本集团",
+    "currency_unit": "人民币百万元",
+    "period": "2025",
+    "compare_period": "2024"
+  },
+  "indicators": [
+    {
+      "id": "revenue",
+      "values": {
+        "2025": 337532,
+        "2024": 337488
+      },
+      "unit": "人民币百万元",
+      "change": {
+        "kind": "pct",
+        "value": 0.01
+      },
+      "citation": {
+        "pdf_page": 14,
+        "printed_page": 13,
+        "quote": "营业收入 337,532 337,488 0.01 339,123"
+      }
+    },
+    {
+      "id": "net_profit_attributable",
+      "values": {
+        "2025": 150181,
+        "2024": 148391
+      },
+      "unit": "人民币百万元",
+      "change": {
+        "kind": "pct",
+        "value": 1.21
+      },
+      "citation": {
+        "pdf_page": 14,
+        "printed_page": 13,
+        "quote": "归属于本行股东的净利润 150,181 148,391 1.21 146,602"
+      }
+    },
+    {
+      "id": "net_interest_margin",
+      "values": {
+        "2025": 1.87,
+        "2024": 1.98
+      },
+      "unit": "%",
+      "change": {
+        "kind": "pp",
+        "value": -0.11
+      },
+      "citation": {
+        "pdf_page": 16,
+        "printed_page": 15,
+        "quote": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15"
+      }
+    },
+    {
+      "id": "cost_to_income",
+      "values": {
+        "2025": 31.98,
+        "2024": 31.89
+      },
+      "unit": "%",
+      "change": {
+        "kind": "pp",
+        "value": 0.09
+      },
+      "citation": {
+        "pdf_page": 16,
+        "printed_page": 15,
+        "quote": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96"
+      }
+    },
+    {
+      "id": "npl_balance",
+      "values": {
+        "2025": 68206,
+        "2024": 65610
+      },
+      "unit": "人民币百万元",
+      "change": {
+        "kind": "pct",
+        "value": 3.96
+      },
+      "citation": {
+        "pdf_page": 15,
+        "printed_page": 14,
+        "quote": "不良贷款 68,206 65,610 3.96 61,579"
+      }
+    },
+    {
+      "id": "npl_ratio",
+      "values": {
+        "2025": 0.94,
+        "2024": 0.95
+      },
+      "unit": "%",
+      "change": {
+        "kind": "pp",
+        "value": -0.01
+      },
+      "citation": {
+        "pdf_page": 16,
+        "printed_page": 15,
+        "quote": "不良贷款率 0.94 0.95 下降0.01个百分点 0.95"
+      }
+    },
+    {
+      "id": "provision_coverage",
+      "values": {
+        "2025": 391.79,
+        "2024": 411.98
+      },
+      "unit": "%",
+      "change": {
+        "kind": "pp",
+        "value": -20.19
+      },
+      "citation": {
+        "pdf_page": 16,
+        "printed_page": 15,
+        "quote": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70"
+      }
+    },
+    {
+      "id": "cet1_ratio_advanced",
+      "values": {
+        "2025": 14.16,
+        "2024": 14.86
+      },
+      "unit": "%",
+      "change": {
+        "kind": "pp",
+        "value": -0.7
+      },
+      "citation": {
+        "pdf_page": 16,
+        "printed_page": 15,
+        "quote": "核心一级资本充足率 14.16 14.86 下降0.70个百分点 13.73"
+      }
+    }
+  ],
+  "sections": [
+    {
+      "id": "operating",
+      "findings": [
+        {
+          "text": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15",
+          "evidence": [
+            {
+              "pdf_page": 16,
+              "printed_page": 15,
+              "quote": "净利息收益率(2) 1.87 1.98 下降0.11个百分点 2.15"
+            }
+          ]
+        },
+        {
+          "text": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96",
+          "evidence": [
+            {
+              "pdf_page": 16,
+              "printed_page": 15,
+              "quote": "成本收入比(3) 31.98 31.89 上升0.09个百分点 32.96"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asset_quality",
+      "findings": [
+        {
+          "text": "不良贷款 68,206 65,610 3.96 61,579",
+          "evidence": [
+            {
+              "pdf_page": 15,
+              "printed_page": 14,
+              "quote": "不良贷款 68,206 65,610 3.96 61,579"
+            }
+          ]
+        },
+        {
+          "text": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70",
+          "evidence": [
+            {
+              "pdf_page": 16,
+              "printed_page": 15,
+              "quote": "拨备覆盖率(1) 391.79 411.98 下降20.19个百分点 437.70"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "risks",
+      "findings": []
+    }
+  ],
+  "limitations": [
+    "仅使用固定快照 cmb-2025-annual-report-a 及其上游 citation；未联网、未引入外部数据或 2023 年列。",
+    "净息差收窄、归母净利润与营收增速差异、拨备覆盖率下降的风险含义及驱动因素属上游推断，未证明，需人工核验。",
+    "cet1_ratio_advanced 为高级法口径；同页权重法核心一级资本充足率 11.92% 未使用，口径差异需人工核验。",
+    "不良余额上升与不良率下降并存、未来信用成本及资本充足率变动原因属开放解释，未作为已证明 finding。",
+    "本稿为初稿，风险部分无独立证据，未声称程序检查通过、报告批准或完整双主题验收。"
+  ]
+}

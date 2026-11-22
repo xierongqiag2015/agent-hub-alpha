@@ -1,0 +1,149 @@
+{
+  "bus_binding": {
+    "environment_id": "report-demo-781255125734a3f6cd169a8a928098b4",
+    "tenant": "demo",
+    "issuer": "http://127.0.0.1:8180/realms/report-demo",
+    "audience": "report-demo",
+    "caller_subject": "328f698a-ba27-48c7-8752-978aae04e5d9"
+  },
+  "identity_contract": "pr25/0.2.0@539d17a",
+  "execution_profile": "sha256:7347e6987981a8804e30958a753bdf1da08d4d2fea1757f8fce1326bfcad63d1",
+  "model_binding_digest": "sha256:8f336627d4812aa1c2b4bd1651af9d0264a04cd55e518a2ae8db8514c70ceefd",
+  "schema_version": "report-demo/1",
+  "task_id": "T-b2befd84db2750fd9f14ce84431b013e",
+  "graph_revision": "g1",
+  "status": "AWAITING_APPROVAL",
+  "generation": "1",
+  "graph": {
+    "selection": {
+      "id": "selection-0273c5a7463d1eecae11462597f96e34",
+      "digest": "sha256:1abe913eb1a4d1ba531036488ed326e2447fa439aa295657ae872ffda27a4c88"
+    },
+    "goal": "生成招商银行股份有限公司本集团2025年对比2024年的经营与资产质量简报：覆盖八项指标原文事实及来源，含至少两条附原文依据的分析性判断",
+    "material_id": "cmb-2025-annual-report-a",
+    "focus": "business+quality",
+    "nodes": [
+      {
+        "id": "extract",
+        "expert": "extractor@1",
+        "role": "年报资料提取",
+        "task": "从固定材料 cmb-2025-annual-report-a 中提取招商银行股份有限公司本集团2025年与2024年的八项指标原文事实及其来源定位：revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced。每项须标明期间、口径与原文出处（章节或表格），只做提取，不改写、不推算、不补写材料中未出现的数值或期间。"
+      },
+      {
+        "id": "business",
+        "expert": "business@1",
+        "role": "经营分析",
+        "task": "基于 extract 输出的八项指标原文事实，输出经营主题段落分析（对照2025与2024）。所用数值必须与提取结果一致并保留来源标注；不得引入固定材料之外的数值、期间或口径。",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "id": "quality",
+        "expert": "quality@1",
+        "role": "资产质量分析",
+        "task": "基于 extract 输出的八项指标原文事实，输出资产质量主题段落分析，重点说明 npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced 的期间变化及其与提取事实的关系。数值与来源须与提取结果一致，不得引入固定材料之外的信息。",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "id": "draft0",
+        "expert": "writer@1",
+        "role": "报告写作与一次修订",
+        "task": "基于 business 与 quality 两个段落，按交付模板 annual-report/1 撰写本集团2025对比2024经营与资产质量简报初稿。正文须逐项呈现八项指标的原文事实并标注来源；另须给出至少两条分析性判断（例如利润增长与净息差变化之间的关系、拨备覆盖率下降对风险抵御能力的含义），每条判断后附支撑该判断的原文依据。分析性判断必须与原文事实分开表述，不得替代、弱化或改写原文事实，并须显式标注为待人工核验项。不得编造固定材料之外的数值、期间或口径。",
+        "depends_on": [
+          "business",
+          "quality"
+        ]
+      },
+      {
+        "id": "check0",
+        "expert": "checker@1",
+        "role": "数值/期间/口径/来源检查",
+        "task": "对 draft0 执行确定性程序检查：八项指标是否齐全，数值、期间、口径与来源是否与固定材料一致且可定位。输出 PASS 或 REVISE。检查范围仅限可逐字核对的事实项，不评判分析性判断的合理性。",
+        "depends_on": [
+          "draft0"
+        ]
+      },
+      {
+        "id": "revise1",
+        "expert": "writer@1",
+        "role": "报告写作与一次修订",
+        "task": "依据 check0 的 REVISE 意见对 draft0 做最多一次定向修订，仅修改检查指出的问题，保留已通过内容以及标注为待人工核验的分析性判断；输出修订稿。",
+        "depends_on": [
+          "draft0",
+          "check0"
+        ],
+        "condition": {
+          "step": "check0",
+          "outcome": "REVISE"
+        }
+      },
+      {
+        "id": "check1",
+        "expert": "checker@1",
+        "role": "数值/期间/口径/来源检查",
+        "task": "对 revise1 执行与 check0 相同的确定性程序检查（数值、期间、口径、来源、八项指标齐全性），输出 PASS 或 REVISE。",
+        "depends_on": [
+          "revise1",
+          "check0"
+        ],
+        "condition": {
+          "step": "check0",
+          "outcome": "REVISE"
+        }
+      },
+      {
+        "id": "select_report",
+        "expert": "select@1",
+        "role": "选择已通过检查的报告",
+        "task": "消费 check0 与 check1 的结果，无条件选择通过检查的报告版本作为正式交付候选；若检查均未通过则不得选中任何版本。程序检查仅覆盖可逐字核对的事实、数值、期间、口径与来源；报告中的分析性判断须在选中后转人工核验确认，方可批准。",
+        "depends_on": [
+          "check0",
+          "check1"
+        ]
+      }
+    ],
+    "catalog_digest": "sha256:6df470d3860c155b11958b5f5ae365df38ed350c6c6c770f4427d2093cafedb5",
+    "policy_version": "annual-report-policy/1"
+  },
+  "graph_digest": "sha256:550a39fa1bbd96190aa90a082e4b3bdea9e5037c442b902381f04738010b807c",
+  "runtime_spec_digest": "sha256:e2803fb18ebd1f0162d08863975166a9b18ca688eb6d344f193f3800421eb770",
+  "pause_requested": false,
+  "nodes": {
+    "business": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "check0": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "check1": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "draft0": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "extract": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "quality": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "revise1": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "select_report": {
+      "status": "READY",
+      "attempt": 0
+    }
+  },
+  "created_at": "2026-11-21T10:23:46.161212401Z"
+}
