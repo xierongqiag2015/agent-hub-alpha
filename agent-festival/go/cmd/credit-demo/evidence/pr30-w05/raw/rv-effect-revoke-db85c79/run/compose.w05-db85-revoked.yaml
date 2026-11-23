@@ -1,0 +1,5 @@
+# Test-only overlay applied last: credit from w05-db85/credit:revoked, the db85c79 build whose
+# built-in credit-dd package lacks the caller hold credit.apply / execute.
+services:
+  credit:
+    image: w05-db85/credit:revoked

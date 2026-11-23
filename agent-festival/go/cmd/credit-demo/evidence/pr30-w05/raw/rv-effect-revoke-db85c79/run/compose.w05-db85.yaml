@@ -1,0 +1,13 @@
+# Test-only overlay: PR #70 head db85c79 in the separate project agent-hub-db85. Credit is built
+# from db85c79; orchestrator and professional are the bc03eb2 images (PR #70 does not touch them).
+services:
+  credit:
+    image: w05-db85/credit:dev
+  orchestrator:
+    image: w05-bc03/orchestrator:dev
+  material-agent:
+    image: w05-bc03/professional:dev
+  analysis-agent:
+    image: w05-bc03/professional:dev
+  writer-agent:
+    image: w05-bc03/professional:dev

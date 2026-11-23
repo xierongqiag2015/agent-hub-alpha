@@ -1,0 +1,79 @@
+== 2026-11-23T22:24:48+08:00 source db85c79fb96a51304ca3d423565852a0bcd849bf
+w05-bc03/orchestrator:dev sha256:a22cf20c3fdfafddd0f947daa7480262a692c07f1daa46a40247be69021799b1
+w05-bc03/professional:dev sha256:d382af7d00505a4c8d71afb82678c97d861854b1b963114f487e2662efc0292c
+w05-db85/credit:dev sha256:f251268d29188c0e83c908646bd44d381d88bad58c603d7c258f7b531f737d93
+w05-db85/credit:revoked sha256:b4ab52b1d6119fe7e2ae487f7b4bf43977be00bbf4a6c25d21ce20b17ff1ed1a
+ Network agent-hub-db85_default Creating 
+ Network agent-hub-db85_default Created 
+ Volume agent-hub-db85_credit-data Creating 
+ Volume agent-hub-db85_credit-data Created 
+ Volume agent-hub-db85_rdc-data Creating 
+ Volume agent-hub-db85_rdc-data Created 
+ Container agent-hub-db85-fault-proxy-1 Creating 
+ Container agent-hub-db85-credit-1 Creating 
+ Container agent-hub-db85-bus-db-1 Creating 
+ Container agent-hub-db85-analysis-agent-1 Creating 
+ Container agent-hub-db85-material-agent-1 Creating 
+ Container agent-hub-db85-writer-agent-1 Creating 
+ Container agent-hub-db85-credit-1 Created 
+ Container agent-hub-db85-material-agent-1 Created 
+ Container agent-hub-db85-bus-db-1 Created 
+ Container agent-hub-db85-rdc-1 Creating 
+ Container agent-hub-db85-writer-agent-1 Created 
+ Container agent-hub-db85-fault-proxy-1 Created 
+ Container agent-hub-db85-orchestrator-1 Creating 
+ Container agent-hub-db85-analysis-agent-1 Created 
+ Container agent-hub-db85-rdc-1 Created 
+ Container agent-hub-db85-gateway-1 Creating 
+ Container agent-hub-db85-orchestrator-1 Created 
+ Container agent-hub-db85-gateway-1 Created 
+ Container agent-hub-db85-material-agent-1 Starting 
+ Container agent-hub-db85-fault-proxy-1 Starting 
+ Container agent-hub-db85-bus-db-1 Starting 
+ Container agent-hub-db85-analysis-agent-1 Starting 
+ Container agent-hub-db85-writer-agent-1 Starting 
+ Container agent-hub-db85-credit-1 Starting 
+ Container agent-hub-db85-writer-agent-1 Started 
+ Container agent-hub-db85-material-agent-1 Started 
+ Container agent-hub-db85-fault-proxy-1 Started 
+ Container agent-hub-db85-analysis-agent-1 Started 
+ Container agent-hub-db85-credit-1 Started 
+ Container agent-hub-db85-credit-1 Waiting 
+ Container agent-hub-db85-fault-proxy-1 Waiting 
+ Container agent-hub-db85-bus-db-1 Started 
+ Container agent-hub-db85-bus-db-1 Waiting 
+ Container agent-hub-db85-fault-proxy-1 Healthy 
+ Container agent-hub-db85-bus-db-1 Healthy 
+ Container agent-hub-db85-rdc-1 Starting 
+ Container agent-hub-db85-rdc-1 Started 
+ Container agent-hub-db85-rdc-1 Waiting 
+ Container agent-hub-db85-credit-1 Healthy 
+ Container agent-hub-db85-orchestrator-1 Starting 
+ Container agent-hub-db85-orchestrator-1 Started 
+ Container agent-hub-db85-rdc-1 Healthy 
+ Container agent-hub-db85-gateway-1 Starting 
+ Container agent-hub-db85-gateway-1 Started 
+ Container agent-hub-db85-writer-agent-1 Waiting 
+ Container agent-hub-db85-bus-db-1 Waiting 
+ Container agent-hub-db85-rdc-1 Waiting 
+ Container agent-hub-db85-fault-proxy-1 Waiting 
+ Container agent-hub-db85-gateway-1 Waiting 
+ Container agent-hub-db85-analysis-agent-1 Waiting 
+ Container agent-hub-db85-material-agent-1 Waiting 
+ Container agent-hub-db85-orchestrator-1 Waiting 
+ Container agent-hub-db85-credit-1 Waiting 
+ Container agent-hub-db85-rdc-1 Healthy 
+ Container agent-hub-db85-material-agent-1 Healthy 
+ Container agent-hub-db85-orchestrator-1 Healthy 
+ Container agent-hub-db85-bus-db-1 Healthy 
+ Container agent-hub-db85-analysis-agent-1 Healthy 
+ Container agent-hub-db85-fault-proxy-1 Healthy 
+ Container agent-hub-db85-writer-agent-1 Healthy 
+ Container agent-hub-db85-credit-1 Healthy 
+ Container agent-hub-db85-gateway-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-23T22:25:15+08:00 up exit 0
+== 2026-11-23T22:29:49+08:00 scenario exit 0
+== 2026-11-23T22:29:49+08:00 collected; stopping agent-hub-db85
+stopped agent-hub-db85
+== 2026-11-23T22:29:51+08:00 done /home/xrq/w05-db85-runs/20261123T222448-rv-effect-revoke

@@ -1,0 +1,35 @@
+14:25:01.174 INFO  c.o.demo.credit.Main - credit orchestrator on :8195, record at http://credit:8091
+14:25:51.883 INFO  c.o.d.credit.Worker - run R1 leased (epoch 1)
+14:26:18.077 INFO  c.o.d.credit.Worker - run R1 step related: executing
+14:26:18.152 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:26:32.992 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:26:33.002 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:26:33.002 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:27:10.137 INFO  c.o.d.credit.Worker - run R1 step judge: executing
+14:27:10.137 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:27:29.485 INFO  c.o.d.credit.Worker - run R1 step submit: executing
+14:27:33.821 INFO  c.o.d.credit.Worker - run R1 done (skipped [])
+14:27:44.861 INFO  c.o.d.credit.Worker - run R2 leased (epoch 1)
+14:28:16.270 INFO  c.o.d.credit.Worker - run R2 step related: executing
+14:28:16.272 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:28:28.703 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:28:28.713 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:28:28.723 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:29:07.694 INFO  c.o.d.credit.Worker - run R2 step judge: executing
+14:29:07.695 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+14:29:23.805 INFO  c.o.demo.credit.Main - credit orchestrator on :8195, record at http://credit:8091
+14:29:28.960 INFO  c.o.d.credit.Worker - run R2 leased (epoch 2)
+14:29:29.051 INFO  c.o.d.credit.Worker - run R2 step related: reused recorded result
+14:29:29.064 INFO  c.o.d.credit.Worker - run R2 step judge: reused recorded result
+14:29:29.158 INFO  c.o.d.credit.Worker - run R2 step submit: executing
+14:29:29.174 ERROR c.o.d.credit.Worker - run R2 failed
+com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=submit failed: /exec/effect -> 400 INVALID_REQUEST dispatch rejected: live grant set no longer covers the grants pinned at decision time (revocation check, 14-A4)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)
+	at com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:70)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+14:29:40.044 WARN  c.o.d.credit.Worker - lease loop: /exec/lease unreachable: HTTP/1.1 header parser received no bytes

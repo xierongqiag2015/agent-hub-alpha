@@ -1011,6 +1011,21 @@ def rv_effect_revoke(evidence):
     evidence["test"]["resume_after_refusal"] = api_resume(t_id)
     evidence["holds_after"] = credit_holds(team)  # orchestrator is up again: the planner can compile
 
+    def submit_view():
+        graph, _ = sb.request(f"/api/graph?run={t_id}")
+        node = next((n for n in graph["nodes"] if n["id"] == "submit"), {})
+        rec = sb.read_run(t_id)["steps"].get("submit") or {}
+        return {"graph_status": node.get("status"), "graph_activity": node.get("activity"),
+                "record_status": rec.get("status"), "record_activity": rec.get("activity"), "finished_at": rec.get("finished_at"),
+                "run_status": graph["run"]["status"]}
+
+    evidence["test"]["submit_view"] = submit_view()
+    # reload: credit restarts on the same (revoked) build and reads its persisted state again
+    sb.docker("credit", "restart")
+    wait_healthy("credit")
+    time.sleep(3)
+    evidence["test"]["submit_view_after_reload"] = submit_view()
+
     # H after the revocation: every read entry, nothing changes
     rev_before_reads = state_rev()
     sessions = [ui_session(), ui_session()]
@@ -1065,6 +1080,10 @@ def rv_effect_revoke(evidence):
             g.get("selector") == "credit.apply" for g in tf["dispatch_grants"][-1] or []),
         "test_no_receipt": not tf["receipt"],
         "test_submit_status": tf["steps"].get("submit"),
+        "submit_projected_failed_rejected": all(v["graph_status"] == "failed" and v["record_status"] == "failed"
+                                                and v["record_activity"] == "派发被拒"
+                                                for v in (evidence["test"]["submit_view"], evidence["test"]["submit_view_after_reload"])),
+        "submit_views": [evidence["test"]["submit_view"], evidence["test"]["submit_view_after_reload"]],
         "test_final_status": tf["status"],
         "sends_after_revoke": windows["after-revoke"]["transport_send"],
         "gateway_audit_sends_after_revoke": windows["after-revoke"]["gateway_audit_send"],
