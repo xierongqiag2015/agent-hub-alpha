@@ -1,0 +1,10 @@
+57,64d56
+<  },
+<  {
+<   "actions": [
+<    "execute"
+<   ],
+<   "effect": "irreversible",
+<   "kind": "tool",
+<   "selector": "credit.apply"
+== 2026-11-23T17:29:32+08:00 built credit:revoked sha256:d6081157746bb61d15455e4f370d7a699d750ea0656f15c643daec2648a366dc

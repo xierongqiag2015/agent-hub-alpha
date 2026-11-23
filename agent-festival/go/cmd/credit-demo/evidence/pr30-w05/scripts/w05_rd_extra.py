@@ -57,6 +57,13 @@ at the transport by its JSON-RPC id (= request_id).
                call keeps its identity, is queried by its original remote task
                and never resent; one formal result is committed, the one the
                remote had produced.
+  rv-effect-revoke
+               #30 item 2: run H to the simulated bank receipt with the credit.apply
+               hold; run T until its judgment is adopted and stop the orchestrator
+               before the application; restart credit from a build whose credit-dd
+               package lacks credit.apply / execute (W05_REVOKED_OVERLAY) and resume T:
+               the dispatch is refused, the ledger stays adopted, no application, no
+               new Agent Bus send; H's report and receipt read back unchanged.
 
 The script records what happened and evaluates checks; it does not stop at
 the first unexpected result, so a deviation is kept as evidence. Evidence
@@ -892,12 +899,192 @@ def rq_accepted_no_final(evidence):
     evidence["snapshots"] = kept
 
 
+def new_run_with(label, team):
+    """sb.new_run with a given team, through the same planner MCP entry and /api/approve."""
+    planner = sb.Planner()
+    plan = planner.tool("propose_plan", {"case_id": "C006", "goal": f"Agent Bus {label} 验证 {int(time.time())}，仅生成模拟授信报告与模拟银行申请", "agents": team})
+    assert plan["precheck"]["ok"], "Candidate graph failed precheck: " + json.dumps(plan["precheck"], ensure_ascii=False)[:500]
+    graph, _ = sb.request(f'/api/graph?plan={plan["plan_id"]}&v={plan["version"]}')
+    approved, _ = sb.request("/api/approve", {"plan": plan["plan_id"], "version": plan["version"], "hash": graph["hash"],
+                                              "user": "alice", "password": PASSWORD})
+    return approved["run"], plan["plan_id"]
+
+
+def credit_holds(team):
+    """What the running credit service holds, seen through the planner entry: the credit-dd package
+    digest, and the precheck of a fresh proposal of the same team (a plan, never approved or run)."""
+    planner = sb.Planner()
+    digest = next((v.get("digest") for v in planner.tool("list_capabilities", {}).get("scenarios") or []
+                   if v.get("package") == "credit-dd"), None)
+    try:
+        plan = planner.tool("propose_plan", {"case_id": "C006", "goal": f"W05 授权探测 {int(time.time())}，只做预检不批准", "agents": team})
+    except RuntimeError as exc:  # the planner may refuse the proposal outright
+        return {"package_digest": digest, "probe_plan": None, "precheck_ok": False, "refused": str(exc)[:800]}
+    pc = plan.get("precheck") or {}
+    return {"package_digest": digest, "probe_plan": plan.get("plan_id"), "precheck_ok": pc.get("ok"),
+            "precheck_errors": pc.get("errors"), "precheck_rules": pc.get("rules"), "not_held": pc.get("not_held")}
+
+
+def run_record(run_id):
+    run = sb.read_run(run_id)
+    ledger = [json.loads(line) for line in (data_file(f"/data/runs/{run_id}/adopt.jsonl") or "").splitlines() if line.strip()]
+    return {
+        "status": run["status"], "decision": run.get("decision"), "decision_op": run.get("decision_op"),
+        "business_request": run.get("business_request"), "receipt": run.get("receipt"), "receipt_of": run.get("receipt_of"),
+        "final_digest": "sha256:" + __import__("hashlib").sha256((run.get("final_output") or "").encode()).hexdigest(),
+        "blocked": run.get("blocked"), "reconciliation": run.get("reconciliation"),
+        "steps": {k: {"status": s.get("status"), "activity": s.get("activity"), "output_len": len(s.get("output") or "")} for k, s in run["steps"].items()},
+        "replay_ops": [s.get("op") for s in run.get("replay_steps") or []],
+        "ledger": [{"event": e.get("event_type"), "outcome": (e.get("outcome") or {}).get("status"), "detail": (e.get("outcome") or {}).get("detail"),
+                    "op": (e.get("identity") or {}).get("operation_id"), "grants": e.get("grants_at_decision")} for e in ledger],
+        "dispatch_grants": [s.get("grants") for s in run.get("replay_steps") or [] if s.get("op") == "dispatch"],
+        "final_output": run.get("final_output"),
+        "calls": sb.call_snapshot(run),
+    }
+
+
+def rv_effect_revoke(evidence):
+    """#30 item 2: a finished run keeps its report and receipt; a run whose judgment is adopted but whose
+    credit application is not yet dispatched meets a revoked credit.apply hold and is refused."""
+    import demo
+    demo.BUS = True
+    overlays = [a for f in os.environ["W05_COMPOSE_FILES"].split(":") for a in ("-f", f)]
+    team = sb.TEAM + [{"id": "submit", "expert": "credit-submitter", "role": "提交", "task": "判断为授予时提交模拟授信申请",
+                       "depends_on": ["judge", "report"], "run_if": {"step": "judge", "contains": "DECISION=GRANT"}}]
+    marks = {}
+
+    def mark(name):
+        marks[name] = time.time()
+
+    evidence["holds_before"] = credit_holds(team)
+
+    # H: positive control, holds intact, runs to the simulated bank receipt
+    mark("h_start")
+    h_id, h_plan = new_run_with("rv-history", team)
+    sb.wait_run(h_id, evidence, timeout=900)
+    time.sleep(10)  # the provider's terminal status arrives a few seconds after the receipt
+    mark("h_done")
+    evidence["history"] = {"run_id": h_id, "plan_id": h_plan, "before": run_record(h_id)}
+
+    # T: judgment adopted, report node out at the remote writer, then the orchestrator is stopped
+    state = {"frozen": False}
+    mark("t_start")
+    t_id, t_plan = new_run_with("rv-test", team)
+
+    def hook(graph):
+        if state["frozen"]:
+            return
+        nodes = {n["id"]: n.get("status") for n in graph["nodes"]}
+        if nodes.get("judge") == "done" and nodes.get("report") in ("running", "waiting"):
+            sb.docker("orchestrator", "stop")
+            state.update(frozen=True, at=time.time(), nodes=nodes)
+
+    deadline = time.monotonic() + 900
+    while not state["frozen"] and time.monotonic() < deadline:
+        graph, _ = sb.request(f"/api/graph?run={t_id}")
+        evidence["snapshots"].append({"at": time.time(), "graph": graph})
+        hook(graph)
+        if graph["run"]["status"] in ("done", "failed", "waiting", "blocked"):
+            break
+        time.sleep(0.3)
+    mark("t_frozen")
+    evidence["test"] = {"run_id": t_id, "plan_id": t_plan, "freeze": state, "at_freeze": run_record(t_id)}
+
+    # revoke: credit restarts from the build whose credit-dd lacks credit.apply / execute
+    mark("revoke_start")
+    demo.compose(*overlays, "-f", os.environ["W05_REVOKED_OVERLAY"], "up", "-d", "--no-deps", "--no-build", "--wait", "credit")
+    mark("revoke_end")
+    evidence["credit_image_after"] = sb.docker("credit", "inspect", "--format", "{{.Image}}").strip()
+    evidence["test"]["after_revoke_before_resume"] = run_record(t_id)
+
+    # resume T from the real entry: orchestrator back, then the plugin's resume if the run waits
+    mark("orchestrator_start")
+    sb.docker("orchestrator", "start")
+    wait_healthy("orchestrator")
+    graph = sb.wait_run(t_id, evidence, timeout=900)
+    if graph["run"]["status"] == "waiting":
+        resume_once(t_id, evidence, "resume-after-revoke")
+        graph = sb.wait_run(t_id, evidence, timeout=900)
+    time.sleep(10)
+    mark("t_settled")
+    evidence["test"]["final"] = run_record(t_id)
+    evidence["test"]["resume_after_refusal"] = api_resume(t_id)
+    evidence["holds_after"] = credit_holds(team)  # orchestrator is up again: the planner can compile
+
+    # H after the revocation: every read entry, nothing changes
+    rev_before_reads = state_rev()
+    sessions = [ui_session(), ui_session()]
+    reads = []
+    for n, opener in enumerate(sessions):
+        for path in (f"/api/graph?run={h_id}", f"/api/graph?plan={h_plan}&v=1", "/api/plans", f"/ui/run/{h_id}", f"/ui/plan/{h_plan}/v1"):
+            try:
+                with opener.open(sb.BASE + path, timeout=10) as resp:
+                    reads.append((n, path.split("?")[0], resp.status))
+            except urllib.error.HTTPError as exc:
+                reads.append((n, path.split("?")[0], exc.code))
+    mark("h_read")
+    evidence["history"]["after"] = run_record(h_id)
+    evidence["history"]["reads"] = sorted({(p, s) for _, p, s in reads})
+    evidence["history"]["rev_unchanged_by_reads"] = rev_before_reads == state_rev()
+    evidence["marks"] = marks
+
+    all_events = [json.loads(line) for line in sb.docker("fault-proxy", "exec", "cat", "/tmp/bus-fault-events.jsonl").splitlines() if line.strip()]
+    audit = gateway_audit()
+    t_calls = evidence["test"]["final"]["calls"]
+    t_ids = {c["request_id"] for c in t_calls.values()}
+    windows = {}
+    for name, lo, hi in (("history", "h_start", "h_done"), ("test-until-freeze", "t_start", "t_frozen"),
+                         ("revocation", "revoke_start", "revoke_end"), ("after-revoke", "revoke_end", "t_settled"),
+                         ("history-reads", "t_settled", "h_read")):
+        a, b = marks[lo], marks[hi]
+        windows[name] = {"from": a, "to": b,
+                         "transport_send": sum(e["method"] == "SendMessage" for e in all_events if a <= e["at"] < b),
+                         "transport_query": sum(e["method"] == "GetTask" for e in all_events if a <= e["at"] < b),
+                         "test_run_send": sum(e["method"] == "SendMessage" and e.get("id") in t_ids for e in all_events if a <= e["at"] < b),
+                         "gateway_audit_send": sum(m == "SendMessage" for t, m, _ in audit if a <= t < b),
+                         "gateway_audit_query": sum(m == "GetTask" for t, m, _ in audit if a <= t < b)}
+    evidence["windows"] = windows
+    hb, ha = evidence["history"]["before"], evidence["history"]["after"]
+    tf = evidence["test"]["final"]
+    tz = evidence["test"]["at_freeze"]
+    evidence["checks"] = {
+        "precheck_ok_before": evidence["holds_before"]["precheck_ok"],
+        "precheck_refused_after": evidence["holds_after"]["precheck_ok"] is False,
+        "precheck_refusal_names_credit_apply": "credit.apply" in json.dumps(evidence["holds_after"], ensure_ascii=False)
+                                               and "unreachable" not in json.dumps(evidence["holds_after"]),
+        "package_digest_changed": evidence["holds_before"]["package_digest"] != evidence["holds_after"]["package_digest"],
+        "history_done_with_receipt": hb["status"] == "done" and bool(hb["receipt"]),
+        "history_unchanged_after_revoke": {k: hb[k] for k in ("status", "decision", "receipt", "receipt_of", "final_digest", "ledger")}
+                                          == {k: ha[k] for k in ("status", "decision", "receipt", "receipt_of", "final_digest", "ledger")},
+        "test_frozen_after_adoption": state["frozen"] and any(e["outcome"] == "adopted" for e in tz["ledger"]) and not tz["receipt"],
+        "test_submit_not_dispatched_at_freeze": tz["steps"].get("submit", {}).get("status") in ("pending", None),
+        "test_ledger_adopted_never_dispatched": [e["outcome"] for e in tf["ledger"]][:1] == ["adopted"]
+                                                and not any(e["outcome"] in ("dispatched", "completed") for e in tf["ledger"]),
+        "test_refusal_recorded": [(e["event"], e["outcome"], e["detail"]) for e in tf["ledger"] if e["outcome"] == "rejected"],
+        "test_dispatch_checked_live_grants_without_apply": bool(tf["dispatch_grants"]) and not any(
+            g.get("selector") == "credit.apply" for g in tf["dispatch_grants"][-1] or []),
+        "test_no_receipt": not tf["receipt"],
+        "test_submit_status": tf["steps"].get("submit"),
+        "test_final_status": tf["status"],
+        "sends_after_revoke": windows["after-revoke"]["transport_send"],
+        "gateway_audit_sends_after_revoke": windows["after-revoke"]["gateway_audit_send"],
+        "test_run_sends_after_revoke": windows["after-revoke"]["test_run_send"],
+    }
+    kept, last = [], None
+    for s in evidence["snapshots"]:
+        sig = (s["graph"]["run"]["status"], [(n["id"], n.get("status")) for n in s["graph"]["nodes"]])
+        if sig != last:
+            kept.append(s)
+            last = sig
+    evidence["snapshots"] = kept
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("scenario", choices=["go-kill", "two-clients", "storage-failure-traced", "ra-completed-then-unknown", "ra-unknown-at-report",
                                              "rc-resume-storage-failure", "rb-send-reply-lost", "rb-resume-reply-lost",
                                              "rb-send-reply-lost-restart", "adopt-snapshot-fail", "history-read-no-lease",
-                                             "selection-incompatible", "rq-accepted-no-final"])
+                                             "selection-incompatible", "rq-accepted-no-final", "rv-effect-revoke"])
     parser.add_argument("--resume", choices=["api", "external"], default="api",
                         help="api: resume through /api/resume (the plugin's endpoint); external: wait for an operator in the plugin")
     args = parser.parse_args()
@@ -915,7 +1102,7 @@ def main():
          "rb-send-reply-lost": rb_send_reply_lost, "rb-resume-reply-lost": rb_resume_reply_lost,
          "rb-send-reply-lost-restart": rb_send_reply_lost_restart, "adopt-snapshot-fail": adopt_snapshot_fail,
          "history-read-no-lease": history_read_no_lease, "selection-incompatible": selection_incompatible,
-         "rq-accepted-no-final": rq_accepted_no_final}[args.scenario](evidence)
+         "rq-accepted-no-final": rq_accepted_no_final, "rv-effect-revoke": rv_effect_revoke}[args.scenario](evidence)
     finally:
         evidence["finished_at"] = time.time()
         target.write_text(json.dumps(sb.redact(evidence), ensure_ascii=False, indent=2) + "\n")

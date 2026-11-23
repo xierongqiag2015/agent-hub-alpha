@@ -1,0 +1,22 @@
+R4 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'running'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'running'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting'), ('submit', 'pending')]
+R4 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done'), ('submit', 'running')]
+R4 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done'), ('submit', 'done')]
+ Container agent-hub-bc03-credit-1 Recreate 
+ Container agent-hub-bc03-credit-1 Recreated 
+ Container agent-hub-bc03-credit-1 Starting 
+ Container agent-hub-bc03-credit-1 Started 
+ Container agent-hub-bc03-credit-1 Waiting 
+ Container agent-hub-bc03-credit-1 Healthy 
+R5 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting'), ('submit', 'pending')]
+R5 failed [('intake', 'reused'), ('financial', 'reused'), ('industry', 'reused'), ('bureau', 'reused'), ('related', 'reused'), ('judge', 'reused'), ('report', 'done'), ('submit', 'running')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rv-effect-revoke-1795427017.json
+checks: {"precheck_ok_before": true, "precheck_refused_after": true, "precheck_refusal_names_credit_apply": true, "package_digest_changed": true, "history_done_with_receipt": true, "history_unchanged_after_revoke": true, "test_frozen_after_adoption": true, "test_submit_not_dispatched_at_freeze": true, "test_ledger_adopted_never_dispatched": true, "test_refusal_recorded": [["control", "rejected", "live grant set no longer covers the grants pinned at decision time (revocation check, 14-A4)"]], "test_dispatch_checked_live_grants_without_apply": true, "test_no_receipt": true, "test_submit_status": {"status": "running", "activity": "已派发，等银行回执", "output_len": 0}, "test_final_status": "failed", "sends_after_revoke": 0, "gateway_audit_sends_after_revoke": 0, "test_run_sends_after_revoke": 0}
