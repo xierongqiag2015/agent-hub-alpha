@@ -1,0 +1,150 @@
+{
+  "bus_binding": {
+    "environment_id": "report-demo-781255125734a3f6cd169a8a928098b4",
+    "tenant": "demo",
+    "issuer": "http://127.0.0.1:8180/realms/report-demo",
+    "audience": "report-demo",
+    "caller_subject": "328f698a-ba27-48c7-8752-978aae04e5d9"
+  },
+  "identity_contract": "pr25/0.2.0@539d17a",
+  "execution_profile": "sha256:845cc6e05acc82dd54385c926bb6ffcb5fb7bce35c21a6946cce2049c9b54cfc",
+  "model_binding_digest": "sha256:8f336627d4812aa1c2b4bd1651af9d0264a04cd55e518a2ae8db8514c70ceefd",
+  "schema_version": "report-demo/1",
+  "task_id": "T-32758d16c0f1bde333df2f7d819f9de3",
+  "graph_revision": "g1",
+  "status": "AWAITING_APPROVAL",
+  "generation": "1",
+  "graph": {
+    "human_review_required": true,
+    "selection": {
+      "id": "selection-0ca1e80474c1023f99df738f819b8cc3",
+      "digest": "sha256:1ab308531b731c4dc41b6f64bf728990decfce7ac0adb50a5cc9a93778102f96"
+    },
+    "goal": "基于固定招商银行2025年报快照（材料 cmb-2025-annual-report-a），生成本集团口径 2025 对比 2024 的「经营与资产质量」简报，覆盖 revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced 八项指标及其来源；经程序检查与最多一次定向修订，并由人工核验接受后才可批准和交付。",
+    "material_id": "cmb-2025-annual-report-a",
+    "focus": "business+quality",
+    "nodes": [
+      {
+        "id": "extract",
+        "expert": "extractor@1",
+        "role": "年报资料提取",
+        "task": "从固定材料 cmb-2025-annual-report-a 中独立提取招商银行股份有限公司本集团口径 2025 年与 2024 年的八项指标：revenue、net_profit_attributable、net_interest_margin、cost_to_income、npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced。每项给出两个年度数值，并逐项标注年报中的来源位置（报表/章节/页码）。不引用材料以外的数据，不写入任何参考数值，输出 indicators/1。"
+      },
+      {
+        "id": "business",
+        "expert": "business@1",
+        "role": "经营分析",
+        "task": "仅消费 extract 输出的 indicators/1，围绕经营主题（revenue、net_profit_attributable、net_interest_margin、cost_to_income）完成本集团 2025 对比 2024 分析：说明变动方向与幅度、可比口径与期间，并对每个结论标注其来源位置。不引入 extract 之外的数据，输出 analysis/1 的「经营」段落。",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "id": "quality",
+        "expert": "quality@1",
+        "role": "资产质量分析",
+        "task": "仅消费 extract 输出的 indicators/1，围绕资产质量主题（npl_balance、npl_ratio、provision_coverage、cet1_ratio_advanced）完成本集团 2025 对比 2024 分析：说明变动方向与幅度、可比口径与期间，并对每个结论标注其来源位置。不引入 extract 之外的数据，输出 analysis/1 的「资产质量」段落。",
+        "depends_on": [
+          "extract"
+        ]
+      },
+      {
+        "id": "draft0",
+        "expert": "writer@1",
+        "role": "报告写作（初稿）",
+        "task": "汇合 business 与 quality 两个分析段落，按交付模板 annual-report/1 撰写本集团 2025 对比 2024 经营与资产质量简报初稿：覆盖八项指标数值、同比变化与来源标注，明确主体、口径（本集团）与期间。保持两段分析的事实一致性，不新增无来源数据，输出 report/1。",
+        "depends_on": [
+          "business",
+          "quality"
+        ]
+      },
+      {
+        "id": "check0",
+        "expert": "checker@1",
+        "role": "程序检查（初稿）",
+        "task": "对 draft0 执行确定性程序检查：数值与期间一致性、口径（本集团）一致性、八项指标齐备性、来源标注完整性、材料边界。输出 check/1 的类型化结论（PASS 或 REVISE）与问题清单；不修改稿件内容。",
+        "depends_on": [
+          "draft0"
+        ]
+      },
+      {
+        "id": "revise1",
+        "expert": "writer@1",
+        "role": "报告写作（一次定向修订）",
+        "task": "当且仅当 check0 结论为 REVISE 时执行：严格按 check0 给出的类型化问题做最多一次定向修订，只修正被指出的数值/期间/口径/来源问题，其余内容与来源保持不变，输出修订稿 report/1。",
+        "depends_on": [
+          "draft0",
+          "check0"
+        ],
+        "condition": {
+          "step": "check0",
+          "outcome": "REVISE"
+        }
+      },
+      {
+        "id": "check1",
+        "expert": "checker@1",
+        "role": "程序检查（修订稿）",
+        "task": "当且仅当 check0 结论为 REVISE 时执行：对 revise1 修订稿执行与 check0 相同的确定性程序检查（数值、期间、口径、指标齐备性、来源标注、材料边界），输出 check/1 的类型化结论与问题清单；不修改稿件内容。",
+        "depends_on": [
+          "revise1",
+          "check0"
+        ],
+        "condition": {
+          "step": "check0",
+          "outcome": "REVISE"
+        }
+      },
+      {
+        "id": "select_report",
+        "expert": "select@1",
+        "role": "选择已通过检查的报告",
+        "task": "无条件消费 check0 与 check1 的全部检查结果，选择一份已通过程序检查的报告作为交付候选；若两份均未通过则如实报告失败并转人工，不自行改写或放行。本报告即使程序检查通过，仍须经人工核验接受后才可批准和交付。",
+        "depends_on": [
+          "check0",
+          "check1"
+        ]
+      }
+    ],
+    "catalog_digest": "sha256:6df470d3860c155b11958b5f5ae365df38ed350c6c6c770f4427d2093cafedb5",
+    "policy_version": "annual-report-policy/1"
+  },
+  "graph_digest": "sha256:52b1b1fd630c4d59e2dde7b540a96a3a50b5a25a15fac8c7b206d81b7959619e",
+  "runtime_spec_digest": "sha256:8bacddf48e6857b6accd0c44e337601e1bb5fa194e8ffe2908e06e2b9ba5a0a5",
+  "pause_requested": false,
+  "nodes": {
+    "business": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "check0": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "check1": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "draft0": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "extract": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "quality": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "revise1": {
+      "status": "READY",
+      "attempt": 0
+    },
+    "select_report": {
+      "status": "READY",
+      "attempt": 0
+    }
+  },
+  "created_at": "2026-11-23T02:02:46.158416054Z"
+}
