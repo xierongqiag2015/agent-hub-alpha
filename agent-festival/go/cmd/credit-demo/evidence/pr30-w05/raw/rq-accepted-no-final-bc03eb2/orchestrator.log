@@ -1,0 +1,34 @@
+02:23:13.595 INFO  c.o.demo.credit.Main - credit orchestrator on :8195, record at http://credit:8091
+02:24:06.750 INFO  c.o.d.credit.Worker - run R1 leased (epoch 1)
+02:28:16.069 ERROR c.o.d.credit.Worker - run R1 failed
+com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=intake failed: Remote outcome unresolved; original task retained
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)
+	at com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:70)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+02:28:16.633 WARN  c.o.d.credit.Worker - lease loop: /exec/lease unreachable: HTTP/1.1 header parser received no bytes
+02:28:23.742 INFO  c.o.demo.credit.Main - credit orchestrator on :8195, record at http://credit:8091
+02:28:59.562 INFO  c.o.d.credit.Worker - run R1 leased (epoch 2)
+02:33:08.835 ERROR c.o.d.credit.Worker - run R1 failed
+com.openjiuwen.agents.orchestration.BlueprintException: blueprint id=team-graph step id=intake failed: Remote outcome unresolved; original task retained
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.awaitStepResult(BlueprintScheduler.java:253)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectOneResult(BlueprintScheduler.java:226)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.collectResults(BlueprintScheduler.java:212)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.runLayer(BlueprintScheduler.java:139)
+	at com.openjiuwen.agents.orchestration.BlueprintScheduler.execute(BlueprintScheduler.java:113)
+	at com.openjiuwen.demo.credit.Worker.execute(Worker.java:124)
+	at com.openjiuwen.demo.credit.Worker.run(Worker.java:70)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+02:33:09.859 INFO  c.o.d.credit.Worker - run R1 leased (epoch 3)
+02:33:22.980 INFO  c.o.d.credit.Worker - run R1 step related: executing
+02:33:23.080 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+02:33:31.362 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+02:33:31.367 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+02:33:31.373 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+02:33:56.178 INFO  c.o.d.credit.Worker - run R1 step judge: executing
+02:33:56.179 WARN  llm - Legacy ModelClientConfig.timeout is deprecated and now only overrides the response-header wait window; migrate to connectTimeoutSeconds and streamIdleSeconds
+02:34:13.678 INFO  c.o.d.credit.Worker - run R1 done (skipped [])

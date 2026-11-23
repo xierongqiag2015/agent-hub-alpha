@@ -47,6 +47,16 @@ at the transport by its JSON-RPC id (= request_id).
                #33 counter-example through the planner MCP entry: select the
                annual-report capabilities, then propose teams that do not
                compose; each is refused before any plan, run or send.
+  rq-accepted-no-final
+               the remote accepts the first call of a run, but no final result
+               reaches the caller (needs compose.w05-send-test.yaml, mode
+               mask-next-send): the caller's wait times out, every read entry is
+               refreshed from two clients, Go and the orchestrator restart, the
+               run is resumed while the result is still withheld, then the
+               original reply is released and the run resumed once more. The
+               call keeps its identity, is queried by its original remote task
+               and never resent; one formal result is committed, the one the
+               remote had produced.
 
 The script records what happened and evaluates checks; it does not stop at
 the first unexpected result, so a deviation is kept as evidence. Evidence
@@ -744,12 +754,150 @@ def selection_incompatible(evidence):
     }
 
 
+def gateway_audit():
+    """(epoch, method, outcome) of every governance audit line the Gateway container logged."""
+    from datetime import datetime
+    rows = []
+    for line in sb.docker("gateway", "logs").splitlines():
+        if "governance audit" not in line:
+            continue
+        fields = dict(f.split("=", 1) for f in line.split() if "=" in f)
+        at = datetime.fromisoformat(line.split()[0].replace("Z", "+00:00")).timestamp()
+        rows.append((at, fields.get("method"), fields.get("outcome")))
+    return rows
+
+
+def rq_accepted_no_final(evidence):
+    """The remote accepted the call; its final result is withheld from the caller until released."""
+    identity_keys = ("node_execution_id", "attempt", "input_digest", "request_id", "message_id", "context_id", "remote_task_id")
+    marks = {}
+
+    def mark(name):
+        marks[name] = time.time()
+
+    def target_call(run):
+        return next(((k, s["remote_call"]) for k, s in run["steps"].items()
+                     if (s.get("remote_call") or {}).get("remote_task_id") == evidence.get("remote_task_id")), (None, None))
+
+    def phase(name):
+        run = sb.read_run(run_id)
+        node, call = target_call(run)
+        evidence.setdefault("phases", {})[name] = {
+            "at": time.time(), "run_status": run["status"], "node": node, "node_status": run["steps"][node]["status"] if node else None,
+            "call": sb.redact({k: call.get(k) for k in identity_keys + ("status", "reason", "sequence", "artifact_id", "artifact_digest")}) if call else None,
+            "gateway_exchanges": sb.redact(call.get("gateway_exchanges")) if call else None, "rev": state_rev()}
+        return run, node, call
+
+    set_fault("mask-next-send")
+    mark("armed")
+    run_id, plan_id = sb.new_run("rq-no-final")
+    evidence.update(run_id=run_id, plan_id=plan_id)
+    graph = sb.wait_run(run_id, evidence, timeout=900)
+    mark("timeout_waiting")
+    evidence["remote_task_id"] = sb.docker("fault-proxy", "exec", "cat", "/tmp/bus-mask-task").strip()
+    run, node, call = phase("1-timeout")
+    first = {k: call.get(k) for k in identity_keys} if call else {}
+    evidence.update(target_node=node, identity=first)
+
+    # refresh: every read entry from two signed-in clients, five rounds
+    sessions = [ui_session(), ui_session()]
+    reads = []
+    for _ in range(5):
+        for n, opener in enumerate(sessions):
+            for path in (f"/api/graph?run={run_id}", f"/api/graph?plan={plan_id}&v=1", "/api/plans", "/ui/", f"/ui/plan/{plan_id}/v1", f"/ui/run/{run_id}"):
+                try:
+                    with opener.open(sb.BASE + path, timeout=10) as resp:
+                        reads.append((n, path.split("?")[0], resp.status))
+                except urllib.error.HTTPError as exc:
+                    reads.append((n, path.split("?")[0], exc.code))
+    evidence["refresh_reads"] = {"count": len(reads), "statuses": sorted({(p, s) for _, p, s in reads})}
+    mark("refreshed")
+    phase("2-refreshed")
+
+    restart_services(evidence, "credit+orchestrator")
+    time.sleep(30)
+    mark("restarted")
+    phase("3-restarted")
+
+    resume_once(run_id, evidence, "resume-while-withheld")
+    mark("resumed_withheld")
+    graph = sb.wait_run(run_id, evidence, timeout=900)
+    mark("timeout_waiting_again")
+    phase("4-resumed-still-withheld")
+
+    set_fault("pass")
+    mark("released")
+    resume_once(run_id, evidence, "resume-after-release")
+    graph = sb.wait_run(run_id, evidence, timeout=900)
+    time.sleep(3)
+    mark("finished")
+    run, node, call = phase("5-released")
+    evidence["marks"] = marks
+
+    # counts per window: this call at the transport, every call at the transport, the Gateway audit
+    _, events = transport_sends({first.get("request_id")}, {first.get("remote_task_id")})
+    all_events = [json.loads(line) for line in sb.docker("fault-proxy", "exec", "cat", "/tmp/bus-fault-events.jsonl").splitlines() if line.strip()]
+    audit = gateway_audit()
+    bounds = [("before-first-send", "armed", None), ("timeout", None, "timeout_waiting"), ("refresh", "timeout_waiting", "refreshed"),
+              ("restart", "refreshed", "restarted"), ("resume-withheld", "restarted", "timeout_waiting_again"),
+              ("release", "timeout_waiting_again", "finished")]
+    first_send = min((e["at"] for e in events if e["method"] == "SendMessage"), default=None)
+    windows = {}
+    for name, lo, hi in bounds:
+        a = marks[lo] if lo else first_send
+        b = marks[hi] if hi else first_send
+        if a is None or b is None:
+            continue
+        mine = [e for e in events if a <= e["at"] < b]
+        windows[name] = {
+            "from": a, "to": b,
+            "call_send": sum(e["method"] == "SendMessage" for e in mine),
+            "call_query": sum(e["method"] == "GetTask" for e in mine),
+            "call_query_masked": sum(bool((e.get("mask") or {}).get("masked")) for e in mine),
+            "transport_send_all": sum(e["method"] == "SendMessage" for e in all_events if a <= e["at"] < b),
+            "gateway_audit_send": sum(m == "SendMessage" for t, m, _ in audit if a <= t < b),
+            "gateway_audit_query": sum(m == "GetTask" for t, m, _ in audit if a <= t < b),
+        }
+    evidence["windows"] = windows
+    evidence["call_transport_events"] = events
+    upstream = sorted({(e.get("mask") or {}).get("upstream_artifact_digest") for e in events} - {None})
+    sends = sum(e["method"] == "SendMessage" for e in events)
+    after_first = [w for k, w in windows.items() if k not in ("before-first-send", "timeout")]
+    later_identity = [p["call"] and {k: p["call"].get(k) for k in identity_keys} for p in evidence["phases"].values()]
+    evidence["checks"] = {
+        "first_call_was_masked": bool(first) and node is not None,
+        "unknown_after_timeout": evidence["phases"]["1-timeout"]["run_status"] == "waiting" and evidence["phases"]["1-timeout"]["node_status"] == "unknown",
+        "remote_had_finished_while_withheld": any((e.get("mask") or {}).get("masked") for e in events),
+        "refresh_changed_nothing": evidence["phases"]["1-timeout"]["rev"] == evidence["phases"]["2-refreshed"]["rev"],
+        "waiting_after_restart": evidence["phases"]["3-restarted"]["run_status"] == "waiting",
+        "still_unknown_after_resume_withheld": evidence["phases"]["4-resumed-still-withheld"]["node_status"] == "unknown"
+                                               and evidence["phases"]["4-resumed-still-withheld"]["run_status"] == "waiting",
+        "identity_kept_in_every_phase": all(i == first for i in later_identity),
+        "call_sends_total": sends,
+        "call_new_sends_after_first": sum(w["call_send"] for w in after_first),
+        "gateway_audit_sends_while_unresolved": sum(windows[k]["gateway_audit_send"] for k in ("refresh", "restart", "resume-withheld") if k in windows),
+        "call_queries_per_window": {k: w["call_query"] for k, w in windows.items()},
+        "done_after_release": evidence["phases"]["5-released"]["node_status"] == "done",
+        "one_upstream_result": len(upstream) == 1,
+        "committed_is_upstream_result": bool(call) and len(upstream) == 1 and call.get("artifact_digest") == upstream[0],
+        "final_status": graph["run"]["status"],
+    }
+    # keep only the graph snapshots where a node or the run changed
+    kept, last = [], None
+    for s in evidence["snapshots"]:
+        sig = (s["graph"]["run"]["status"], [(n["id"], n.get("status")) for n in s["graph"]["nodes"]])
+        if sig != last:
+            kept.append(s)
+            last = sig
+    evidence["snapshots"] = kept
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("scenario", choices=["go-kill", "two-clients", "storage-failure-traced", "ra-completed-then-unknown", "ra-unknown-at-report",
                                              "rc-resume-storage-failure", "rb-send-reply-lost", "rb-resume-reply-lost",
                                              "rb-send-reply-lost-restart", "adopt-snapshot-fail", "history-read-no-lease",
-                                             "selection-incompatible"])
+                                             "selection-incompatible", "rq-accepted-no-final"])
     parser.add_argument("--resume", choices=["api", "external"], default="api",
                         help="api: resume through /api/resume (the plugin's endpoint); external: wait for an operator in the plugin")
     args = parser.parse_args()
@@ -766,7 +914,8 @@ def main():
          "ra-unknown-at-report": lambda ev: ra_completed_then_unknown(ev, at_report=True), "rc-resume-storage-failure": rc_resume_storage_failure,
          "rb-send-reply-lost": rb_send_reply_lost, "rb-resume-reply-lost": rb_resume_reply_lost,
          "rb-send-reply-lost-restart": rb_send_reply_lost_restart, "adopt-snapshot-fail": adopt_snapshot_fail,
-         "history-read-no-lease": history_read_no_lease, "selection-incompatible": selection_incompatible}[args.scenario](evidence)
+         "history-read-no-lease": history_read_no_lease, "selection-incompatible": selection_incompatible,
+         "rq-accepted-no-final": rq_accepted_no_final}[args.scenario](evidence)
     finally:
         evidence["finished_at"] = time.time()
         target.write_text(json.dumps(sb.redact(evidence), ensure_ascii=False, indent=2) + "\n")

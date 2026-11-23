@@ -1,0 +1,17 @@
+R1 queued [('intake', 'pending'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'waiting'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 waiting [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 queued [('intake', 'unknown'), ('financial', 'pending'), ('industry', 'pending'), ('bureau', 'pending'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'running'), ('industry', 'running'), ('bureau', 'running'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'waiting'), ('bureau', 'waiting'), ('related', 'pending'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'waiting'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'running'), ('judge', 'pending'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'running'), ('report', 'pending')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'running')]
+R1 running [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'waiting')]
+R1 done [('intake', 'done'), ('financial', 'done'), ('industry', 'done'), ('bureau', 'done'), ('related', 'done'), ('judge', 'done'), ('report', 'done')]
+Evidence: /home/xrq/.cache/agent-hub-alpha/issue16/evidence/agent-bus/rq-accepted-no-final-1795400646.json
+checks: {"first_call_was_masked": true, "unknown_after_timeout": true, "remote_had_finished_while_withheld": true, "refresh_changed_nothing": true, "waiting_after_restart": true, "still_unknown_after_resume_withheld": true, "identity_kept_in_every_phase": true, "call_sends_total": 1, "call_new_sends_after_first": 0, "gateway_audit_sends_while_unresolved": 0, "call_queries_per_window": {"before-first-send": 0, "timeout": 235, "refresh": 0, "restart": 0, "resume-withheld": 236, "release": 1}, "done_after_release": true, "one_upstream_result": true, "committed_is_upstream_result": true, "final_status": "done"}

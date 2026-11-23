@@ -1,11 +1,21 @@
 #!/usr/bin/env python3
 """Test-only transport faults in front of the real Gateway; never mocks Agents.
 
-W05 evidence copy of deploy/bus/fault_proxy.py (41a3675) with one added mode,
-drop-send-reply-once: the next SendMessage is forwarded to the real Gateway
-(so the remote task is created) but the caller receives 502 instead of the
-receipt. All original modes behave exactly as in the repository copy. Mounted
-over the original path by compose.w05-send-test.yaml; product code unchanged."""
+W05 evidence copy of deploy/bus/fault_proxy.py (41a3675) with added modes:
+  drop-send-reply-once: the next SendMessage is forwarded to the real Gateway
+    (so the remote task is created) but the caller receives 502 instead of the
+    receipt.
+  mask-next-send / mask-task: the next SendMessage is forwarded and answered
+    normally; its remote task id is kept in /tmp/bus-mask-task and the mode
+    becomes mask-task. While mask-task holds, every reply about that task is
+    forwarded from the real Gateway but a final state (COMPLETED, FAILED, ...)
+    is shown to the caller as TASK_STATE_WORKING without artifacts: the remote
+    accepted the call and the caller sees no final result. Other tasks pass.
+    Writing "pass" to the mode file releases it; the next query then returns
+    the real Gateway reply unchanged.
+All original modes behave exactly as in the repository copy. Mounted over the
+original path by compose.w05-send-test.yaml; product code unchanged."""
+import hashlib
 import http.server
 import json
 import os
@@ -18,6 +28,26 @@ import urllib.request
 LOCK = threading.Lock()
 MODE = Path("/tmp/bus-fault-mode")
 EVENTS = Path("/tmp/bus-fault-events.jsonl")
+MASK_TASK = Path("/tmp/bus-mask-task")
+MASKING = ("mask-next-send", "mask-task")
+
+
+def reply_task(response):
+    try:
+        result = json.loads(response).get("result", {})
+        return result, result.get("task", result)
+    except (ValueError, AttributeError):
+        return None, None
+
+
+def artifact_digest(task):
+    """Digest of the artifact's output as Go's CommitCall records it (sha256 of the text and a NUL)."""
+    text = "".join(p.get("text", "") for a in task.get("artifacts", []) for p in a.get("parts", []))
+    try:
+        output = json.loads(text).get("output", "")
+    except (ValueError, AttributeError):
+        return None
+    return "sha256:" + hashlib.sha256(output.encode() + b"\0").hexdigest()
 
 
 class Proxy(http.server.BaseHTTPRequestHandler):
@@ -30,7 +60,10 @@ class Proxy(http.server.BaseHTTPRequestHandler):
         method = body.get("method")
         with LOCK:
             mode = MODE.read_text().strip() if MODE.exists() else "pass"
-            if method == "SendMessage" and mode == "drop-send-reply-once":
+            masking = mode if mode in MASKING else None
+            if masking:
+                mode = "pass"  # forwarded unchanged; only the reply is masked below
+            elif method == "SendMessage" and mode == "drop-send-reply-once":
                 MODE.write_text("pass")
             elif method == "GetTask" and mode not in ("pass", "hold-completed-once", "drop-send-reply-once"):
                 MODE.write_text("pass")
@@ -80,8 +113,32 @@ class Proxy(http.server.BaseHTTPRequestHandler):
                     time.sleep(0.1)
             else:
                 mode = "pass"
+        mask = None
+        if masking and status == 200:
+            result, task = reply_task(response)
+            with LOCK:
+                if masking == "mask-next-send" and method == "SendMessage" and task and task.get("id") \
+                        and MODE.read_text().strip() == "mask-next-send":
+                    MASK_TASK.write_text(task["id"])
+                    MODE.write_text("mask-task")
+                    masking = "mask-task"
+                target = MASK_TASK.read_text().strip() if MASK_TASK.exists() else ""
+            if masking == "mask-task" and task and task.get("id") == target:
+                state = task.get("status", {}).get("state")
+                mask = {"task": target, "upstream_state": state, "masked": False}
+                if task.get("artifacts"):
+                    mask["upstream_artifact_digest"] = artifact_digest(task)
+                if state not in ("TASK_STATE_SUBMITTED", "TASK_STATE_WORKING"):
+                    task["status"] = {**task.get("status", {}), "state": "TASK_STATE_WORKING"}
+                    task.pop("artifacts", None)
+                    reply = json.loads(response)
+                    reply["result"] = result
+                    response = json.dumps(reply).encode()
+                    mask["masked"] = True
         event = {"at": time.time(), "method": method, "id": body.get("id"),
-                 "task_id": body.get("params", {}).get("id"), "status": status, "fault": mode}
+                 "task_id": body.get("params", {}).get("id"), "status": status, "fault": masking or mode}
+        if mask:
+            event["mask"] = mask
         if "w05_forwarded" in body.get("params", {}):
             event["forwarded"] = body["params"]["w05_forwarded"]
         with LOCK, EVENTS.open("a") as stream:

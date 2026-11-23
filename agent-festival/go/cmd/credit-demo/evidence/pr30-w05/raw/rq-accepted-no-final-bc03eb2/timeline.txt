@@ -1,0 +1,37 @@
+rq-accepted-no-final on bc03eb2, 2026-11-23 (+08:00). Run R1, target node intake
+identity: {"node_execution_id": "sha256:ca07dde0e200d071a173df2767cbb73bf2ef1f051351fd3d202c398bcb8f11a0", "attempt": 1, "input_digest": "sha256:c3df88acc9db0b54db2b412d1a7406921471d3077945d1a9b0a5c29bc94aecf7", "request_id": "aa2f77741d77c401fee61b4c", "message_id": "0d5a4119981140c06d93314f", "context_id": "ctx-6abaf36d72127a711fa870db", "remote_task_id": "2a17830a-b6d6-4ea3-b2f8-aee1f2ec9bb3"}
+
+marks:
+  armed                  10:24:06.433
+  timeout_waiting        10:28:16.392
+  refreshed              10:28:16.597
+  restarted              10:28:59.437
+  resumed_withheld       10:28:59.450
+  timeout_waiting_again  10:33:09.273
+  released               10:33:09.413
+  finished               10:34:17.335
+
+phases:
+  1-timeout                  10:28:16.512 run=waiting  node=unknown  seq=237 rev=245 artifact=None
+  2-refreshed                10:28:16.599 run=waiting  node=unknown  seq=237 rev=245 artifact=None
+  3-restarted                10:28:59.440 run=waiting  node=unknown  seq=237 rev=245 artifact=None
+  4-resumed-still-withheld   10:33:09.276 run=waiting  node=unknown  seq=474 rev=485 artifact=None
+  5-released                 10:34:17.338 run=done     node=done     seq=475 rev=570 artifact=sha256:6b6cc8f66f6c3c242dda3c2d57d9b0107c3d5aa928155d99a6616b8363c61906
+
+windows (call_* = this call at the transport, by request id / remote task id; all_send = every SendMessage at the transport; gw_* = Gateway governance audit):
+  before-first-send  10:24:06.433-10:24:07.002 call_send=0 call_query=0 call_query_masked=0 all_send=0 gw_send=1 gw_query=0
+  timeout            10:24:07.002-10:28:16.392 call_send=1 call_query=235 call_query_masked=224 all_send=1 gw_send=0 gw_query=259
+  refresh            10:28:16.392-10:28:16.597 call_send=0 call_query=0 call_query_masked=0 all_send=0 gw_send=0 gw_query=0
+  restart            10:28:16.597-10:28:59.437 call_send=0 call_query=0 call_query_masked=0 all_send=0 gw_send=0 gw_query=4
+  resume-withheld    10:28:59.437-10:33:09.273 call_send=0 call_query=236 call_query_masked=236 all_send=0 gw_send=0 gw_query=260
+  release            10:33:09.273-10:34:17.335 call_send=0 call_query=1 call_query_masked=0 all_send=4 gw_send=4 gw_query=55
+
+SendMessage, Gateway audit (on receipt): ['10:24:06.816', '10:33:09.926', '10:33:09.929', '10:33:09.936', '10:34:04.373']
+SendMessage, transport (after the reply): [('10:24:07.002', 'aa2f77741d77c401fee61b4c'), ('10:33:10.030', 'e9a6783b2c72659515f44548'), ('10:33:10.030', '8ab401b833207cbae57385f9'), ('10:33:10.030', '4891f080d590126c327168bb'), ('10:34:04.458', '5b96910caa8207912e9ccb90')]
+
+Notes:
+  - The Gateway writes its audit line when the request arrives; the proxy writes its event after the reply, 0.1-0.2 s later.
+    The one gw_send in 'before-first-send' is the first send itself (10:24:06.816 at the Gateway, 10:24:07.002 at the proxy).
+  - gw_query exceeds call_query by about 6 per minute: the Gateway container's healthcheck (deploy/bus/health_gateway.py)
+    sends GetTask for 'health-nonexistent-task' every 10 s.
+  - upstream artifact digest seen while withheld: ['sha256:6b6cc8f66f6c3c242dda3c2d57d9b0107c3d5aa928155d99a6616b8363c61906'] ; committed: sha256:6b6cc8f66f6c3c242dda3c2d57d9b0107c3d5aa928155d99a6616b8363c61906

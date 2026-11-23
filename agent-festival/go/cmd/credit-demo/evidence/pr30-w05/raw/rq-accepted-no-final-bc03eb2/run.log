@@ -1,0 +1,78 @@
+== 2026-11-23T10:23:03+08:00 source bc03eb2315ef6b32b4f5df9ac55a0c393967c77a
+w05-bc03/orchestrator:dev sha256:a22cf20c3fdfafddd0f947daa7480262a692c07f1daa46a40247be69021799b1
+w05-bc03/professional:dev sha256:d382af7d00505a4c8d71afb82678c97d861854b1b963114f487e2662efc0292c
+w05-bc03/credit:dev sha256:19d21bc61b828bfb8b16c2b9a7fa102907d30c664c6be94704046cf27c269b91
+ Network agent-hub-bc03_default Creating 
+ Network agent-hub-bc03_default Created 
+ Volume agent-hub-bc03_credit-data Creating 
+ Volume agent-hub-bc03_credit-data Created 
+ Volume agent-hub-bc03_rdc-data Creating 
+ Volume agent-hub-bc03_rdc-data Created 
+ Container agent-hub-bc03-material-agent-1 Creating 
+ Container agent-hub-bc03-fault-proxy-1 Creating 
+ Container agent-hub-bc03-analysis-agent-1 Creating 
+ Container agent-hub-bc03-writer-agent-1 Creating 
+ Container agent-hub-bc03-credit-1 Creating 
+ Container agent-hub-bc03-bus-db-1 Creating 
+ Container agent-hub-bc03-writer-agent-1 Created 
+ Container agent-hub-bc03-material-agent-1 Created 
+ Container agent-hub-bc03-analysis-agent-1 Created 
+ Container agent-hub-bc03-credit-1 Created 
+ Container agent-hub-bc03-fault-proxy-1 Created 
+ Container agent-hub-bc03-orchestrator-1 Creating 
+ Container agent-hub-bc03-bus-db-1 Created 
+ Container agent-hub-bc03-rdc-1 Creating 
+ Container agent-hub-bc03-orchestrator-1 Created 
+ Container agent-hub-bc03-rdc-1 Created 
+ Container agent-hub-bc03-gateway-1 Creating 
+ Container agent-hub-bc03-gateway-1 Created 
+ Container agent-hub-bc03-credit-1 Starting 
+ Container agent-hub-bc03-writer-agent-1 Starting 
+ Container agent-hub-bc03-fault-proxy-1 Starting 
+ Container agent-hub-bc03-material-agent-1 Starting 
+ Container agent-hub-bc03-bus-db-1 Starting 
+ Container agent-hub-bc03-analysis-agent-1 Starting 
+ Container agent-hub-bc03-analysis-agent-1 Started 
+ Container agent-hub-bc03-writer-agent-1 Started 
+ Container agent-hub-bc03-credit-1 Started 
+ Container agent-hub-bc03-bus-db-1 Started 
+ Container agent-hub-bc03-bus-db-1 Waiting 
+ Container agent-hub-bc03-fault-proxy-1 Started 
+ Container agent-hub-bc03-fault-proxy-1 Waiting 
+ Container agent-hub-bc03-credit-1 Waiting 
+ Container agent-hub-bc03-material-agent-1 Started 
+ Container agent-hub-bc03-bus-db-1 Healthy 
+ Container agent-hub-bc03-rdc-1 Starting 
+ Container agent-hub-bc03-credit-1 Healthy 
+ Container agent-hub-bc03-fault-proxy-1 Healthy 
+ Container agent-hub-bc03-orchestrator-1 Starting 
+ Container agent-hub-bc03-rdc-1 Started 
+ Container agent-hub-bc03-rdc-1 Waiting 
+ Container agent-hub-bc03-orchestrator-1 Started 
+ Container agent-hub-bc03-rdc-1 Healthy 
+ Container agent-hub-bc03-gateway-1 Starting 
+ Container agent-hub-bc03-gateway-1 Started 
+ Container agent-hub-bc03-writer-agent-1 Waiting 
+ Container agent-hub-bc03-fault-proxy-1 Waiting 
+ Container agent-hub-bc03-rdc-1 Waiting 
+ Container agent-hub-bc03-credit-1 Waiting 
+ Container agent-hub-bc03-material-agent-1 Waiting 
+ Container agent-hub-bc03-gateway-1 Waiting 
+ Container agent-hub-bc03-orchestrator-1 Waiting 
+ Container agent-hub-bc03-bus-db-1 Waiting 
+ Container agent-hub-bc03-analysis-agent-1 Waiting 
+ Container agent-hub-bc03-writer-agent-1 Healthy 
+ Container agent-hub-bc03-credit-1 Healthy 
+ Container agent-hub-bc03-bus-db-1 Healthy 
+ Container agent-hub-bc03-material-agent-1 Healthy 
+ Container agent-hub-bc03-orchestrator-1 Healthy 
+ Container agent-hub-bc03-analysis-agent-1 Healthy 
+ Container agent-hub-bc03-rdc-1 Healthy 
+ Container agent-hub-bc03-fault-proxy-1 Healthy 
+ Container agent-hub-bc03-gateway-1 Healthy 
+All three Agent Bus roles discovered and online
+== 2026-11-23T10:23:29+08:00 up exit 0
+== 2026-11-23T10:34:18+08:00 scenario exit 0
+== 2026-11-23T10:34:18+08:00 collected; stopping agent-hub-bc03
+stopped agent-hub-bc03
+== 2026-11-23T10:34:20+08:00 done /home/xrq/w05-bc03-runs/20261123T102303-rq-accepted-no-final
