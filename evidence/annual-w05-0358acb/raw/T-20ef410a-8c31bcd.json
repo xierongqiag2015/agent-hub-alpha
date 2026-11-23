@@ -186,7 +186,7 @@
        "agentName": "report-extractor",
        "serviceId": "report-extractor",
        "instanceId": "i-3e0ab76d2ee46d4b",
-       "routeHandle": "rh1:eyJ0ZW5hbnRJZCI6ImRlbW8iLCJhZ2VudElkIjoicmVwb3J0LWV4dHJhY3RvciIsInNlcnZpY2VJZCI6InJlcG9ydC1leHRyYWN0b3IiLCJpbnN0YW5jZUlkIjoiaS0zZTBhYjc2ZDJlZTQ2ZDRiIiwicm91dGVLZXkiOiJpLTNlMGFiNzZkMmVlNDZkNGIiLCJjb250cmFjdFZlcnNpb24iOiIxLjAuMCIsImNhcGFiaWxpdHlWZXJzaW9uIjoiMS4wLjAifQ.01u0SNIi5p6yGxiE8e76dg",
+       "routeHandle": "rh1:<redacted>sInNlcnZpY2VJZCI6InJlcG9ydC1leHRyYWN0b3IiLCJpbnN0YW5jZUlkIjoiaS0zZTBhYjc2ZDJlZTQ2ZDRiIiwicm91dGVLZXkiOiJpLTNlMGFiNzZkMmVlNDZkNGIiLCJjb250cmFjdFZlcnNpb24iOiIxLjAuMCIsImNhcGFiaWxpdHlWZXJzaW9uIjoiMS4wLjAifQ.01u0SNIi5p6yGxiE8e76dg",
        "frameworkType": "JIUWEN",
        "maxConcurrency": 1,
        "contractVersion": "1.0.0",
