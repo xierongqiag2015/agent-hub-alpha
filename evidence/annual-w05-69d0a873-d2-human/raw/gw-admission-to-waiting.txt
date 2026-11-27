@@ -1,0 +1,9 @@
+window 2026-11-27T20:31:00 .. 2026-11-27T23:59:59 (+08:00)
+    120 method=GetTask outcome=PASSED
+      4 method=SendMessage outcome=PASSED
+SendMessage times:
+2026-11-27T20:52:01.145
+2026-11-27T20:52:21.983
+2026-11-27T20:52:21.992
+2026-11-27T20:53:23.234
+total lines 1372, last 2026-11-27T20:53:52.347

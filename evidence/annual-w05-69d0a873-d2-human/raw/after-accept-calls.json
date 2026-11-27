@@ -1,0 +1,182 @@
+[
+  {
+    "call_id": "c-095753877f96f1e4511197c7adf37f65",
+    "task_id": "T-54158e50f7ee11c2e40adda9b8da15a0",
+    "node_id": "draft0",
+    "attempt": 1,
+    "input_digest": "sha256:be86c2e4fbea1da1a498c45a5e9ff6ea52534a419b8ce06bf10dac6b5fe445e2",
+    "agent_id": "report-writer",
+    "message_id": "message-7a405b0a3df1e3151caada8bfdb7a74f",
+    "context_id": "context-da45e89f68eab5321a38cb4fd335d6fa",
+    "remote_task_id": "16a627a5-b115-4553-b630-f3351ab2d74b",
+    "state": "COMPLETED",
+    "route": {
+      "card": {
+        "name": "report-writer",
+        "rawJson": "{\"name\": \"report-writer\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"report-writer\", \"name\": \"report-writer\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8097/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8097/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+      },
+      "agent_id": "report-writer",
+      "instances": {
+        "agentId": "report-writer",
+        "instances": [
+          {
+            "card": {
+              "name": "report-writer",
+              "rawJson": "{\"name\": \"report-writer\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"report-writer\", \"name\": \"report-writer\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8097/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8097/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+            },
+            "health": "ONLINE",
+            "region": null,
+            "weight": 100,
+            "agentName": "report-writer",
+            "serviceId": "report-writer",
+            "instanceId": "i-d60a882b80276a7c",
+            "routeHandle": "<redacted>",
+            "frameworkType": "JIUWEN",
+            "maxConcurrency": 1,
+            "contractVersion": "1.0.0",
+            "capabilityVersion": "1.0.0"
+          }
+        ]
+      },
+      "observed_at": "2026-11-27T12:53:23.202111168Z",
+      "gateway_mode": "DIRECT",
+      "actual_execution_instance": "not_collected"
+    },
+    "conflicted": false
+  },
+  {
+    "call_id": "c-6ba13c72f67c2e7c06682d942b411644",
+    "task_id": "T-54158e50f7ee11c2e40adda9b8da15a0",
+    "node_id": "business",
+    "attempt": 1,
+    "input_digest": "sha256:5e1a308aab1bf7ca482451be3029252e6b9a603448df28afe7ba3d511013c0d4",
+    "agent_id": "business-analyst",
+    "message_id": "message-a1785f5bf46880a188f2ab589fd99097",
+    "context_id": "context-cfdb018370cea7791155502c18533cf6",
+    "remote_task_id": "217ff139-53f8-4e1e-90a8-d029daffe4ae",
+    "state": "COMPLETED",
+    "route": {
+      "card": {
+        "name": "business-analyst",
+        "rawJson": "{\"name\": \"business-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"business-analyst\", \"name\": \"business-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+      },
+      "agent_id": "business-analyst",
+      "instances": {
+        "agentId": "business-analyst",
+        "instances": [
+          {
+            "card": {
+              "name": "business-analyst",
+              "rawJson": "{\"name\": \"business-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"business-analyst\", \"name\": \"business-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8094/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+            },
+            "health": "ONLINE",
+            "region": null,
+            "weight": 100,
+            "agentName": "business-analyst",
+            "serviceId": "business-analyst",
+            "instanceId": "i-6315f907fd8eae7b",
+            "routeHandle": "<redacted>",
+            "frameworkType": "JIUWEN",
+            "maxConcurrency": 1,
+            "contractVersion": "1.0.0",
+            "capabilityVersion": "1.0.0"
+          }
+        ]
+      },
+      "observed_at": "2026-11-27T12:52:21.944323551Z",
+      "gateway_mode": "DIRECT",
+      "actual_execution_instance": "not_collected"
+    },
+    "conflicted": false
+  },
+  {
+    "call_id": "c-419804be93cd777eec414709bd3ff25a",
+    "task_id": "T-54158e50f7ee11c2e40adda9b8da15a0",
+    "node_id": "extract",
+    "attempt": 1,
+    "input_digest": "sha256:fc79e79d20b1a64222a2a958d6edd787a22ebeb2f2553fcc0d60b16b89d9ec9e",
+    "agent_id": "report-extractor",
+    "message_id": "message-88ec18cda498f4230a67f8ed8bba88ca",
+    "context_id": "context-5cb76d6f91b9bd8e44b422b4162ebb88",
+    "remote_task_id": "a735c604-6e68-41d0-a070-f72c9edd53e5",
+    "state": "COMPLETED",
+    "route": {
+      "card": {
+        "name": "report-extractor",
+        "rawJson": "{\"name\": \"report-extractor\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"report-extractor\", \"name\": \"report-extractor\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+      },
+      "agent_id": "report-extractor",
+      "instances": {
+        "agentId": "report-extractor",
+        "instances": [
+          {
+            "card": {
+              "name": "report-extractor",
+              "rawJson": "{\"name\": \"report-extractor\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"report-extractor\", \"name\": \"report-extractor\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8093/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+            },
+            "health": "ONLINE",
+            "region": null,
+            "weight": 100,
+            "agentName": "report-extractor",
+            "serviceId": "report-extractor",
+            "instanceId": "i-3e0ab76d2ee46d4b",
+            "routeHandle": "<redacted>",
+            "frameworkType": "JIUWEN",
+            "maxConcurrency": 1,
+            "contractVersion": "1.0.0",
+            "capabilityVersion": "1.0.0"
+          }
+        ]
+      },
+      "observed_at": "2026-11-27T12:52:00.862748961Z",
+      "gateway_mode": "DIRECT",
+      "actual_execution_instance": "not_collected"
+    },
+    "conflicted": false
+  },
+  {
+    "call_id": "c-97fe9a81474dbce3e7dfdf5fa4d176b5",
+    "task_id": "T-54158e50f7ee11c2e40adda9b8da15a0",
+    "node_id": "quality",
+    "attempt": 1,
+    "input_digest": "sha256:49d1a40081f0577aab6d8b8775585704aadf4b72e97d17af018921b9bb6dd85e",
+    "agent_id": "asset-quality-analyst",
+    "message_id": "message-ab5ca5271e06c1cbe186f4dc38fb358b",
+    "context_id": "context-952803e57d530dbf0165985d0ecc5a53",
+    "remote_task_id": "ce52d011-74f6-437e-894f-3239f9e17ee9",
+    "state": "COMPLETED",
+    "route": {
+      "card": {
+        "name": "asset-quality-analyst",
+        "rawJson": "{\"name\": \"asset-quality-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"asset-quality-analyst\", \"name\": \"asset-quality-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+      },
+      "agent_id": "asset-quality-analyst",
+      "instances": {
+        "agentId": "asset-quality-analyst",
+        "instances": [
+          {
+            "card": {
+              "name": "asset-quality-analyst",
+              "rawJson": "{\"name\": \"asset-quality-analyst\", \"description\": \"Bound annual report expert; controlled material and typed results\", \"provider\": {\"organization\": \"Agent Hub Alpha Demo\", \"url\": \"\"}, \"version\": \"1.0.0\", \"documentationUrl\": null, \"capabilities\": {\"streaming\": false, \"pushNotifications\": false, \"extendedAgentCard\": false, \"extensions\": []}, \"defaultInputModes\": [\"text/plain\", \"application/json\"], \"defaultOutputModes\": [\"text/plain\", \"application/json\"], \"skills\": [{\"id\": \"asset-quality-analyst\", \"name\": \"asset-quality-analyst\", \"description\": \"Process one admitted report node using its fixed inputs\", \"tags\": [\"annual-report\", \"bound-node\"], \"examples\": [], \"inputModes\": [\"text/plain\", \"application/json\"], \"outputModes\": [\"text/plain\", \"application/json\"], \"securityRequirements\": []}], \"securitySchemes\": {}, \"securityRequirements\": [], \"iconUrl\": null, \"supportedInterfaces\": [{\"protocolBinding\": \"JSONRPC\", \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"tenant\": null, \"protocolVersion\": \"1.0\"}], \"signatures\": [], \"url\": \"http://127.0.0.1:8096/a2a/a2a\", \"preferredTransport\": \"JSONRPC\", \"additionalInterfaces\": []}"
+            },
+            "health": "ONLINE",
+            "region": null,
+            "weight": 100,
+            "agentName": "asset-quality-analyst",
+            "serviceId": "asset-quality-analyst",
+            "instanceId": "i-8a4e816a69626666",
+            "routeHandle": "<redacted>",
+            "frameworkType": "JIUWEN",
+            "maxConcurrency": 1,
+            "contractVersion": "1.0.0",
+            "capabilityVersion": "1.0.0"
+          }
+        ]
+      },
+      "observed_at": "2026-11-27T12:52:21.952249265Z",
+      "gateway_mode": "DIRECT",
+      "actual_execution_instance": "not_collected"
+    },
+    "conflicted": false
+  }
+]
